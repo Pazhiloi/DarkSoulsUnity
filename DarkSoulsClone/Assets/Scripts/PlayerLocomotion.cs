@@ -180,7 +180,7 @@ namespace SG
             inAirTimer = 0;
           }
           else{
-            animatorHandler.PlayTargetAnimation("Locomotion", true);
+            animatorHandler.PlayTargetAnimation("Locomotion", false);
             inAirTimer = 0;
           }
           playerManager.isInAir = false;
