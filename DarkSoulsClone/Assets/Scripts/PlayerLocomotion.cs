@@ -5,6 +5,8 @@ namespace SG
 {
   public class PlayerLocomotion : MonoBehaviour
   {
+
+    PlayerManager playerManager;
     Transform cameraObject;
     InputHandler inputHandler;
     Vector3 moveDirection;
@@ -18,30 +20,20 @@ namespace SG
     public GameObject normalCamera;
 
 
-    [Header("Stats")]
+    [Header("Movement Stats")]
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float sprintSpeed = 7;
     [SerializeField] private float rotationSpeed = 10;
 
-    public bool isSprinting;
     private void Start()
     {
+      playerManager = GetComponent<PlayerManager>();
       rigidbody = GetComponent<Rigidbody>();
       inputHandler = GetComponent<InputHandler>();
       animatorHandler = GetComponentInChildren<AnimatorHandler>();
       cameraObject = Camera.main.transform;
       myTransform = transform;
       animatorHandler.Initialize();
-    }
-
-    private void Update()
-    {
-      float delta = Time.deltaTime;
-
-      isSprinting = inputHandler.b_input;
-      inputHandler.TickInput(delta);
-      HandleMovement(delta);
-      HandleRollingAndSprinting(delta);
     }
 
     #region Movement
@@ -89,7 +81,7 @@ namespace SG
       if (inputHandler.sprintFlag)
       {
         speed = sprintSpeed;
-        isSprinting = true;
+        playerManager.isSprinting = true;
         moveDirection *= speed;
       }
       else
@@ -100,7 +92,7 @@ namespace SG
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
       rigidbody.velocity = projectedVelocity;
 
-      animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
+      animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
 
       if (animatorHandler.canRotate)
       {

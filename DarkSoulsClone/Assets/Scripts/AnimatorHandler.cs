@@ -6,9 +6,10 @@ namespace SG
 {
   public class AnimatorHandler : MonoBehaviour
   {
+    PlayerManager playerManager;
     public Animator anim;
-    public InputHandler inputHandler;
-    public PlayerLocomotion playerLocomotion;
+    InputHandler inputHandler;
+    PlayerLocomotion playerLocomotion;
     int vertical;
     int horizontal;
     public bool canRotate;
@@ -16,6 +17,7 @@ namespace SG
 
     public void Initialize()
     {
+      playerManager = GetComponentInParent<PlayerManager>();
       anim = GetComponent<Animator>();
       inputHandler = GetComponentInParent<InputHandler>();
       playerLocomotion = GetComponentInParent<PlayerLocomotion>();
@@ -97,7 +99,7 @@ namespace SG
     }
 
     private void OnAnimatorMove(){
-      if (inputHandler.isInteracting == false)
+      if (playerManager.isInteracting == false)
       {
         return;
       }
