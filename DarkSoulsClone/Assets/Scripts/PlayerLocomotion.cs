@@ -1,26 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SG{
-public class PlayerLocomotion : MonoBehaviour
+namespace SG
 {
-  Transform cameraObject;
-  InputHandler inputHandler;
-  Vector3 moveDirection;
+  public class PlayerLocomotion : MonoBehaviour
+  {
+    Transform cameraObject;
+    InputHandler inputHandler;
+    Vector3 moveDirection;
 
-  [HideInInspector]
-  public Transform myTransform;
-  [HideInInspector]
-  public AnimatorHandler animatorHandler;
+    [HideInInspector]
+    public Transform myTransform;
+    [HideInInspector]
+    public AnimatorHandler animatorHandler;
 
-  public new Rigidbody rigidbody;
-  public GameObject normalCamera;
+    public new Rigidbody rigidbody;
+    public GameObject normalCamera;
 
 
-  [Header("Stats")]
-  [SerializeField] private float movementSpeed = 5;
-  [SerializeField] private float rotationSpeed = 10;
-    private void Start() {
+    [Header("Stats")]
+    [SerializeField] private float movementSpeed = 5;
+    [SerializeField] private float sprintSpeed = 7;
+    [SerializeField] private float rotationSpeed = 10;
+
+    public bool isSprinting;
+    private void Start()
+    {
       rigidbody = GetComponent<Rigidbody>();
       inputHandler = GetComponent<InputHandler>();
       animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -29,8 +34,11 @@ public class PlayerLocomotion : MonoBehaviour
       animatorHandler.Initialize();
     }
 
-    private void Update() {
+    private void Update()
+    {
       float delta = Time.deltaTime;
+
+      isSprinting = inputHandler.b_input;
       inputHandler.TickInput(delta);
       HandleMovement(delta);
       HandleRollingAndSprinting(delta);
@@ -40,7 +48,8 @@ public class PlayerLocomotion : MonoBehaviour
     Vector3 normalVector;
     Vector3 targetPosition;
 
-    private void HandleRotation(float delta){
+    private void HandleRotation(float delta)
+    {
       Vector3 targetDir = Vector3.zero;
       float moveOverride = inputHandler.moveAmount;
 
@@ -54,7 +63,7 @@ public class PlayerLocomotion : MonoBehaviour
       {
         targetDir = myTransform.forward;
       }
-      float rs =  rotationSpeed;
+      float rs = rotationSpeed;
 
       Quaternion tr = Quaternion.LookRotation(targetDir);
       Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
@@ -62,19 +71,36 @@ public class PlayerLocomotion : MonoBehaviour
       myTransform.rotation = targetRotation;
     }
 
-    public void HandleMovement(float delta){
+    public void HandleMovement(float delta)
+    {
+
+      if (inputHandler.rollFlag)
+      {
+        return;
+      }
+
       moveDirection = cameraObject.forward * inputHandler.vertical;
       moveDirection += cameraObject.right * inputHandler.horizontal;
       moveDirection.Normalize();
       moveDirection.y = 0;
 
       float speed = movementSpeed;
-      moveDirection *= speed;
+
+      if (inputHandler.sprintFlag)
+      {
+        speed = sprintSpeed;
+        isSprinting = true;
+        moveDirection *= speed;
+      }
+      else
+      {
+        moveDirection *= speed;
+      }
 
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
       rigidbody.velocity = projectedVelocity;
 
-      animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0);
+      animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
 
       if (animatorHandler.canRotate)
       {
@@ -82,7 +108,8 @@ public class PlayerLocomotion : MonoBehaviour
       }
     }
 
-    public void HandleRollingAndSprinting(float delta){
+    public void HandleRollingAndSprinting(float delta)
+    {
       if (animatorHandler.anim.GetBool("isInteracting"))
       {
         return;
@@ -99,12 +126,14 @@ public class PlayerLocomotion : MonoBehaviour
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
           myTransform.rotation = rollRotation;
-        }else{
+        }
+        else
+        {
           animatorHandler.PlayTargetAnimation("Backstep", true);
         }
       }
     }
     #endregion
-}
+  }
 
 }

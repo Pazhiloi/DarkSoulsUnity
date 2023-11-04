@@ -14,6 +14,8 @@ namespace SG
 
     public bool b_input;
     public bool rollFlag;
+    public bool sprintFlag;
+    public float rollInputTimer;
     public bool isInteracting;
 
 
@@ -70,7 +72,15 @@ namespace SG
 
       if (b_input)
       {
-        rollFlag = true;
+        rollInputTimer += delta;
+        sprintFlag=  true;
+      }else{
+        if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+        {
+          sprintFlag = false;
+          rollFlag = true;
+        }
+        rollInputTimer =0;
       }
     }
 
