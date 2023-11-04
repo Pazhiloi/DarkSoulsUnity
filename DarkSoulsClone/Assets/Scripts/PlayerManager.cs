@@ -15,6 +15,8 @@ namespace SG
     [Header("Player Flags")]
     public bool isInteracting;
     public bool isSprinting;
+    public bool isInAir;
+    public bool isGrounded;
 
     void Start()
     {
@@ -33,6 +35,7 @@ namespace SG
       inputHandler.TickInput(delta);
       playerLocomotion.HandleMovement(delta);
       playerLocomotion.HandleRollingAndSprinting(delta);
+      playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
     }
     private void FixedUpdate()
     {
@@ -50,6 +53,10 @@ namespace SG
       inputHandler.sprintFlag = false;
       isSprinting = inputHandler.b_input;
 
+      if (isInAir)
+      {
+        playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+      }
     }
   }
 }

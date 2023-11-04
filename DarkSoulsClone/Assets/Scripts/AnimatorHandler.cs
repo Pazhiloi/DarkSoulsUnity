@@ -75,7 +75,7 @@ namespace SG
       }
       #endregion
 
-      if (isSprinting)
+      if (isSprinting && inputHandler.moveAmount > 0)
       {
         v =2;
         h = horizontalMovement;
