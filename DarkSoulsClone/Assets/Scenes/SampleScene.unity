@@ -1318,6 +1318,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889441314}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &905182951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905182952}
+  m_Layer: 0
+  m_Name: LeftHandOverride
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &905182952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905182951}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.04952382, y: -0.9658804, z: 0.20395815, w: -0.15173523}
+  m_LocalPosition: {x: -0.017, y: -0.08, z: 0.059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1831172370}
+  m_LocalEulerAnglesHint: {x: 24.144, y: -197.402, z: 2.121}
 --- !u!1 &921350753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1842,7 @@ GameObject:
   - component: {fileID: 1251455413}
   - component: {fileID: 1251455412}
   - component: {fileID: 1251455414}
+  - component: {fileID: 1251455415}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1899,7 +1931,7 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   myTransform: {fileID: 0}
   animatorHandler: {fileID: 0}
-  rigidbody: {fileID: 1251455410}
+  rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
   groundDetectionRayStartPoint: 0.5
   minimumDistanceNeededToBeginFall: 1
@@ -1946,6 +1978,20 @@ MonoBehaviour:
   isSprinting: 0
   isInAir: 0
   isGrounded: 0
+--- !u!114 &1251455415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251455408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3b22af227a78340aa1e47d0a07eb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  leftWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
 --- !u!1 &1310560120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,6 +2307,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419501461}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1441444181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141766373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be212cf91676774ead8d94ab4569514, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1472700828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,11 +2437,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3780837713738550241, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 905182952}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1831172367}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1441444181}
+    - targetCorrespondingSourceObject: {fileID: 3668086056121675338, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1831172373}
+    - targetCorrespondingSourceObject: {fileID: 6392886965815168175, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1831172372}
   m_SourcePrefab: {fileID: 100100000, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
 --- !u!4 &1831172365 stripped
 Transform:
@@ -2409,6 +2479,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1831172366}
   canRotate: 1
+--- !u!4 &1831172368 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2221872609835778665, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+  m_PrefabInstance: {fileID: 1831172364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1831172369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6392886965815168175, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+  m_PrefabInstance: {fileID: 1831172364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1831172370 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3780837713738550241, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+  m_PrefabInstance: {fileID: 1831172364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1831172371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3668086056121675338, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+  m_PrefabInstance: {fileID: 1831172364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1831172372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831172369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee9e2b12611253409dbb0a09d63ed1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 1831172368}
+  isLeftHandSlot: 0
+  isRightHandSlot: 1
+  currentWeaponModel: {fileID: 0}
+--- !u!114 &1831172373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831172371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee9e2b12611253409dbb0a09d63ed1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentOverride: {fileID: 905182952}
+  isLeftHandSlot: 1
+  isRightHandSlot: 0
+  currentWeaponModel: {fileID: 0}
 --- !u!1 &1895723660
 GameObject:
   m_ObjectHideFlags: 0
