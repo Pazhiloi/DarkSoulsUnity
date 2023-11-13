@@ -1843,6 +1843,7 @@ GameObject:
   - component: {fileID: 1251455412}
   - component: {fileID: 1251455414}
   - component: {fileID: 1251455415}
+  - component: {fileID: 1251455416}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1938,6 +1939,7 @@ MonoBehaviour:
   groundDirectionRayDistance: -0.2
   inAirTimer: 0
   movementSpeed: 5
+  walkingSpeed: 3
   sprintSpeed: 7
   rotationSpeed: 10
   fallingSpeed: 80
@@ -1992,6 +1994,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   leftWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+--- !u!114 &1251455416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251455408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515bf4801dfd31e42810e7f64c0b66d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1310560120
 GameObject:
   m_ObjectHideFlags: 0

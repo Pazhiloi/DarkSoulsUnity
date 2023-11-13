@@ -51,8 +51,6 @@ namespace SG
     private void LateUpdate() {
       inputHandler.rollFlag = false;
       inputHandler.sprintFlag = false;
-      isSprinting = inputHandler.b_input;
-
       if (isInAir)
       {
         playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;

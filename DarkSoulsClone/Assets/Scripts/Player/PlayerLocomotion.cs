@@ -28,6 +28,7 @@ namespace SG
 
     [Header("Movement Stats")]
     [SerializeField] private float movementSpeed = 5;
+    [SerializeField] private float walkingSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 7;
     [SerializeField] private float rotationSpeed = 10;
     [SerializeField] private float fallingSpeed = 45;
@@ -92,7 +93,7 @@ namespace SG
 
       float speed = movementSpeed;
 
-      if (inputHandler.sprintFlag)
+      if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
       {
         speed = sprintSpeed;
         playerManager.isSprinting = true;
@@ -100,7 +101,16 @@ namespace SG
       }
       else
       {
-        moveDirection *= speed;
+        if (inputHandler.moveAmount < 0.5)
+        {
+          moveDirection *= walkingSpeed;
+          playerManager.isSprinting = false;
+        }
+        else
+        {
+          moveDirection *= speed;
+          playerManager.isSprinting = false;
+        }
       }
 
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
@@ -140,7 +150,8 @@ namespace SG
       }
     }
 
-    public void HandleFalling(float delta, Vector3 moveDirection){
+    public void HandleFalling(float delta, Vector3 moveDirection)
+    {
       playerManager.isGrounded = false;
       RaycastHit hit;
       Vector3 origin = myTransform.position;
@@ -163,11 +174,11 @@ namespace SG
 
       targetPosition = myTransform.position;
 
-      Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red,  0.1f, false);
+      Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
       if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
       {
         normalVector = hit.normal;
-        Vector3  tp = hit.point;
+        Vector3 tp = hit.point;
         playerManager.isGrounded = true;
         targetPosition.y = tp.y;
 
@@ -179,14 +190,16 @@ namespace SG
             animatorHandler.PlayTargetAnimation("Landing", true);
             inAirTimer = 0;
           }
-          else{
+          else
+          {
             animatorHandler.PlayTargetAnimation("Locomotion", false);
             inAirTimer = 0;
           }
           playerManager.isInAir = false;
         }
       }
-      else{
+      else
+      {
         if (playerManager.isGrounded)
         {
           playerManager.isGrounded = false;
@@ -208,8 +221,10 @@ namespace SG
       {
         if (playerManager.isInteracting || inputHandler.moveAmount > 0)
         {
-          myTransform.position  = Vector3.MoveTowards(myTransform.position, targetPosition, Time.deltaTime);
-        }else{
+          myTransform.position = Vector3.MoveTowards(myTransform.position, targetPosition, Time.deltaTime);
+        }
+        else
+        {
           myTransform.position = targetPosition;
         }
       }
