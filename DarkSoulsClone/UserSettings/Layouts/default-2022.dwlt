@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 103
+  controlID: 43
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 346
     height: 750
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -215,8 +215,8 @@ MonoBehaviour:
     y: 0
     width: 1245
     height: 750
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -243,15 +243,15 @@ MonoBehaviour:
     y: 750
     width: 1591
     height: 197
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -413,9 +413,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 5c600000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 28fbffff
+      m_ExpandedIDs: 46d7ffff94e6ffffd4e6ffff5ee9ffff9ce9ffff28fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -799,7 +799,7 @@ MonoBehaviour:
       sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 0
   m_SceneLighting: 1
@@ -808,9 +808,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.7980808, y: 7.778609, z: -5.4604754}
+    m_Target: {x: -9.082572, y: 1.9386646, z: 1.0315537}
     speed: 2
-    m_Value: {x: 1.7980808, y: 7.778609, z: -5.4604754}
+    m_Value: {x: -9.082572, y: 1.9386646, z: 1.0315537}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -856,13 +856,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.051290665, y: -0.0053908485, z: 0.00025381744, w: -0.9987228}
+    m_Target: {x: 0.032417238, y: -0.9578228, z: 0.12019979, w: 0.2592164}
     speed: 2
-    m_Value: {x: -0.05128792, y: -0.00539056, z: 0.00025380385, w: -0.9986693}
+    m_Value: {x: 0.032415353, y: -0.95776707, z: 0.1201928, w: 0.25920132}
   m_Size:
-    m_Target: 2.1994612
+    m_Target: 0.86168444
     speed: 2
-    m_Value: 2.1994612
+    m_Value: 0.86168444
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -880,7 +880,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.13875778, y: 0.4923933, z: -0.079906985, w: 0.85555655}
+  m_LastSceneViewRotation: {x: -0.051290665, y: -0.0053908485, z: 0.00025381744, w: -0.9987228}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -959,14 +959,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.69035333
+    - e00: 1.0296276
       e01: 0
       e02: 0
-      e03: 488.43378
+      e03: -81.855225
       e10: 0
-      e11: 0.69035333
+      e11: 1.0296276
       e12: 0
-      e13: 234.90155
+      e13: 464.63
       e20: 0
       e21: 0
       e22: 1
@@ -1036,7 +1036,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Art/Animations/Death&Damage
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1044,16 +1044,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 61
   m_LastFolders:
-  - Assets
+  - Assets/Art/Animations/Death&Damage
   m_LastFoldersGridSize: 61
   m_LastProjectPath: D:\unity\courseProjects\DarkSoulsUnity\DarkSoulsClone
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 16600000
-    m_LastClickedID: 24598
-    m_ExpandedIDs: 0000000016600000586000005a60000086600000ae60000000ca9a3bffffff7f
+    m_SelectedIDs: c08a0000
+    m_LastClickedID: 35520
+    m_ExpandedIDs: 0000000016600000586000005a6000006060000098600000be600000c060000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1106,8 +1106,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 88b5ffff
+    m_LastClickedInstanceID: -19064
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000f6790000765601000c800100047a0000dc7e0000f87e00008a780000a8780000a6a10000702101000000000030800000dac000002a8a0000cafa0100de610200c89b0000e4b600000c8300008e7d0000fa7d000088ea020080940000728e0000828e0000e4b80000a68b010030e900002ce9000050bb0000fed00000f4d00000fad00000dca00000d6a00000d0a00000caa00000665c0000
     m_RenameOverlay:
@@ -1192,9 +1192,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 752
-    width: 1538
-    height: 247
+    y: 823
+    width: 1590
+    height: 176
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1324,12 +1324,12 @@ MonoBehaviour:
       oldMaxSizes: 
       oldSplitSize: 0
     m_HorizontalSplitter:
-      ID: 1545
+      ID: 1514
       splitterInitialOffset: 0
       currentActiveSplitter: -1
       realSizes:
-      - 461
-      - 1077
+      - 477
+      - 1113
       relativeSizes:
       - 0.3
       - 0.7
@@ -1339,7 +1339,7 @@ MonoBehaviour:
       maxSizes:
       - 0
       - 0
-      lastTotalSize: 1538
+      lastTotalSize: 1590
       splitSize: 6
       xOffset: 0
       m_Version: 1

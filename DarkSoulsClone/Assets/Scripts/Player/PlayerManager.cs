@@ -18,9 +18,12 @@ namespace SG
     public bool isInAir;
     public bool isGrounded;
 
+    private void Awake() {
+      cameraHandler = FindObjectOfType<CameraHandler>();
+    }
+
     void Start()
     {
-      cameraHandler = CameraHandler.singleton;
       inputHandler = GetComponent<InputHandler>();
       anim = GetComponentInChildren<Animator>();
       playerLocomotion = GetComponent<PlayerLocomotion>();
