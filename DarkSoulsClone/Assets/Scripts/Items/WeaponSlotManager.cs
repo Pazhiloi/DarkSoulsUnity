@@ -25,6 +25,8 @@ public class WeaponSlotManager : MonoBehaviour
       }
     }
 
+    #region Handle Weapons Damage Collider
+
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft){
       if (isLeft)
       {
@@ -51,11 +53,14 @@ public class WeaponSlotManager : MonoBehaviour
       leftHandDamageCollider.EnableDamageCollider();
     }
     public void CloseRightDamageCollider(){
-      rightHandDamageCollider.EnableDamageCollider();
+      rightHandDamageCollider.DisableDamageCollider();
     }
     public void CloseLeftDamageCollider(){
-      leftHandDamageCollider.EnableDamageCollider();
+      leftHandDamageCollider.DisableDamageCollider();
     }
-}
+
+    #endregion
+
+  }
 
 }
