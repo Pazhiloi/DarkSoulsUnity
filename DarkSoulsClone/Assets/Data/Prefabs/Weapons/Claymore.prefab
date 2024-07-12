@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5958694496863527621}
   m_Layer: 0
-  m_Name: Butcher Sword
+  m_Name: Claymore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
