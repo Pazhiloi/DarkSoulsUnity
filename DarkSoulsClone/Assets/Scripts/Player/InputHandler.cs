@@ -13,6 +13,7 @@ namespace SG
     public float mouseY;
 
     public bool b_Input;
+    public bool a_Input;
     public bool rb_Input;
     public bool rt_Input;
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
@@ -64,6 +65,7 @@ namespace SG
       HandleRollInput(delta);
       HandleAttackInput(delta);
       HandleQuickSlotsInput();
+      HandleInteractingButtonInput();
     }
     private void MoveInput(float delta)
     {
@@ -136,6 +138,10 @@ namespace SG
       }else if(d_Pad_Left){
         playerInventory.ChangeLeftWeapon();
       }
+    }
+
+    private void HandleInteractingButtonInput(){
+      inputActions.PlayerActions.A.performed += i => a_Input = true;
     }
 
   }
