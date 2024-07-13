@@ -109,6 +109,15 @@
             "id": "a8812b2f-d524-4f1f-b9c2-734e5cfba99b",
             "actions": [
                 {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "1aa1afc5-fe7f-4dcd-aa30-054c1f308df4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Roll",
                     "type": "Button",
                     "id": "ccc43f34-108c-42a5-918f-665f484918e2",
@@ -155,28 +164,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "f1df925a-934e-4a93-95b3-85bda0be5bf6",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "SlowTap",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a46dccdd-0944-47a8-a70f-39453d2e5621",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "SlowTap",
-                    "processors": "",
-                    "groups": "Mouse & KeyBoard",
-                    "action": "Roll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "d7234a4f-d1c7-4337-9a7e-b58bb5ad2462",
@@ -229,6 +216,50 @@
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c4d05e8c-6f4b-4000-a67a-cca1c18a1e8c",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afd2407e-65bc-4117-b936-db932fa9fa68",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1df925a-934e-4a93-95b3-85bda0be5bf6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "SlowTap",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a46dccdd-0944-47a8-a70f-39453d2e5621",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "SlowTap",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
