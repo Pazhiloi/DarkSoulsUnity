@@ -1662,6 +1662,11 @@ Transform:
   - {fileID: 931207871}
   m_Father: {fileID: 26271232}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &821002566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7119566838313410564, guid: 87c452f9e6f71894b821c6935723a2fe, type: 3}
+  m_PrefabInstance: {fileID: 2687408805015645146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &843151297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,7 +1752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 846717435}
   m_Layer: 5
-  m_Name: Inventory Window
+  m_Name: Weapon Inventory Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2532,6 +2537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1079363977}
+  - component: {fileID: 1079363978}
   m_Layer: 5
   m_Name: Weapon Inventory Slot
   m_TagString: Untagged
@@ -2559,6 +2565,19 @@ RectTransform:
   m_AnchoredPosition: {x: 62, y: -40}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1079363978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079363976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a937149e0def744bd2b63dc6f73c83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 1168493913}
 --- !u!1 &1129450749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,6 +2884,7 @@ MonoBehaviour:
   rb_Input: 0
   rt_Input: 0
   jump_Input: 0
+  inventory_Input: 0
   d_Pad_Up: 0
   d_Pad_Down: 0
   d_Pad_Left: 0
@@ -2872,6 +2892,7 @@ MonoBehaviour:
   rollFlag: 0
   sprintFlag: 0
   comboFlag: 0
+  inventoryFlag: 0
   rollInputTimer: 0
 --- !u!114 &1251455414
 MonoBehaviour:
@@ -5137,6 +5158,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7119566838313410564, guid: 87c452f9e6f71894b821c6935723a2fe, type: 3}
+      propertyPath: m_Name
+      value: HUD Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119566838313410564, guid: 87c452f9e6f71894b821c6935723a2fe, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -5184,7 +5209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4cfbd42005fe54ea2a75f82eef759f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInventory: {fileID: 1251455415}
+  hudWindow: {fileID: 821002566}
   selectWindow: {fileID: 941198296}
+  weaponInventoryWindow: {fileID: 846717434}
+  weaponInventorySlotPrefab: {fileID: 1079363976}
+  weaponInventorySlotsParent: {fileID: 1129450750}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
