@@ -14,9 +14,14 @@ namespace SG
     public string right_hand_idle;
     public string left_hand_idle;
     
-    [Header("One Handed Attack Animations")]
+    [Header("Attack Animations")]
     public string oh_light_attack_01;
     public string oh_light_attack_02;
     public string oh_heavy_attack_01;
+
+    [Header("Stamina Costs")]
+    public int baseStamina;
+    public float lightAttackMultiplier;
+    public float heavyAttackMultiplier;
   }
 }

@@ -7,10 +7,12 @@ namespace SG
 {
     AnimatorHandler animatorHandler;
     InputHandler inputHandler;
+    WeaponSlotManager weaponSlotManager;
     public string lastAttack;
 
     private void Awake() {
       animatorHandler = GetComponentInChildren<AnimatorHandler>();
+      weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
       inputHandler = GetComponent<InputHandler>();
     }
 
@@ -29,10 +31,12 @@ namespace SG
     }
 
     public void HandleLightAttack(WeaponItem weapon) {
+      weaponSlotManager.attackingWeapon = weapon;
       animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_01, true);
       lastAttack = weapon.oh_light_attack_01;
     }
     public void HandleHeavyAttack(WeaponItem weapon) {
+      weaponSlotManager.attackingWeapon = weapon;
       animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_01, true);
       lastAttack = weapon.oh_light_attack_01;
     }

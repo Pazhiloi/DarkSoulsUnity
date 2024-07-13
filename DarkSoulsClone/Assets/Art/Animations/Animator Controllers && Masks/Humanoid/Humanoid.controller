@@ -122,8 +122,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OH_Heavy_Attack_01
-  m_Speed: 1
+  m_Name: OH_Sword_Attack_03
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3039582224224727429}

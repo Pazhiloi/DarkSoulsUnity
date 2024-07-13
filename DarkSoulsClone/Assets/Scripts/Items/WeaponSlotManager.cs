@@ -3,29 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
-  
-public class WeaponSlotManager : MonoBehaviour
-{
+
+  public class WeaponSlotManager : MonoBehaviour
+  {
+    public WeaponItem attackingWeapon;
+
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
 
     DamageCollider leftHandDamageCollider;
     DamageCollider rightHandDamageCollider;
 
+
     Animator animator;
 
     QuickSlotsUI quickSlotsUI;
+    PlayerStats playerStats;
 
-    private void Awake() {
+    private void Awake()
+    {
       animator = GetComponent<Animator>();
       quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+      playerStats = GetComponentInParent<PlayerStats>();
       WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
       {
         if (weaponSlot.isLeftHandSlot)
         {
           leftHandSlot = weaponSlot;
-        }else if(weaponSlot.isRightHandSlot){
+        }
+        else if (weaponSlot.isRightHandSlot)
+        {
           rightHandSlot = weaponSlot;
         }
       }
@@ -33,7 +41,8 @@ public class WeaponSlotManager : MonoBehaviour
 
     #region Handle Weapons Damage Collider
 
-    public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft){
+    public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+    {
       if (isLeft)
       {
         leftHandSlot.LoadWeaponModel(weaponItem);
@@ -44,13 +53,16 @@ public class WeaponSlotManager : MonoBehaviour
         if (weaponItem != null)
         {
           animator.CrossFade(weaponItem.left_hand_idle, 0.2f);
-        }else{
+        }
+        else
+        {
           animator.CrossFade("Left Arm Empty", 0.2f);
         }
 
         #endregion
       }
-      else{
+      else
+      {
         rightHandSlot.LoadWeaponModel(weaponItem);
         LoadRightWeaponDamageCollider();
         quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
@@ -67,27 +79,45 @@ public class WeaponSlotManager : MonoBehaviour
       }
     }
 
-    private void LoadLeftWeaponDamageCollider (){
+    private void LoadLeftWeaponDamageCollider()
+    {
       leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
     }
-    private void LoadRightWeaponDamageCollider (){
+    private void LoadRightWeaponDamageCollider()
+    {
       rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
     }
 
-    public void OpenRightDamageCollider(){
+    public void OpenRightDamageCollider()
+    {
       rightHandDamageCollider.EnableDamageCollider();
     }
-    public void OpenLeftDamageCollider(){
+    public void OpenLeftDamageCollider()
+    {
       leftHandDamageCollider.EnableDamageCollider();
     }
-    public void CloseRightDamageCollider(){
+    public void CloseRightDamageCollider()
+    {
       rightHandDamageCollider.DisableDamageCollider();
     }
-    public void CloseLeftDamageCollider(){
+    public void CloseLeftDamageCollider()
+    {
       leftHandDamageCollider.DisableDamageCollider();
     }
 
     #endregion
+    
+    #region  Handle Weapons Stamina Drainage
+    public void DrainStaminaLightAttack()
+    {
+      playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
+    }
+    public void DrainStaminaHeavyAttack()
+    {
+      playerStats.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
+    }
+    #endregion
+
 
   }
 
