@@ -12,6 +12,9 @@ namespace SG
     Animator anim;
     CameraHandler cameraHandler;
     PlayerLocomotion playerLocomotion;
+    InteractableUI interactableUI;
+    public GameObject interactableUIGameObject;
+    public GameObject itemInteractableGameObject;
     [Header("Player Flags")]
     public bool isInteracting;
     public bool isSprinting;
@@ -19,7 +22,8 @@ namespace SG
     public bool isGrounded;
     public bool canDoCombo;
 
-    private void Awake() {
+    private void Awake()
+    {
       cameraHandler = FindObjectOfType<CameraHandler>();
     }
 
@@ -28,6 +32,7 @@ namespace SG
       inputHandler = GetComponent<InputHandler>();
       anim = GetComponentInChildren<Animator>();
       playerLocomotion = GetComponent<PlayerLocomotion>();
+      interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     void Update()
@@ -53,7 +58,8 @@ namespace SG
       }
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
       inputHandler.rollFlag = false;
       inputHandler.sprintFlag = false;
       inputHandler.rb_Input = false;
@@ -69,17 +75,19 @@ namespace SG
       }
     }
 
-    public void CheckForInteractableObject(){
+    public void CheckForInteractableObject()
+    {
       RaycastHit hit;
       if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
       {
         if (hit.collider.tag == "Interactable")
         {
           Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-          Debug.Log("Interactable");
           if (interactableObject != null)
           {
             string interactableText = interactableObject.interactableText;
+            interactableUI.interactableText.text = interactableText;
+            interactableUIGameObject.SetActive(true);
 
             if (inputHandler.a_Input)
             {
@@ -87,6 +95,18 @@ namespace SG
             }
           }
         }
+      }
+      else{
+        if (interactableUIGameObject != null)
+        {
+          interactableUIGameObject.SetActive(false);
+        }
+
+        if (itemInteractableGameObject != null && inputHandler.a_Input)
+        {
+          itemInteractableGameObject.SetActive(false);
+        }
+
       }
     }
   }
