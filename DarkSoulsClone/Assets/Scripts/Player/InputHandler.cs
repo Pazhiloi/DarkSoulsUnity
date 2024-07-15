@@ -17,12 +17,14 @@ namespace SG
     public bool rb_Input;
     public bool rt_Input;
     public bool jump_Input;
-    public bool inventory_Input;  
+    public bool inventory_Input;
+    public bool lockOnInput;
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
 
     public bool rollFlag;
     public bool sprintFlag;
     public bool comboFlag;
+    public bool lockOnFlag;
     public bool inventoryFlag;
     public float rollInputTimer;
 
@@ -31,6 +33,7 @@ namespace SG
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    CameraHandler cameraHandler;
     UIManager uiManager;
 
 
@@ -43,6 +46,7 @@ namespace SG
       playerInventory = GetComponent<PlayerInventory>();
       playerManager = GetComponent<PlayerManager>();
       uiManager = FindObjectOfType<UIManager>();
+      cameraHandler = FindObjectOfType<CameraHandler>();
     }
 
 
@@ -61,6 +65,7 @@ namespace SG
         inputActions.PlayerActions.A.performed += i => a_Input = true;
         inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
         inputActions.PlayerActions.Inventory.performed += i => inventory_Input = true;
+        inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
       }
 
       inputActions.Enable();
@@ -78,6 +83,7 @@ namespace SG
       HandleAttackInput(delta);
       HandleQuickSlotsInput();
       HandleInventoryInput();
+      HandleLockOnInput();
     }
     private void MoveInput(float delta)
     {
@@ -109,7 +115,7 @@ namespace SG
 
     private void HandleAttackInput(float delta)
     {
-      
+
 
       if (rb_Input)
       {
@@ -139,18 +145,22 @@ namespace SG
       }
     }
 
-    private void HandleQuickSlotsInput(){
-      
+    private void HandleQuickSlotsInput()
+    {
+
       if (d_Pad_Right)
       {
         playerInventory.ChangeRightWeapon();
-      }else if(d_Pad_Left){
+      }
+      else if (d_Pad_Left)
+      {
         playerInventory.ChangeLeftWeapon();
       }
     }
 
-   
-    private void HandleInventoryInput(){
+
+    private void HandleInventoryInput()
+    {
 
       if (inventory_Input)
       {
@@ -161,7 +171,8 @@ namespace SG
           uiManager.OpenSelectWindow();
           uiManager.UpdateUI();
           uiManager.hudWindow.SetActive(false);
-        }else
+        }
+        else
         {
           uiManager.CloseSelectWindow();
           uiManager.CloseAllInventoryWindows();
@@ -170,5 +181,26 @@ namespace SG
       }
     }
 
+
+    private void HandleLockOnInput()
+    {
+      if (lockOnInput && lockOnFlag == false)
+      {
+        cameraHandler.ClearLockOnTargets();
+        lockOnInput = false;
+        cameraHandler.HandleLockOn();
+        if (cameraHandler.nearestLockOnTarget != null)
+        {
+          cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+          lockOnFlag = true;
+        }
+      }
+      else if(lockOnInput && lockOnFlag)
+      {
+        lockOnInput = false;
+        lockOnFlag = false;
+        cameraHandler.ClearLockOnTargets();
+      }
+    }
   }
 }

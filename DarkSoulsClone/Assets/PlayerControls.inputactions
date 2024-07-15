@@ -118,6 +118,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LockOn",
+                    "type": "Button",
+                    "id": "89f089a9-e066-4586-876a-d9e25145fb37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Roll",
                     "type": "Button",
                     "id": "ccc43f34-108c-42a5-918f-665f484918e2",
@@ -260,6 +269,28 @@
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43f56eff-11d9-4701-881e-c8ff324ac563",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa600d7e-e8a1-4db2-a519-928b9fc4d674",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "LockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
