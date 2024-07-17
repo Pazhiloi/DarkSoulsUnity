@@ -180,6 +180,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Y",
+                    "type": "Button",
+                    "id": "d279cf8a-1374-4615-946a-45631af7fc42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LockOn",
                     "type": "Button",
                     "id": "89f089a9-e066-4586-876a-d9e25145fb37",
@@ -353,6 +362,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9606641b-4a88-48b0-825d-33682a907f5f",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22389d56-84ce-4891-9ef7-8e39bd84e366",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Y",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

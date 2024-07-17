@@ -13,6 +13,7 @@ namespace SG
 
     public string right_hand_idle;
     public string left_hand_idle;
+    public string th_idle;
     
     [Header("Attack Animations")]
     public string oh_light_attack_01;
