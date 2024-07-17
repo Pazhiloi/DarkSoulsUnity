@@ -986,6 +986,7 @@ GameObject:
   - component: {fileID: 251655509}
   - component: {fileID: 251655508}
   - component: {fileID: 251655511}
+  - component: {fileID: 251655512}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -1052,7 +1053,7 @@ Transform:
   m_GameObject: {fileID: 251655501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.83, y: 0.139, z: -3.06}
+  m_LocalPosition: {x: -0.83, y: 0.139, z: 3.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1073,6 +1074,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 1841210898}
+  detectionRadius: 20
+  maximumDetectionAngle: 50
+  minimumDetectionAngle: -50
+--- !u!114 &251655512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251655501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1001 &300935135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3781,7 +3801,7 @@ GameObject:
   - component: {fileID: 1251455415}
   - component: {fileID: 1251455416}
   - component: {fileID: 1251455417}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
