@@ -6,12 +6,16 @@ namespace SG
   public class UIManager : MonoBehaviour
   {
     public PlayerInventory playerInventory;
-    EquipmentWindowUI equipmentWindowUI;
+    public EquipmentWindowUI equipmentWindowUI;
 
     [Header("UI Windows")]
     public GameObject hudWindow;
     public GameObject selectWindow;
     public GameObject weaponInventoryWindow;
+    public GameObject equipmentScreenWindow;
+
+    [Header("Equipment Window Slots Selected")]
+    public bool rightHandSlot01Selected, rightHandSlot02Selected, leftHandSlot01Selected, leftHandSlot02Selected;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
@@ -19,10 +23,8 @@ namespace SG
     WeaponInventorySlot[] weaponInventorySlots;
 
 
-private void Awake() {
-  equipmentWindowUI = FindObjectOfType<EquipmentWindowUI>();
-}
-    private void Start() {
+    private void Start()
+    {
       weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
       equipmentWindowUI.LoadWeaponsOnEquipmentScreen(playerInventory);
     }
@@ -54,12 +56,25 @@ private void Awake() {
     {
       selectWindow.SetActive(true);
     }
+
     public void CloseSelectWindow()
     {
       selectWindow.SetActive(false);
     }
-    public void CloseAllInventoryWindows(){
+
+    public void CloseAllInventoryWindows()
+    {
+      ResetAllSelectedSlots();
       weaponInventoryWindow.SetActive(false);
+      equipmentScreenWindow.SetActive(false);
+    }
+
+    public void ResetAllSelectedSlots()
+    {
+      rightHandSlot01Selected = false;
+      rightHandSlot02Selected = false;
+      leftHandSlot01Selected = false;
+      leftHandSlot02Selected = false;
     }
   }
 }

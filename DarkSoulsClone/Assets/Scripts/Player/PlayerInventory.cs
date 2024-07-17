@@ -12,8 +12,8 @@ namespace SG
     public WeaponItem leftWeapon;
     public WeaponItem unarmedWeapon;
 
-    public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[1];
-    public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[1];
+    public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
+    public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];
 
     public int currentRightWeaponIndex = -1;
     public int currentLeftWeaponIndex = -1;
@@ -25,8 +25,10 @@ namespace SG
     }
     private void Start()
     {
-      rightWeapon = unarmedWeapon;
-      leftWeapon = unarmedWeapon;
+      rightWeapon = weaponsInRightHandSlots[0];
+      leftWeapon = weaponsInLeftHandSlots[0];
+      weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
+      weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
     }
 
     public void ChangeRightWeapon()
