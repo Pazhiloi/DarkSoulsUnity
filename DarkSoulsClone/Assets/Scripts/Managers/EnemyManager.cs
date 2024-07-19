@@ -18,6 +18,7 @@ namespace SG
     public CharacterStats currentTarget;
 
     public bool isPreformingAction;
+    public bool isInteracting;
 
     public float distanceFromTarget;
     public float rotationSpeed = 15;
@@ -50,6 +51,8 @@ namespace SG
     private void Update()
     {
       HandleRecoveryTimer();
+
+      isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
     }
 
     private void FixedUpdate()
