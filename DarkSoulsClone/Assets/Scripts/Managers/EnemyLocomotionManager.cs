@@ -9,6 +9,8 @@ namespace SG
     EnemyManager enemyManager;
     EnemyAnimatorManager enemyAnimatorManager;
 
+    public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
+
     
     public LayerMask detectionLayer;
 
@@ -18,6 +20,10 @@ namespace SG
     {
       enemyManager = GetComponent<EnemyManager>();
       enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+    }
+
+    private void Start() {
+      Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
   }

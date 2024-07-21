@@ -33,6 +33,8 @@ namespace SG
     [SerializeField] private float rotationSpeed = 10;
     [SerializeField] private float fallingSpeed = 45;
 
+    public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
+
     private void Awake()
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
@@ -49,6 +51,7 @@ namespace SG
 
       playerManager.isGrounded = true;
       ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+      Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
     #region Movement

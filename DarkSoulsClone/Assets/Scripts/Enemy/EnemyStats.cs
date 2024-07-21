@@ -26,6 +26,7 @@ namespace SG
 
     public void TakeDamage(int damage)
     {
+      if (isDead)return;
       currentHealth -= damage;
 
 
@@ -35,6 +36,7 @@ namespace SG
       {
         currentHealth = 0;
         animator.Play("Dead_01");
+        isDead = true;
       }
     }
   }

@@ -40,6 +40,7 @@ namespace SG
     PlayerManager playerManager;
     WeaponSlotManager weaponSlotManager;
     CameraHandler cameraHandler;
+    AnimatorHandler animatorHandler;
     UIManager uiManager;
 
 
@@ -54,6 +55,7 @@ namespace SG
       weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
       uiManager = FindObjectOfType<UIManager>();
       cameraHandler = FindObjectOfType<CameraHandler>();
+      animatorHandler = GetComponentInChildren<AnimatorHandler>();
     }
 
 
@@ -126,8 +128,6 @@ namespace SG
 
     private void HandleAttackInput(float delta)
     {
-
-
       if (rb_Input)
       {
         if (playerManager.canDoCombo)
@@ -146,6 +146,7 @@ namespace SG
           {
             return;
           }
+          animatorHandler.anim.SetBool("isUsingRightHand", true);
           playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
         }
 

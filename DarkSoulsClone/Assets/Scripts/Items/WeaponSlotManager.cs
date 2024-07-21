@@ -7,6 +7,7 @@ namespace SG
   public class WeaponSlotManager : MonoBehaviour
   {
     public WeaponItem attackingWeapon;
+    PlayerManager playerManager;
 
     WeaponHolderSlot leftHandSlot;
     WeaponHolderSlot rightHandSlot;
@@ -24,6 +25,7 @@ namespace SG
 
     private void Awake()
     {
+      playerManager = GetComponentInParent<PlayerManager>();
       animator = GetComponent<Animator>();
       quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
       playerStats = GetComponentInParent<PlayerStats>();
@@ -38,7 +40,9 @@ namespace SG
         else if (weaponSlot.isRightHandSlot)
         {
           rightHandSlot = weaponSlot;
-        }else if(weaponSlot.isBackSlot){
+        }
+        else if (weaponSlot.isBackSlot)
+        {
           backSlot = weaponSlot;
         }
       }
@@ -76,7 +80,8 @@ namespace SG
           leftHandSlot.UnloadWeaponAndDestroy();
           animator.CrossFade(weaponItem.th_idle, 0.2f);
         }
-        else{
+        else
+        {
           #region  Handle Right  Weapon Item Idle Animations
           animator.CrossFade("Both Arms Empty", 0.2f);
           backSlot.UnloadWeaponAndDestroy();
@@ -106,25 +111,28 @@ namespace SG
       rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
     }
 
-    public void OpenRightDamageCollider()
+    public void OpenDamageCollider()
     {
-      rightHandDamageCollider.EnableDamageCollider();
+      if (playerManager.isUsingRightHand)
+      {
+        rightHandDamageCollider.EnableDamageCollider();
+
+      }
+      else if (playerManager.isUsingLeftHand)
+      {
+        leftHandDamageCollider.EnableDamageCollider();
+      }
     }
-    public void OpenLeftDamageCollider()
-    {
-      leftHandDamageCollider.EnableDamageCollider();
-    }
-    public void CloseRightDamageCollider()
+
+    public void CloseDamageCollider()
     {
       rightHandDamageCollider.DisableDamageCollider();
-    }
-    public void CloseLeftDamageCollider()
-    {
       leftHandDamageCollider.DisableDamageCollider();
     }
 
+
     #endregion
-    
+
     #region  Handle Weapons Stamina Drainage
     public void DrainStaminaLightAttack()
     {
