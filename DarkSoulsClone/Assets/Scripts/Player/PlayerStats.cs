@@ -6,19 +6,24 @@ namespace SG
 {
   public class PlayerStats : CharacterStats
   {
-    
+
     HealthBar healthBar;
     StaminaBar staminaBar;
-
+    PlayerManager playerManager;
     AnimatorHandler animatorHandler;
+
+    public float staminaRegenerationAmount = 30f;
+    public float staminaRegenTimer;
 
     private void Awake()
     {
       healthBar = FindObjectOfType<HealthBar>();
       staminaBar = FindObjectOfType<StaminaBar>();
-      animatorHandler  = GetComponentInChildren<AnimatorHandler>();
+      animatorHandler = GetComponentInChildren<AnimatorHandler>();
     }
-    private void Start() {
+    private void Start()
+    {
+      playerManager = GetComponent<PlayerManager>();
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;
       healthBar.SetMaxHealth(maxHealth);
@@ -30,18 +35,21 @@ namespace SG
 
     }
 
-    private int SetMaxHealthFromHealthLevel() {
+    private int SetMaxHealthFromHealthLevel()
+    {
       maxHealth = healthLevel * 10;
       return maxHealth;
     }
-    private int SetMaxStaminaFromStaminaLevel() {
+    private float SetMaxStaminaFromStaminaLevel()
+    {
       maxStamina = staminaLevel * 10;
       return maxStamina;
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage)
+    {
 
-      if (isDead) return;
+      if (isDead || playerManager.isInvulnerable) return;
       currentHealth -= damage;
 
       healthBar.SetCurrentHealth(currentHealth);
@@ -55,9 +63,32 @@ namespace SG
         isDead = true;
       }
     }
-    public void TakeStaminaDamage(int damage) {
+    public void TakeStaminaDamage(int damage)
+    {
       currentStamina -= damage;
       staminaBar.SetCurrentStamina(currentStamina);
+    }
+
+    public void RegenerateStamina()
+    {
+      if (playerManager.isInteracting)
+      {
+        staminaRegenTimer = 0f;
+      }
+      else
+      {
+        if (staminaRegenTimer <= 1f)
+        {
+          staminaRegenTimer += Time.deltaTime;
+        }
+
+        if (currentStamina < maxStamina && staminaRegenTimer > 1f)
+        {
+          currentStamina += staminaRegenerationAmount * Time.deltaTime;
+          staminaBar.SetCurrentStamina(currentStamina);
+        }
+      }
+
     }
 
   }

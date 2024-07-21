@@ -38,6 +38,7 @@ namespace SG
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    PlayerStats playerStats;
     WeaponSlotManager weaponSlotManager;
     CameraHandler cameraHandler;
     AnimatorHandler animatorHandler;
@@ -52,6 +53,7 @@ namespace SG
       playerAttacker = GetComponent<PlayerAttacker>();
       playerInventory = GetComponent<PlayerInventory>();
       playerManager = GetComponent<PlayerManager>();
+      playerStats = GetComponent<PlayerStats>();
       weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
       uiManager = FindObjectOfType<UIManager>();
       cameraHandler = FindObjectOfType<CameraHandler>();

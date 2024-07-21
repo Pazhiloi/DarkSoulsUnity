@@ -11,7 +11,7 @@ namespace SG
     public int currentHealth;
 
     public int staminaLevel = 10;
-    public int maxStamina, currentStamina;
+    public float maxStamina, currentStamina;
     public bool isDead;
   }
 }

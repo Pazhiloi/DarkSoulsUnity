@@ -12,6 +12,7 @@ namespace SG
     Animator anim;
     CameraHandler cameraHandler;
     PlayerLocomotion playerLocomotion;
+    PlayerStats playerStats;
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableGameObject;
@@ -22,6 +23,7 @@ namespace SG
     public bool isGrounded;
     public bool canDoCombo;
     public bool isUsingRightHand, isUsingLeftHand;
+    public bool isInvulnerable;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ namespace SG
       inputHandler = GetComponent<InputHandler>();
       anim = GetComponentInChildren<Animator>();
       playerLocomotion = GetComponent<PlayerLocomotion>();
+      playerStats = GetComponent<PlayerStats>();
       interactableUI = FindObjectOfType<InteractableUI>();
     }
 
@@ -43,11 +46,13 @@ namespace SG
       canDoCombo = anim.GetBool("canDoCombo");
       isUsingRightHand = anim.GetBool("isUsingRightHand");
       isUsingLeftHand = anim.GetBool("isUsingLeftHand");
+      isInvulnerable = anim.GetBool("isInvulnerable");
       anim.SetBool("isInAir", isInAir);
       
       inputHandler.TickInput(delta);
       playerLocomotion.HandleRollingAndSprinting(delta);
       playerLocomotion.HandleJumping();
+      playerStats.RegenerateStamina();
 
       CheckForInteractableObject();
     }
