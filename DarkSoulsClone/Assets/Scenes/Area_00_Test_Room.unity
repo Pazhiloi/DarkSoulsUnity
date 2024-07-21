@@ -4286,7 +4286,6 @@ GameObject:
   - component: {fileID: 1251455412}
   - component: {fileID: 1251455414}
   - component: {fileID: 1251455415}
-  - component: {fileID: 1251455416}
   - component: {fileID: 1251455417}
   m_Layer: 13
   m_Name: Player
@@ -4451,6 +4450,7 @@ MonoBehaviour:
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isInvulnerable: 0
 --- !u!114 &1251455415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4463,6 +4463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3b22af227a78340aa1e47d0a07eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpell: {fileID: 0}
   rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   leftWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
@@ -4475,19 +4476,6 @@ MonoBehaviour:
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0
   weaponsInventory: []
---- !u!114 &1251455416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251455408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515bf4801dfd31e42810e7f64c0b66d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastAttack: 
 --- !u!114 &1251455417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4506,6 +4494,9 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
+  isDead: 0
+  staminaRegenerationAmount: 30
+  staminaRegenTimer: 0
 --- !u!1001 &1295274986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5815,6 +5806,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1637830122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141766373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515bf4801dfd31e42810e7f64c0b66d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!1 &1756495108
 GameObject:
   m_ObjectHideFlags: 0
@@ -6288,6 +6292,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1441444181}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1637830122}
     - targetCorrespondingSourceObject: {fileID: 3668086056121675338, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1831172373}
