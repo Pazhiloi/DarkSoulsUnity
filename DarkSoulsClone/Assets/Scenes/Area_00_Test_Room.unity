@@ -4463,8 +4463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3b22af227a78340aa1e47d0a07eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 0}
-  rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  currentSpell: {fileID: 11400000, guid: 909cb982fea68f740901e9657323b11f, type: 2}
+  rightWeapon: {fileID: 11400000, guid: 07c7f1361221a4046b1e5f3eb7683ca4, type: 2}
   leftWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
   weaponsInRightHandSlots:

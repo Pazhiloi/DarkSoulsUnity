@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
-public class SpellItem : MonoBehaviour
+public class SpellItem : Item
 {
     public GameObject spellWarmUpFX, spellCastFX;
     public string spellAnimation;
@@ -16,10 +16,10 @@ public class SpellItem : MonoBehaviour
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(){
+    public virtual void AttemptToCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats){
       Debug.Log("You attempted to cast the spell!");
     }
-    public virtual void SuccessfullyCastSpell(){
+    public virtual void SuccessfullyCastSpell(AnimatorHandler animatorHandler, PlayerStats playerStats){
       Debug.Log("You Successfully cast a spell!");
     }
   }
