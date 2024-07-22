@@ -17,6 +17,7 @@ namespace SG
     public bool y_Input;
     public bool rb_Input;
     public bool rt_Input;
+    public bool critical_attack_input;
     public bool jump_Input;
     public bool inventory_Input;
     public bool lockOnInput;
@@ -32,6 +33,8 @@ namespace SG
     public bool lockOnFlag;
     public bool inventoryFlag;
     public float rollInputTimer;
+
+    public Transform criticalAttackRayCastStartPoint;
 
 
     PlayerControls inputActions;
@@ -71,6 +74,7 @@ namespace SG
         inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         inputActions.PlayerActions.RB.performed += i => rb_Input = true;
         inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+        inputActions.PlayerActions.CriticalAttack.performed += i => critical_attack_input = true;
         inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
         inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
         inputActions.PlayerActions.A.performed += i => a_Input = true;
@@ -99,6 +103,7 @@ namespace SG
       HandleInventoryInput();
       HandleLockOnInput();
       HandleTwoHandInput();
+      HandleCriticalAttackInput();
     }
     private void HandleMoveInput(float delta)
     {
@@ -233,6 +238,15 @@ namespace SG
           weaponSlotManager.LoadWeaponOnSlot(playerInventory.rightWeapon, false);
           weaponSlotManager.LoadWeaponOnSlot(playerInventory.leftWeapon, true);
         }
+      }
+    }
+
+    private void HandleCriticalAttackInput()
+    {
+      if (critical_attack_input)
+      {
+        critical_attack_input = false;
+        playerAttacker.AttemptBackStabOrRiposte();
       }
     }
   }

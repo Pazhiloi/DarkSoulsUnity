@@ -225,6 +225,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Critical Attack",
+                    "type": "Button",
+                    "id": "392de472-6d49-4799-9497-e755ffc29a99",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "A",
                     "type": "Button",
                     "id": "9de2ef20-c50f-4040-bd7b-19e143ecba70",
@@ -248,9 +257,20 @@
                     "name": "",
                     "id": "d7234a4f-d1c7-4337-9a7e-b58bb5ad2462",
                     "path": "<Keyboard>/e",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
+                    "action": "RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e21c1531-9d6f-4808-9d63-eebab981684f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Controller",
                     "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -384,6 +404,28 @@
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
                     "action": "Y",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd46e797-27e4-417c-956c-83b9ea2e3620",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11e397a1-5554-4eeb-be8b-b1d3d543dc0b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Critical Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

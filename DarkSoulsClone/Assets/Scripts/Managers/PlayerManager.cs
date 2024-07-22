@@ -28,6 +28,7 @@ namespace SG
     private void Awake()
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
+      backStabCollider = GetComponentInChildren<BackStabCollider>();
     }
 
     void Start()
