@@ -17,8 +17,7 @@ namespace SG
       slider.maxValue = maxStamina;
       slider.value = maxStamina;
     }
-
-    // function which sets the slider display/visibility to the Stamina amount
+    
     public void SetCurrentStamina(float currentStamina)
     {
       slider.value = currentStamina;

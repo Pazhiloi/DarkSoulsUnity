@@ -13,5 +13,9 @@ namespace SG
     public int staminaLevel = 10;
     public float maxStamina, currentStamina;
     public bool isDead;
+
+    public int focusLevel = 10;
+    public float maxFocusPoints;
+    public float currentFocusPoints;
   }
 }
