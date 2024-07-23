@@ -7,6 +7,7 @@ namespace SG
   {
     CameraHandler cameraHandler;
     PlayerManager playerManager;
+    PlayerStats playerStats;
     Transform cameraObject;
     InputHandler inputHandler;
     public Vector3 moveDirection;
@@ -33,18 +34,23 @@ namespace SG
     [SerializeField] private float rotationSpeed = 10;
     [SerializeField] private float fallingSpeed = 45;
 
+    [Header("Stamina Costs")]
+    [SerializeField] private int rollStaminaCost = 15;
+    [SerializeField] private int backstepStaminaCost = 12;
+    [SerializeField] private int sprintStaminaCost = 12;
     public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
 
     private void Awake()
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
-    }
-    private void Start()
-    {
       playerManager = GetComponent<PlayerManager>();
+      playerStats = GetComponent<PlayerStats>();
       rigidbody = GetComponent<Rigidbody>();
       inputHandler = GetComponent<InputHandler>();
       playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
+    }
+    private void Start()
+    {
       cameraObject = Camera.main.transform;
       myTransform = transform;
       playerAnimatorManager.Initialize();
@@ -144,6 +150,7 @@ namespace SG
         speed = sprintSpeed;
         playerManager.isSprinting = true;
         moveDirection *= speed;
+        playerStats.TakeStaminaDamage(sprintStaminaCost);
       }
       else
       {
@@ -175,10 +182,8 @@ namespace SG
 
     public void HandleRollingAndSprinting(float delta)
     {
-      if (playerAnimatorManager.anim.GetBool("isInteracting"))
-      {
-        return;
-      }
+      if (playerAnimatorManager.anim.GetBool("isInteracting")) return;
+      if (playerStats.currentStamina <= 0) return;
 
       if (inputHandler.rollFlag)
       {
@@ -191,10 +196,12 @@ namespace SG
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
           myTransform.rotation = rollRotation;
+          playerStats.TakeStaminaDamage(rollStaminaCost);
         }
         else
         {
           playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+          playerStats.TakeStaminaDamage(backstepStaminaCost);
         }
       }
     }
@@ -283,10 +290,8 @@ namespace SG
 
     public void HandleJumping()
     {
-      if (playerManager.isInteracting)
-      {
-        return;
-      }
+      if (playerManager.isInteracting)return;
+      if (playerStats.currentStamina <= 0) return;
 
       if (inputHandler.jump_Input)
       {
