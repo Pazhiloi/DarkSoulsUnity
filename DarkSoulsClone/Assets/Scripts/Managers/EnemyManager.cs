@@ -42,7 +42,8 @@ namespace SG
       backStabCollider = GetComponentInChildren<BackStabCollider>();
 
     }
-    private void Start() {
+    private void Start()
+    {
       navMeshAgent.enabled = false;
       enemyRigidbody.isKinematic = false;
     }
@@ -97,7 +98,7 @@ namespace SG
 
     #region  Attacks
 
-    
+
 
     #endregion
   }

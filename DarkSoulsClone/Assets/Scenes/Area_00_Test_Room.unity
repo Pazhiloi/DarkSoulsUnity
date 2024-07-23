@@ -735,6 +735,7 @@ GameObject:
   - component: {fileID: 251655508}
   - component: {fileID: 251655511}
   - component: {fileID: 251655512}
+  - component: {fileID: 251655513}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -858,6 +859,28 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &251655513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251655501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  staminaLevel: 10
+  maxStamina: 0
+  currentStamina: 0
+  isDead: 0
+  focusLevel: 10
+  maxFocusPoints: 0
+  currentFocusPoints: 0
 --- !u!1001 &300935135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2392,19 +2415,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945175018}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &953897625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148660747813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944c15ce32ea82e49a867e96aad2ca7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 5866666021332270821}
 --- !u!114 &953897626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5350,7 +5360,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653119276191}
   - component: {fileID: 5866666021332270821}
-  - component: {fileID: 953897625}
+  - component: {fileID: 5866666021332270822}
   - component: {fileID: 953897626}
   m_Layer: 0
   m_Name: Model
@@ -7580,6 +7590,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666021332270822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148660747813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 944c15ce32ea82e49a867e96aad2ca7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 5866666021332270821}
 --- !u!137 &5944369018173324400
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

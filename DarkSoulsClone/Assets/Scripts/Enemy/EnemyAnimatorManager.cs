@@ -21,7 +21,6 @@ namespace SG
       enemyManager.pendingCriticalDamage = 0;
     }
 
-
     private void OnAnimatorMove()
     {
       float delta = Time.deltaTime;
