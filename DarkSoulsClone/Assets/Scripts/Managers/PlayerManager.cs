@@ -91,11 +91,11 @@ namespace SG
         playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
       }
     }
-
+    #region Player Interactions
     public void CheckForInteractableObject()
     {
       RaycastHit hit;
-      if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
+      if (Physics.SphereCast(transform.position, 0.06f, transform.forward, out hit) && hit.collider.tag == "Interactable")
       {
         if (hit.collider.tag == "Interactable")
         {
@@ -127,5 +127,15 @@ namespace SG
 
       }
     }
+
+    public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
+    {
+      playerLocomotion.rigidbody.velocity = Vector3.zero;
+      transform.position = playerStandsHereWhenOpeningChest.position;
+      playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
+    }
+    #endregion
+
+
   }
 }
