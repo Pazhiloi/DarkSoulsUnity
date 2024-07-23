@@ -2839,8 +2839,8 @@ MonoBehaviour:
   movementSpeed: 5
   walkingSpeed: 3
   sprintSpeed: 7
-  rotationSpeed: 10
-  fallingSpeed: 80
+  rotationSpeed: 18
+  fallingSpeed: 600
   characterCollider: {fileID: 1251455411}
   characterCollisionBlockerCollider: {fileID: 1627505771}
 --- !u!114 &1251455413
@@ -7603,6 +7603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 5866666021332270821}
+  canRotate: 0
 --- !u!137 &5944369018173324400
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
