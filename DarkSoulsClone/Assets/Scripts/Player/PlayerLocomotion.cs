@@ -14,7 +14,7 @@ namespace SG
     [HideInInspector]
     public Transform myTransform;
     [HideInInspector]
-    public AnimatorHandler animatorHandler;
+    public PlayerAnimatorManager playerAnimatorManager;
 
     public new Rigidbody rigidbody;
     public GameObject normalCamera;
@@ -44,10 +44,10 @@ namespace SG
       playerManager = GetComponent<PlayerManager>();
       rigidbody = GetComponent<Rigidbody>();
       inputHandler = GetComponent<InputHandler>();
-      animatorHandler = GetComponentInChildren<AnimatorHandler>();
+      playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
       cameraObject = Camera.main.transform;
       myTransform = transform;
-      animatorHandler.Initialize();
+      playerAnimatorManager.Initialize();
 
       playerManager.isGrounded = true;
       ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
@@ -159,14 +159,14 @@ namespace SG
       rigidbody.velocity = projectedVelocity;
       if (inputHandler.lockOnFlag && !inputHandler.sprintFlag)
       {
-        animatorHandler.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+        playerAnimatorManager.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
       }
       else
       {
-        animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+        playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
       }
 
-      if (animatorHandler.canRotate)
+      if (playerAnimatorManager.canRotate)
       {
         HandleRotation(delta);
       }
@@ -174,7 +174,7 @@ namespace SG
 
     public void HandleRollingAndSprinting(float delta)
     {
-      if (animatorHandler.anim.GetBool("isInteracting"))
+      if (playerAnimatorManager.anim.GetBool("isInteracting"))
       {
         return;
       }
@@ -186,14 +186,14 @@ namespace SG
 
         if (inputHandler.moveAmount > 0)
         {
-          animatorHandler.PlayTargetAnimation("Rolling", true);
+          playerAnimatorManager.PlayTargetAnimation("Rolling", true);
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
           myTransform.rotation = rollRotation;
         }
         else
         {
-          animatorHandler.PlayTargetAnimation("Backstep", true);
+          playerAnimatorManager.PlayTargetAnimation("Backstep", true);
         }
       }
     }
@@ -235,12 +235,12 @@ namespace SG
           if (inAirTimer > 0.5f)
           {
             Debug.Log("You were in the air for " + inAirTimer);
-            animatorHandler.PlayTargetAnimation("Landing", true);
+            playerAnimatorManager.PlayTargetAnimation("Landing", true);
             inAirTimer = 0;
           }
           else
           {
-            animatorHandler.PlayTargetAnimation("Empty", false);
+            playerAnimatorManager.PlayTargetAnimation("Empty", false);
             inAirTimer = 0;
           }
           playerManager.isInAir = false;
@@ -257,7 +257,7 @@ namespace SG
 
           if (playerManager.isInteracting == false)
           {
-            animatorHandler.PlayTargetAnimation("Falling", true);
+            playerAnimatorManager.PlayTargetAnimation("Falling", true);
           }
 
           Vector3 vel = rigidbody.velocity;
@@ -294,7 +294,7 @@ namespace SG
         {
           moveDirection = cameraObject.forward * inputHandler.vertical;
           moveDirection += cameraObject.right * inputHandler.horizontal;
-          animatorHandler.PlayTargetAnimation("Jump", true);
+          playerAnimatorManager.PlayTargetAnimation("Jump", true);
           moveDirection.y = 0;
           Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
           myTransform.rotation = jumpRotation;

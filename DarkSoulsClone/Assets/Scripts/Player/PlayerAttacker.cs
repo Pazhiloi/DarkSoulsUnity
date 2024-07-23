@@ -5,7 +5,7 @@ namespace SG
 {
   public class PlayerAttacker : MonoBehaviour
   {
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager playerAnimatorManager;
     PlayerManager playerManager;
     PlayerStats playerStats;
     PlayerInventory playerInventory;
@@ -16,7 +16,7 @@ namespace SG
 
     private void Awake()
     {
-      animatorHandler = GetComponent<AnimatorHandler>();
+      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       playerManager = GetComponentInParent<PlayerManager>();
       playerStats = GetComponentInParent<PlayerStats>();
       playerInventory = GetComponentInParent<PlayerInventory>();
@@ -29,15 +29,15 @@ namespace SG
 
       if (inputHandler.comboFlag)
       {
-        animatorHandler.anim.SetBool("canDoCombo", false);
+        playerAnimatorManager.anim.SetBool("canDoCombo", false);
 
         if (lastAttack == weapon.oh_light_attack_01)
         {
-          animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_02, true);
+          playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_02, true);
         }
         else if (lastAttack == weapon.th_light_attack_01)
         {
-          animatorHandler.PlayTargetAnimation(weapon.th_light_attack_02, true);
+          playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_02, true);
         }
       }
 
@@ -48,12 +48,12 @@ namespace SG
       weaponSlotManager.attackingWeapon = weapon;
       if (inputHandler.twoHandFlag)
       {
-        animatorHandler.PlayTargetAnimation(weapon.th_light_attack_01, true);
+        playerAnimatorManager.PlayTargetAnimation(weapon.th_light_attack_01, true);
         lastAttack = weapon.th_light_attack_01;
       }
       else
       {
-        animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_01, true);
+        playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
         lastAttack = weapon.oh_light_attack_01;
       }
     }
@@ -63,12 +63,12 @@ namespace SG
 
       if (inputHandler.twoHandFlag)
       {
-        animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_01, true);
+        playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
         lastAttack = weapon.oh_light_attack_01;
       }
       else
       {
-        animatorHandler.PlayTargetAnimation(weapon.oh_light_attack_01, true);
+        playerAnimatorManager.PlayTargetAnimation(weapon.oh_light_attack_01, true);
         lastAttack = weapon.oh_light_attack_01;
       }
     }
@@ -109,7 +109,7 @@ namespace SG
         {
           return;
         }
-        animatorHandler.anim.SetBool("isUsingRightHand", true);
+        playerAnimatorManager.anim.SetBool("isUsingRightHand", true);
         HandleLightAttack(playerInventory.rightWeapon);
       }
     }
@@ -124,11 +124,11 @@ namespace SG
         {
           if (playerStats.currentFocusPoints >= playerInventory.currentSpell.focusPointCost)
           {
-            playerInventory.currentSpell.AttemptToCastSpell(animatorHandler, playerStats);
+            playerInventory.currentSpell.AttemptToCastSpell(playerAnimatorManager, playerStats);
           }
           else
           {
-            animatorHandler.PlayTargetAnimation("Damage_01", true);
+            playerAnimatorManager.PlayTargetAnimation("Damage_01", true);
           }
 
         }
@@ -137,7 +137,7 @@ namespace SG
 
     private void SuccessfullyCastSpell()
     {
-      playerInventory.currentSpell.SuccessfullyCastSpell(animatorHandler, playerStats);
+      playerInventory.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStats);
     }
 
     #endregion
@@ -148,13 +148,14 @@ namespace SG
       if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.5f, backStabLayer))
       {
         CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+        DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
         if (enemyCharacterManager != null)
         {
 
           playerManager.transform.position = enemyCharacterManager.backStabCollider.backStaberStandPoint.position;
 
           // rotate towards enemy transform
-          Vector3 rotationDirection = playerManager.transform.root.eulerAngles; 
+          Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
           rotationDirection = hit.transform.position - playerManager.transform.position;
           rotationDirection.y = 0;
           rotationDirection.Normalize();
@@ -163,10 +164,11 @@ namespace SG
           playerManager.transform.rotation = targetRotation;
 
 
+          int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+          enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
 
-
-          animatorHandler.PlayTargetAnimation("Back Stab", true);
+          playerAnimatorManager.PlayTargetAnimation("Back Stab", true);
           enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
         }
       }

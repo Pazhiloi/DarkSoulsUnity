@@ -19,14 +19,14 @@ namespace SG
     private void PickUpItem(PlayerManager playerManager){
       PlayerInventory playerInventory;
       PlayerLocomotion playerLocomotion;
-      AnimatorHandler animatorHandler;
+      PlayerAnimatorManager playerAnimatorManager;
 
       playerInventory = playerManager.GetComponent<PlayerInventory>();
       playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-      animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+      playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
-      playerLocomotion.rigidbody.velocity = Vector3.zero; 
-      animatorHandler.PlayTargetAnimation("Pick Up Item", true);
+      playerLocomotion.rigidbody.velocity = Vector3.zero;
+      playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
       playerInventory.weaponsInventory.Add(weapon);
       playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
       playerManager.itemInteractableGameObject.GetComponentInChildren<RawImage>().texture = weapon.itemIcon.texture;

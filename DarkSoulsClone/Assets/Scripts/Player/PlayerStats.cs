@@ -13,7 +13,7 @@ namespace SG
 
 
     PlayerManager playerManager;
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager playerAnimatorManager;
 
     public float staminaRegenerationAmount = 30f;
     public float staminaRegenTimer;
@@ -23,7 +23,7 @@ namespace SG
       healthBar = FindObjectOfType<HealthBar>();
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
-      animatorHandler = GetComponentInChildren<AnimatorHandler>();
+      playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
     }
     private void Start()
     {
@@ -62,6 +62,17 @@ namespace SG
       maxFocusPoints = focusLevel * 10;
       return maxFocusPoints;
     }
+    public void TakeDamageNoAnimation(int damage)
+    {
+      if (isDead) { return; }
+      currentHealth -= damage;
+
+      if (currentHealth <= 0)
+      {
+        currentHealth = 0;
+        isDead = true;
+      }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -71,12 +82,12 @@ namespace SG
 
       healthBar.SetCurrentHealth(currentHealth);
 
-      animatorHandler.PlayTargetAnimation("Damage_01", true);
+      playerAnimatorManager.PlayTargetAnimation("Damage_01", true);
 
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        animatorHandler.PlayTargetAnimation("Dead_01", true);
+        playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
         isDead = true;
       }
     }

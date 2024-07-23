@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
-  
-public class EnemyAnimatorManager : AnimatorManager
-{
 
-  EnemyManager enemyManager;
+  public class EnemyAnimatorManager : AnimatorManager
+  {
+
+    EnemyManager enemyManager;
     EnemyStats enemyStats;
-    private void Awake() {
-    anim = GetComponent<Animator>();
+    private void Awake()
+    {
+      anim = GetComponent<Animator>();
       enemyManager = GetComponentInParent<EnemyManager>();
       enemyStats = GetComponentInParent<EnemyStats>();
     }
@@ -21,13 +22,14 @@ public class EnemyAnimatorManager : AnimatorManager
     }
 
 
-    private void OnAnimatorMove() {
-    float delta = Time.deltaTime;
-    enemyManager.enemyRigidbody.drag = 0;
-    Vector3 deltaPosition = anim.deltaPosition;
-    deltaPosition.y = 0;
-    Vector3 velocity = deltaPosition / delta;
-    enemyManager.enemyRigidbody.velocity = velocity;
-   }
-}
+    private void OnAnimatorMove()
+    {
+      float delta = Time.deltaTime;
+      enemyManager.enemyRigidbody.drag = 0;
+      Vector3 deltaPosition = anim.deltaPosition;
+      deltaPosition.y = 0;
+      Vector3 velocity = deltaPosition / delta;
+      enemyManager.enemyRigidbody.velocity = velocity;
+    }
+  }
 }

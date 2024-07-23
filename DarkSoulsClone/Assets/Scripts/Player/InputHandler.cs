@@ -44,7 +44,7 @@ namespace SG
     PlayerStats playerStats;
     WeaponSlotManager weaponSlotManager;
     CameraHandler cameraHandler;
-    AnimatorHandler animatorHandler;
+    PlayerAnimatorManager playerAnimatorManager;
     UIManager uiManager;
 
 
@@ -60,7 +60,7 @@ namespace SG
       weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
       uiManager = FindObjectOfType<UIManager>();
       cameraHandler = FindObjectOfType<CameraHandler>();
-      animatorHandler = GetComponentInChildren<AnimatorHandler>();
+      playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
     }
 
 

@@ -8,7 +8,7 @@ namespace SG
   {
 
     EnemyLocomotionManager enemyLocomotionManager;
-    EnemyAnimatorManager enemyAnimationManager;
+    EnemyAnimatorManager enemyAnimatorManager;
     EnemyStats enemyStats;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
@@ -35,7 +35,7 @@ namespace SG
     private void Awake()
     {
       enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-      enemyAnimationManager = GetComponentInChildren<EnemyAnimatorManager>();
+      enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
       enemyStats = GetComponent<EnemyStats>();
       navMeshAgent = GetComponentInChildren<NavMeshAgent>();
       enemyRigidbody = GetComponent<Rigidbody>();
@@ -51,8 +51,8 @@ namespace SG
     {
       HandleRecoveryTimer();
 
-      isInteracting = enemyAnimationManager.anim.GetBool("isInteracting");
-      // enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
+      isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
+      enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
     }
 
     private void FixedUpdate()
@@ -65,7 +65,7 @@ namespace SG
 
       if (currentState != null)
       {
-        State nextState = currentState.Tick(this, enemyStats, enemyAnimationManager);
+        State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
 
         if (nextState != null)
         {
