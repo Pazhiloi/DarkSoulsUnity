@@ -142,5 +142,10 @@ namespace SG
 
       healthBar.SetCurrentHealth(currentHealth);
     }
+
+
+    public void AddSouls(int souls){
+      soulCount += souls;
+    }
   }
 }
