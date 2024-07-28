@@ -13,6 +13,7 @@ namespace SG
     WeaponSlotManager weaponSlotManager;
     public string lastAttack;
     public LayerMask backStabLayer = 1 << 12;
+    public LayerMask riposteLayer = 1 << 13;
 
     private void Awake()
     {
@@ -155,7 +156,7 @@ namespace SG
         if (enemyCharacterManager != null)
         {
 
-          playerManager.transform.position = enemyCharacterManager.backStabCollider.backStaberStandPoint.position;
+          playerManager.transform.position = enemyCharacterManager.backStabCollider.criticalDamageStandPosition.position;
 
           // rotate towards enemy transform
           Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
@@ -174,6 +175,31 @@ namespace SG
           playerAnimatorManager.PlayTargetAnimation("Back Stab", true);
           enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
         }
+      }
+      else if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
+      {
+        CharacterManager enemyCharacterManager = hit.transform.gameObject.GetComponentInParent<CharacterManager>();
+        DamageCollider rightWeapon = weaponSlotManager.rightHandDamageCollider;
+
+        if (enemyCharacterManager != null && enemyCharacterManager.canBeRiposted)
+        {
+          playerManager.transform.position = enemyCharacterManager.riposteCollider.criticalDamageStandPosition.position;
+
+          Vector3 rotationDirection = playerManager.transform.root.eulerAngles;
+          rotationDirection = hit.transform.position - playerManager.transform.position;
+          rotationDirection.y = 0;
+          rotationDirection.Normalize();
+          Quaternion tr = Quaternion.LookRotation(rotationDirection);
+          Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
+          playerManager.transform.rotation = targetRotation;
+
+          int criticalDamage = playerInventory.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+          enemyCharacterManager.pendingCriticalDamage = criticalDamage;
+
+          playerAnimatorManager.PlayTargetAnimation("Riposte", true);
+          enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposted", true);
+        }
+        
       }
     }
 

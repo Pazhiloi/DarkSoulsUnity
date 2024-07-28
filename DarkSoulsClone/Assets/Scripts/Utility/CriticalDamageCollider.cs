@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace SG
 {
-  public class BackStabCollider : MonoBehaviour
+  public class CriticalDamageCollider : MonoBehaviour
   {
-    public Transform backStaberStandPoint;
+    public Transform criticalDamageStandPosition;
   }
 }

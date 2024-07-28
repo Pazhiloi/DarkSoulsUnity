@@ -29,7 +29,7 @@ namespace SG
     private void Awake()
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
-      backStabCollider = GetComponentInChildren<BackStabCollider>();
+      //backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
       inputHandler = GetComponent<InputHandler>();
       playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
       anim = GetComponentInChildren<Animator>();
