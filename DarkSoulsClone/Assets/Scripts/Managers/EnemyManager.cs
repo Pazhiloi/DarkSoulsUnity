@@ -23,6 +23,8 @@ namespace SG
     public float rotationSpeed = 15;
     public float maximumAttackRange = 1.5f;
 
+    [Header("Combat Flags")]
+    public bool canDoCombo;
 
 
     [Header("A.I Settings")]
@@ -49,14 +51,16 @@ namespace SG
     private void Update()
     {
       HandleRecoveryTimer();
+      HandleStateMachine();
 
       isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
+      canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
       enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
     }
 
-    private void FixedUpdate()
-    {
-      HandleStateMachine();
+    private void LateUpdate() {
+      navMeshAgent.transform.localPosition = Vector3.zero;
+      navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
     private void HandleStateMachine()

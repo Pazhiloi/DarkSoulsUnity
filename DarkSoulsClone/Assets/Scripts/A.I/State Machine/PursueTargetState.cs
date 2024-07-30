@@ -8,7 +8,7 @@ namespace SG
    public CombatStanceState combatStanceState;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
-
+      if (enemyManager.isInteracting) return this;
       if (enemyManager.isPreformingAction){
         enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         return this;
@@ -23,8 +23,9 @@ namespace SG
       }
 
       HandleRotateTowardsTarget(enemyManager);
-      enemyManager.navMeshAgent.transform.localPosition = Vector3.zero;
-      enemyManager.navMeshAgent.transform.localRotation = Quaternion.identity;
+
+
+      
 
       if (distanceFromTarget <= enemyManager.maximumAttackRange)
       {

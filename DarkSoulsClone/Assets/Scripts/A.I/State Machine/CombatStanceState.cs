@@ -10,8 +10,8 @@ namespace SG
     public PursueTargetState pursueTargetState;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
-
-      float distanceFromTarget = Vector3.Distance(enemyManager.currentState.transform.position, enemyManager.transform.position);
+      if (enemyManager.isInteracting) return this;
+      float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
       HandleRotateTowardsTarget(enemyManager);
 
       if (enemyManager.isPreformingAction)
@@ -22,12 +22,10 @@ namespace SG
       if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange)
       {
         return attackState;
-      }
-      else if (distanceFromTarget > enemyManager.maximumAttackRange)
+      } else if (distanceFromTarget > enemyManager.maximumAttackRange)
       {
         return pursueTargetState;
-      }
-      else
+      } else
       {
         return this;
       }
