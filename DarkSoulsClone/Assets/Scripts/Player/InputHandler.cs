@@ -16,7 +16,7 @@ namespace SG
     public bool a_Input;
     public bool y_Input;
     public bool rb_Input;
-    public bool rt_Input;
+    public bool rt_Input, lt_Input;
     public bool critical_attack_input;
     public bool jump_Input;
     public bool inventory_Input;
@@ -74,6 +74,7 @@ namespace SG
         inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         inputActions.PlayerActions.RB.performed += i => rb_Input = true;
         inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+        inputActions.PlayerActions.LT.performed += i => lt_Input = true;
         inputActions.PlayerActions.CriticalAttack.performed += i => critical_attack_input = true;
         inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
         inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
@@ -148,11 +149,23 @@ namespace SG
       if (rb_Input)
       {
         playerAttacker.HandleRBAction();
-
       }
       if (rt_Input)
       {
         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+      }
+
+      if (lt_Input)
+      {
+        if (twoHandFlag)
+        {
+          // handle two handing weapon art
+        }
+        else
+        {
+          // handle normal weapon art
+          playerAttacker.HandleLTAction();
+        }
       }
     }
 

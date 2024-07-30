@@ -15,6 +15,28 @@ namespace SG
       enemyManager = GetComponentInParent<EnemyManager>();
       enemyStats = GetComponentInParent<EnemyStats>();
     }
+
+    public void EnableIsParrying()
+    {
+      enemyManager.isParrying = true;
+    }
+
+    public void DisableIsParrying()
+    {
+      enemyManager.isParrying = false;
+    }
+
+    public void EnableCanBeRiposted()
+    {
+      enemyManager.canBeRiposted = true;
+    }
+
+    public void DisableCanBeRiposted()
+    {
+      enemyManager.canBeRiposted = false;
+    }
+
+
     public override void TakeCriticalDamageAnimationEvent()
     {
       enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
@@ -34,6 +56,16 @@ namespace SG
           soulCountBar.SetSoulCountText(playerStats.soulCount);
         }
       }
+    }
+
+    public void CanRotate()
+    {
+      anim.SetBool("canRotate", true);
+    }
+
+    public void StopRotation()
+    {
+      anim.SetBool("canRotate", false);
     }
 
     private void OnAnimatorMove()

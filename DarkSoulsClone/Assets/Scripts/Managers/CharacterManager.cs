@@ -14,6 +14,8 @@ namespace SG
 
     [Header("Combat Flags")]
     public bool canBeRiposted;
+    public bool canBeParried;
+    public bool isParrying;
 
     // damage to be inflicted during an animation event (backstab/riposte)
     public int pendingCriticalDamage;

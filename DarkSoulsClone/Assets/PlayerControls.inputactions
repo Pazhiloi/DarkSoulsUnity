@@ -225,6 +225,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LT",
+                    "type": "Button",
+                    "id": "599880cb-65a6-472c-aacf-8ddda1da8c51",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Critical Attack",
                     "type": "Button",
                     "id": "392de472-6d49-4799-9497-e755ffc29a99",
@@ -426,6 +435,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Critical Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c6ff592-3daf-4c0f-9032-a277c1e05a1f",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "365887a7-0750-4860-bcba-906d1b5c4a00",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "LT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

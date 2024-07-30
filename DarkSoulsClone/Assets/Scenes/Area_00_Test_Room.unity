@@ -830,11 +830,13 @@ MonoBehaviour:
   backStabCollider: {fileID: 2070478348}
   riposteCollider: {fileID: 303706882}
   canBeRiposted: 1
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   navMeshAgent: {fileID: 0}
   enemyRigidbody: {fileID: 0}
-  currentState: {fileID: 487031660}
-  currentTarget: {fileID: 0}
+  currentState: {fileID: 926801241}
+  currentTarget: {fileID: 1251455417}
   isPreformingAction: 0
   isInteracting: 0
   rotationSpeed: 15
@@ -2990,6 +2992,7 @@ MonoBehaviour:
   y_Input: 0
   rb_Input: 0
   rt_Input: 0
+  lt_Input: 0
   critical_attack_input: 0
   jump_Input: 0
   inventory_Input: 0
@@ -3024,6 +3027,8 @@ MonoBehaviour:
   backStabCollider: {fileID: 1621343587}
   riposteCollider: {fileID: 1554954568}
   canBeRiposted: 0
+  canBeParried: 0
+  isParrying: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 1406049358}
   itemInteractableGameObject: {fileID: 1334027106}
@@ -3049,13 +3054,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpell: {fileID: 11400000, guid: 909cb982fea68f740901e9657323b11f, type: 2}
   rightWeapon: {fileID: 11400000, guid: 07c7f1361221a4046b1e5f3eb7683ca4, type: 2}
-  leftWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  leftWeapon: {fileID: 11400000, guid: 433b84b7908fc0246945076d2cbdd433, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   - {fileID: 11400000, guid: e961d5710cdf17f44a42f9c252455831, type: 2}
   weaponsInLeftHandSlots:
-  - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  - {fileID: 11400000, guid: 433b84b7908fc0246945076d2cbdd433, type: 2}
   - {fileID: 11400000, guid: e961d5710cdf17f44a42f9c252455831, type: 2}
   currentRightWeaponIndex: 0
   currentLeftWeaponIndex: 0

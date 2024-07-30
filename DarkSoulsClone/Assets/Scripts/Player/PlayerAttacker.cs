@@ -89,7 +89,17 @@ namespace SG
         PerformRBMagicAction(playerInventory.rightWeapon);
       }
     }
+    public void HandleLTAction()
+    {
+      if (playerInventory.leftWeapon.isShieldWeapon)
+      {
+        PerformLTWeaponArt(inputHandler.twoHandFlag);
+      }
+      else if (playerInventory.leftWeapon.isMelleWeapon)
+      {
 
+      }
+    }
     #endregion
 
     #region Attack Actions
@@ -138,6 +148,19 @@ namespace SG
       }
     }
 
+    private void PerformLTWeaponArt(bool isTwoHanding)
+    {
+      if (playerManager.isInteracting) return;
+
+      if (isTwoHanding)
+      {
+      }
+      else
+      {
+        playerAnimatorManager.PlayTargetAnimation(playerInventory.leftWeapon.weapon_art, true);
+
+      }
+    }
     private void SuccessfullyCastSpell()
     {
       playerInventory.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStats);
@@ -199,7 +222,7 @@ namespace SG
           playerAnimatorManager.PlayTargetAnimation("Riposte", true);
           enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposted", true);
         }
-        
+
       }
     }
 
