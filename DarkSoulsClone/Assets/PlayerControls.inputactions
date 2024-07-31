@@ -216,6 +216,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LB",
+                    "type": "Button",
+                    "id": "45a6d657-6a9a-4652-a281-8d2c000d800d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RT",
                     "type": "Button",
                     "id": "b8e47410-71a7-4b7c-bdb9-9380dc76a66c",
@@ -457,6 +466,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "LT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "170d78e7-771b-44a3-b3b4-ae08ab891bf7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b22aad1b-c115-43fd-86b4-a2549180cbeb",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "LB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

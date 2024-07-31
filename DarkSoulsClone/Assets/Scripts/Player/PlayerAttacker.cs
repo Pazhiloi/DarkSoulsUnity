@@ -89,6 +89,12 @@ namespace SG
         PerformRBMagicAction(playerInventory.rightWeapon);
       }
     }
+
+    public void HandleLBAction()
+    {
+      PerformLBBlockingAction();
+    }
+
     public void HandleLTAction()
     {
       if (playerInventory.leftWeapon.isShieldWeapon)
@@ -167,6 +173,19 @@ namespace SG
     }
 
     #endregion
+
+    #region  Defense Actions
+
+    private void PerformLBBlockingAction()
+    {
+      if (playerManager.isInteracting) return;
+      if (playerManager.isBlocking) return;
+
+      playerAnimatorManager.PlayTargetAnimation("Block Start", false, true);
+      playerManager.isBlocking = true;
+    }
+    #endregion
+
 
     public void AttemptBackStabOrRiposte()
     {

@@ -15,7 +15,7 @@ namespace SG
     public bool b_Input;
     public bool a_Input;
     public bool y_Input;
-    public bool rb_Input;
+    public bool rb_Input, lb_Input;
     public bool rt_Input, lt_Input;
     public bool critical_attack_input;
     public bool jump_Input;
@@ -75,6 +75,8 @@ namespace SG
         inputActions.PlayerActions.RB.performed += i => rb_Input = true;
         inputActions.PlayerActions.RT.performed += i => rt_Input = true;
         inputActions.PlayerActions.LT.performed += i => lt_Input = true;
+        inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
+        inputActions.PlayerActions.LB.performed += i => lb_Input = true;
         inputActions.PlayerActions.CriticalAttack.performed += i => critical_attack_input = true;
         inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
         inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
@@ -101,7 +103,7 @@ namespace SG
     {
       HandleMoveInput(delta);
       HandleRollInput(delta);
-      HandleAttackInput(delta);
+      HandleCombatInput(delta);
       HandleQuickSlotsInput();
       HandleInventoryInput();
       HandleLockOnInput();
@@ -144,7 +146,7 @@ namespace SG
       }
     }
 
-    private void HandleAttackInput(float delta)
+    private void HandleCombatInput(float delta)
     {
       if (rb_Input)
       {
@@ -153,6 +155,13 @@ namespace SG
       if (rt_Input)
       {
         playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+      }
+
+      if (lb_Input)
+      {
+        playerAttacker.HandleLBAction();
+      }else{
+        playerManager.isBlocking = false;
       }
 
       if (lt_Input)
