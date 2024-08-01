@@ -832,6 +832,7 @@ MonoBehaviour:
   canBeRiposted: 1
   canBeParried: 0
   isParrying: 0
+  isBlocking: 0
   pendingCriticalDamage: 0
   navMeshAgent: {fileID: 0}
   enemyRigidbody: {fileID: 0}
@@ -841,6 +842,7 @@ MonoBehaviour:
   isInteracting: 0
   rotationSpeed: 15
   maximumAttackRange: 1.5
+  canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
@@ -1552,6 +1554,74 @@ Transform:
   - {fileID: 198269589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &703308378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703308379}
+  - component: {fileID: 703308381}
+  - component: {fileID: 703308380}
+  m_Layer: 9
+  m_Name: Blocking Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703308379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703308378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 899486129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703308380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703308378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9981001d4d4b6654fba173671892089d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockingCollider: {fileID: 0}
+  blockingPhysicalDamageAbsorption: 0
+--- !u!65 &703308381
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703308378}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.98, y: 1.37, z: 0.1}
+  m_Center: {x: -0.008, y: 0.703, z: 0.362}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2066,7 @@ Transform:
   - {fileID: 1627505770}
   - {fileID: 1621343585}
   - {fileID: 1554954567}
+  - {fileID: 703308379}
   m_Father: {fileID: 1251455409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902587510
@@ -2991,6 +3062,7 @@ MonoBehaviour:
   a_Input: 0
   y_Input: 0
   rb_Input: 0
+  lb_Input: 0
   rt_Input: 0
   lt_Input: 0
   critical_attack_input: 0
@@ -3029,6 +3101,7 @@ MonoBehaviour:
   canBeRiposted: 0
   canBeParried: 0
   isParrying: 0
+  isBlocking: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 1406049358}
   itemInteractableGameObject: {fileID: 1334027106}
@@ -5675,6 +5748,7 @@ GameObject:
   - component: {fileID: 1831172367}
   - component: {fileID: 1441444181}
   - component: {fileID: 1637830122}
+  - component: {fileID: 5866666020217144478}
   m_Layer: 0
   m_Name: Player Model
   m_TagString: Untagged
@@ -7992,6 +8066,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020217144478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147630490717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e83de91dde0ca84f8d0d26447bea6e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockingCollider: {fileID: 703308380}
 --- !u!95 &5866666021332270821
 Animator:
   serializedVersion: 5

@@ -74,7 +74,7 @@ namespace SG
       }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
 
       if (isDead || playerManager.isInvulnerable) return;
@@ -82,7 +82,7 @@ namespace SG
 
       healthBar.SetCurrentHealth(currentHealth);
 
-      playerAnimatorManager.PlayTargetAnimation("Damage_01", true);
+      playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
       if (currentHealth <= 0)
       {

@@ -6,6 +6,7 @@ namespace SG
   public class PlayerAttacker : MonoBehaviour
   {
     PlayerAnimatorManager playerAnimatorManager;
+    PlayerEquipmentManager playerEquipmentManager;
     PlayerManager playerManager;
     PlayerStats playerStats;
     PlayerInventory playerInventory;
@@ -18,6 +19,7 @@ namespace SG
     private void Awake()
     {
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+      playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
       playerManager = GetComponentInParent<PlayerManager>();
       playerStats = GetComponentInParent<PlayerStats>();
       playerInventory = GetComponentInParent<PlayerInventory>();
@@ -182,6 +184,7 @@ namespace SG
       if (playerManager.isBlocking) return;
 
       playerAnimatorManager.PlayTargetAnimation("Block Start", false, true);
+      playerEquipmentManager.OpenBlockingCollider();
       playerManager.isBlocking = true;
     }
     #endregion

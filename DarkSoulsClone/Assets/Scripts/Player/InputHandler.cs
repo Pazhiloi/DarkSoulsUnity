@@ -42,6 +42,7 @@ namespace SG
     PlayerInventory playerInventory;
     PlayerManager playerManager;
     PlayerStats playerStats;
+    BlockingCollider blockingCollider;
     WeaponSlotManager weaponSlotManager;
     CameraHandler cameraHandler;
     PlayerAnimatorManager playerAnimatorManager;
@@ -58,6 +59,7 @@ namespace SG
       playerManager = GetComponent<PlayerManager>();
       playerStats = GetComponent<PlayerStats>();
       weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+      blockingCollider = GetComponentInChildren<BlockingCollider>();
       uiManager = FindObjectOfType<UIManager>();
       cameraHandler = FindObjectOfType<CameraHandler>();
       playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
@@ -162,6 +164,10 @@ namespace SG
         playerAttacker.HandleLBAction();
       }else{
         playerManager.isBlocking = false;
+        if (blockingCollider.blockingCollider.enabled)
+        {
+          blockingCollider.DisableBlockingCollider();
+        }
       }
 
       if (lt_Input)
