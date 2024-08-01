@@ -10,7 +10,7 @@ namespace SG
     public EnemyAttackAction[] enemyAttacks;
     public EnemyAttackAction currentAttack;
 
-    bool isComboing = false;
+    bool willDoComboOnNextAttack = false;
     public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
     {
       if (enemyManager.isInteracting && !enemyManager.canDoCombo)
@@ -19,10 +19,10 @@ namespace SG
       }
       else if (enemyManager.isInteracting && enemyManager.canDoCombo)
       {
-        if (isComboing)
+        if (willDoComboOnNextAttack)
         {
+          willDoComboOnNextAttack = false;
           enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-          isComboing = false;
         }
 
       }
@@ -55,8 +55,9 @@ namespace SG
               enemyAnimatorManager.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
               enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
               enemyManager.isPreformingAction = true;
+              RollForComboChance(enemyManager);
 
-              if (currentAttack.canCombo)
+              if (currentAttack.canCombo && willDoComboOnNextAttack)
               {
                 currentAttack = currentAttack.comboAction;
                 return this;
@@ -130,7 +131,15 @@ namespace SG
 
     }
 
+    private void RollForComboChance(EnemyManager enemyManager)
+    {
+      float comboChance = Random.Range(0f, 100f);
 
+      if (enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
+      {
+        willDoComboOnNextAttack = true;
+      }
+    }
     private void HandleRotateTowardsTarget(EnemyManager enemyManager)
     {
       // Rotate Manually
@@ -160,5 +169,8 @@ namespace SG
         enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
       }
     }
+    
+
+
   }
 }
