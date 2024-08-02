@@ -7,20 +7,26 @@ namespace SG
   public class EnemyStats : CharacterStats
   {
     EnemyAnimatorManager enemyAnimatorManager;
+    public UIEnemyHealthBar enemyHealthBar;
 
     public int soulsAwardedOnDeath = 50;
 
-    private void Awake() {
+    private void Awake()
+    {
       enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+      enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
     }
 
-    private void Start() {
+    private void Start()
+    {
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;
+      enemyHealthBar.SetMaxHealth(maxHealth);
     }
 
 
-    private int SetMaxHealthFromHealthLevel() {
+    private int SetMaxHealthFromHealthLevel()
+    {
       maxHealth = healthLevel * 10;
       return maxHealth;
     }
@@ -29,6 +35,7 @@ namespace SG
     {
       if (isDead) { return; }
       currentHealth -= damage;
+      enemyHealthBar.SetHealth(currentHealth);
 
       if (currentHealth <= 0)
       {
@@ -38,8 +45,9 @@ namespace SG
     }
     public void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
-      if (isDead)return;
+      if (isDead) return;
       currentHealth -= damage;
+      enemyHealthBar.SetHealth(currentHealth);
 
 
       enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
@@ -50,12 +58,12 @@ namespace SG
       }
     }
 
-
-    private void HandleDeath(){
+    private void HandleDeath()
+    {
       currentHealth = 0;
       enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
       isDead = true;
-      
     }
+
   }
 }
