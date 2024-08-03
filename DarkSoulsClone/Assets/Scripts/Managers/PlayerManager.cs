@@ -45,6 +45,7 @@ namespace SG
       isUsingRightHand = anim.GetBool("isUsingRightHand");
       isUsingLeftHand = anim.GetBool("isUsingLeftHand");
       isInvulnerable = anim.GetBool("isInvulnerable");
+      isFiringSpell = anim.GetBool("isFiringSpell");
 
       anim.SetBool("isBlocking", isBlocking);
       anim.SetBool("isInAir", isInAir);

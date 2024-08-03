@@ -10,8 +10,8 @@ namespace SG
     PlayerManager playerManager;
     PlayerInventory playerInventory;
 
-    WeaponHolderSlot leftHandSlot;
-    WeaponHolderSlot rightHandSlot;
+    public WeaponHolderSlot leftHandSlot;
+    public WeaponHolderSlot rightHandSlot;
     WeaponHolderSlot backSlot;
 
     public DamageCollider leftHandDamageCollider;

@@ -17,6 +17,9 @@ namespace SG
     public bool canBeParried;
     public bool isParrying, isBlocking;
 
+    [Header("Spells")]
+    public bool isFiringSpell;
+
     // damage to be inflicted during an animation event (backstab/riposte)
     public int pendingCriticalDamage;
   }
