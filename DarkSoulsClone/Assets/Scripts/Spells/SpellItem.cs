@@ -22,7 +22,8 @@ public class SpellItem : Item
     {
       Debug.Log("You attempted to cast the spell!");
     }
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats){
+    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats, CameraHandler cameraHandler, WeaponSlotManager weaponSlotManager)
+    {
       Debug.Log("You Successfully cast a spell!");
       playerStats.DrainFocusPoints(focusPointCost);
     }

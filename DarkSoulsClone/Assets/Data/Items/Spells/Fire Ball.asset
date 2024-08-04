@@ -15,12 +15,15 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: Fire Ball
   spellWarmUpFX: {fileID: 7240149375222060678, guid: f692a2c77ea93084593f3c446b03ef41, type: 3}
-  spellCastFX: {fileID: 7240149375222060678, guid: 87c478c983050e54dab81ff2ef8cc574, type: 3}
+  spellCastFX: {fileID: 7240149375222060678, guid: 0208eabaa9b5ae6468a8138607098050, type: 3}
   spellAnimation: Spell_Throw_Start
   focusPointCost: 0
   isFaithSpell: 0
   isMagicSpell: 0
   isPyroSpell: 1
   spellDescription: 
-  baseDamage: 0
-  projectileVelocity: 0
+  baseDamage: 75
+  projectileForwardVelocity: 500
+  projectileUpwardVelocity: 150
+  projectileMass: 25
+  isEffectedByGravity: 1

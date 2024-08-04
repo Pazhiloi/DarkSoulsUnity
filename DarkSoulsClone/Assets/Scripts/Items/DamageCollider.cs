@@ -7,13 +7,14 @@ namespace SG
   {
     public CharacterManager characterManager;
     Collider damageCollider;
+    public bool enabledDamageColliderOnStartUP = false;
     public int currentWeaponDamage = 25;
     private void Awake()
     {
       damageCollider = GetComponent<Collider>();
       damageCollider.gameObject.SetActive(true);
       damageCollider.isTrigger = true;
-      damageCollider.enabled = false;
+      damageCollider.enabled = enabledDamageColliderOnStartUP;
     }
 
     public void EnableDamageCollider()

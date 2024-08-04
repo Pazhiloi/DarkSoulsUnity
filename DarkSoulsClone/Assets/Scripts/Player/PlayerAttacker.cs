@@ -5,6 +5,7 @@ namespace SG
 {
   public class PlayerAttacker : MonoBehaviour
   {
+    CameraHandler cameraHandler;
     PlayerAnimatorManager playerAnimatorManager;
     PlayerEquipmentManager playerEquipmentManager;
     PlayerManager playerManager;
@@ -18,6 +19,7 @@ namespace SG
 
     private void Awake()
     {
+      cameraHandler = FindObjectOfType<CameraHandler>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
       playerManager = GetComponentInParent<PlayerManager>();
@@ -185,7 +187,7 @@ namespace SG
     }
     private void SuccessfullyCastSpell()
     {
-      playerInventory.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStats);
+      playerInventory.currentSpell.SuccessfullyCastSpell(playerAnimatorManager, playerStats, cameraHandler, weaponSlotManager);
       playerAnimatorManager.anim.SetBool("isFiringSpell", true);
     }
 
