@@ -50,8 +50,11 @@ namespace SG
       }
     }
 
-    #region Handle Weapons Damage Collider
-
+    public void LoadBothWeaponsOnSlots()
+    {
+      LoadWeaponOnSlot(playerInventory.rightWeapon, false);
+      LoadWeaponOnSlot(playerInventory.leftWeapon, true);
+    }
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
       if (isLeft)
@@ -103,6 +106,10 @@ namespace SG
         quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
       }
     }
+
+    #region Handle Weapons Damage Collider
+
+
 
     private void LoadLeftWeaponDamageCollider()
     {

@@ -261,6 +261,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "X",
+                    "type": "Button",
+                    "id": "754bb7d3-eabc-4626-a88f-d5980693711b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "9cf1af83-97a4-4f40-8ee1-82816cb64548",
@@ -488,6 +497,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "LB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "918138b5-f230-41fc-9eb0-3f4ec2e6ed84",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ed67fa1-952c-4454-a3f1-da299fb9fe04",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "X",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

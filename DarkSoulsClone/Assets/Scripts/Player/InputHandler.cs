@@ -14,6 +14,7 @@ namespace SG
 
     public bool b_Input;
     public bool a_Input;
+    public bool x_Input;
     public bool y_Input;
     public bool rb_Input, lb_Input;
     public bool rt_Input, lt_Input;
@@ -41,11 +42,12 @@ namespace SG
     PlayerAttacker playerAttacker;
     PlayerInventory playerInventory;
     PlayerManager playerManager;
+    PlayerAnimatorManager playerAnimatorManager;
+    PlayerEffectsManager playerEffectsManager;
     PlayerStats playerStats;
     BlockingCollider blockingCollider;
     WeaponSlotManager weaponSlotManager;
     CameraHandler cameraHandler;
-    PlayerAnimatorManager playerAnimatorManager;
     UIManager uiManager;
 
 
@@ -58,6 +60,7 @@ namespace SG
       playerInventory = GetComponent<PlayerInventory>();
       playerManager = GetComponent<PlayerManager>();
       playerStats = GetComponent<PlayerStats>();
+      playerEffectsManager = GetComponentInChildren<PlayerEffectsManager>();
       weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
       blockingCollider = GetComponentInChildren<BlockingCollider>();
       uiManager = FindObjectOfType<UIManager>();
@@ -83,6 +86,7 @@ namespace SG
         inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
         inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
         inputActions.PlayerActions.A.performed += i => a_Input = true;
+        inputActions.PlayerActions.X.performed += i => x_Input = true;
         inputActions.PlayerActions.Roll.performed += i => b_Input = true;
         inputActions.PlayerActions.Roll.canceled += i => b_Input = false;
         inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
@@ -111,6 +115,7 @@ namespace SG
       HandleLockOnInput();
       HandleTwoHandInput();
       HandleCriticalAttackInput();
+      HandleUseConsumableInput();
     }
     private void HandleMoveInput(float delta)
     {
@@ -285,6 +290,15 @@ namespace SG
       {
         critical_attack_input = false;
         playerAttacker.AttemptBackStabOrRiposte();
+      }
+    }
+
+
+    private void HandleUseConsumableInput(){
+      if (x_Input)
+      {
+        x_Input = false;
+        playerInventory.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, weaponSlotManager, playerEffectsManager);
       }
     }
   }
