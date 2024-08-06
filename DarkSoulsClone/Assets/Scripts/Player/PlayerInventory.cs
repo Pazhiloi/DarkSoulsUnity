@@ -8,12 +8,15 @@ namespace SG
   {
     WeaponSlotManager weaponSlotManager;
     
+    [Header("Quick Slots Items")]
     public SpellItem currentSpell;
     public WeaponItem rightWeapon;
     public WeaponItem leftWeapon;
     public WeaponItem unarmedWeapon;
     public ConsumableItem currentConsumable;
 
+    [Header("Current Equipment")]
+    public HelmetEquipment currentHelmetEquipment;
 
     public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
     public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];

@@ -7,12 +7,20 @@ public class PlayerEquipmentManager : MonoBehaviour
 {
     InputHandler inputHandler;
     PlayerInventory playerInverntory;
+    [Header("Equipment Model Changers")]
+    HelmetModelChanger helmetModelChanger;
     public BlockingCollider blockingCollider;
 
     private void Awake()
     {
       inputHandler = GetComponentInParent<InputHandler>();
       playerInverntory = GetComponentInParent<PlayerInventory>();
+      helmetModelChanger = GetComponentInChildren<HelmetModelChanger>();
+    }
+
+    private void Start() {
+      helmetModelChanger.UnequipAllHelmetModels();
+      helmetModelChanger.EquipHelmetModelByName(playerInverntory.currentHelmetEquipment.helmetModelName);
     }
 
     public void OpenBlockingCollider()
