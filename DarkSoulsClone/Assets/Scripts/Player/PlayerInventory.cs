@@ -17,6 +17,7 @@ namespace SG
 
     [Header("Current Equipment")]
     public HelmetEquipment currentHelmetEquipment;
+    public TorsoEquipment currentTorsoEquipment;
 
     public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
     public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];
