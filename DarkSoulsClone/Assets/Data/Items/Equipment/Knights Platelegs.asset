@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7a90bc378a2a5409021d4895919727, type: 3}
-  m_Name: Fallen Knights Chestplate
+  m_Script: {fileID: 11500000, guid: 8f93b872919e4aa4b8bb871ddd0a33a5, type: 3}
+  m_Name: Knights Platelegs
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemName: Knights Chestplate
+  itemName: Knights Platelegs
   physicalDefense: 0
-  torsoModelName: Male_Torso_03
-  upperLeftArmModelName: Male_upper_arm_02
-  upperRightArmModelName: Male_upper_arm_02
+  hipModelName: Chr_Hips_Male_02
+  leftLegName: Male_Left_Leg_01
+  rightLegName: Male_Right_Leg_01

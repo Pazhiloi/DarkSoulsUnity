@@ -16,3 +16,5 @@ MonoBehaviour:
   itemName: Knights Chestplate
   physicalDefense: 0
   torsoModelName: Male_Torso_02
+  upperLeftArmModelName: Male_upper_arm_01
+  upperRightArmModelName: Male_upper_arm_01

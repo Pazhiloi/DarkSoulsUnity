@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7a90bc378a2a5409021d4895919727, type: 3}
-  m_Name: Fallen Knights Chestplate
+  m_Script: {fileID: 11500000, guid: 8b9a875b2e6d3b94fae04fdb011f7c8f, type: 3}
+  m_Name: Knights Gaunlets
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemName: Knights Chestplate
+  itemName: 
   physicalDefense: 0
-  torsoModelName: Male_Torso_03
-  upperLeftArmModelName: Male_upper_arm_02
-  upperRightArmModelName: Male_upper_arm_02
+  leftHandModelName: Hand_Armor_01
+  rightHandModelName: Hand_Armor_01
+  lowerLeftArmModelName: Arm_armor_01
+  lowerRightArmModelName: Arm_armor_01
