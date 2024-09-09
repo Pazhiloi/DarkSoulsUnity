@@ -1018,7 +1018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &251655508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1162,11 +1162,15 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
-  isDead: 0
   focusLevel: 10
   maxFocusPoints: 0
   currentFocusPoints: 0
   soulCount: 0
+  physicalDamageAbsorptionHead: 0
+  physicalDamageAbsorptionBody: 0
+  physicalDamageAbsorptionLegs: 0
+  physicalDamageAbsorptionHands: 0
+  isDead: 0
   enemyHealthBar: {fileID: 259633376}
   soulsAwardedOnDeath: 50
 --- !u!1 &259633374
@@ -4770,11 +4774,15 @@ MonoBehaviour:
   staminaLevel: 10
   maxStamina: 0
   currentStamina: 0
-  isDead: 0
   focusLevel: 10
   maxFocusPoints: 100
   currentFocusPoints: 100
   soulCount: 0
+  physicalDamageAbsorptionHead: 0
+  physicalDamageAbsorptionBody: 0
+  physicalDamageAbsorptionLegs: 0
+  physicalDamageAbsorptionHands: 0
+  isDead: 0
   focusPointBar: {fileID: 2121553570}
   staminaRegenerationAmount: 30
   staminaRegenTimer: 0
@@ -4859,7 +4867,7 @@ RectTransform:
   m_Father: {fileID: 537363979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

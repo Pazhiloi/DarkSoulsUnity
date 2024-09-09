@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Knights Chestplate
-  physicalDefense: 0
+  physicalDefense: 12.5
   torsoModelName: Male_Torso_02
   upperLeftArmModelName: Male_upper_arm_01
   upperRightArmModelName: Male_upper_arm_01

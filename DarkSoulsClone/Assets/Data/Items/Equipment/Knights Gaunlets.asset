@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: 
-  physicalDefense: 0
+  physicalDefense: 10
   leftHandModelName: Hand_Armor_01
   rightHandModelName: Hand_Armor_01
   lowerLeftArmModelName: Arm_armor_01
