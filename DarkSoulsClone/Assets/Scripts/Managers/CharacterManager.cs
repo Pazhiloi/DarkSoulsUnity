@@ -17,6 +17,9 @@ namespace SG
     public bool canBeParried;
     public bool isParrying, isBlocking;
 
+    [Header("Movement Flags")]
+    public bool isRotatingWithRootMotion;
+
     [Header("Spells")]
     public bool isFiringSpell;
 

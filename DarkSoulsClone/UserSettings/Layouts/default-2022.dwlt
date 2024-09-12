@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Project
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 117
+  controlID: 171
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 118
+  controlID: 2507
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 51
+  controlID: 2508
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: AnimatorControllerTool
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -266,15 +266,15 @@ MonoBehaviour:
     y: 0
     width: 1036
     height: 647
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 20}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -375,7 +375,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Environment
+    - Assets/Scripts/A.I/States
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -383,16 +383,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 55
   m_LastFolders:
-  - Assets/Scripts/Environment
+  - Assets/Scripts/A.I/States
   m_LastFoldersGridSize: 55
   m_LastProjectPath: D:\unity\courseProjects\DarkSoulsUnity\DarkSoulsClone
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 173}
-    m_SelectedIDs: 369d0000
-    m_LastClickedID: 40246
-    m_ExpandedIDs: 0000000094790000547b0000987b00009a7b000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: d4830000
+    m_LastClickedID: 33748
+    m_ExpandedIDs: 00000000a67900006c7b0000ac7b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -420,7 +420,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000094790000
+    m_ExpandedIDs: 00000000a6790000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: -428
+    m_CachedPref: 428
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -599,7 +599,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 98f6fffffcfaffff3470000052710000
+      m_ExpandedIDs: fcfaffff90700000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_Size:
     m_Target: 8.571793
     speed: 2
-    m_Value: 8.975699
+    m_Value: 8.571793
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1148,14 +1148,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7926689
+    - e00: 1.2372773
       e01: 0
       e02: 0
-      e03: -20.479935
+      e03: 77.18312
       e10: 0
-      e11: 0.7926689
+      e11: 1.2372773
       e12: 0
-      e13: 329.75797
+      e13: 427.8782
       e20: 0
       e21: 0
       e22: 1
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_PreviewAnimator: {fileID: 0}
   m_AnimatorController: {fileID: 9100000, guid: 52fc9ffe1ced894459cc3c3a908bd5b3, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -4811976786155180635, guid: 52fc9ffe1ced894459cc3c3a908bd5b3, type: 2}
+  - m_Target: {fileID: 7536336207968535833, guid: 52fc9ffe1ced894459cc3c3a908bd5b3, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1259,7 +1259,7 @@ MonoBehaviour:
     m_IsLocked: 0
   m_CurrentEditor: 0
   m_LayerEditor:
-    m_SelectedLayerIndex: 4
+    m_SelectedLayerIndex: 5
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1403,7 +1403,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/Materials
+    - Assets/Art/Animations/Turning
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1411,16 +1411,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 52
   m_LastFolders:
-  - Assets/Art/Materials
+  - Assets/Art/Animations/Turning
   m_LastFoldersGridSize: 52
   m_LastProjectPath: D:\unity\courseProjects\DarkSoulsUnity\DarkSoulsClone
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 72810000
-    m_LastClickedID: 33138
-    m_ExpandedIDs: 00000000947900004a7b00004e7b00008a7b000000ca9a3bffffff7f
+    m_SelectedIDs: 087c0000
+    m_LastClickedID: 31752
+    m_ExpandedIDs: 00000000a6790000627b0000a27b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1448,7 +1448,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000094790000
+    m_ExpandedIDs: 00000000a6790000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1475,7 +1475,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000f6790000765601000c800100047a0000dc7e0000f87e00008a780000a8780000a6a10000702101000000000030800000dac000002a8a0000cafa0100de610200c89b0000e4b600000c8300008e7d0000fa7d000088ea020080940000728e0000828e0000e4b80000a68b010030e900002ce9000050bb0000fed00000f4d00000fad00000dca00000d6a00000d0a00000caa00000665c000046b30000427c0000bc92000046bf000062c000003e6e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
