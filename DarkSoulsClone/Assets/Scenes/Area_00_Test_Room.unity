@@ -1112,16 +1112,17 @@ MonoBehaviour:
   isParrying: 0
   isBlocking: 0
   isRotatingWithRootMotion: 0
+  canRotate: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
   navMeshAgent: {fileID: 0}
   enemyRigidbody: {fileID: 0}
-  currentState: {fileID: 1512057410}
-  currentTarget: {fileID: 1251455417}
+  currentState: {fileID: 487031660}
+  currentTarget: {fileID: 0}
   isPreformingAction: 0
   isInteracting: 0
-  rotationSpeed: 15
-  maximumAttackRange: 1.5
+  rotationSpeed: 30.9
+  maximumAggroRadius: 5
   canDoCombo: 0
   detectionRadius: 20
   maximumDetectionAngle: 50
@@ -3418,11 +3419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e113e83feab96a42a48e2c22060facb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateTowardsTargetState: {fileID: 1512057410}
   combatStanceState: {fileID: 1337768098}
-  enemyAttacks:
-  - {fileID: 11400000, guid: b579d01522a0e1b46b9f77d49d0664ec, type: 2}
-  - {fileID: 11400000, guid: 536f4e39075be4443bf73ce8e2228f1e, type: 2}
+  pursueTargetState: {fileID: 902587512}
   currentAttack: {fileID: 0}
+  hasPerformedAttack: 0
 --- !u!1 &889441314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3608,6 +3609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 1337768098}
+  rotateTowardsTargetState: {fileID: 1512057410}
 --- !u!1 &905182951
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,6 +4941,7 @@ MonoBehaviour:
   isParrying: 0
   isBlocking: 0
   isRotatingWithRootMotion: 0
+  canRotate: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
   interactableUIGameObject: {fileID: 1406049358}
@@ -5570,6 +5573,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 888697336}
+  enemyAttacks:
+  - {fileID: 11400000, guid: b579d01522a0e1b46b9f77d49d0664ec, type: 2}
+  - {fileID: 11400000, guid: 536f4e39075be4443bf73ce8e2228f1e, type: 2}
   pursueTargetState: {fileID: 902587512}
 --- !u!1 &1344934540
 GameObject:
@@ -6369,6 +6375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0dea16975b80124cb28b08232e0c3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatStanceState: {fileID: 1337768098}
 --- !u!1 &1518472662
 GameObject:
   m_ObjectHideFlags: 0
