@@ -15,10 +15,7 @@ namespace SG
       float viewableAngle = Vector3.SignedAngle(targetDirection, enemyManager.transform.forward, Vector3.up);
       HandleRotateTowardsTarget(enemyManager);
 
-      if (viewableAngle > 65  || viewableAngle < -65)
-      {
-        return rotateTowardsTargetState;
-      }
+     
 
 
       if (enemyManager.isInteracting) return this;
