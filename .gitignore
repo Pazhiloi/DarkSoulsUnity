@@ -77,3 +77,16 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+DarkSoulsClone/ProjectSettings/BurstAotSettings_Android.json
+DarkSoulsClone/ProjectSettings/BurstAotSettings_iOS.json
+DarkSoulsClone/ProjectSettings/BurstAotSettings_StandaloneWindows.json
+DarkSoulsClone/ProjectSettings/BurstAotSettings_WebGL.json
+DarkSoulsClone/ProjectSettings/BurstAotSettings_WSAPlayer.json
+DarkSoulsClone/ProjectSettings/CommonBurstAotSettings.json
+DarkSoulsClone/Logs/shadercompiler-UnityShaderCompiler.exe3.log
+DarkSoulsClone/Logs/shadercompiler-UnityShaderCompiler.exe2.log
+DarkSoulsClone/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+DarkSoulsClone/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+DarkSoulsClone/Logs/AssetImportWorker0.log
+DarkSoulsClone/Logs/AssetImportWorker0-prev.log
+DarkSoulsClone/Logs/AssetImportWorker0-prev.log
