@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SG
@@ -136,6 +134,17 @@ namespace SG
       playerLocomotion.rigidbody.velocity = Vector3.zero;
       transform.position = playerStandsHereWhenOpeningChest.position;
       playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
+    }
+
+    public void PassThroughFogWallInteraction(Transform fogWallEntrance){
+      playerLocomotion.rigidbody.velocity = Vector3.zero;
+
+      Vector3 rotationDirection  = fogWallEntrance.transform.forward;
+      Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);
+      transform.rotation = turnRotation;
+
+      playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
+      
     }
     #endregion
 
