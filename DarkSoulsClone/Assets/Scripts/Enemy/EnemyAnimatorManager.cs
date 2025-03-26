@@ -8,11 +8,13 @@ namespace SG
   {
 
     EnemyManager enemyManager;
+    EnemyBossManager enemyBossManager;
     EnemyStats enemyStats;
     private void Awake()
     {
       anim = GetComponent<Animator>();
       enemyManager = GetComponentInParent<EnemyManager>();
+      enemyBossManager = GetComponentInParent<EnemyBossManager>();
       enemyStats = GetComponentInParent<EnemyStats>();
     }
 
@@ -76,6 +78,12 @@ namespace SG
           soulCountBar.SetSoulCountText(playerStats.soulCount);
         }
       }
+    }
+
+    public void InstantiateBossParticeFX()
+    {
+      BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
+      GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFXTransform.transform);
     }
 
    

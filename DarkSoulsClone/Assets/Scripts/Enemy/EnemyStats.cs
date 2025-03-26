@@ -57,8 +57,12 @@ namespace SG
       {
         enemyHealthBar.SetHealth(currentHealth);
 
-      }else if(isBoss && enemyBossManager != null){
-        enemyBossManager.UpdateBossHealthBar(currentHealth);
+      }
+      else if(isBoss && enemyBossManager != null){
+        enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+
+       
+        
       }
 
       enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);

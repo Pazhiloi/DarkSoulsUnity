@@ -2,25 +2,44 @@ using UnityEngine;
 
 namespace SG
 {
-    public class EnemyBossManager : MonoBehaviour
+  public class EnemyBossManager : MonoBehaviour
+  {
+    public string bossName;
+
+    UIBossHealthBar bossHealthBar;
+    EnemyStats enemyStats;
+    EnemyAnimatorManager enemyAnimatorManager;
+    BossCombatStanceState bossCombatStanceState;
+    [Header("Second Phase FX")]
+    public GameObject particleFX;
+
+    private void Awake()
     {
-      public string bossName;
+      bossHealthBar = FindObjectOfType<UIBossHealthBar>();
+      enemyStats = GetComponent<EnemyStats>();
+      enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+      bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
+    }
 
-      UIBossHealthBar bossHealthBar;
-      EnemyStats enemyStats;
+    private void Start()
+    {
+      bossHealthBar.SetBossName(bossName);
+      bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
+    }
 
-      private void Awake() {
-        bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-        enemyStats = GetComponent<EnemyStats>();
-      } 
-
-      private void Start() {
-        bossHealthBar.SetBossName(bossName);
-        bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
-      }
-
-      public void UpdateBossHealthBar(int currentHealth){
-        bossHealthBar.SetBossCurrentHealth(currentHealth);
+    public void UpdateBossHealthBar(int currentHealth, int maxHealth)
+    {
+      bossHealthBar.SetBossCurrentHealth(currentHealth);
+      if (currentHealth <= maxHealth / 2)
+      {
+        ShiftToSecondPhase();
       }
     }
+
+    public void ShiftToSecondPhase()
+    {
+      enemyAnimatorManager.PlayTargetAnimation("PhaseShift", true);
+      bossCombatStanceState.hasPhaseShifted = true;
+    }
+  }
 }
