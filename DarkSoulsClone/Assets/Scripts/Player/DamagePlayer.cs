@@ -13,6 +13,7 @@ namespace SG
       if (playerStats != null)
       {
         playerStats.TakeDamage(damage);
+        // aboba pro
       }
     }
 }

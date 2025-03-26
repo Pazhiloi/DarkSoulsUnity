@@ -15,8 +15,6 @@ namespace SG
       float viewableAngle = Vector3.SignedAngle(targetDirection, enemyManager.transform.forward, Vector3.up);
       HandleRotateTowardsTarget(enemyManager);
 
-     
-
 
       if (enemyManager.isInteracting) return this;
 
