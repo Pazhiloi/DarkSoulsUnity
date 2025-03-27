@@ -138,8 +138,15 @@ namespace SG
 
     public void CloseDamageCollider()
     {
-      rightHandDamageCollider.DisableDamageCollider();
-      leftHandDamageCollider.DisableDamageCollider();
+
+      if (rightHandDamageCollider != null)
+      {
+        rightHandDamageCollider.DisableDamageCollider();
+      }
+      if (leftHandDamageCollider != null)
+      {
+        leftHandDamageCollider.DisableDamageCollider();
+      }
     }
 
 
@@ -156,6 +163,16 @@ namespace SG
     }
     #endregion
 
+
+    #region Handle Weapon's Poise Bonus
+    public void GrantWeaponAttackingPoiseBonus(){
+      playerStats.totalPoiseDefence += attackingWeapon.offensivePoiseBonus;
+    }
+
+    public void ResetWeaponAttackingPoiseBonus(){
+      playerStats.totalPoiseDefence = playerStats.armorPoiseBonus;
+    }
+    #endregion
 
   }
 

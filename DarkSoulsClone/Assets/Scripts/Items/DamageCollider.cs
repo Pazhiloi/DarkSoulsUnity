@@ -89,18 +89,35 @@ namespace SG
             return;
           }
         }
-        
+
         if (enemyStats != null)
         {
           enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
           enemyStats.totalPoiseDefence = enemyStats.totalPoiseResetTime - poiseBreak;
-          if(enemyStats.totalPoiseDefence > poiseBreak ){
-            enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+          if (enemyStats.isBoss)
+          {
+            if (enemyStats.totalPoiseDefence > poiseBreak)
+            {
+              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+            }
+            else
+            {
+              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+              enemyStats.BreakGuard();
+            }
           }
           else
           {
-            enemyStats.TakeDamage(currentWeaponDamage);
+            if (enemyStats.totalPoiseDefence > poiseBreak)
+            {
+              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+            }
+            else
+            {
+              enemyStats.TakeDamage(currentWeaponDamage);
+            }
           }
+
         }
       }
 

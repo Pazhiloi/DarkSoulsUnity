@@ -59,6 +59,10 @@ namespace SG
         isDead = true;
       }
     }
+
+    public void BreakGuard(){
+      enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
+    }
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
 

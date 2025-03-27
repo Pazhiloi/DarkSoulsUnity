@@ -15,8 +15,19 @@ namespace SG
     DamageCollider rightHandDamageCollider;
     DamageCollider leftHandDamageCollider;
 
+    EnemyStats enemyStats;
+
     public void Awake()
     {
+      enemyStats = GetComponentInParent<EnemyStats>();
+      LoadWeaponHolderSlots();
+    }
+    public void Start()
+    {
+      LoadWeaponsOnBothHands();
+    }
+
+    private void LoadWeaponHolderSlots(){
       WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
       {
@@ -31,10 +42,6 @@ namespace SG
           //LoadRightWeaponDamageCollider();
         }
       }
-    }
-    public void Start()
-    {
-      LoadWeaponsOnBothHands();
     }
     public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
     {
@@ -116,6 +123,19 @@ namespace SG
     public void DisableCombo()
     {
 
+    }
+    #endregion
+
+
+    #region Handle Weapon's Poise Bonus
+    public void GrantWeaponAttackingPoiseBonus()
+    {
+      enemyStats.totalPoiseDefence += enemyStats.offensivePoiseBonus;
+    }
+
+    public void ResetWeaponAttackingPoiseBonus()
+    {
+      enemyStats.totalPoiseDefence = enemyStats.armorPoiseBonus;
     }
     #endregion
   }
