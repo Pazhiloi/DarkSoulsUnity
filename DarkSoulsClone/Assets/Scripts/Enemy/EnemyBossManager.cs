@@ -30,15 +30,18 @@ namespace SG
     public void UpdateBossHealthBar(int currentHealth, int maxHealth)
     {
       bossHealthBar.SetBossCurrentHealth(currentHealth);
-      if (currentHealth <= maxHealth / 2)
+      if (currentHealth <= maxHealth / 2 && !bossCombatStanceState.hasPhaseShifted)
       {
+        bossCombatStanceState.hasPhaseShifted = true;
         ShiftToSecondPhase();
       }
     }
 
     public void ShiftToSecondPhase()
     {
-      enemyAnimatorManager.PlayTargetAnimation("PhaseShift", true);
+      enemyAnimatorManager.anim.SetBool("isInvulnerable", true);
+      enemyAnimatorManager.anim.SetBool("isPhaseShifting", true);
+      enemyAnimatorManager.PlayTargetAnimation("Phase Shift", true);
       bossCombatStanceState.hasPhaseShifted = true;
     }
   }

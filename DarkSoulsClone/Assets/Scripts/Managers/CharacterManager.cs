@@ -15,7 +15,7 @@ namespace SG
     [Header("Combat Flags")]
     public bool canBeRiposted;
     public bool canBeParried;
-    public bool isParrying, isBlocking;
+    public bool isParrying, isBlocking, isInvulnerable;
 
     [Header("Movement Flags")]
     public bool isRotatingWithRootMotion;

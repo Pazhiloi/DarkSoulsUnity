@@ -22,7 +22,6 @@ namespace SG
     public bool isGrounded;
     public bool canDoCombo;
     public bool isUsingRightHand, isUsingLeftHand;
-    public bool isInvulnerable;
 
     private void Awake()
     {

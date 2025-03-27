@@ -343,7 +343,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 74641536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da20ef458606c7e49bb6ffcfc1e87f84, type: 3}
+  m_Script: {fileID: 11500000, guid: 27819953a05c3214a9fffec83f45c4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackState: {fileID: 1475492687}
@@ -351,6 +351,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b579d01522a0e1b46b9f77d49d0664ec, type: 2}
   - {fileID: 11400000, guid: 536f4e39075be4443bf73ce8e2228f1e, type: 2}
   pursueTargetState: {fileID: 1776800403}
+  hasPhaseShifted: 0
+  secondPhaseAttacks:
+  - {fileID: 11400000, guid: 0d3a50f979a10f54a9e8a13fe822d066, type: 2}
+  - {fileID: 11400000, guid: 0ff08a1c6c20de446b72fc19ccc39570, type: 2}
 --- !u!1 &78614380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1621,6 +1625,7 @@ MonoBehaviour:
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
   allowAIToPerformCombos: 1
+  isPhaseShifting: 0
   comboLikelyHood: 100
 --- !u!114 &251655512
 MonoBehaviour:
@@ -4846,6 +4851,7 @@ MonoBehaviour:
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
   allowAIToPerformCombos: 1
+  isPhaseShifting: 0
   comboLikelyHood: 100
 --- !u!54 &861787903
 Rigidbody:
@@ -4932,6 +4938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossName: Sir Forkface
+  particleFX: {fileID: 7281661528061161630, guid: 3c17396cd6f548c4b88d3eedc550f608, type: 3}
 --- !u!1 &888697334
 GameObject:
   m_ObjectHideFlags: 0
@@ -7812,7 +7819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e180561f430c9b47a0d6d26c92c8e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightHandWeapon: {fileID: 11400000, guid: e961d5710cdf17f44a42f9c252455831, type: 2}
+  rightHandWeapon: {fileID: 11400000, guid: 6b53fe21f01dcc541ab9886d04ecda2c, type: 2}
   leftHandWeapon: {fileID: 0}
 --- !u!114 &1317471734
 MonoBehaviour:
@@ -7838,7 +7845,7 @@ Animator:
   m_GameObject: {fileID: 1317471731}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5cc790e4702ecdc43b005fd302586757, type: 3}
-  m_Controller: {fileID: 9100000, guid: 52fc9ffe1ced894459cc3c3a908bd5b3, type: 2}
+  m_Controller: {fileID: 9100000, guid: 171b90391e03e744f8bef6994b650762, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

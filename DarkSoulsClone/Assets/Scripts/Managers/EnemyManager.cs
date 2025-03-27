@@ -36,6 +36,7 @@ namespace SG
 
     [Header("A.I Combat Settings")]
     public bool allowAIToPerformCombos;
+    public bool isPhaseShifting;
     public float comboLikelyHood;
 
     private void Awake()
@@ -59,6 +60,8 @@ namespace SG
 
       isRotatingWithRootMotion = enemyAnimatorManager.anim.GetBool("isRotatingWithRootMotion");
       isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
+      isPhaseShifting = enemyAnimatorManager.anim.GetBool("isPhaseShifting");
+      isInvulnerable = enemyAnimatorManager.anim.GetBool("isInvulnerable");
       canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
       canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
       enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
