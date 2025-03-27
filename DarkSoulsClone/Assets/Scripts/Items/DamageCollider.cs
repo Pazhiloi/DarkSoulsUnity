@@ -34,7 +34,7 @@ namespace SG
     {
       if (other.tag == "Player")
       {
-        PlayerStats playerStats = other.GetComponent<PlayerStats>();
+        PlayerStatsManager PlayerStatsManager = other.GetComponent<PlayerStatsManager>();
         CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
         BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
 
@@ -48,23 +48,23 @@ namespace SG
           else if (shield != null && enemyCharacterManager.isBlocking)
           {
             float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-            if (playerStats != null)
-            { playerStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
+            if (PlayerStatsManager != null)
+            { PlayerStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
             return;
           }
         }
 
-        if (playerStats != null)
+        if (PlayerStatsManager != null)
         {
-          playerStats.poiseResetTimer = playerStats.totalPoiseResetTime;
-          playerStats.totalPoiseDefence = playerStats.totalPoiseResetTime - poiseBreak;
-          if (playerStats.totalPoiseDefence > poiseBreak)
+          PlayerStatsManager.poiseResetTimer = PlayerStatsManager.totalPoiseResetTime;
+          PlayerStatsManager.totalPoiseDefence = PlayerStatsManager.totalPoiseResetTime - poiseBreak;
+          if (PlayerStatsManager.totalPoiseDefence > poiseBreak)
           {
-            playerStats.TakeDamageNoAnimation(currentWeaponDamage);
+            PlayerStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
           }
           else
           {
-            playerStats.TakeDamage(currentWeaponDamage);
+            PlayerStatsManager.TakeDamage(currentWeaponDamage);
           }
         }
       }

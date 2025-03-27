@@ -15,7 +15,7 @@ namespace SG
 
 
     public State currentState;
-    public CharacterStats currentTarget;
+    public CharacterStatsManager currentTarget;
 
     public bool isPreformingAction;
     public bool isInteracting;
@@ -58,13 +58,13 @@ namespace SG
       HandleRecoveryTimer();
       HandleStateMachine();
 
-      isRotatingWithRootMotion = enemyAnimatorManager.anim.GetBool("isRotatingWithRootMotion");
-      isInteracting = enemyAnimatorManager.anim.GetBool("isInteracting");
-      isPhaseShifting = enemyAnimatorManager.anim.GetBool("isPhaseShifting");
-      isInvulnerable = enemyAnimatorManager.anim.GetBool("isInvulnerable");
-      canDoCombo = enemyAnimatorManager.anim.GetBool("canDoCombo");
-      canRotate = enemyAnimatorManager.anim.GetBool("canRotate");
-      enemyAnimatorManager.anim.SetBool("isDead", enemyStats.isDead);
+      isRotatingWithRootMotion = enemyAnimatorManager.animator.GetBool("isRotatingWithRootMotion");
+      isInteracting = enemyAnimatorManager.animator.GetBool("isInteracting");
+      isPhaseShifting = enemyAnimatorManager.animator.GetBool("isPhaseShifting");
+      isInvulnerable = enemyAnimatorManager.animator.GetBool("isInvulnerable");
+      canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
+      canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
+      enemyAnimatorManager.animator.SetBool("isDead", enemyStats.isDead);
     }
 
     private void LateUpdate() {

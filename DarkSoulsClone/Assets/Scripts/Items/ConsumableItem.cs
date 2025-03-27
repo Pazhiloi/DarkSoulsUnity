@@ -14,7 +14,7 @@ namespace SG
     public string consumeAnimation;
     public bool isInteracting;
 
-    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, WeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
+    public virtual void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager playerWeaponSlotManager, PlayerEffectsManager playerEffectsManager)
     {
       if (currentItemAmount > 0)
       {

@@ -124,7 +124,7 @@ namespace SG
 
             if (!isPerformingAction)
             {
-                HandleAllPlayerLocomotion();
+                HandleAllPlayerLocomotionManager();
             }
 
             isPerformingAction = animator.GetBool("isPerformingAction");
@@ -210,7 +210,7 @@ namespace SG
 
         #region LOCOMOTION
 
-        private void HandleAllPlayerLocomotion()
+        private void HandleAllPlayerLocomotionManager()
         {
             HandleGroundCheck();
             HandlePlayerRotation();

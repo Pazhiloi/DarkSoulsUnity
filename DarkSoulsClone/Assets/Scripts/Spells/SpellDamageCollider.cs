@@ -7,7 +7,7 @@ public class SpellDamageCollider : DamageCollider
 {
    public GameObject impactParticles, projectileParticles, muzzleParticles;
    bool hasCollided = false;
-   CharacterStats spellTarget;
+   CharacterStatsManager spellTarget;
    Rigidbody rb;
    Vector3 impactNormal;
 
@@ -29,7 +29,7 @@ public class SpellDamageCollider : DamageCollider
     if (!hasCollided)
     {
 
-      spellTarget = collision.transform.GetComponent<CharacterStats>();
+      spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
 
       if (spellTarget != null)
       {

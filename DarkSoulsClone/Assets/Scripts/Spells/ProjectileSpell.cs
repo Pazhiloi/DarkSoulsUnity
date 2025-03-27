@@ -13,23 +13,23 @@ public class ProjectileSpell : SpellItem
     public bool isEffectedByGravity;
     Rigidbody rigidbody;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats, WeaponSlotManager weaponSlotManager)
+    public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager)
     {
-      base.AttemptToCastSpell(playerAnimatorManager, playerStats, weaponSlotManager);
-      GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, weaponSlotManager.rightHandSlot.transform);
+      base.AttemptToCastSpell(playerAnimatorManager, PlayerStatsManager, playerWeaponSlotManager);
+      GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerWeaponSlotManager.rightHandSlot.transform);
       playerAnimatorManager.PlayTargetAnimation(spellAnimation, true);
     }
-    public override void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats, CameraHandler cameraHandler, WeaponSlotManager weaponSlotManager)
+    public override void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager)
     {
-      base.SuccessfullyCastSpell(playerAnimatorManager, playerStats, cameraHandler, weaponSlotManager);
-      GameObject instantiatedSpellFX = Instantiate(spellCastFX, weaponSlotManager.rightHandSlot.transform.position, cameraHandler.transform.rotation);
+      base.SuccessfullyCastSpell(playerAnimatorManager, PlayerStatsManager, cameraHandler, playerWeaponSlotManager);
+      GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerWeaponSlotManager.rightHandSlot.transform.position, cameraHandler.transform.rotation);
       rigidbody = instantiatedSpellFX.GetComponent<Rigidbody>();
 
       if (cameraHandler.currentLockOnTarget!= null)
       {
         instantiatedSpellFX.transform.LookAt(cameraHandler.currentLockOnTarget.transform);
       }else{
-        instantiatedSpellFX.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerStats.transform.eulerAngles.y, 0);
+        instantiatedSpellFX.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, PlayerStatsManager.transform.eulerAngles.y, 0);
       }
 
       rigidbody.AddForce(instantiatedSpellFX.transform.forward * projectileForwardVelocity);

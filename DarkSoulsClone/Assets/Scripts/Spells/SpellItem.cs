@@ -18,14 +18,14 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats, WeaponSlotManager weaponSlotManager)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager)
     {
       Debug.Log("You attempted to cast the spell!");
     }
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStats playerStats, CameraHandler cameraHandler, WeaponSlotManager weaponSlotManager)
+    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager)
     {
       Debug.Log("You Successfully cast a spell!");
-      playerStats.DrainFocusPoints(focusPointCost);
+      PlayerStatsManager.DrainFocusPoints(focusPointCost);
     }
   }
 }

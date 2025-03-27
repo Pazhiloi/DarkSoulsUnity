@@ -39,8 +39,8 @@ namespace SG
 
     public void ShiftToSecondPhase()
     {
-      enemyAnimatorManager.anim.SetBool("isInvulnerable", true);
-      enemyAnimatorManager.anim.SetBool("isPhaseShifting", true);
+      enemyAnimatorManager.animator.SetBool("isInvulnerable", true);
+      enemyAnimatorManager.animator.SetBool("isPhaseShifting", true);
       enemyAnimatorManager.PlayTargetAnimation("Phase Shift", true);
       bossCombatStanceState.hasPhaseShifted = true;
     }

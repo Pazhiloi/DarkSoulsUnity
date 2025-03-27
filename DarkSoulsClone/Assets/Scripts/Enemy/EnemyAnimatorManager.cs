@@ -12,7 +12,7 @@ namespace SG
     EnemyStats enemyStats;
     private void Awake()
     {
-      anim = GetComponent<Animator>();
+      animator = GetComponent<Animator>();
       enemyManager = GetComponentInParent<EnemyManager>();
       enemyBossManager = GetComponentInParent<EnemyBossManager>();
       enemyStats = GetComponentInParent<EnemyStats>();
@@ -20,21 +20,21 @@ namespace SG
 
     public void CanRotate()
     {
-      anim.SetBool("canRotate", true);
+      animator.SetBool("canRotate", true);
     }
 
     public void StopRotation()
     {
-      anim.SetBool("canRotate", false);
+      animator.SetBool("canRotate", false);
     }
 
     public void EnableCombo()
     {
-      anim.SetBool("canDoCombo", true);
+      animator.SetBool("canDoCombo", true);
     }
     public void DisableCombo()
     {
-      anim.SetBool("canDoCombo", false);
+      animator.SetBool("canDoCombo", false);
     }
 
 
@@ -67,15 +67,15 @@ namespace SG
 
     public void AwardSoulsOnDeath()
     {
-      PlayerStats playerStats = FindObjectOfType<PlayerStats>();
+      PlayerStatsManager PlayerStatsManager = FindObjectOfType<PlayerStatsManager>();
       SoulCountBar soulCountBar = FindObjectOfType<SoulCountBar>();
       
-      if (playerStats != null)
+      if (PlayerStatsManager != null)
       {
-        playerStats.AddSouls(enemyStats.soulsAwardedOnDeath);
+        PlayerStatsManager.AddSouls(enemyStats.soulsAwardedOnDeath);
         if (soulCountBar != null)
         {
-          soulCountBar.SetSoulCountText(playerStats.soulCount);
+          soulCountBar.SetSoulCountText(PlayerStatsManager.soulCount);
         }
       }
     }
@@ -92,14 +92,14 @@ namespace SG
     {
       float delta = Time.deltaTime;
       enemyManager.enemyRigidbody.drag = 0;
-      Vector3 deltaPosition = anim.deltaPosition;
+      Vector3 deltaPosition = animator.deltaPosition;
       deltaPosition.y = 0;
       Vector3 velocity = deltaPosition / delta;
       enemyManager.enemyRigidbody.velocity = velocity;
 
       if (enemyManager.isRotatingWithRootMotion)
       {
-        enemyManager.transform.rotation *= anim.deltaRotation;
+        enemyManager.transform.rotation *= animator.deltaRotation;
       }
     }
 

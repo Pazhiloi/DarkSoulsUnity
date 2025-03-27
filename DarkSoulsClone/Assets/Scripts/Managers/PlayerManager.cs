@@ -7,10 +7,10 @@ namespace SG
   {
 
     InputHandler inputHandler;
-    Animator anim;
+    Animator animator;
     CameraHandler cameraHandler;
-    PlayerLocomotion playerLocomotion;
-    PlayerStats playerStats;
+    PlayerLocomotionManager playerLocomotionManager;
+    PlayerStatsManager playerStatsManager;
     PlayerAnimatorManager playerAnimatorManager;
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -27,43 +27,43 @@ namespace SG
     {
       cameraHandler = FindObjectOfType<CameraHandler>();
       inputHandler = GetComponent<InputHandler>();
-      playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
-      anim = GetComponentInChildren<Animator>();
-      playerLocomotion = GetComponent<PlayerLocomotion>();
-      playerStats = GetComponent<PlayerStats>();
+      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+      animator = GetComponent<Animator>();
+      playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+      playerStatsManager = GetComponent<PlayerStatsManager>();
       interactableUI = FindObjectOfType<InteractableUI>();
     }
 
     void Update()
     {
       float delta = Time.deltaTime;
-      isInteracting = anim.GetBool("isInteracting");
-      canDoCombo = anim.GetBool("canDoCombo");
-      isUsingRightHand = anim.GetBool("isUsingRightHand");
-      isUsingLeftHand = anim.GetBool("isUsingLeftHand");
-      isInvulnerable = anim.GetBool("isInvulnerable");
-      isFiringSpell = anim.GetBool("isFiringSpell");
+      isInteracting = animator.GetBool("isInteracting");
+      canDoCombo = animator.GetBool("canDoCombo");
+      isUsingRightHand = animator.GetBool("isUsingRightHand");
+      isUsingLeftHand = animator.GetBool("isUsingLeftHand");
+      isInvulnerable = animator.GetBool("isInvulnerable");
+      isFiringSpell = animator.GetBool("isFiringSpell");
 
-      anim.SetBool("isBlocking", isBlocking);
-      anim.SetBool("isInAir", isInAir);
-      anim.SetBool("isDead", playerStats.isDead);
+      animator.SetBool("isBlocking", isBlocking);
+      animator.SetBool("isInAir", isInAir);
+      animator.SetBool("isDead", playerStatsManager.isDead);
 
       
       inputHandler.TickInput(delta);
-      playerAnimatorManager.canRotate = anim.GetBool("canRotate");
-      playerLocomotion.HandleRollingAndSprinting(delta);
-      playerLocomotion.HandleJumping();
+      playerAnimatorManager.canRotate = animator.GetBool("canRotate");
+      playerLocomotionManager.HandleRollingAndSprinting(delta);
+      playerLocomotionManager.HandleJumping();
 
-      playerStats.RegenerateStamina();
+      playerStatsManager.RegenerateStamina();
 
       CheckForInteractableObject();
     }
     private void FixedUpdate()
     {
       float delta = Time.fixedDeltaTime;
-      playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-      playerLocomotion.HandleMovement(delta);
-      playerLocomotion.HandleRotation(delta);
+      playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
+      playerLocomotionManager.HandleMovement(delta);
+      playerLocomotionManager.HandleRotation(delta);
     }
 
     private void LateUpdate()
@@ -88,7 +88,7 @@ namespace SG
       }
       if (isInAir)
       {
-        playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
+        playerLocomotionManager.inAirTimer = playerLocomotionManager.inAirTimer + Time.deltaTime;
       }
     }
     #region Player Interactions
@@ -130,13 +130,13 @@ namespace SG
 
     public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
     {
-      playerLocomotion.rigidbody.velocity = Vector3.zero;
+      playerLocomotionManager.rigidbody.velocity = Vector3.zero;
       transform.position = playerStandsHereWhenOpeningChest.position;
       playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
     }
 
     public void PassThroughFogWallInteraction(Transform fogWallEntrance){
-      playerLocomotion.rigidbody.velocity = Vector3.zero;
+      playerLocomotionManager.rigidbody.velocity = Vector3.zero;
 
       Vector3 rotationDirection  = fogWallEntrance.transform.forward;
       Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);

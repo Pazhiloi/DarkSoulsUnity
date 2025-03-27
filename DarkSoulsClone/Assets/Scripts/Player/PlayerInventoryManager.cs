@@ -4,15 +4,14 @@ using UnityEngine;
 
 namespace SG
 {
-  public class PlayerInventory : MonoBehaviour
+  public class PlayerInventoryManager : MonoBehaviour
   {
-    WeaponSlotManager weaponSlotManager;
+    PlayerWeaponSlotManager playerWeaponSlotManager;
     
     [Header("Quick Slots Items")]
     public SpellItem currentSpell;
     public WeaponItem rightWeapon;
     public WeaponItem leftWeapon;
-    public WeaponItem unarmedWeapon;
     public ConsumableItem currentConsumable;
 
     [Header("Current Equipment")]
@@ -30,14 +29,14 @@ namespace SG
     public List<WeaponItem> weaponsInventory;
     private void Awake()
     {
-      weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+      playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
     private void Start()
     {
       rightWeapon = weaponsInRightHandSlots[0];
       leftWeapon = weaponsInLeftHandSlots[0];
-      weaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
-      weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+      playerWeaponSlotManager.LoadWeaponOnSlot(rightWeapon, false);
+      playerWeaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
     }
 
     public void ChangeRightWeapon()
@@ -47,7 +46,7 @@ namespace SG
       if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] != null)
       {
         rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-        weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
       }
       else if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] == null)
       {
@@ -56,7 +55,7 @@ namespace SG
       else if (currentRightWeaponIndex == 1 && weaponsInRightHandSlots[1] != null)
       {
         rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-        weaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
       }
       else
       {
@@ -66,8 +65,8 @@ namespace SG
       if (currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
       {
         currentRightWeaponIndex = -1;
-        rightWeapon = unarmedWeapon;
-        weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
+        rightWeapon = playerWeaponSlotManager.unarmedWeapon;
+        playerWeaponSlotManager.LoadWeaponOnSlot(playerWeaponSlotManager.unarmedWeapon, false);
       }
     }
 
@@ -79,7 +78,7 @@ namespace SG
       if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] != null)
       {
         leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-        weaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
+        playerWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
       }
       else if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] == null)
       {
@@ -89,7 +88,7 @@ namespace SG
       else if (currentLeftWeaponIndex == 1 && weaponsInLeftHandSlots[1] != null)
       {
         leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-        weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+        playerWeaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
       }
       else
       {
@@ -99,8 +98,8 @@ namespace SG
       if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)
       {
         currentLeftWeaponIndex = -1;
-        leftWeapon = unarmedWeapon;
-        weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, true);
+        leftWeapon = playerWeaponSlotManager.unarmedWeapon;
+        playerWeaponSlotManager.LoadWeaponOnSlot(playerWeaponSlotManager.unarmedWeapon, true);
       }
       #endregion
     }

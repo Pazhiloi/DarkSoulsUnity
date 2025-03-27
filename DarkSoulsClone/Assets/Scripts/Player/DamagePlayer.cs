@@ -6,11 +6,11 @@ namespace SG
     public int damage = 25;
 
     private void OnTriggerEnter(Collider other) {
-      PlayerStats playerStats = other.GetComponent<PlayerStats>();
+      PlayerStatsManager PlayerStatsManager = other.GetComponent<PlayerStatsManager>();
 
-      if (playerStats != null)
+      if (PlayerStatsManager != null)
       {
-        playerStats.TakeDamage(damage);
+        PlayerStatsManager.TakeDamage(damage);
         // aboba pro
       }
     }

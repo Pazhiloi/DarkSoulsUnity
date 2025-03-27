@@ -19,14 +19,14 @@ namespace SG
       if (enemyManager.isInteracting) return this;
 
       if (enemyManager.isPreformingAction){
-        enemyAnimatorManager.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        enemyAnimatorManager.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         return this;
       }
       
 
       if (distanceFromTarget > enemyManager.maximumAggroRadius)
       {
-        enemyAnimatorManager.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        enemyAnimatorManager.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
       }
       
 

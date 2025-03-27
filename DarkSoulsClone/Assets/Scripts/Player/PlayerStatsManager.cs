@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
-  public class PlayerStats : CharacterStats
+  public class PlayerStatsManager : CharacterStatsManager
   {
 
     HealthBar healthBar;
@@ -23,7 +23,7 @@ namespace SG
       healthBar = FindObjectOfType<HealthBar>();
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
-      playerAnimatorManager = GetComponentInChildren<PlayerAnimatorManager>();
+      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
     private void Start()
     {

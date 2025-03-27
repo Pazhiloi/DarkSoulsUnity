@@ -4,8 +4,8 @@ namespace SG
   public class PlayerEquipmentManager : MonoBehaviour
   {
     InputHandler inputHandler;
-    PlayerInventory playerInverntory;
-    PlayerStats playerStats;
+    PlayerInventoryManager playerInverntory;
+    PlayerStatsManager playerStatsManager;
     [Header("Equipment Model Changers")]
     HelmetModelChanger helmetModelChanger;
     TorsoModelChanger torsoModelChanger;
@@ -30,9 +30,9 @@ namespace SG
 
     private void Awake()
     {
-      inputHandler = GetComponentInParent<InputHandler>();
-      playerInverntory = GetComponentInParent<PlayerInventory>();
-      playerStats = GetComponentInParent<PlayerStats>();
+      inputHandler = GetComponent<InputHandler>();
+      playerInverntory = GetComponent<PlayerInventoryManager>();
+      playerStatsManager = GetComponent<PlayerStatsManager>();
 
       helmetModelChanger = GetComponentInChildren<HelmetModelChanger>();
       torsoModelChanger = GetComponentInChildren<TorsoModelChanger>();
@@ -73,13 +73,13 @@ namespace SG
       {
         nakedHeadModelGO.SetActive(false);
         helmetModelChanger.EquipHelmetModelByName(playerInverntory.currentHelmetEquipment.helmetModelName);
-        playerStats.physicalDamageAbsorptionHead = playerInverntory.currentHelmetEquipment.physicalDefense;
+        playerStatsManager.physicalDamageAbsorptionHead = playerInverntory.currentHelmetEquipment.physicalDefense;
       }
       else
       {
         helmetModelChanger.EquipHelmetModelByName(nakedHeadModel);
         nakedHeadModelGO.SetActive(true);
-        playerStats.physicalDamageAbsorptionHead = 0;
+        playerStatsManager.physicalDamageAbsorptionHead = 0;
       }
 
       if (playerInverntory.currentTorsoEquipment != null)
@@ -87,14 +87,14 @@ namespace SG
         torsoModelChanger.EquipTorsoModelByName(playerInverntory.currentTorsoEquipment.torsoModelName);
         upperLeftArmModelChanger.EquipModelByName(playerInverntory.currentTorsoEquipment.upperLeftArmModelName);
         upperRightArmModelChanger.EquipModelByName(playerInverntory.currentTorsoEquipment.upperRightArmModelName);
-        playerStats.physicalDamageAbsorptionBody = playerInverntory.currentTorsoEquipment.physicalDefense;
+        playerStatsManager.physicalDamageAbsorptionBody = playerInverntory.currentTorsoEquipment.physicalDefense;
       }
       else
       {
         torsoModelChanger.EquipTorsoModelByName(nakedTorsoModel);
         upperLeftArmModelChanger.EquipModelByName(nakedUpperLeftArm);
         upperRightArmModelChanger.EquipModelByName(nakedUpperRightArm);
-        playerStats.physicalDamageAbsorptionBody = 0;
+        playerStatsManager.physicalDamageAbsorptionBody = 0;
       }
 
       if (playerInverntory.currentLegEquipment != null)
@@ -102,14 +102,14 @@ namespace SG
         hipModelChanger.EquipHipModelByName(playerInverntory.currentLegEquipment.hipModelName);
         leftLegModelChanger.EquipLegModelByName(playerInverntory.currentLegEquipment.leftLegName);
         rightLegModelChanger.EquipLegModelByName(playerInverntory.currentLegEquipment.rightLegName);
-        playerStats.physicalDamageAbsorptionLegs = playerInverntory.currentLegEquipment.physicalDefense;
+        playerStatsManager.physicalDamageAbsorptionLegs = playerInverntory.currentLegEquipment.physicalDefense;
       }
       else
       {
         hipModelChanger.EquipHipModelByName(nakedHipModel);
         leftLegModelChanger.EquipLegModelByName(nakedLeftLeg);
         rightLegModelChanger.EquipLegModelByName(nakedRightLeg);
-        playerStats.physicalDamageAbsorptionLegs = 0;
+        playerStatsManager.physicalDamageAbsorptionLegs = 0;
       }
 
       if (playerInverntory.currentHandEquipment != null)
@@ -118,7 +118,7 @@ namespace SG
         lowerRightArmModelChanger.EquipModelByName(playerInverntory.currentHandEquipment.lowerRightArmModelName);
         leftHandModelChanger.EquipModelByName(playerInverntory.currentHandEquipment.leftHandModelName);
         rightHandModelChanger.EquipModelByName(playerInverntory.currentHandEquipment.rightHandModelName);
-        playerStats.physicalDamageAbsorptionHands = playerInverntory.currentHandEquipment.physicalDefense;
+        playerStatsManager.physicalDamageAbsorptionHands = playerInverntory.currentHandEquipment.physicalDefense;
       }
       else
       {
@@ -126,7 +126,7 @@ namespace SG
         lowerRightArmModelChanger.EquipModelByName(nakedLowerRightArm);
         leftHandModelChanger.EquipModelByName(nakedLeftHand);
         rightHandModelChanger.EquipModelByName(nakedRightHand);
-        playerStats.physicalDamageAbsorptionHands = 0;
+        playerStatsManager.physicalDamageAbsorptionHands = 0;
       }
 
 

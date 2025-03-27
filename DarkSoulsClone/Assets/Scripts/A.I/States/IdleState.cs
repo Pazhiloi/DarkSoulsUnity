@@ -13,16 +13,16 @@ namespace SG
       Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
       for (int i = 0; i < colliders.Length; i++)
       {
-        CharacterStats characterStats = colliders[i].transform.GetComponent<CharacterStats>();
+        CharacterStatsManager CharacterStatsManager = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
-        if (characterStats != null)
+        if (CharacterStatsManager != null)
         {
-          Vector3 targetDirection = characterStats.transform.position - transform.position;
+          Vector3 targetDirection = CharacterStatsManager.transform.position - transform.position;
           float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
 
           if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
           {
-            enemyManager.currentTarget = characterStats;
+            enemyManager.currentTarget = CharacterStatsManager;
           }
         }
       }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SG
 {
 
-  public class EnemyStats : CharacterStats
+  public class EnemyStats : CharacterStatsManager
   {
     EnemyManager enemyManager;
     EnemyAnimatorManager enemyAnimatorManager;
