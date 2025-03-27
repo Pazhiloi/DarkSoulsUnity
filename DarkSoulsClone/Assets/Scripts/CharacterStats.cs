@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
@@ -18,11 +16,24 @@ namespace SG
     public float currentFocusPoints;
     public int soulCount = 0;
 
+    [Header("Poise")]
+    public float totalPoiseDefence, offensivePoiseBonus, armorPoiseBonus;
+    public float totalPoiseResetTime = 15;
+    public float poiseResetTimer = 0;
+
     [Header("Armor Absorptions")]
     public float physicalDamageAbsorptionHead;
     public float physicalDamageAbsorptionBody, physicalDamageAbsorptionLegs, physicalDamageAbsorptionHands;
 
     public bool isDead;
+
+    protected virtual void Update(){
+      HandlePoiseResetTimer();
+    }
+
+    private void Start() {
+      totalPoiseDefence = armorPoiseBonus;
+    }
 
 
     public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
@@ -50,5 +61,14 @@ namespace SG
         isDead = true;
       }
     }
+
+    public virtual void HandlePoiseResetTimer(){
+      if(poiseResetTimer > 0){
+        poiseResetTimer -= Time.deltaTime;
+      }
+      else{
+        totalPoiseDefence = armorPoiseBonus;
+    }
   }
+}
 }

@@ -1607,6 +1607,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isFiringSpell: 0
@@ -1666,6 +1667,11 @@ MonoBehaviour:
   maxFocusPoints: 0
   currentFocusPoints: 0
   soulCount: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -4789,6 +4795,11 @@ MonoBehaviour:
   maxFocusPoints: 0
   currentFocusPoints: 0
   soulCount: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 150
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
@@ -4833,6 +4844,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isFiringSpell: 0
@@ -7163,6 +7175,7 @@ MonoBehaviour:
   canBeParried: 0
   isParrying: 0
   isBlocking: 0
+  isInvulnerable: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isFiringSpell: 0
@@ -7176,7 +7189,6 @@ MonoBehaviour:
   canDoCombo: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
-  isInvulnerable: 0
 --- !u!114 &1251455415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7229,6 +7241,11 @@ MonoBehaviour:
   maxFocusPoints: 100
   currentFocusPoints: 100
   soulCount: 0
+  totalPoiseDefence: 0
+  offensivePoiseBonus: 0
+  armorPoiseBonus: 0
+  totalPoiseResetTime: 15
+  poiseResetTimer: 0
   physicalDamageAbsorptionHead: 0
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0

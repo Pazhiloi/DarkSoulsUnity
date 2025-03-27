@@ -11,6 +11,8 @@ namespace SG
      [Header("Damage")]
      public int baseDamage = 25;
      public int criticalDamageMultiplier = 4;
+     [Header("Poise")]
+     public int poiseBreak, offensivePoiseBonus;
 
     [Header("Absorpsion")]
     public float physicalDamageAbsorption;
