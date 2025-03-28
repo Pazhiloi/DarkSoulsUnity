@@ -71,7 +71,7 @@ namespace SG
 
       if (other.tag == "Enemy")
       {
-        EnemyStats enemyStats = other.GetComponent<EnemyStats>();
+        EnemyStatsManager enemyStatsManager = other.GetComponent<EnemyStatsManager>();
         CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
         BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
         if (enemyCharacterManager != null)
@@ -84,37 +84,37 @@ namespace SG
           else if (shield != null && enemyCharacterManager.isBlocking)
           {
             float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-            if (enemyStats != null)
-            { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
+            if (enemyStatsManager != null)
+            { enemyStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
             return;
           }
         }
 
-        if (enemyStats != null)
+        if (enemyStatsManager != null)
         {
-          enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
-          enemyStats.totalPoiseDefence = enemyStats.totalPoiseResetTime - poiseBreak;
-          if (enemyStats.isBoss)
+          enemyStatsManager.poiseResetTimer = enemyStatsManager.totalPoiseResetTime;
+          enemyStatsManager.totalPoiseDefence = enemyStatsManager.totalPoiseResetTime - poiseBreak;
+          if (enemyStatsManager.isBoss)
           {
-            if (enemyStats.totalPoiseDefence > poiseBreak)
+            if (enemyStatsManager.totalPoiseDefence > poiseBreak)
             {
-              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+              enemyStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
             }
             else
             {
-              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
-              enemyStats.BreakGuard();
+              enemyStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
+              enemyStatsManager.BreakGuard();
             }
           }
           else
           {
-            if (enemyStats.totalPoiseDefence > poiseBreak)
+            if (enemyStatsManager.totalPoiseDefence > poiseBreak)
             {
-              enemyStats.TakeDamageNoAnimation(currentWeaponDamage);
+              enemyStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
             }
             else
             {
-              enemyStats.TakeDamage(currentWeaponDamage);
+              enemyStatsManager.TakeDamage(currentWeaponDamage);
             }
           }
 

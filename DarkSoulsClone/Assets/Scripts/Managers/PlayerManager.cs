@@ -15,13 +15,8 @@ namespace SG
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableGameObject;
-    [Header("Player Flags")]
-    public bool isInteracting;
-    public bool isSprinting;
-    public bool isInAir;
-    public bool isGrounded;
-    public bool canDoCombo;
-    public bool isUsingRightHand, isUsingLeftHand;
+
+
 
     private void Awake()
     {

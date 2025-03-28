@@ -14,7 +14,7 @@ namespace SG
    public LayerMask detectionLayer;
 
     public PursueTargetState pursueTargetState;
-    public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
     {
 
       if (isSleeping && !enemyManager.isInteracting)

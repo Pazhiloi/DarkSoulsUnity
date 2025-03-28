@@ -9,7 +9,7 @@ namespace SG
 
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
-    EnemyStats enemyStats;
+    EnemyStatsManager enemyStatsManager;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -18,13 +18,9 @@ namespace SG
     public CharacterStatsManager currentTarget;
 
     public bool isPreformingAction;
-    public bool isInteracting;
 
     public float rotationSpeed = 15;
     public float maximumAggroRadius = 1.5f;
-
-    [Header("Combat Flags")]
-    public bool canDoCombo;
 
 
     [Header("A.I Settings")]
@@ -42,8 +38,8 @@ namespace SG
     private void Awake()
     {
       enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
-      enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
-      enemyStats = GetComponent<EnemyStats>();
+      enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
+      enemyStatsManager = GetComponent<EnemyStatsManager>();
       navMeshAgent = GetComponentInChildren<NavMeshAgent>();
       enemyRigidbody = GetComponent<Rigidbody>();
     }
@@ -64,7 +60,7 @@ namespace SG
       isInvulnerable = enemyAnimatorManager.animator.GetBool("isInvulnerable");
       canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
       canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
-      enemyAnimatorManager.animator.SetBool("isDead", enemyStats.isDead);
+      enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
     }
 
     private void LateUpdate() {
@@ -77,7 +73,7 @@ namespace SG
 
       if (currentState != null)
       {
-        State nextState = currentState.Tick(this, enemyStats, enemyAnimatorManager);
+        State nextState = currentState.Tick(this, enemyStatsManager, enemyAnimatorManager);
 
         if (nextState != null)
         {

@@ -4,22 +4,16 @@ using UnityEngine;
 
 namespace SG
 {
-  public class EnemyWeaponSlotManager : MonoBehaviour
+  public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
   {
     public WeaponItem rightHandWeapon;
     public WeaponItem leftHandWeapon;
 
-    WeaponHolderSlot rightHandSlot;
-    WeaponHolderSlot leftHandSlot;
-
-    DamageCollider rightHandDamageCollider;
-    DamageCollider leftHandDamageCollider;
-
-    EnemyStats enemyStats;
+    EnemyStatsManager enemyStatsManager;
 
     public void Awake()
     {
-      enemyStats = GetComponentInParent<EnemyStats>();
+      enemyStatsManager = GetComponent<EnemyStatsManager>();
       LoadWeaponHolderSlots();
     }
     public void Start()
@@ -130,12 +124,12 @@ namespace SG
     #region Handle Weapon's Poise Bonus
     public void GrantWeaponAttackingPoiseBonus()
     {
-      enemyStats.totalPoiseDefence += enemyStats.offensivePoiseBonus;
+      enemyStatsManager.totalPoiseDefence += enemyStatsManager.offensivePoiseBonus;
     }
 
     public void ResetWeaponAttackingPoiseBonus()
     {
-      enemyStats.totalPoiseDefence = enemyStats.armorPoiseBonus;
+      enemyStatsManager.totalPoiseDefence = enemyStatsManager.armorPoiseBonus;
     }
     #endregion
   }

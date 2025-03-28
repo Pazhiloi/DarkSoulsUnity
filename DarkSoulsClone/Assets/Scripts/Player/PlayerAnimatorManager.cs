@@ -7,19 +7,15 @@ namespace SG
   public class PlayerAnimatorManager : AnimatorManager
   {
     InputHandler inputHandler;
-    PlayerManager playerManager;
-    PlayerStatsManager playerStatsManager;
     PlayerLocomotionManager playerLocomotionManager;
     int vertical;
     int horizontal;
 
-
-    public void Initialize()
+    protected override void Awake()
     {
+      base.Awake();
       inputHandler = GetComponentInParent<InputHandler>();
       animator = GetComponentInChildren<Animator>();
-      playerManager = GetComponentInParent<PlayerManager>();
-      playerStatsManager = GetComponentInParent<PlayerStatsManager>();
       playerLocomotionManager = GetComponentInParent<PlayerLocomotionManager>();
       vertical = Animator.StringToHash("Vertical");
       horizontal = Animator.StringToHash("Horizontal");
@@ -45,7 +41,9 @@ namespace SG
       else if (verticalMovement < -0.55f)
       {
         v = -1;
-      }else{
+      }
+      else
+      {
         v = 0;
       }
       #endregion
@@ -77,67 +75,14 @@ namespace SG
 
       if (isSprinting && inputHandler.moveAmount > 0)
       {
-        v =2;
+        v = 2;
         h = horizontalMovement;
       }
       animator.SetFloat(vertical, v, 0.1f, Time.deltaTime);
       animator.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
 
-    
-    public void CanRotate()
-    {
-      animator.SetBool("canRotate", true);
-    }
 
-    public void StopRotation()
-    {
-      animator.SetBool("canRotate", false);
-    }
-
-    public void EnableCombo(){
-      animator.SetBool("canDoCombo", true);
-    }
-    public void DisableCombo(){
-      animator.SetBool("canDoCombo", false);
-    }
-
-    public void EnableIsInvulnerable()
-    {
-      animator.SetBool("isInvulnerable", true);
-    }
-
-    public void DisableIsInvulnerable()
-    {
-      animator.SetBool("isInvulnerable", false);
-    }
-
-    public void EnableIsParrying()
-    {
-      playerManager.isParrying = true;
-    }
-
-    public void DisableIsParrying()
-    {
-      playerManager.isParrying = false;
-    }
-
-    public void EnableCanBeRiposted()
-    {
-      playerManager.canBeRiposted = true;
-    }
-
-    public void DisableCanBeRiposted()
-    {
-      playerManager.canBeRiposted = false;
-    }
-
-
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-      playerStatsManager.TakeDamageNoAnimation(playerManager.pendingCriticalDamage);
-      playerManager.pendingCriticalDamage = 0;
-    }
 
     public void DisableCollision()
     {
@@ -152,11 +97,12 @@ namespace SG
     }
     public void AwardSoulsOnDeath()
     {
-      
+
     }
 
-      private void OnAnimatorMove(){
-      if (playerManager.isInteracting == false)
+    private void OnAnimatorMove()
+    {
+      if (characterManager.isInteracting == false)
       {
         return;
       }
@@ -169,7 +115,9 @@ namespace SG
       playerLocomotionManager.rigidbody.velocity = velocity;
     }
 
-    
+
+
+
   }
-  
+
 }

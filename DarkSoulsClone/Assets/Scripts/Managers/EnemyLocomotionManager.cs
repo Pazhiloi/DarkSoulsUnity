@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 namespace SG
@@ -19,7 +17,7 @@ namespace SG
     private void Awake()
     {
       enemyManager = GetComponent<EnemyManager>();
-      enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+      enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
     }
 
     private void Start() {

@@ -20,6 +20,8 @@ namespace SG
     public float currentFocusPoints;
     public int soulCount = 0;
 
+    public int soulsAwardedOnDeath = 50;
+
     [Header("Poise")]
     public float totalPoiseDefence, offensivePoiseBonus, armorPoiseBonus;
     public float totalPoiseResetTime = 15;
@@ -66,6 +68,18 @@ namespace SG
       }
     }
 
+    public virtual void TakeDamageNoAnimation(int damage)
+    {
+      if (isDead) { return; }
+      currentHealth -= damage;
+
+      if (currentHealth <= 0)
+      {
+        currentHealth = 0;
+        isDead = true;
+      }
+
+    }
     public virtual void HandlePoiseResetTimer(){
       if(poiseResetTimer > 0){
         poiseResetTimer -= Time.deltaTime;

@@ -52,7 +52,7 @@ namespace SG
       {
         poiseResetTimer -= Time.deltaTime;
       }
-      else if(poiseResetTimer <= 0 && !playerManager.isInteracting)
+      else if (poiseResetTimer <= 0 && !playerManager.isInteracting)
       {
         totalPoiseDefence = armorPoiseBonus;
       }
@@ -74,16 +74,10 @@ namespace SG
       maxFocusPoints = focusLevel * 10;
       return maxFocusPoints;
     }
-    public void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int damage)
     {
-      if (isDead) { return; }
-      currentHealth -= damage;
-
-      if (currentHealth <= 0)
-      {
-        currentHealth = 0;
-        isDead = true;
-      }
+      base.TakeDamageNoAnimation(damage);
+      healthBar.SetCurrentHealth(currentHealth);
     }
 
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
@@ -155,7 +149,8 @@ namespace SG
     }
 
 
-    public void AddSouls(int souls){
+    public void AddSouls(int souls)
+    {
       soulCount += souls;
     }
   }

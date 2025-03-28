@@ -7,7 +7,7 @@ namespace SG
     public string bossName;
 
     UIBossHealthBar bossHealthBar;
-    EnemyStats enemyStats;
+    EnemyStatsManager enemyStatsManager;
     EnemyAnimatorManager enemyAnimatorManager;
     BossCombatStanceState bossCombatStanceState;
     [Header("Second Phase FX")]
@@ -16,15 +16,15 @@ namespace SG
     private void Awake()
     {
       bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-      enemyStats = GetComponent<EnemyStats>();
-      enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorManager>();
+      enemyStatsManager = GetComponent<EnemyStatsManager>();
+      enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
       bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
 
     private void Start()
     {
       bossHealthBar.SetBossName(bossName);
-      bossHealthBar.SetBossMaxHealth(enemyStats.maxHealth);
+      bossHealthBar.SetBossMaxHealth(enemyStatsManager.maxHealth);
     }
 
     public void UpdateBossHealthBar(int currentHealth, int maxHealth)

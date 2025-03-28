@@ -1,69 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
 
   public class EnemyAnimatorManager : AnimatorManager
   {
-
     EnemyManager enemyManager;
     EnemyBossManager enemyBossManager;
-    EnemyStats enemyStats;
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       animator = GetComponent<Animator>();
-      enemyManager = GetComponentInParent<EnemyManager>();
-      enemyBossManager = GetComponentInParent<EnemyBossManager>();
-      enemyStats = GetComponentInParent<EnemyStats>();
+      enemyManager = GetComponent<EnemyManager>();
+      enemyBossManager = GetComponent<EnemyBossManager>();
     }
-
-    public void CanRotate()
-    {
-      animator.SetBool("canRotate", true);
-    }
-
-    public void StopRotation()
-    {
-      animator.SetBool("canRotate", false);
-    }
-
-    public void EnableCombo()
-    {
-      animator.SetBool("canDoCombo", true);
-    }
-    public void DisableCombo()
-    {
-      animator.SetBool("canDoCombo", false);
-    }
-
-
-    public void EnableIsParrying()
-    {
-      enemyManager.isParrying = true;
-    }
-
-    public void DisableIsParrying()
-    {
-      enemyManager.isParrying = false;
-    }
-
-    public void EnableCanBeRiposted()
-    {
-      enemyManager.canBeRiposted = true;
-    }
-
-    public void DisableCanBeRiposted()
-    {
-      enemyManager.canBeRiposted = false;
-    }
-
-
-    public override void TakeCriticalDamageAnimationEvent()
-    {
-      enemyStats.TakeDamageNoAnimation(enemyManager.pendingCriticalDamage);
-      enemyManager.pendingCriticalDamage = 0;
-    }
+  
 
     public void AwardSoulsOnDeath()
     {
@@ -72,7 +22,7 @@ namespace SG
       
       if (PlayerStatsManager != null)
       {
-        PlayerStatsManager.AddSouls(enemyStats.soulsAwardedOnDeath);
+        PlayerStatsManager.AddSouls(characterStatsManager.soulsAwardedOnDeath);
         if (soulCountBar != null)
         {
           soulCountBar.SetSoulCountText(PlayerStatsManager.soulCount);
