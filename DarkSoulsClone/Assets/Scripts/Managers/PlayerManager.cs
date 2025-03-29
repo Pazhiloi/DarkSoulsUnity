@@ -11,6 +11,7 @@ namespace SG
     CameraHandler cameraHandler;
     PlayerLocomotionManager playerLocomotionManager;
     PlayerStatsManager playerStatsManager;
+    PlayerEffectsManager playerEffectsManager;
     PlayerAnimatorManager playerAnimatorManager;
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -26,6 +27,7 @@ namespace SG
       animator = GetComponent<Animator>();
       playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
       playerStatsManager = GetComponent<PlayerStatsManager>();
+      playerEffectsManager = GetComponent<PlayerEffectsManager>();
       interactableUI = FindObjectOfType<InteractableUI>();
     }
 
@@ -59,6 +61,7 @@ namespace SG
       playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
       playerLocomotionManager.HandleMovement(delta);
       playerLocomotionManager.HandleRotation(delta);
+      playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

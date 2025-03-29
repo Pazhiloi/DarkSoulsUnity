@@ -80,6 +80,20 @@ namespace SG
       healthBar.SetCurrentHealth(currentHealth);
     }
 
+    public override void TakePoisonDamage(int damage)
+    {
+      if (isDead) return;
+      
+      base.TakePoisonDamage(damage);
+      healthBar.SetCurrentHealth(currentHealth);
+      if (currentHealth <= 0)
+      {
+        currentHealth = 0;
+        isDead = true;
+        playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
+      }
+    }
+
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
     {
 

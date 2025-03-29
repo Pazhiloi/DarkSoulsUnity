@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 namespace SG
@@ -10,6 +8,7 @@ namespace SG
     EnemyLocomotionManager enemyLocomotionManager;
     EnemyAnimatorManager enemyAnimatorManager;
     EnemyStatsManager enemyStatsManager;
+    EnemyEffectsManager enemyEffectsManager;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -40,6 +39,7 @@ namespace SG
       enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
       enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
       enemyStatsManager = GetComponent<EnemyStatsManager>();
+      enemyEffectsManager = GetComponent<EnemyEffectsManager>();
       navMeshAgent = GetComponentInChildren<NavMeshAgent>();
       enemyRigidbody = GetComponent<Rigidbody>();
     }
@@ -61,6 +61,10 @@ namespace SG
       canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
       canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
       enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
+    }
+
+    private void FixedUpdate() {
+      enemyEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate() {

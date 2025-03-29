@@ -49,8 +49,29 @@ namespace SG
         enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
       }
     }
+    public override void TakePoisonDamage(int damage)
+    {
+      if (isDead) return;
 
-    public void BreakGuard(){
+      base.TakePoisonDamage(damage);
+      if (!isBoss)
+      {
+        enemyHealthBar.SetHealth(currentHealth);
+      }
+      else if (isBoss && enemyBossManager != null)
+      {
+        enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+      }
+      if (currentHealth <= 0)
+      {
+        currentHealth = 0;
+        isDead = true;
+        enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
+      }
+    }
+
+    public void BreakGuard()
+    {
       enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
     public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
@@ -62,7 +83,8 @@ namespace SG
         enemyHealthBar.SetHealth(currentHealth);
 
       }
-      else if(isBoss && enemyBossManager != null){
+      else if (isBoss && enemyBossManager != null)
+      {
         enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
       }
 

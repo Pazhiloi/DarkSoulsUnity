@@ -78,8 +78,20 @@ namespace SG
         currentHealth = 0;
         isDead = true;
       }
-
     }
+    public virtual void TakePoisonDamage(int damage)
+    {
+      if (isDead) { return; }
+      currentHealth -= damage;
+
+      if (currentHealth <= 0)
+      {
+        currentHealth = 0;
+        isDead = true;
+      }
+    }
+
+
     public virtual void HandlePoiseResetTimer(){
       if(poiseResetTimer > 0){
         poiseResetTimer -= Time.deltaTime;

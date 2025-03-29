@@ -8,8 +8,9 @@ namespace SG
     public GameObject currentParticleFX, instantiatedFXModel;
     public int amountToBeHealed;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       playerStatsManager = GetComponentInParent<PlayerStatsManager>();
       playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
     }
