@@ -12587,6 +12587,7 @@ GameObject:
   - component: {fileID: 5866666021332270824}
   - component: {fileID: 5866666021332270828}
   - component: {fileID: 5866666021332270823}
+  - component: {fileID: 5866666021332270829}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -15166,11 +15167,11 @@ MonoBehaviour:
   currentLegEquipment: {fileID: 11400000, guid: dc9a591801b313247a8b924e34380942, type: 2}
   currentHandEquipment: {fileID: 11400000, guid: b7ffb6cd4f62a064c9ed89ba8a2bcc6a, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  - {fileID: 11400000, guid: 68a3fdf764d3dfe45b362f3707a49d90, type: 2}
   weaponsInLeftHandSlots:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  - {fileID: 11400000, guid: 68a3fdf764d3dfe45b362f3707a49d90, type: 2}
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
   weaponsInventory: []
@@ -15186,6 +15187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36561cd1d9633ea40b4ec83c38337950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
   currentParticleFX: {fileID: 0}
   instantiatedFXModel: {fileID: 0}
   amountToBeHealed: 0
@@ -15641,6 +15644,20 @@ MonoBehaviour:
   isDead: 0
   enemyHealthBar: {fileID: 259633376}
   isBoss: 0
+--- !u!114 &5866666021332270829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148660747813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightWeaponFX: {fileID: 0}
+  leftWeaponFX: {fileID: 0}
 --- !u!137 &5944369018173324400
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

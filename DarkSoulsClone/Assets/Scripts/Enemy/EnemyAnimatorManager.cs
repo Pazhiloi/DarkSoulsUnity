@@ -5,12 +5,14 @@ namespace SG
   public class EnemyAnimatorManager : AnimatorManager
   {
     EnemyManager enemyManager;
+    EnemyEffectsManager enemyEffectsManager;
     EnemyBossManager enemyBossManager;
     protected override void Awake()
     {
       base.Awake();
       animator = GetComponent<Animator>();
       enemyManager = GetComponent<EnemyManager>();
+      enemyEffectsManager = GetComponent<EnemyEffectsManager>();
       enemyBossManager = GetComponent<EnemyBossManager>();
     }
   
@@ -34,6 +36,11 @@ namespace SG
     {
       BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
       GameObject phaseFX = Instantiate(enemyBossManager.particleFX, bossFXTransform.transform);
+    }
+
+    public void PlayWeaponTrailFX()
+    {
+        enemyEffectsManager.PlayWeaponFX(false);
     }
 
    

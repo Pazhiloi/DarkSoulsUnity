@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
@@ -46,6 +44,7 @@ namespace SG
     private void AttackTarget(EnemyAnimatorManager enemyAnimatorManager, EnemyManager enemyManager)
     {
       enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+      enemyAnimatorManager.PlayWeaponTrailFX();
       enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
       hasPerformedAttack = true;
     }
@@ -54,6 +53,7 @@ namespace SG
     {
       willDoComboOnNextAttack = false;
       enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+      enemyAnimatorManager.PlayWeaponTrailFX();
       enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
       currentAttack = null;
     }

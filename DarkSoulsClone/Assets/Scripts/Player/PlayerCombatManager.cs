@@ -13,6 +13,7 @@ namespace SG
     PlayerInventoryManager playerInventoryManager;
     InputHandler inputHandler;
     PlayerWeaponSlotManager playerWeaponSlotManager;
+    PlayerEffectsManager playerEffectsManager;
     public string lastAttack;
     public LayerMask backStabLayer = 1 << 12;
     public LayerMask riposteLayer = 1 << 13;
@@ -26,6 +27,7 @@ namespace SG
       playerStatsManager = GetComponent<PlayerStatsManager>();
       playerInventoryManager = GetComponent<PlayerInventoryManager>();
       playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+      playerEffectsManager = GetComponent<PlayerEffectsManager>();
       inputHandler = GetComponent<InputHandler>();
     }
 
@@ -135,6 +137,8 @@ namespace SG
         playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
         HandleLightAttack(playerInventoryManager.rightWeapon);
       }
+      playerEffectsManager.PlayWeaponFX(false);
+
     }
 
 
