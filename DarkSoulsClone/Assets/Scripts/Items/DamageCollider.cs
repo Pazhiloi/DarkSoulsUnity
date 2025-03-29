@@ -34,37 +34,42 @@ namespace SG
     {
       if (other.tag == "Player")
       {
-        PlayerStatsManager PlayerStatsManager = other.GetComponent<PlayerStatsManager>();
-        CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
+        PlayerStatsManager playerStatsManager = other.GetComponent<PlayerStatsManager>();
+        CharacterManager playerCharacterManager = other.GetComponent<CharacterManager>();
+        CharacterEffectsManager playerEffectsManager = other.GetComponent<CharacterEffectsManager>();
         BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
 
-        if (enemyCharacterManager != null)
+        if (playerCharacterManager != null)
         {
-          if (enemyCharacterManager.isParrying)
+          if (playerCharacterManager.isParrying)
           {
             characterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Parried", true);
             return;
           }
-          else if (shield != null && enemyCharacterManager.isBlocking)
+          else if (shield != null && playerCharacterManager.isBlocking)
           {
             float physicalDamageAfterBlock = currentWeaponDamage - (currentWeaponDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-            if (PlayerStatsManager != null)
-            { PlayerStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
+            if (playerStatsManager != null)
+            { playerStatsManager.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), "Block Guard"); }
             return;
           }
         }
 
-        if (PlayerStatsManager != null)
+        if (playerStatsManager != null)
         {
-          PlayerStatsManager.poiseResetTimer = PlayerStatsManager.totalPoiseResetTime;
-          PlayerStatsManager.totalPoiseDefence = PlayerStatsManager.totalPoiseResetTime - poiseBreak;
-          if (PlayerStatsManager.totalPoiseDefence > poiseBreak)
+          playerStatsManager.poiseResetTimer = playerStatsManager.totalPoiseResetTime;
+          playerStatsManager.totalPoiseDefence = playerStatsManager.totalPoiseResetTime - poiseBreak;
+
+          Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+          playerEffectsManager.PlayBloodSplatterFX(contactPoint);
+
+          if (playerStatsManager.totalPoiseDefence > poiseBreak)
           {
-            PlayerStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
+            playerStatsManager.TakeDamageNoAnimation(currentWeaponDamage);
           }
           else
           {
-            PlayerStatsManager.TakeDamage(currentWeaponDamage);
+            playerStatsManager.TakeDamage(currentWeaponDamage);
           }
         }
       }
@@ -73,6 +78,7 @@ namespace SG
       {
         EnemyStatsManager enemyStatsManager = other.GetComponent<EnemyStatsManager>();
         CharacterManager enemyCharacterManager = other.GetComponent<CharacterManager>();
+        CharacterEffectsManager enemyEffectsManager = other.GetComponent<CharacterEffectsManager>();
         BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
         if (enemyCharacterManager != null)
         {
@@ -94,6 +100,9 @@ namespace SG
         {
           enemyStatsManager.poiseResetTimer = enemyStatsManager.totalPoiseResetTime;
           enemyStatsManager.totalPoiseDefence = enemyStatsManager.totalPoiseResetTime - poiseBreak;
+
+          Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+          enemyEffectsManager.PlayBloodSplatterFX(contactPoint);
           if (enemyStatsManager.isBoss)
           {
             if (enemyStatsManager.totalPoiseDefence > poiseBreak)

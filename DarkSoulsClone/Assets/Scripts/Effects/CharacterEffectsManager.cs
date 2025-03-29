@@ -4,7 +4,14 @@ namespace SG
 {
   public class CharacterEffectsManager : MonoBehaviour
   {
-    public WeaponFX rightWeaponFX, leftWeaponFX;
+
+    [Header("Damage FX")]
+    public GameObject bloodSplatterFX;
+    [Header("Weapon FX")]
+    public WeaponFX rightWeaponFX;
+    public WeaponFX  leftWeaponFX;
+
+    [Header("Weapon FX")]
     public virtual void PlayWeaponFX(bool isLeft)
     {
       if (!isLeft)
@@ -21,6 +28,11 @@ namespace SG
           leftWeaponFX.PlayWeaponFX();
         }
       }
+    }
+
+    public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
+    {
+      GameObject blood  = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
   }
 }
