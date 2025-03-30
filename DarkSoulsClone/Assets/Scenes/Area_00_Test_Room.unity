@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18808,7 +18808,7 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: e3221913ee2ebf44bb5ff0e8873ec3a8, type: 2}
   rightWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
   leftWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
-  currentConsumable: {fileID: 11400000, guid: 5c0f6e81f2118b743865435e16852313, type: 2}
+  currentConsumable: {fileID: 11400000, guid: c3d43611ca7d48e4f9eb0b80b18652fe, type: 2}
   currentHelmetEquipment: {fileID: 11400000, guid: 944aa87c311cce2439c6c0522fa1d8f1, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 43daba3238265e947aea9a1e5b43428c, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: dc9a591801b313247a8b924e34380942, type: 2}
@@ -20284,6 +20284,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &6617786446002073877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4300252608580142463, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_Name
+      value: Firebomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6459420947550382744, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c228bd96fc0326489a7ada92395f1ed, type: 3}
 --- !u!4 &6626616094567981915
 Transform:
   m_ObjectHideFlags: 0
@@ -22821,3 +22878,4 @@ SceneRoots:
   - {fileID: 1655618846}
   - {fileID: 1611981741}
   - {fileID: 954407943}
+  - {fileID: 6617786446002073877}
