@@ -12,10 +12,13 @@ namespace SG
     public WeaponFX  leftWeaponFX;
 
     [Header("Poison FX")]
+    public GameObject defaultPoisonParticleFX;
+    public GameObject currentPoisonParticleFX;
+    public Transform buildUpTransform;
     public bool isPoisoned;
     public float poisonBuildup = 0; 
     public float poisonAmount = 100; 
-    public float defaultPoisonAmount; 
+    public float defaultPoisonAmount = 100; 
     public float poisonTimer =2;
     public int poisonDamage = 1;
     float timer;
@@ -69,6 +72,13 @@ namespace SG
       {
         isPoisoned = true;
         poisonBuildup = 0;
+
+        if (buildUpTransform != null)
+        {
+          currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, buildUpTransform.transform);
+        }else{
+          currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, characterStatsManager.transform);
+        }
       }
     }
 
@@ -90,6 +100,7 @@ namespace SG
         {
           isPoisoned = false;
           poisonAmount = defaultPoisonAmount;
+          Destroy(currentPoisonParticleFX);
         }
       }
     }
