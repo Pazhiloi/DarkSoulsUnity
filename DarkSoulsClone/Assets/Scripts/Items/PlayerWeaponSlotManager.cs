@@ -11,16 +11,17 @@ namespace SG
     PlayerInventoryManager playerInventoryManager;
     PlayerStatsManager playerStatsManager;
     PlayerEffectsManager playerEffectsManager;
-
+    CameraHandler cameraHandler;
 
     [Header("Attacking Weapon")]
     public WeaponItem attackingWeapon;
-   
 
 
- 
+
+
     private void Awake()
     {
+      cameraHandler = FindObjectOfType<CameraHandler>();
       playerStatsManager = GetComponent<PlayerStatsManager>();
       inputHandler = GetComponent<InputHandler>();
 
@@ -32,7 +33,8 @@ namespace SG
       LoadWeaponHolderSlots();
     }
 
-    private void LoadWeaponHolderSlots(){
+    private void LoadWeaponHolderSlots()
+    {
 
       WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
       foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -61,7 +63,8 @@ namespace SG
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
 
-      if(weaponItem != null){
+      if (weaponItem != null)
+      {
         if (isLeft)
         {
           leftHandSlot.currentWeapon = weaponItem;
@@ -90,7 +93,8 @@ namespace SG
           quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
         }
       }
-      else{
+      else
+      {
         weaponItem = unarmedWeapon;
         if (isLeft)
         {
@@ -100,7 +104,9 @@ namespace SG
           leftHandSlot.LoadWeaponModel(weaponItem);
           LoadLeftWeaponDamageCollider();
           quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
-        }else{
+        }
+        else
+        {
           animator.CrossFade("Right Arm Empty", 0.2f);
           playerInventoryManager.rightWeapon = unarmedWeapon;
           rightHandSlot.currentWeapon = unarmedWeapon;
@@ -109,8 +115,28 @@ namespace SG
           quickSlotsUI.UpdateWeaponQuickSlotsUI(false, weaponItem);
         }
       }
-     
+
     }
+
+    public void SucessfullyThrowFireBomb()
+    {
+      Destroy(playerEffectsManager.instantiatedFXModel);
+
+      BombConsumeableItem fireBombItem = playerInventoryManager.currentConsumable as BombConsumeableItem;
+
+      GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, cameraHandler.cameraPivotTransform.rotation);
+
+      activeModelBomb.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+
+      // DETECT BOMB DAMAGE COLLIDER
+
+      // ADD FORCE TO RIGIDBODY TO MOVE IT THROUGH THE AIR
+      // CHECK FOR FRIENDLY FIRE
+
+      // CREATE EXPLOSION AND AFTER SPLASH DAMAGE / EFFECTS
+
+    }
+
 
     #region Handle Weapons Damage Collider
 
@@ -174,11 +200,13 @@ namespace SG
 
 
     #region Handle Weapon's Poise Bonus
-    public void GrantWeaponAttackingPoiseBonus(){
+    public void GrantWeaponAttackingPoiseBonus()
+    {
       playerStatsManager.totalPoiseDefence += attackingWeapon.offensivePoiseBonus;
     }
 
-    public void ResetWeaponAttackingPoiseBonus(){
+    public void ResetWeaponAttackingPoiseBonus()
+    {
       playerStatsManager.totalPoiseDefence = playerStatsManager.armorPoiseBonus;
     }
     #endregion
