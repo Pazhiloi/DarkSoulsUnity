@@ -6,14 +6,14 @@ namespace SG
   public class DamageCollider : MonoBehaviour
   {
     public CharacterManager characterManager;
-    Collider damageCollider;
+    protected Collider damageCollider;
     public bool enabledDamageColliderOnStartUP = false;
 
     [Header("Poise")]
     public float poiseBreak, offensivePoiseBonus;
     [Header("Damage")]
     public int currentWeaponDamage = 25;
-    private void Awake()
+    protected virtual void Awake()
     {
       damageCollider = GetComponent<Collider>();
       damageCollider.gameObject.SetActive(true);
