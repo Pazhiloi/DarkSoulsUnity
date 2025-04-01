@@ -9,6 +9,7 @@ TagManager:
   - Interactable
   - Shield
   - Illusionary Wall
+  - Character
   layers:
   - Default
   - TransparentFX

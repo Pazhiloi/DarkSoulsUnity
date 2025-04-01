@@ -37,9 +37,10 @@ namespace SG
       return maxHealth;
     }
 
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-      base.TakeDamageNoAnimation(damage);
+      base.TakeDamageNoAnimation(physicalDamage, fireDamage);
+
       if (!isBoss)
       {
         enemyHealthBar.SetHealth(currentHealth);
@@ -74,15 +75,13 @@ namespace SG
     {
       enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
-    public override void TakeDamage(int damage,int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
+      base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
 
-      base.TakeDamage(damage,1, damageAnimation = "Damage_01");
-      // REFACTOR
       if (!isBoss)
       {
         enemyHealthBar.SetHealth(currentHealth);
-
       }
       else if (isBoss && enemyBossManager != null)
       {

@@ -4,7 +4,7 @@ namespace SG
 {
   [CreateAssetMenu(menuName = "Items/Consumables/Bomb Item")]
   public class BombConsumeableItem : ConsumableItem
-    {
+  {
     [Header("Velocity")]
     public int upwardVelocity = 50;
     public int forwardVelocity = 50;
@@ -15,6 +15,7 @@ namespace SG
 
     [Header("Base Damage")]
     public int baseDamage = 200;
+    public int explosiveDamage = 75;
 
     public override void AttemptToConsumeItem(PlayerAnimatorManager playerAnimatorManager, PlayerWeaponSlotManager weaponSlotManager, PlayerEffectsManager playerEffectsManager)
     {

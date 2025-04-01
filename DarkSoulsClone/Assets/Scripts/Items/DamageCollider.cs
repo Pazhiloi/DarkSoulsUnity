@@ -55,7 +55,7 @@ namespace SG
             float physicalDamageAfterBlock = physicalDamage - (physicalDamage * shield.blockingPhysicalDamageAbsorption) / 100;
             float fireDamageAfterBlock = fireDamage - (fireDamage * shield.blockingFireDamageAbsorption) / 100;
             if (enemyStats != null)
-            { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock),1, "Block Guard"); }
+            { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block Guard"); }
             // REFACTOR
             return;
           }
@@ -71,18 +71,18 @@ namespace SG
 
           if (enemyStats.totalPoiseDefence > poiseBreak)
           {
-            enemyStats.TakeDamageNoAnimation(physicalDamage);
+            enemyStats.TakeDamageNoAnimation(physicalDamage, 0);
             //REFACTOR
           }
           else
           {
-            enemyStats.TakeDamage(physicalDamage, 1);
+            enemyStats.TakeDamage(physicalDamage, 0);
             //REFACTOR
           }
         }
       }
 
-      
+
 
       if (other.tag == "Illusionary Wall")
       {

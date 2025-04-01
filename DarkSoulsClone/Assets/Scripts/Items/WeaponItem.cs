@@ -9,7 +9,8 @@ namespace SG
     public GameObject modelPrefab;
     public bool isUnarmed;
      [Header("Damage")]
-     public int baseDamage = 25;
+     public int physicalDamage;
+     public int fireDamage;
      public int criticalDamageMultiplier = 4;
      [Header("Poise")]
      public int poiseBreak, offensivePoiseBonus;

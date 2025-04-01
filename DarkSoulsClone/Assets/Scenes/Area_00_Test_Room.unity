@@ -3786,6 +3786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockingCollider: {fileID: 0}
   blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
 --- !u!65 &703308381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7512,6 +7513,10 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionHands: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionHands: 0
   isDead: 0
   enemyHealthBar: {fileID: 0}
   isBoss: 1
@@ -13277,7 +13282,7 @@ GameObject:
   - component: {fileID: 5866666020217144479}
   m_Layer: 11
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13300,9 +13305,9 @@ GameObject:
   - component: {fileID: 5866666021332270828}
   - component: {fileID: 5866666021332270823}
   - component: {fileID: 5866666021332270829}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
-  m_TagString: Enemy
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18958,7 +18963,12 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionHands: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionHands: 0
   isDead: 0
+  healthBar: {fileID: 2464153670485678061}
   focusPointBar: {fileID: 0}
   staminaRegenerationAmount: 30
   staminaRegenTimer: 0
@@ -19301,6 +19311,10 @@ MonoBehaviour:
   physicalDamageAbsorptionBody: 0
   physicalDamageAbsorptionLegs: 0
   physicalDamageAbsorptionHands: 0
+  fireDamageAbsorptionHead: 0
+  fireDamageAbsorptionBody: 0
+  fireDamageAbsorptionLegs: 0
+  fireDamageAbsorptionHands: 0
   isDead: 0
   enemyHealthBar: {fileID: 259633376}
   isBoss: 0

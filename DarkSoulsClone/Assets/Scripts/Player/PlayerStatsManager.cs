@@ -7,7 +7,7 @@ namespace SG
   public class PlayerStatsManager : CharacterStatsManager
   {
 
-    HealthBar healthBar;
+   public HealthBar healthBar;
     StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
 
@@ -20,7 +20,6 @@ namespace SG
 
     private void Awake()
     {
-      healthBar = FindObjectOfType<HealthBar>();
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
@@ -74,16 +73,16 @@ namespace SG
       maxFocusPoints = focusLevel * 10;
       return maxFocusPoints;
     }
-    public override void TakeDamageNoAnimation(int damage)
+    public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-      base.TakeDamageNoAnimation(damage);
+      base.TakeDamageNoAnimation(physicalDamage, fireDamage);
       healthBar.SetCurrentHealth(currentHealth);
     }
 
     public override void TakePoisonDamage(int damage)
     {
       if (isDead) return;
-      
+
       base.TakePoisonDamage(damage);
       healthBar.SetCurrentHealth(currentHealth);
       if (currentHealth <= 0)
@@ -94,13 +93,12 @@ namespace SG
       }
     }
 
-    public override void TakeDamage(int damage,int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
+      if (playerManager.isInvulnerable)
+        return;
 
-      if (playerManager.isInvulnerable) return;
-      base.TakeDamage(damage, 1, damageAnimation = "Damage_01");
-      // REFACTOR
-      healthBar.SetCurrentHealth(currentHealth);
+      base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
 
       playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 

@@ -4,14 +4,15 @@ using UnityEngine;
 namespace SG
 {
 
-public class AnimatorManager : MonoBehaviour
-{
+  public class AnimatorManager : MonoBehaviour
+  {
     public Animator animator;
-   protected CharacterManager characterManager;
-   protected CharacterStatsManager characterStatsManager;
+    protected CharacterManager characterManager;
+    protected CharacterStatsManager characterStatsManager;
     public bool canRotate;
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
       characterManager = GetComponent<CharacterManager>();
       characterStatsManager = GetComponent<CharacterStatsManager>();
     }
@@ -83,10 +84,8 @@ public class AnimatorManager : MonoBehaviour
 
     public virtual void TakeCriticalDamageAnimationEvent()
     {
-      characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage);
+      characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage, 0);
       characterManager.pendingCriticalDamage = 0;
     }
-
-
   }
 }

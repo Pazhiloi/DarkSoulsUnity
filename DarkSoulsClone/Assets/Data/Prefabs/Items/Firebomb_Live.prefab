@@ -167,7 +167,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.07
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1372231730701543725
 Rigidbody:
@@ -212,7 +212,13 @@ MonoBehaviour:
   enabledDamageColliderOnStartUP: 0
   poiseBreak: 0
   offensivePoiseBonus: 0
-  currentWeaponDamage: 25
+  physicalDamage: 0
+  fireDamage: 0
+  magicDamage: 0
+  lightningDamage: 0
+  darkDamage: 0
   explosiveRadius: 1
-  fireExplosionDamage: 1
+  explosionDamage: 0
+  explosionSplashDamage: 0
+  bombRigidBody: {fileID: 0}
   impactParticles: {fileID: 1809022330002312, guid: ce42f0220b0cc634a98c5962997430dc, type: 3}

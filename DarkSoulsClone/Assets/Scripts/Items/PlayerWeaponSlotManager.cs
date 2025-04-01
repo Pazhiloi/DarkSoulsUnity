@@ -128,6 +128,10 @@ namespace SG
 
       activeModelBomb.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
       BombDamageCollider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageCollider>();
+
+      damageCollider.explosionDamage = fireBombItem.baseDamage;
+      damageCollider.explosionSplashDamage = fireBombItem.explosiveDamage;
+
       damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
       damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
       LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
@@ -144,7 +148,8 @@ namespace SG
     private void LoadLeftWeaponDamageCollider()
     {
       leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-      leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.baseDamage;
+      leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.physicalDamage;
+      leftHandDamageCollider.fireDamage = playerInventoryManager.leftWeapon.fireDamage;
       leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
       playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
@@ -152,7 +157,8 @@ namespace SG
     private void LoadRightWeaponDamageCollider()
     {
       rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-      rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.baseDamage;
+      rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.physicalDamage;
+      rightHandDamageCollider.fireDamage = playerInventoryManager.rightWeapon.fireDamage;
       rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
       playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }

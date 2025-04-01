@@ -37,16 +37,18 @@ namespace SG
 
     public bool isDead;
 
-    protected virtual void Update(){
+    protected virtual void Update()
+    {
       HandlePoiseResetTimer();
     }
 
-    private void Start() {
+    private void Start()
+    {
       totalPoiseDefence = armorPoiseBonus;
     }
 
 
-    public virtual void TakeDamage(int physicalDamage,int fireDamage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
       if (isDead) return;
 
@@ -78,10 +80,30 @@ namespace SG
       }
     }
 
-    public virtual void TakeDamageNoAnimation(int damage)
+    public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-      if (isDead) { return; }
-      currentHealth -= damage;
+      if (isDead) return;
+
+      float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
+                                                (1 - physicalDamageAbsorptionBody / 100) *
+                                                (1 - physicalDamageAbsorptionLegs / 100) *
+                                                (1 - physicalDamageAbsorptionHands / 100);
+
+      physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
+
+
+      float totalFireDamageAbsorption = 1 -
+          (1 - fireDamageAbsorptionHead / 100) *
+          (1 - fireDamageAbsorptionBody / 100) *
+          (1 - fireDamageAbsorptionLegs / 100) *
+          (1 - fireDamageAbsorptionHands / 100);
+
+      fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
+
+      float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
+
+      currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
+
 
       if (currentHealth <= 0)
       {
@@ -102,13 +124,16 @@ namespace SG
     }
 
 
-    public virtual void HandlePoiseResetTimer(){
-      if(poiseResetTimer > 0){
+    public virtual void HandlePoiseResetTimer()
+    {
+      if (poiseResetTimer > 0)
+      {
         poiseResetTimer -= Time.deltaTime;
       }
-      else{
+      else
+      {
         totalPoiseDefence = armorPoiseBonus;
+      }
     }
   }
-}
 }

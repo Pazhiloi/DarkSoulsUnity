@@ -7,9 +7,10 @@ namespace SG
   public class BombDamageCollider : DamageCollider
   {
     [Header("Explosive Damage & Radius")]
-    public int explosiveRadius= 1;
-    public int fireExplosionDamage = 1;
-   public Rigidbody bombRigidBody;
+    public int explosiveRadius = 1;
+    public int explosionDamage;
+    public int explosionSplashDamage;
+    public Rigidbody bombRigidBody;
     private bool hasCollided = false;
     public GameObject impactParticles;
 
@@ -31,11 +32,11 @@ namespace SG
 
         if (character != null)
         {
-          // character.TakeDamage();
+          character.TakeDamage(0, explosionDamage);
         }
 
         Destroy(impactParticles, 5f);
-        Destroy(transform.parent.gameObject);
+        Destroy(transform.parent.parent.gameObject);
       }
     }
 
@@ -48,9 +49,9 @@ namespace SG
         CharacterStatsManager character = objectsInExplosion.GetComponent<CharacterStatsManager>();
         if (character != null)
         {
-          // DEAL FIRE DAMAGE
+          character.TakeDamage(0, explosionSplashDamage);
         }
-      } 
+      }
     }
   }
 }

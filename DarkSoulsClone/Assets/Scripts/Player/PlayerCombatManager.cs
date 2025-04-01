@@ -159,7 +159,8 @@ namespace SG
           }
 
         }
-      }else if(weapon.isPyroCaster)
+      }
+      else if (weapon.isPyroCaster)
       {
         if (playerInventoryManager.currentSpell != null && playerInventoryManager.currentSpell.isPyroSpell)
         {
@@ -234,7 +235,7 @@ namespace SG
           playerManager.transform.rotation = targetRotation;
 
 
-          int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+          int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.physicalDamage;
           enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
 
@@ -259,7 +260,7 @@ namespace SG
           Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 500 * Time.deltaTime);
           playerManager.transform.rotation = targetRotation;
 
-          int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.currentWeaponDamage;
+          int criticalDamage = playerInventoryManager.rightWeapon.criticalDamageMultiplier * rightWeapon.physicalDamage;
           enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
           playerAnimatorManager.PlayTargetAnimation("Riposte", true);
