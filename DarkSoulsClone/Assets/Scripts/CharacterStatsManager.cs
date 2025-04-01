@@ -30,6 +30,10 @@ namespace SG
     [Header("Armor Absorptions")]
     public float physicalDamageAbsorptionHead;
     public float physicalDamageAbsorptionBody, physicalDamageAbsorptionLegs, physicalDamageAbsorptionHands;
+    public float fireDamageAbsorptionHead;
+    public float fireDamageAbsorptionBody;
+    public float fireDamageAbsorptionLegs;
+    public float fireDamageAbsorptionHands;
 
     public bool isDead;
 
@@ -42,7 +46,7 @@ namespace SG
     }
 
 
-    public virtual void TakeDamage(int physicalDamage, string damageAnimation = "Damage_01")
+    public virtual void TakeDamage(int physicalDamage,int fireDamage, string damageAnimation = "Damage_01")
     {
       if (isDead) return;
 
@@ -53,13 +57,19 @@ namespace SG
 
       physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
 
-      Debug.Log("Total Damage Absorption is: " + totalPhysicalDamageAbsorption + "%");
 
-      float finalDamage = physicalDamage;
+      float totalFireDamageAbsorption = 1 -
+          (1 - fireDamageAbsorptionHead / 100) *
+          (1 - fireDamageAbsorptionBody / 100) *
+          (1 - fireDamageAbsorptionLegs / 100) *
+          (1 - fireDamageAbsorptionHands / 100);
+
+      fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
+
+      float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
 
       currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
-      Debug.Log("Final Damage Dealt is: " + finalDamage);
 
       if (currentHealth <= 0)
       {

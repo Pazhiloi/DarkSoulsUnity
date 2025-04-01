@@ -20,6 +20,7 @@ namespace SG
     {
       if (currentItemAmount > 0)
       {
+        weaponSlotManager.rightHandSlot.UnloadWeapon();
         playerAnimatorManager.PlayTargetAnimation(consumeAnimation, true);
         GameObject bombModel = Instantiate(itemModel, weaponSlotManager.rightHandSlot.transform.position, Quaternion.identity, weaponSlotManager.rightHandSlot.transform);
         playerEffectsManager.instantiatedFXModel = bombModel;

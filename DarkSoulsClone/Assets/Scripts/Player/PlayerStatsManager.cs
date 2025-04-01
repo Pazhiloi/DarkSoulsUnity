@@ -94,11 +94,12 @@ namespace SG
       }
     }
 
-    public override void TakeDamage(int damage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int damage,int fireDamage, string damageAnimation = "Damage_01")
     {
 
       if (playerManager.isInvulnerable) return;
-      base.TakeDamage(damage, damageAnimation = "Damage_01");
+      base.TakeDamage(damage, 1, damageAnimation = "Damage_01");
+      // REFACTOR
       healthBar.SetCurrentHealth(currentHealth);
 
       playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);

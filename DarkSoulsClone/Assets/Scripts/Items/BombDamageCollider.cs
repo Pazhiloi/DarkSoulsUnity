@@ -7,9 +7,9 @@ namespace SG
   public class BombDamageCollider : DamageCollider
   {
     [Header("Explosive Damage & Radius")]
-    public int explosiveDamage = 1;
+    public int explosiveRadius= 1;
     public int fireExplosionDamage = 1;
-    Rigidbody bombRigidBody;
+   public Rigidbody bombRigidBody;
     private bool hasCollided = false;
     public GameObject impactParticles;
 
@@ -24,11 +24,33 @@ namespace SG
       if (!hasCollided)
       {
         hasCollided = true;
+        impactParticles = Instantiate(impactParticles, transform.position, Quaternion.identity);
+        Explode();
+
+        CharacterStatsManager character = collision.transform.GetComponent<CharacterStatsManager>();
+
+        if (character != null)
+        {
+          // character.TakeDamage();
+        }
+
+        Destroy(impactParticles, 5f);
+        Destroy(transform.parent.gameObject);
       }
     }
 
     private void Explode()
     {
+      Collider[] characters = Physics.OverlapSphere(transform.position, explosiveRadius);
+
+      foreach (Collider objectsInExplosion in characters)
+      {
+        CharacterStatsManager character = objectsInExplosion.GetComponent<CharacterStatsManager>();
+        if (character != null)
+        {
+          // DEAL FIRE DAMAGE
+        }
+      } 
     }
   }
 }

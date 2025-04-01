@@ -127,13 +127,12 @@ namespace SG
       GameObject activeModelBomb = Instantiate(fireBombItem.liveBombModel, rightHandSlot.transform.position, cameraHandler.cameraPivotTransform.rotation);
 
       activeModelBomb.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+      BombDamageCollider damageCollider = activeModelBomb.GetComponentInChildren<BombDamageCollider>();
+      damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
+      damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
+      LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+      //CHECK FOR FRIENDLY FIRE
 
-      // DETECT BOMB DAMAGE COLLIDER
-
-      // ADD FORCE TO RIGIDBODY TO MOVE IT THROUGH THE AIR
-      // CHECK FOR FRIENDLY FIRE
-
-      // CREATE EXPLOSION AND AFTER SPLASH DAMAGE / EFFECTS
 
     }
 
@@ -145,7 +144,7 @@ namespace SG
     private void LoadLeftWeaponDamageCollider()
     {
       leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-      leftHandDamageCollider.currentWeaponDamage = playerInventoryManager.leftWeapon.baseDamage;
+      leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.baseDamage;
       leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
       playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
@@ -153,7 +152,7 @@ namespace SG
     private void LoadRightWeaponDamageCollider()
     {
       rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-      rightHandDamageCollider.currentWeaponDamage = playerInventoryManager.rightWeapon.baseDamage;
+      rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.baseDamage;
       rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
       playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
