@@ -76,6 +76,8 @@ namespace SG
         leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
         leftHandDamageCollider.physicalDamage = leftHandWeapon.physicalDamage;
         leftHandDamageCollider.fireDamage = leftHandWeapon.fireDamage;
+
+        leftHandDamageCollider.teamIDNumber = enemyStatsManager.teamIDNumber;
         enemyEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
       }
       else
