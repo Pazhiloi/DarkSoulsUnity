@@ -4,6 +4,8 @@ namespace SG
 {
   public class QuickSlotsUI : MonoBehaviour
   {
+    public Image currentSpellIcon;
+    public Image currentConsumableIcon;
     public Image leftWeaponIcon;
     public Image rightWeaponIcon;
 
@@ -37,6 +39,34 @@ namespace SG
           leftWeaponIcon.enabled = false;
         }
 
+      }
+    }
+
+    public void UpdateCurrentSpellIcon(SpellItem spell)
+    {
+      if (spell.itemIcon != null)
+      {
+        currentSpellIcon.sprite = spell.itemIcon;
+        currentSpellIcon.enabled = true;
+      }
+      else
+      {
+        currentSpellIcon.sprite = null;
+        currentSpellIcon.enabled = false;
+      }
+    }
+
+    public void UpdateCurrentConsumableIcon(ConsumableItem consumable)
+    {
+      if (consumable.itemIcon != null)
+      {
+        currentConsumableIcon.sprite = consumable.itemIcon;
+        currentConsumableIcon.enabled = true;
+      }
+      else
+      {
+        currentConsumableIcon.sprite = null;
+        currentConsumableIcon.enabled = false;
       }
     }
   }

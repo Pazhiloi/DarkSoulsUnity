@@ -32,7 +32,10 @@ namespace SG
 
         if (character != null)
         {
-          character.TakeDamage(0, explosionDamage);
+          if (character.teamIDNumber != teamIDNumber)
+          {
+            character.TakeDamage(0, explosionDamage);
+          }
         }
 
         Destroy(impactParticles, 5f);
@@ -49,7 +52,10 @@ namespace SG
         CharacterStatsManager character = objectsInExplosion.GetComponent<CharacterStatsManager>();
         if (character != null)
         {
-          character.TakeDamage(0, explosionSplashDamage);
+          if (character.teamIDNumber != teamIDNumber)
+          {
+            character.TakeDamage(0, explosionSplashDamage);
+          }
         }
       }
     }

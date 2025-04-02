@@ -134,8 +134,8 @@ namespace SG
 
       damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.forward * fireBombItem.forwardVelocity);
       damageCollider.bombRigidBody.AddForce(activeModelBomb.transform.up * fireBombItem.upwardVelocity);
+      damageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
       LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
-      //CHECK FOR FRIENDLY FIRE
 
 
     }
@@ -149,7 +149,12 @@ namespace SG
     {
       leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
       leftHandDamageCollider.physicalDamage = playerInventoryManager.leftWeapon.physicalDamage;
+
       leftHandDamageCollider.fireDamage = playerInventoryManager.leftWeapon.fireDamage;
+
+      leftHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
+
       leftHandDamageCollider.poiseBreak = playerInventoryManager.leftWeapon.poiseBreak;
       playerEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }
@@ -157,8 +162,12 @@ namespace SG
     private void LoadRightWeaponDamageCollider()
     {
       rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+
       rightHandDamageCollider.physicalDamage = playerInventoryManager.rightWeapon.physicalDamage;
       rightHandDamageCollider.fireDamage = playerInventoryManager.rightWeapon.fireDamage;
+
+      rightHandDamageCollider.teamIDNumber = playerStatsManager.teamIDNumber;
+
       rightHandDamageCollider.poiseBreak = playerInventoryManager.rightWeapon.poiseBreak;
       playerEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
     }

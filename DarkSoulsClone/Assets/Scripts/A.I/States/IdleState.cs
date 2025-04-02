@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace SG
 {
@@ -13,17 +11,20 @@ namespace SG
       Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
       for (int i = 0; i < colliders.Length; i++)
       {
-        CharacterStatsManager CharacterStatsManager = colliders[i].transform.GetComponent<CharacterStatsManager>();
+        CharacterStatsManager characterStatsManager = colliders[i].transform.GetComponent<CharacterStatsManager>();
 
-        if (CharacterStatsManager != null)
+        if (characterStatsManager != null)
         {
-          Vector3 targetDirection = CharacterStatsManager.transform.position - transform.position;
-          float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
-
-          if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+          if (characterStatsManager.teamIDNumber != enemyStatsManager.teamIDNumber)
           {
-            enemyManager.currentTarget = CharacterStatsManager;
-          }
+            Vector3 targetDirection = characterStatsManager.transform.position - transform.position;
+            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+            if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+            {
+              enemyManager.currentTarget = characterStatsManager;
+            }
+          } 
         }
       }
       #endregion
