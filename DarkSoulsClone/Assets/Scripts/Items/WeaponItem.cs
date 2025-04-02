@@ -8,31 +8,21 @@ namespace SG
   {
     public GameObject modelPrefab;
     public bool isUnarmed;
-     [Header("Damage")]
-     public int physicalDamage;
-     public int fireDamage;
-     public int criticalDamageMultiplier = 4;
-     [Header("Poise")]
-     public int poiseBreak, offensivePoiseBonus;
+
+    [Header("Animator Replacer")]
+    public AnimatorOverrideController weaponController;
+    [Header("Weapon Type")]
+    WeaponType weaponType;
+
+    [Header("Damage")]
+    public int physicalDamage;
+    public int fireDamage;
+    public int criticalDamageMultiplier = 4;
+    [Header("Poise")]
+    public int poiseBreak, offensivePoiseBonus;
 
     [Header("Absorpsion")]
     public float physicalDamageAbsorption;
-
-    [Header("Idle Animations")]
-
-    public string right_hand_idle;
-    public string left_hand_idle;
-    public string th_idle;
-    
-    [Header("Attack Animations")]
-    public string oh_light_attack_01;
-    public string oh_light_attack_02;
-    public string th_light_attack_01;
-    public string th_light_attack_02;
-    public string oh_heavy_attack_01;
-
-    [Header("Weapon Art")]
-    public string weapon_art;
 
     [Header("Stamina Costs")]
     public int baseStamina;
