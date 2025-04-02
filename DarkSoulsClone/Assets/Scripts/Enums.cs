@@ -4,13 +4,17 @@ using UnityEngine;
 
 namespace SG
 {
-  public enum WeaponType{
-    PyroMancyCaster,
+  public enum WeaponType
+  {
+    PyromancyCaster,
     FaithCaster,
-    StraightSword
+    SpellCaster,
+    Unarmed,
+    StraightSword,
+    Shield
   }
-    public class Enums : MonoBehaviour
-    {
-       
-    }
+  public class Enums : MonoBehaviour
+  {
+
+  }
 }

@@ -11,8 +11,10 @@ namespace SG
 
     [Header("Animator Replacer")]
     public AnimatorOverrideController weaponController;
+    public string offHandIdleAnimation = "Left_Arm_Idle_01";
+
     [Header("Weapon Type")]
-    WeaponType weaponType;
+    public WeaponType weaponType;
 
     [Header("Damage")]
     public int physicalDamage;
@@ -29,12 +31,5 @@ namespace SG
     public float lightAttackMultiplier;
     public float heavyAttackMultiplier;
 
-    [Header("Weapon Type")]
-
-    public bool isSpellCaster;
-    public bool isFaithCaster;
-    public bool isPyroCaster;
-    public bool isMelleWeapon;
-    public bool isShieldWeapon;
   }
 }

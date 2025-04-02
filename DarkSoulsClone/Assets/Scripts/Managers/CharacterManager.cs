@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SG
 {
   public class CharacterManager : MonoBehaviour
-{
+  {
     [Header("Lock On Transform")]
     public Transform lockOnTransform;
 
@@ -23,7 +23,7 @@ namespace SG
     public bool isInvulnerable;
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
-
+    public bool isTwoHandingWeapon;
     [Header("Movement Flags")]
     public bool isRotatingWithRootMotion;
     public bool canRotate;
