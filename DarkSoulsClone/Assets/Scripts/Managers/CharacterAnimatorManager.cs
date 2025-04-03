@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 namespace SG
 {
 
-  public class AnimatorManager : MonoBehaviour
+  public class CharacterAnimatorManager : MonoBehaviour
   {
     public Animator animator;
     protected CharacterManager characterManager;
     protected CharacterStatsManager characterStatsManager;
     public bool canRotate;
+    protected RigBuilder rigBuilder;
+    public TwoBoneIKConstraint leftHandConstraint;
+    public TwoBoneIKConstraint rightHandConstraint;
 
     protected virtual void Awake()
     {
       characterManager = GetComponent<CharacterManager>();
       characterStatsManager = GetComponent<CharacterStatsManager>();
+      rigBuilder = GetComponent<RigBuilder>();
     }
 
 
@@ -86,6 +91,32 @@ namespace SG
     {
       characterStatsManager.TakeDamageNoAnimation(characterManager.pendingCriticalDamage, 0);
       characterManager.pendingCriticalDamage = 0;
+    }
+
+    public virtual void SetHandIKForWeapon(RightHandIKTarget rightHandTarget, LeftHandIKTarget leftHandTarget, bool isTwoHandingWeapon)
+    {
+      if (isTwoHandingWeapon)
+      {
+        rightHandConstraint.data.target = rightHandTarget.transform;
+        rightHandConstraint.data.targetPositionWeight = 1; // Assign this from a weapon variable if you'd like
+        rightHandConstraint.data.targetRotationWeight = 1;
+
+        leftHandConstraint.data.target = leftHandTarget.transform;
+        leftHandConstraint.data.targetPositionWeight = 1;
+        leftHandConstraint.data.targetRotationWeight = 1;
+      }
+      else
+      {
+        rightHandConstraint.data.target = null;
+        leftHandConstraint.data.target = null;
+      }
+
+      // rigBuilder.Build();
+    }
+
+    public virtual void EraseHandIKForWeapon()
+    {
+      // RESET WEIGHTS TO 0
     }
   }
 }

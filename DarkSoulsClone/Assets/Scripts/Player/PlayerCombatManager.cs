@@ -249,7 +249,7 @@ namespace SG
 
 
           playerAnimatorManager.PlayTargetAnimation("Back Stab", true);
-          enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
+          enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Back Stabbed", true);
         }
       }
       else if (Physics.Raycast(inputHandler.criticalAttackRayCastStartPoint.position, transform.TransformDirection(Vector3.forward), out hit, 0.7f, riposteLayer))
@@ -273,7 +273,7 @@ namespace SG
           enemyCharacterManager.pendingCriticalDamage = criticalDamage;
 
           playerAnimatorManager.PlayTargetAnimation("Riposte", true);
-          enemyCharacterManager.GetComponentInChildren<AnimatorManager>().PlayTargetAnimation("Riposted", true);
+          enemyCharacterManager.GetComponentInChildren<CharacterAnimatorManager>().PlayTargetAnimation("Riposted", true);
         }
 
       }

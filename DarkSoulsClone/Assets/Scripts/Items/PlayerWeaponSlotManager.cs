@@ -35,33 +35,6 @@ namespace SG
       LoadWeaponHolderSlots();
     }
 
-    private void LoadWeaponHolderSlots()
-    {
-
-      WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-      foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
-      {
-        if (weaponSlot.isLeftHandSlot)
-        {
-          leftHandSlot = weaponSlot;
-        }
-        else if (weaponSlot.isRightHandSlot)
-        {
-          rightHandSlot = weaponSlot;
-        }
-        else if (weaponSlot.isBackSlot)
-        {
-          backSlot = weaponSlot;
-        }
-      }
-    }
-
-
-    public void LoadBothWeaponsOnSlots()
-    {
-      LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
-      LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
-    }
     public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
     {
 

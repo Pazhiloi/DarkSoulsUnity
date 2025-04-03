@@ -20,25 +20,8 @@ namespace SG
     }
     public void Start()
     {
-      LoadWeaponsOnBothHands();
     }
 
-    private void LoadWeaponHolderSlots(){
-      WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-      foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
-      {
-        if (weaponSlot.isLeftHandSlot)
-        {
-          leftHandSlot = weaponSlot;
-          //LoadLeftWeaponDamageCollider();
-        }
-        else if (weaponSlot.isRightHandSlot)
-        {
-          rightHandSlot = weaponSlot;
-          //LoadRightWeaponDamageCollider();
-        }
-      }
-    }
     public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
     {
       if (isLeft)
@@ -55,17 +38,6 @@ namespace SG
       }
     }
 
-    public void LoadWeaponsOnBothHands()
-    {
-      if (rightHandWeapon != null)
-      {
-        LoadWeaponOnSlot(rightHandWeapon, false);
-      }
-      if (leftHandWeapon != null)
-      {
-        LoadWeaponOnSlot(leftHandWeapon, true);
-      }
-    }
 
     #region Handle Weapon Damage Colliders
     public void LoadWeaponsDamageCollider(bool isLeft)
