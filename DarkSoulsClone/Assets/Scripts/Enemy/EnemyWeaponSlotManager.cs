@@ -6,115 +6,16 @@ namespace SG
 {
   public class EnemyWeaponSlotManager : CharacterWeaponSlotManager
   {
-    public WeaponItem rightHandWeapon;
-    public WeaponItem leftHandWeapon;
 
-    EnemyStatsManager enemyStatsManager;
-    EnemyEffectsManager enemyEffectsManager;
+public override void GrantWeaponAttackingPoiseBonus()
+{
+    characterStatsManager.totalPoiseDefence = characterStatsManager.totalPoiseDefence + characterStatsManager.offensivePoiseBonus;
+}
 
-    public void Awake()
-    {
-      enemyStatsManager = GetComponent<EnemyStatsManager>();
-      enemyEffectsManager = GetComponent<EnemyEffectsManager>();
-      LoadWeaponHolderSlots();
-    }
-    public void Start()
-    {
-    }
-
-    public void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft)
-    {
-      if (isLeft)
-      {
-        leftHandSlot.currentWeapon = weapon;
-        leftHandSlot.LoadWeaponModel(weapon);
-        LoadWeaponsDamageCollider(true);
-      }
-      else
-      {
-        rightHandSlot.currentWeapon = weapon;
-        rightHandSlot.LoadWeaponModel(weapon);
-        LoadWeaponsDamageCollider(false);
-      }
-    }
-
-
-    #region Handle Weapon Damage Colliders
-    public void LoadWeaponsDamageCollider(bool isLeft)
-    {
-      if (isLeft)
-      {
-        leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        leftHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
-        leftHandDamageCollider.physicalDamage = leftHandWeapon.physicalDamage;
-        leftHandDamageCollider.fireDamage = leftHandWeapon.fireDamage;
-
-        leftHandDamageCollider.teamIDNumber = enemyStatsManager.teamIDNumber;
-        enemyEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
-      }
-      else
-      {
-        rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-        rightHandDamageCollider.characterManager = GetComponentInParent<CharacterManager>();
-        rightHandDamageCollider.physicalDamage = rightHandWeapon.physicalDamage;
-        rightHandDamageCollider.fireDamage = rightHandWeapon.fireDamage;
-
-        rightHandDamageCollider.teamIDNumber = enemyStatsManager.teamIDNumber;
-        enemyEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
-      }
-    }
-
-    public void OpenDamageCollider()
-    {
-      if (rightHandDamageCollider != null)
-      {
-        rightHandDamageCollider.EnableDamageCollider();
-      }
-    }
-    public void CloseDamageCollider()
-    {
-      if (rightHandDamageCollider != null)
-      {
-        rightHandDamageCollider.DisableDamageCollider();
-      }
-    }
-    #endregion
-
-    #region Handle Weapon Stamina Drains
-    public void DrainStaminaLightAttack()
-    {
-
-    }
-
-    public void DrainStaminaHeavyAttack()
-    {
-
-    }
-    #endregion
-
-    #region Handle Weapon Combos
-    public void EnableCombo()
-    {
-
-    }
-
-    public void DisableCombo()
-    {
-
-    }
-    #endregion
-
-
-    #region Handle Weapon's Poise Bonus
-    public void GrantWeaponAttackingPoiseBonus()
-    {
-      enemyStatsManager.totalPoiseDefence += enemyStatsManager.offensivePoiseBonus;
-    }
-
-    public void ResetWeaponAttackingPoiseBonus()
-    {
-      enemyStatsManager.totalPoiseDefence = enemyStatsManager.armorPoiseBonus;
-    }
-    #endregion
+public override void ResetWeaponAttackingPoiseBonus()
+{
+    characterStatsManager.totalPoiseDefence = characterStatsManager.armorPoiseBonus;
+}
+    
   }
 }
