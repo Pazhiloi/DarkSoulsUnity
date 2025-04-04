@@ -111,7 +111,7 @@ namespace SG
         leftHandConstraint.data.target = null;
       }
 
-      // rigBuilder.Build();
+      rigBuilder.Build();
     }
 
     public virtual void EraseHandIKForWeapon()
