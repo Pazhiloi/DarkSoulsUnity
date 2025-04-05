@@ -275,13 +275,15 @@ namespace SG
 
         if (twoHandFlag)
         {
-          playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
           playerManager.isTwoHandingWeapon = true;
+          playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
+          playerWeaponSlotManager.LoadTwoHandIKTargets(true);
         }
         else{
+          playerManager.isTwoHandingWeapon = false;
           playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
           playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
-          playerManager.isTwoHandingWeapon = false;
+          playerWeaponSlotManager.LoadTwoHandIKTargets(false);
         }
       }
     }

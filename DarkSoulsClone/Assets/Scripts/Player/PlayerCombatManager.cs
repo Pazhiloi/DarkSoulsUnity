@@ -48,6 +48,7 @@ namespace SG
 
     public void HandleRBAction()
     {
+      playerAnimatorManager.EraseHandIKForWeapon();
       if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
       {
         PerformRBMelleAction();

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace SG
 {
-    public class CharacterInventoryManager : MonoBehaviour
-    {
+  public class CharacterInventoryManager : MonoBehaviour
+  {
 
-     protected CharacterWeaponSlotManager characterWeaponSlotManager;
-  [Header("Quick Slots Items")]
+    protected CharacterWeaponSlotManager characterWeaponSlotManager;
+    [Header("Quick Slots Items")]
     public SpellItem currentSpell;
     public WeaponItem rightWeapon;
     public WeaponItem leftWeapon;
@@ -26,16 +26,16 @@ namespace SG
     public int currentRightWeaponIndex = -1;
     public int currentLeftWeaponIndex = -1;
 
-    
+
 
     private void Awake()
-{
-
-}
-
-private void Start()
-{
-    characterWeaponSlotManager.LoadBothWeaponsOnSlots();
-}
+    {
+      characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
     }
+
+    private void Start()
+    {
+      characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+    }
+  }
 }

@@ -13,13 +13,9 @@ namespace SG
     PlayerAnimatorManager playerAnimatorManager;
     CameraHandler cameraHandler;
 
-    
-
-
-
-
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       cameraHandler = FindObjectOfType<CameraHandler>();
       playerStatsManager = GetComponent<PlayerStatsManager>();
       inputHandler = GetComponent<InputHandler>();
@@ -29,7 +25,6 @@ namespace SG
       playerEffectsManager = GetComponent<PlayerEffectsManager>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
-      LoadWeaponHolderSlots();
     }
 
     public override void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)

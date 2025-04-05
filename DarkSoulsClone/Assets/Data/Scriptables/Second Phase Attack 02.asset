@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8125428762b944f9d1f79afc347a6d, type: 3}
   m_Name: Second Phase Attack 02
   m_EditorClassIdentifier: 
-  actionAnimation: OH_Sword_Attack_02
+  actionAnimation: OH_Light_Attack_02
   canCombo: 0
   comboAction: {fileID: 11400000, guid: b579d01522a0e1b46b9f77d49d0664ec, type: 2}
   attackScore: 3
