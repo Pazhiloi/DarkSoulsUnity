@@ -18,8 +18,9 @@ namespace SG
     public float staminaRegenerationAmount = 30f;
     public float staminaRegenTimer;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();

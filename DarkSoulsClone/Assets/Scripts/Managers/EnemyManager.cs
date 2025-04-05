@@ -34,8 +34,9 @@ namespace SG
     public bool isPhaseShifting;
     public float comboLikelyHood;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
       enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
       enemyStatsManager = GetComponent<EnemyStatsManager>();
@@ -66,7 +67,8 @@ namespace SG
       enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
     }
 
-    private void FixedUpdate() {
+    protected override void FixedUpdate() {
+      base.FixedUpdate();
       enemyEffectsManager.HandleAllBuildUpEffects();
     }
 

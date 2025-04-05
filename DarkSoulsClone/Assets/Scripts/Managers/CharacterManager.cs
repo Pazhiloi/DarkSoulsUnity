@@ -5,6 +5,9 @@ namespace SG
 {
   public class CharacterManager : MonoBehaviour
   {
+    CharacterAnimatorManager characterAnimatorManager;
+    CharacterWeaponSlotManager characterWeaponSlotManager;
+    [Header("Look On Transform")]
     [Header("Lock On Transform")]
     public Transform lockOnTransform;
 
@@ -38,5 +41,16 @@ namespace SG
 
     // damage to be inflicted during an animation event (backstab/riposte)
     public int pendingCriticalDamage;
+
+    protected virtual void Awake()
+    {
+      characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+      characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
+    }
+
+    protected virtual void FixedUpdate()
+    {
+      characterAnimatorManager.CheckHandIKWeight(characterWeaponSlotManager.rightHandIKTarget, characterWeaponSlotManager.leftHandIKTarget, isTwoHandingWeapon);
+    }
   }
 }

@@ -266,7 +266,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Critical Attack"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""392de472-6d49-4799-9497-e755ffc29a99"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 namespace SG
@@ -14,6 +12,8 @@ namespace SG
     protected RigBuilder rigBuilder;
     public TwoBoneIKConstraint leftHandConstraint;
     public TwoBoneIKConstraint rightHandConstraint;
+
+    bool handIKWeightsReset = false;
 
     protected virtual void Awake()
     {
@@ -114,9 +114,48 @@ namespace SG
       rigBuilder.Build();
     }
 
+    public virtual void CheckHandIKWeight(RightHandIKTarget rightHandIK, LeftHandIKTarget leftHandIK, bool isTwoHandingWeapon)
+    {
+      if (characterManager.isInteracting)
+      {
+        return;
+      }
+
+      if (handIKWeightsReset)
+      {
+        handIKWeightsReset = false;
+
+        if (rightHandConstraint.data.target != null)
+        {
+          rightHandConstraint.data.target = rightHandIK.transform;
+          rightHandConstraint.data.targetPositionWeight = 1;
+          rightHandConstraint.data.targetRotationWeight = 1;
+        }
+
+        if (leftHandConstraint.data.target != null)
+        {
+          leftHandConstraint.data.target = leftHandIK.transform;
+          leftHandConstraint.data.targetPositionWeight = 1;
+          leftHandConstraint.data.targetRotationWeight = 1;
+        }
+      }
+    }
+
     public virtual void EraseHandIKForWeapon()
     {
-      // RESET WEIGHTS TO 0
+      handIKWeightsReset = true;
+
+      if (rightHandConstraint.data.target != null)
+      {
+        rightHandConstraint.data.targetPositionWeight = 0;
+        rightHandConstraint.data.targetRotationWeight = 0;
+      }
+
+      if (leftHandConstraint.data.target != null)
+      {
+        leftHandConstraint.data.targetPositionWeight = 0;
+        leftHandConstraint.data.targetRotationWeight = 0;
+      }
     }
   }
 }

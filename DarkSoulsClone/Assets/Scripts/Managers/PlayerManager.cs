@@ -19,8 +19,9 @@ namespace SG
 
 
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       cameraHandler = FindObjectOfType<CameraHandler>();
       inputHandler = GetComponent<InputHandler>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
@@ -55,8 +56,9 @@ namespace SG
 
       CheckForInteractableObject();
     }
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+      base.FixedUpdate();
       float delta = Time.fixedDeltaTime;
       playerLocomotionManager.HandleFalling(delta, playerLocomotionManager.moveDirection);
       playerLocomotionManager.HandleMovement(delta);

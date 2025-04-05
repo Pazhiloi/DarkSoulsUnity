@@ -24,8 +24,8 @@ namespace SG
     [Header("Attacking Weapon")]
     public WeaponItem attackingWeapon;
     [Header("Hand IK Targets")]
-    RightHandIKTarget rightHandIKTarget;
-    LeftHandIKTarget leftHandIKTarget;
+    public RightHandIKTarget rightHandIKTarget;
+    public LeftHandIKTarget leftHandIKTarget;
 
     protected virtual void Awake()
     {

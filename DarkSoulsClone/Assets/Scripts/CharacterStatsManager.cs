@@ -6,6 +6,7 @@ namespace SG
 {
   public class CharacterStatsManager : MonoBehaviour
   {
+    CharacterAnimatorManager characterAnimatorManager;
     [Header("Team I.D")]
     public int teamIDNumber = 0;
     public int healthLevel = 10;
@@ -37,6 +38,10 @@ namespace SG
 
     public bool isDead;
 
+    protected virtual void Awake() {
+      characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+    }
+
     protected virtual void Update()
     {
       HandlePoiseResetTimer();
@@ -51,6 +56,8 @@ namespace SG
     public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
     {
       if (isDead) return;
+
+      characterAnimatorManager.EraseHandIKForWeapon();
 
       float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
                                                 (1 - physicalDamageAbsorptionBody / 100) *

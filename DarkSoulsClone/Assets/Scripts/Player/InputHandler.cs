@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SG
@@ -107,6 +105,7 @@ namespace SG
 
     public void TickInput(float delta)
     {
+      if (playerStatsManager.isDead)return;
       HandleMoveInput(delta);
       HandleRollInput(delta);
       HandleCombatInput(delta);

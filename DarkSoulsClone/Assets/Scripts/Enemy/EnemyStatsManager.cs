@@ -13,11 +13,11 @@ namespace SG
 
     public bool isBoss = false;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
       enemyBossManager = GetComponent<EnemyBossManager>();
-      enemyHealthBar = GetComponentInChildren<UIEnemyHealthBar>();
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;
     }
