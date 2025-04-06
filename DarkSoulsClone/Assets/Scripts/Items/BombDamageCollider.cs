@@ -34,7 +34,7 @@ namespace SG
         {
           if (character.teamIDNumber != teamIDNumber)
           {
-            character.TakeDamage(0, explosionDamage);
+            character.TakeDamage(0, explosionDamage, currentDamageAnimation);
           }
         }
 
@@ -54,7 +54,7 @@ namespace SG
         {
           if (character.teamIDNumber != teamIDNumber)
           {
-            character.TakeDamage(0, explosionSplashDamage);
+            character.TakeDamage(0, explosionSplashDamage, currentDamageAnimation);
           }
         }
       }

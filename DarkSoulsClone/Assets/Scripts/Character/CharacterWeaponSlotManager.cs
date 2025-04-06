@@ -123,6 +123,7 @@ namespace SG
       leftHandDamageCollider.physicalDamage = characterInventoryManager.leftWeapon.physicalDamage;
 
       leftHandDamageCollider.fireDamage = characterInventoryManager.leftWeapon.fireDamage;
+      leftHandDamageCollider.characterManager = characterManager;
 
       leftHandDamageCollider.teamIDNumber = characterStatsManager.teamIDNumber;
 
@@ -137,6 +138,7 @@ namespace SG
 
       rightHandDamageCollider.physicalDamage = characterInventoryManager.rightWeapon.physicalDamage;
       rightHandDamageCollider.fireDamage = characterInventoryManager.rightWeapon.fireDamage;
+      rightHandDamageCollider.characterManager = characterManager;
 
       rightHandDamageCollider.teamIDNumber = characterStatsManager.teamIDNumber;
 

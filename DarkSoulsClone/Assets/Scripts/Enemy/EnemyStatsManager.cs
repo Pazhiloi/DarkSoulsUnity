@@ -75,9 +75,9 @@ namespace SG
     {
       enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation = "Damage_01")
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
     {
-      base.TakeDamage(physicalDamage, fireDamage, damageAnimation = "Damage_01");
+      base.TakeDamage(physicalDamage, fireDamage, damageAnimation);
 
       if (!isBoss)
       {

@@ -24,7 +24,7 @@ namespace SG
 
     bool shieldHasBeenHit;
     bool hasBeenParried;
-    string currentDamageAnimation;
+   protected string currentDamageAnimation;
     protected virtual void Awake()
     {
       damageCollider = GetComponent<Collider>();
@@ -135,11 +135,11 @@ namespace SG
       }
       else if (direction >= -144 && direction <= -45)
       {
-        currentDamageAnimation = "Damage_Right_01";
+        currentDamageAnimation = "Damage_Left_01";
       }
       else if (direction >= 45 && direction <= 144)
       {
-        currentDamageAnimation = "Damage_Left_01";
+        currentDamageAnimation = "Damage_Right_01";
       }
     }
 
