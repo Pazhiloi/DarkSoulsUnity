@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7295,7 +7295,7 @@ RectTransform:
   m_Father: {fileID: 537363979}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7741,7 +7741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1317471732
 Transform:
   m_ObjectHideFlags: 0
@@ -13842,7 +13842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &949790103862849990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19346,18 +19346,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpell: {fileID: 11400000, guid: e3221913ee2ebf44bb5ff0e8873ec3a8, type: 2}
-  rightWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
-  leftWeapon: {fileID: 11400000, guid: f2f1f0d827fcd0c47965341cae56edac, type: 2}
+  rightWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
+  leftWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   currentConsumable: {fileID: 11400000, guid: c3d43611ca7d48e4f9eb0b80b18652fe, type: 2}
   currentHelmetEquipment: {fileID: 11400000, guid: 944aa87c311cce2439c6c0522fa1d8f1, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 43daba3238265e947aea9a1e5b43428c, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: dc9a591801b313247a8b924e34380942, type: 2}
   currentHandEquipment: {fileID: 11400000, guid: b7ffb6cd4f62a064c9ed89ba8a2bcc6a, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  - {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   - {fileID: 11400000, guid: 68a3fdf764d3dfe45b362f3707a49d90, type: 2}
   weaponsInLeftHandSlots:
-  - {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
+  - {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   - {fileID: 11400000, guid: 68a3fdf764d3dfe45b362f3707a49d90, type: 2}
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
@@ -19896,7 +19896,7 @@ MonoBehaviour:
   leftWeaponFX: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
-  buildUpTransform: {fileID: 0}
+  buildUpTransform: {fileID: 1841210898}
   isPoisoned: 0
   poisonBuildup: 0
   poisonAmount: 100

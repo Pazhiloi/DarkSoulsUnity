@@ -26,7 +26,11 @@ namespace SG
     public bool isInvulnerable;
     public bool isUsingRightHand;
     public bool isUsingLeftHand;
+    public bool isAiming;
     public bool isTwoHandingWeapon;
+
+
+
     [Header("Movement Flags")]
     public bool isRotatingWithRootMotion;
     public bool canRotate;

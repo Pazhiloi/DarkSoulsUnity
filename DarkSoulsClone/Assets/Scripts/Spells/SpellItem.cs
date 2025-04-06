@@ -18,11 +18,11 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager)
+    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager,bool isLeftHanded)
     {
       Debug.Log("You attempted to cast the spell!");
     }
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager)
+    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager, bool isLeftHanded)
     {
       Debug.Log("You Successfully cast a spell!");
       PlayerStatsManager.DrainFocusPoints(focusPointCost);

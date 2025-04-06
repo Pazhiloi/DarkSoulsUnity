@@ -21,7 +21,7 @@ namespace SG
     public bool inventory_Input;
     public bool lockOnInput;
     public bool right_Stick_Right_Input, right_Stick_Left_Input;
-    
+
 
     public bool d_Pad_Up, d_Pad_Down, d_Pad_Left, d_Pad_Right;
 
@@ -105,9 +105,10 @@ namespace SG
 
     public void TickInput(float delta)
     {
-      if (playerStatsManager.isDead)return;
+      if (playerStatsManager.isDead) return;
       HandleMoveInput(delta);
       HandleRollInput(delta);
+      HandleLBInput();
       HandleCombatInput(delta);
       HandleQuickSlotsInput();
       HandleInventoryInput();
@@ -118,11 +119,23 @@ namespace SG
     }
     private void HandleMoveInput(float delta)
     {
-      horizontal = movementInput.x;
-      vertical = movementInput.y;
-      moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
-      mouseX = cameraInput.x;
-      mouseY = cameraInput.y;
+      if (playerManager.isAiming)
+      {
+        horizontal = movementInput.x;
+        vertical = movementInput.y;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical) / 2);
+        mouseX = cameraInput.x;
+        mouseY = cameraInput.y;
+      }
+      else
+      {
+        horizontal = movementInput.x;
+        vertical = movementInput.y;
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+        mouseX = cameraInput.x;
+        mouseY = cameraInput.y;
+      }
+      
     }
 
     private void HandleRollInput(float delta)
@@ -163,16 +176,7 @@ namespace SG
         playerCombatManager.HandleHeavyAttack(playerInventoryManager.rightWeapon);
       }
 
-      if (lb_Input)
-      {
-        playerCombatManager.HandleLBAction();
-      }else{
-        playerManager.isBlocking = false;
-        if (blockingCollider.blockingCollider.enabled)
-        {
-          blockingCollider.DisableBlockingCollider();
-        }
-      }
+
 
       if (lt_Input)
       {
@@ -184,6 +188,34 @@ namespace SG
         {
           // handle normal weapon art
           playerCombatManager.HandleLTAction();
+        }
+      }
+    }
+
+    private void HandleLBInput()
+    {
+      if (playerManager.isInAir || playerManager.isSprinting || playerManager.isFiringSpell)
+      {
+        lb_Input = false;
+        return;
+      }
+
+      if (lb_Input)
+      {
+        playerCombatManager.HandleLBAction();
+      }
+      else if (lb_Input == false)
+      {
+        playerManager.isBlocking = false;
+
+        if (blockingCollider.blockingCollider.enabled)
+        {
+          blockingCollider.DisableBlockingCollider();
+        }
+
+        if (playerManager.isAiming)
+        {
+          playerAnimatorManager.animator.SetBool("isAiming", false);
         }
       }
     }
@@ -237,7 +269,7 @@ namespace SG
           lockOnFlag = true;
         }
       }
-      else if(lockOnInput && lockOnFlag)
+      else if (lockOnInput && lockOnFlag)
       {
         lockOnInput = false;
         lockOnFlag = false;
@@ -266,7 +298,8 @@ namespace SG
       cameraHandler.SetCameraHeight();
     }
 
-    private void HandleTwoHandInput(){
+    private void HandleTwoHandInput()
+    {
       if (y_Input)
       {
         y_Input = false;
@@ -278,7 +311,8 @@ namespace SG
           playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
           playerWeaponSlotManager.LoadTwoHandIKTargets(true);
         }
-        else{
+        else
+        {
           playerManager.isTwoHandingWeapon = false;
           playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.rightWeapon, false);
           playerWeaponSlotManager.LoadWeaponOnSlot(playerInventoryManager.leftWeapon, true);
@@ -297,7 +331,8 @@ namespace SG
     }
 
 
-    private void HandleUseConsumableInput(){
+    private void HandleUseConsumableInput()
+    {
       if (x_Input)
       {
         x_Input = false;
