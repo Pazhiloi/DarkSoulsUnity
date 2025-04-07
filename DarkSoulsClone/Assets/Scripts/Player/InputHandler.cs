@@ -14,9 +14,11 @@ namespace SG
     public bool a_Input;
     public bool x_Input;
     public bool y_Input;
+
     public bool rb_Input, lb_Input;
+    public bool hold_rb_Input;
     public bool rt_Input, lt_Input;
-    public bool critical_attack_input;
+
     public bool jump_Input;
     public bool inventory_Input;
     public bool lockOnInput;
@@ -30,6 +32,7 @@ namespace SG
     public bool sprintFlag;
     public bool comboFlag;
     public bool lockOnFlag;
+    public bool fireFlag;
     public bool inventoryFlag;
     public float rollInputTimer;
 
@@ -76,11 +79,13 @@ namespace SG
         inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
         inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+        inputActions.PlayerActions.HoldRB.performed += i => hold_rb_Input = true;
+        inputActions.PlayerActions.HoldRB.canceled += i => hold_rb_Input = false;
+        inputActions.PlayerActions.HoldRB.canceled += i => fireFlag = true;
         inputActions.PlayerActions.RT.performed += i => rt_Input = true;
         inputActions.PlayerActions.LT.performed += i => lt_Input = true;
         inputActions.PlayerActions.LB.canceled += i => lb_Input = false;
         inputActions.PlayerActions.LB.performed += i => lb_Input = true;
-        inputActions.PlayerActions.CriticalAttack.performed += i => critical_attack_input = true;
         inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
         inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
         inputActions.PlayerActions.A.performed += i => a_Input = true;
@@ -114,12 +119,12 @@ namespace SG
       HandleInventoryInput();
       HandleLockOnInput();
       HandleTwoHandInput();
-      HandleCriticalAttackInput();
       HandleUseConsumableInput();
+      HandleHoldRBInput();
     }
     private void HandleMoveInput(float delta)
     {
-      if (playerManager.isAiming)
+      if (playerManager.isHoldingArrow)
       {
         horizontal = movementInput.x;
         vertical = movementInput.y;
@@ -135,7 +140,7 @@ namespace SG
         mouseX = cameraInput.x;
         mouseY = cameraInput.y;
       }
-      
+
     }
 
     private void HandleRollInput(float delta)
@@ -213,9 +218,9 @@ namespace SG
           blockingCollider.DisableBlockingCollider();
         }
 
-        if (playerManager.isAiming)
+        if (playerManager.isHoldingArrow)
         {
-          playerAnimatorManager.animator.SetBool("isAiming", false);
+          // playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
         }
       }
     }
@@ -321,12 +326,20 @@ namespace SG
       }
     }
 
-    private void HandleCriticalAttackInput()
+
+    private void HandleHoldRBInput()
     {
-      if (critical_attack_input)
+      if (hold_rb_Input)
       {
-        critical_attack_input = false;
-        playerCombatManager.AttemptBackStabOrRiposte();
+        if (playerInventoryManager.rightWeapon.weaponType == WeaponType.Bow)
+        {
+          playerCombatManager.HandleHoldRBAction();
+        }
+        else
+        {
+          hold_rb_Input = false;
+          playerCombatManager.AttemptBackStabOrRiposte();
+        }
       }
     }
 

@@ -44,6 +44,18 @@ namespace SG
       inputHandler = GetComponent<InputHandler>();
     }
 
+    public void HandleHoldRBAction()
+    {
+      if (playerManager.isTwoHandingWeapon)
+      {
+        PerformRBRangedAction();
+      }
+      else
+      {
+        //DO A MELEE ATTACK (Bow Bash)
+      }
+    }
+
 
 
     public void HandleRBAction()
@@ -147,6 +159,15 @@ namespace SG
       }
     }
 
+    private void DrawArrowAction()
+    {
+      playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
+      playerAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
+      GameObject loadedArrow = Instantiate(playerInventoryManager.currentAmmo.loadedItemModel, playerWeaponSlotManager.leftHandSlot.transform);
+      //ANIMATE THE BOW
+      playerEffectsManager.currentRangeFX = loadedArrow;
+    }
+
 
     private void PerformRBMelleAction()
     {
@@ -173,8 +194,30 @@ namespace SG
 
     }
 
+    private void PerformRBRangedAction()
+    {
+      if (playerStatsManager.currentStamina <= 0)
+      {
+        return;
+      }
+
+      playerAnimatorManager.EraseHandIKForWeapon();
+      playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
+      if (!playerManager.isHoldingArrow)
+      {
+        if (playerInventoryManager.currentAmmo != null)
+        {
+          DrawArrowAction();
+        }
+        else
+        {
+          playerAnimatorManager.PlayTargetAnimation("Shrug", true);
+        }
+      }
+    }
+
     private void PerformLBAimingAction(){
-      playerAnimatorManager.animator.SetBool("isAiming", true);
+      // playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
     }
 
 

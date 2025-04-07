@@ -41,7 +41,7 @@ namespace SG
       isUsingLeftHand = animator.GetBool("isUsingLeftHand");
       isInvulnerable = animator.GetBool("isInvulnerable");
       isFiringSpell = animator.GetBool("isFiringSpell");
-      isAiming = animator.GetBool("isAiming");
+      isHoldingArrow = animator.GetBool("isHoldingArrow");
       animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
       animator.SetBool("isBlocking", isBlocking);
       animator.SetBool("isInAir", isInAir);

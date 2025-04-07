@@ -216,6 +216,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Hold RB",
+                    "type": "PassThrough",
+                    "id": "74c34e15-3b46-4182-aa01-839e7f521695",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LB",
                     "type": "Button",
                     "id": "45a6d657-6a9a-4652-a281-8d2c000d800d",
@@ -237,15 +246,6 @@
                     "name": "LT",
                     "type": "Button",
                     "id": "599880cb-65a6-472c-aacf-8ddda1da8c51",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Critical Attack",
-                    "type": "PassThrough",
-                    "id": "392de472-6d49-4799-9497-e755ffc29a99",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -436,28 +436,6 @@
                 },
                 {
                     "name": "",
-                    "id": "fd46e797-27e4-417c-956c-83b9ea2e3620",
-                    "path": "<Keyboard>/e",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Mouse & KeyBoard",
-                    "action": "Critical Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "11e397a1-5554-4eeb-be8b-b1d3d543dc0b",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Critical Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4c6ff592-3daf-4c0f-9032-a277c1e05a1f",
                     "path": "<Keyboard>/z",
                     "interactions": "",
@@ -519,6 +497,28 @@
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
                     "action": "X",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f576935-f9bc-4693-81f0-0763c83fcda1",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Hold RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0103bd49-476a-4052-9c56-e72ca0a73ae6",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Hold RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

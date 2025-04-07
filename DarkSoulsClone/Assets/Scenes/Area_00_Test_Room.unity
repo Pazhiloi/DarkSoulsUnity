@@ -7918,6 +7918,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -19328,7 +19329,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Thumb_02_R'\n\tTransform 'Thumb_02_L'\n\tTransform
+    'IndexFinger_02_L'\n\tTransform 'Finger_03_R'\n\tTransform 'Thumb_03_L'\n\tTransform
+    'Thumb_03_R'\n\tTransform 'Ball_L'\n\tTransform 'Ball_R'\n\tTransform 'Neck'\n\tTransform
+    'Head'\n\tand more ...\n\tFrom animation clip 'bow_th_aim_walk_BR_01'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -19349,6 +19355,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   leftWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   currentConsumable: {fileID: 11400000, guid: c3d43611ca7d48e4f9eb0b80b18652fe, type: 2}
+  currentAmmo: {fileID: 11400000, guid: f7e8ce915d7672148a5902c26f44eb60, type: 2}
   currentHelmetEquipment: {fileID: 11400000, guid: 944aa87c311cce2439c6c0522fa1d8f1, type: 2}
   currentTorsoEquipment: {fileID: 11400000, guid: 43daba3238265e947aea9a1e5b43428c, type: 2}
   currentLegEquipment: {fileID: 11400000, guid: dc9a591801b313247a8b924e34380942, type: 2}
@@ -19374,6 +19381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36561cd1d9633ea40b4ec83c38337950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRangeFX: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -19570,6 +19578,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -19603,9 +19612,9 @@ MonoBehaviour:
   y_Input: 0
   rb_Input: 0
   lb_Input: 0
+  hold_rb_Input: 0
   rt_Input: 0
   lt_Input: 0
-  critical_attack_input: 0
   jump_Input: 0
   inventory_Input: 0
   lockOnInput: 0
@@ -19620,6 +19629,7 @@ MonoBehaviour:
   sprintFlag: 0
   comboFlag: 0
   lockOnFlag: 0
+  fireFlag: 0
   inventoryFlag: 0
   rollInputTimer: 0
   criticalAttackRayCastStartPoint: {fileID: 1355703664}
@@ -19767,6 +19777,7 @@ MonoBehaviour:
   isInvulnerable: 0
   isUsingRightHand: 0
   isUsingLeftHand: 0
+  isHoldingArrow: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -19891,6 +19902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRangeFX: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -19919,6 +19931,7 @@ MonoBehaviour:
   rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   leftWeapon: {fileID: 0}
   currentConsumable: {fileID: 0}
+  currentAmmo: {fileID: 0}
   currentHelmetEquipment: {fileID: 0}
   currentTorsoEquipment: {fileID: 0}
   currentLegEquipment: {fileID: 0}
