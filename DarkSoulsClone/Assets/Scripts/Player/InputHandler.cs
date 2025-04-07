@@ -121,6 +121,7 @@ namespace SG
       HandleTwoHandInput();
       HandleUseConsumableInput();
       HandleHoldRBInput();
+      HandleFireBowInput();
     }
     private void HandleMoveInput(float delta)
     {
@@ -343,6 +344,18 @@ namespace SG
       }
     }
 
+    private void HandleFireBowInput()
+    {
+      if (fireFlag)
+      {
+        if (playerManager.isHoldingArrow)
+        {
+          fireFlag = false;
+          playerCombatManager.FireArrowAction();
+        }
+      }
+    }
+
 
     private void HandleUseConsumableInput()
     {
@@ -352,5 +365,7 @@ namespace SG
         playerInventoryManager.currentConsumable.AttemptToConsumeItem(playerAnimatorManager, playerWeaponSlotManager, playerEffectsManager);
       }
     }
+
+
   }
 }

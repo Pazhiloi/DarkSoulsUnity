@@ -22,9 +22,9 @@ namespace SG
     public int lightningDamage;
     public int darkDamage;
 
-    bool shieldHasBeenHit;
-    bool hasBeenParried;
-   protected string currentDamageAnimation;
+    protected bool shieldHasBeenHit;
+    protected bool hasBeenParried;
+    protected string currentDamageAnimation;
     protected virtual void Awake()
     {
       damageCollider = GetComponent<Collider>();
@@ -42,7 +42,7 @@ namespace SG
       damageCollider.enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
       if (other.tag == "Character")
       {
@@ -67,8 +67,8 @@ namespace SG
         if (enemyStats != null)
         {
           if (enemyStats.teamIDNumber == teamIDNumber) return;
-          if (hasBeenParried)return;
-          if (shieldHasBeenHit)return;
+          if (hasBeenParried) return;
+          if (shieldHasBeenHit) return;
 
           enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
           enemyStats.totalPoiseDefence = enemyStats.totalPoiseResetTime - poiseBreak;

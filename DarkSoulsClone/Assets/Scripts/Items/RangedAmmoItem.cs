@@ -19,7 +19,7 @@ namespace SG
     public int currentAmount = 99;
 
     [Header("Ammo Base Damage")]
-    public float physicalDamage = 50;
+    public int physicalDamage = 50;
     //Magic Damage
     //Fire Damage
     //Dark Damage
