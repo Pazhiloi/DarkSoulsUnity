@@ -179,7 +179,7 @@ namespace SG
       }
       if (rt_Input)
       {
-        playerCombatManager.HandleHeavyAttack(playerInventoryManager.rightWeapon);
+        playerCombatManager.HandleRTAction();
       }
 
 

@@ -23,11 +23,15 @@ namespace SG
     string oh_light_attack_02 = "OH_Light_Attack_02";
     string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
     string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+    string oh_running_attack_01 = "OH_Running_Attack_01";
+    string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
 
     string th_light_attack_01 = "TH_Light_Attack_01";
     string th_light_attack_02 = "TH_Light_Attack_02";
     string th_heavy_attack_01 = "TH_Heavy_Attack_01";
     string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+    string th_running_attack_01 = "TH_Running_Attack_01";
+    string th_jumping_attack_01 = "TH_Jumping_Attack_01";
 
     string weapon_art = "Weapon_Art";
 
@@ -72,6 +76,19 @@ namespace SG
         PerformMagicAction(playerInventoryManager.rightWeapon, false);
       }
     }
+    public void HandleRTAction(){
+      playerAnimatorManager.EraseHandIKForWeapon();
+      if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
+      {
+        PerformRTMelleAction();
+      }
+      else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.SpellCaster ||
+               playerInventoryManager.rightWeapon.weaponType == WeaponType.FaithCaster ||
+               playerInventoryManager.rightWeapon.weaponType == WeaponType.PyromancyCaster)
+      {
+        PerformMagicAction(playerInventoryManager.rightWeapon, false);
+      }
+    }
 
     public void HandleLBAction()
     {
@@ -108,7 +125,7 @@ namespace SG
       }
     }
 
-    public void HandleWeaponCombo(WeaponItem weapon)
+    private void HandleLightWeaponCombo(WeaponItem weapon)
     {
       if (playerStatsManager.currentStamina <= 0) return;
       if (inputHandler.comboFlag)
@@ -124,10 +141,27 @@ namespace SG
           playerAnimatorManager.PlayTargetAnimation(th_light_attack_02, true);
         }
       }
-
     }
 
-    public void HandleLightAttack(WeaponItem weapon)
+    private void HandleHeavyWeaponCombo(WeaponItem weapon)
+    {
+      if (playerStatsManager.currentStamina <= 0) return;
+      if (inputHandler.comboFlag)
+      {
+        playerAnimatorManager.animator.SetBool("canDoCombo", false);
+
+        if (lastAttack == oh_heavy_attack_01)
+        {
+          playerAnimatorManager.PlayTargetAnimation(oh_heavy_attack_02, true);
+        }
+        else if (lastAttack == th_heavy_attack_01)
+        {
+          playerAnimatorManager.PlayTargetAnimation(th_heavy_attack_02, true);
+        }
+      }
+    }
+
+    private void HandleLightAttack(WeaponItem weapon)
     {
       if (playerStatsManager.currentStamina <= 0) return;
       playerWeaponSlotManager.attackingWeapon = weapon;
@@ -142,6 +176,25 @@ namespace SG
         lastAttack = oh_light_attack_01;
       }
     }
+
+    private void HandleJumpingAttack(WeaponItem weapon)
+    {
+      if (playerStatsManager.currentStamina <= 0) return;
+      playerWeaponSlotManager.attackingWeapon = weapon;
+
+      if (inputHandler.twoHandFlag)
+      {
+        playerAnimatorManager.PlayTargetAnimation(th_jumping_attack_01, true);
+        lastAttack = th_jumping_attack_01;
+      }
+      else
+      {
+        playerAnimatorManager.PlayTargetAnimation(oh_jumping_attack_01, true);
+        lastAttack = oh_jumping_attack_01;
+      }
+    }
+
+
     public void HandleHeavyAttack(WeaponItem weapon)
     {
       if (playerStatsManager.currentStamina <= 0) return;
@@ -149,15 +202,34 @@ namespace SG
 
       if (inputHandler.twoHandFlag)
       {
-        playerAnimatorManager.PlayTargetAnimation(oh_light_attack_01, true);
-        lastAttack = oh_light_attack_01;
+        playerAnimatorManager.PlayTargetAnimation(th_light_attack_01, true);
+        lastAttack = th_heavy_attack_01;
       }
       else
       {
-        playerAnimatorManager.PlayTargetAnimation(oh_light_attack_01, true);
-        lastAttack = oh_light_attack_01;
+        playerAnimatorManager.PlayTargetAnimation(oh_heavy_attack_01, true);
+        lastAttack = oh_heavy_attack_01;
       }
     }
+
+    private void HandleRunningAttack(WeaponItem weapon)
+    {
+      if (playerStatsManager.currentStamina <= 0) return;
+      playerWeaponSlotManager.attackingWeapon = weapon;
+
+      if (inputHandler.twoHandFlag)
+      {
+        playerAnimatorManager.PlayTargetAnimation(th_running_attack_01, true);
+        lastAttack = th_running_attack_01;
+      }
+      else
+      {
+        playerAnimatorManager.PlayTargetAnimation(oh_running_attack_01, true);
+        lastAttack = oh_running_attack_01;
+      }
+    }
+
+
 
     private void DrawArrowAction()
     {
@@ -221,10 +293,18 @@ namespace SG
 
     private void PerformRBMelleAction()
     {
+      playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
+
+      if (playerManager.isSprinting)
+      {
+        HandleRunningAttack(playerInventoryManager.rightWeapon);
+        return;
+      }
+      
       if (playerManager.canDoCombo)
       {
         inputHandler.comboFlag = true;
-        HandleWeaponCombo(playerInventoryManager.rightWeapon);
+        HandleLightWeaponCombo(playerInventoryManager.rightWeapon);
         inputHandler.comboFlag = false;
       }
       else
@@ -237,11 +317,40 @@ namespace SG
         {
           return;
         }
-        playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
         HandleLightAttack(playerInventoryManager.rightWeapon);
       }
       playerEffectsManager.PlayWeaponFX(false);
 
+    }
+
+   private void PerformRTMelleAction(){
+      playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
+
+      if (playerManager.isSprinting)
+      {
+        HandleJumpingAttack(playerInventoryManager.rightWeapon);
+        return;
+      }
+
+      if (playerManager.canDoCombo)
+      {
+        inputHandler.comboFlag = true;
+        HandleHeavyWeaponCombo(playerInventoryManager.rightWeapon);
+        inputHandler.comboFlag = false;
+      }
+      else
+      {
+        if (playerManager.isInteracting)
+        {
+          return;
+        }
+        if (playerManager.canDoCombo)
+        {
+          return;
+        }
+        HandleHeavyAttack(playerInventoryManager.rightWeapon);
+      }
+      playerEffectsManager.PlayWeaponFX(false);
     }
 
     private void PerformRBRangedAction()
