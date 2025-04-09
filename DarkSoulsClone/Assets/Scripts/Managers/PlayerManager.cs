@@ -85,7 +85,7 @@ namespace SG
       if (cameraHandler != null)
       {
         cameraHandler.FollowTarget(delta);
-        cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
+        cameraHandler.HandleCameraRotation();
       }
       if (isInAir)
       {

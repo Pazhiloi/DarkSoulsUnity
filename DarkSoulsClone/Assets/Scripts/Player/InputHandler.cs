@@ -49,7 +49,7 @@ namespace SG
     BlockingCollider blockingCollider;
     PlayerWeaponSlotManager playerWeaponSlotManager;
     CameraHandler cameraHandler;
-    UIManager uiManager;
+   public UIManager uiManager;
 
 
     Vector2 movementInput;
@@ -212,17 +212,18 @@ namespace SG
       }
       else if (lb_Input == false)
       {
-        playerManager.isBlocking = false;
+        if (playerManager.isAiming)
+        {
+          playerManager.isAiming = false;
+          uiManager.crossHair.SetActive(false);
+        }
 
         if (blockingCollider.blockingCollider.enabled)
         {
+          playerManager.isBlocking = false;
           blockingCollider.DisableBlockingCollider();
         }
 
-        if (playerManager.isHoldingArrow)
-        {
-          // playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
-        }
       }
     }
 

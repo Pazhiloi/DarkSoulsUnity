@@ -8,9 +8,9 @@ namespace SG
     InputHandler inputHandler;
     PlayerManager playerManager;
     public Transform targetTransform;
+    public Transform targetTransformWhileAiming;
     public Transform cameraTransform;
     public Transform cameraPivotTransform;
-    private Transform myTransform;
     private Vector3 cameraTransformPosition;
     public LayerMask ignoreLayers, environmentLayer;
     private Vector3 cameraFollowVelocity = Vector3.zero;
@@ -48,7 +48,6 @@ namespace SG
     private void Awake()
     {
       singleton = this;
-      myTransform = transform;
       defaultPosition = cameraTransform.localPosition.z;
       ignoreLayers = ~(1 << 9 | 1 << 10 | 1 << 11 | 1 << 12 | 1 << 13);
       targetTransform = FindObjectOfType<PlayerManager>().transform;
@@ -63,54 +62,78 @@ namespace SG
 
     public void FollowTarget(float delta)
     {
-      Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
-      myTransform.position = targetPosition;
 
-      HandleCameraCollisions(delta);
-    }
-
-    public void HandleCameraRotation(float delta, float mouseXInput, float mouseYInput)
-    {
-      if (!inputHandler.lockOnFlag && currentLockOnTarget == null)
+      if (playerManager.isAiming)
       {
-        lookAngle += mouseXInput * lookSpeed * delta;
-        pivotAngle -= mouseYInput * pivotSpeed * delta;
-        pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
-
-        Vector3 rotation = Vector3.zero;
-        rotation.y = lookAngle;
-        Quaternion targetRotation = Quaternion.Euler(rotation);
-        myTransform.rotation = targetRotation;
-
-        rotation = Vector3.zero;
-        rotation.x = pivotAngle;
-
-        targetRotation = Quaternion.Euler(rotation);
-        cameraPivotTransform.localRotation = targetRotation;
+        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollowVelocity, delta * followSpeed);
+        transform.position = targetPosition;
       }
       else
       {
-        float velocity = 0;
-
-        Vector3 dir = currentLockOnTarget.transform.position - transform.position;
-        dir.Normalize();
-        dir.y = 0;
-
-        Quaternion targetRotation = Quaternion.LookRotation(dir);
-        transform.rotation = targetRotation;
-
-        dir = currentLockOnTarget.transform.position - cameraPivotTransform.position;
-        dir.Normalize();
-
-        targetRotation = Quaternion.LookRotation(dir);
-
-        Vector3 eulerAngle = targetRotation.eulerAngles;
-        eulerAngle.y = 0;
-        cameraPivotTransform.localEulerAngles = eulerAngle;
+        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, delta * followSpeed);
+        transform.position = targetPosition;
       }
+      HandleCameraCollisions(delta);
 
     }
+    public void HandleCameraRotation()
+    {
+      if (inputHandler.lockOnInput == false && currentLockOnTarget == null)
+      {
+        HandleLockedCameraRotation();
+      }
+      else if (playerManager.isAiming)
+      {
+        HandleAimedCameraRotation();
+      }
+      else
+      {
+        HandleStandartCameraRotation();
+      }
+    }
 
+    public void HandleStandartCameraRotation()
+    {
+      lookAngle += inputMager.mouseXInput * lookSpeed * delta;
+      pivotAngle -= inputMager.mouseYInput * pivotSpeed * delta;
+      pivotAngle = Mathf.Clamp(pivotAngle, minimumPivot, maximumPivot);
+
+      Vector3 rotation = Vector3.zero;
+      rotation.y = lookAngle;
+      Quaternion targetRotation = Quaternion.Euler(rotation);
+      transform.rotation = targetRotation;
+
+      rotation = Vector3.zero;
+      rotation.x = pivotAngle;
+
+      targetRotation = Quaternion.Euler(rotation);
+      cameraPivotTransform.localRotation = targetRotation;
+      
+    }
+
+    private void HandleLockedCameraRotation()
+    {
+
+      Vector3 dir = currentLockOnTarget.transform.position - transform.position;
+      dir.Normalize();
+      dir.y = 0;
+
+      Quaternion targetRotation = Quaternion.LookRotation(dir);
+      transform.rotation = targetRotation;
+
+      dir = currentLockOnTarget.transform.position - cameraPivotTransform.position;
+      dir.Normalize();
+
+      targetRotation = Quaternion.LookRotation(dir);
+
+      Vector3 eulerAngle = targetRotation.eulerAngles;
+      eulerAngle.y = 0;
+      cameraPivotTransform.localEulerAngles = eulerAngle;
+    }
+    private void HandleAimedCameraRotation()
+    {
+
+    }
     private void HandleCameraCollisions(float delta)
     {
       targetPosition = defaultPosition;
@@ -193,7 +216,8 @@ namespace SG
           {
             shortestDistanceOfLeftTarget = distanceFromLeftTarget;
             leftLockTarget = availableTargets[k];
-          } else if (relativeEnemyPosition.x >= 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget && availableTargets[k]!= currentLockOnTarget)
+          }
+          else if (relativeEnemyPosition.x >= 0.00 && distanceFromRightTarget < shortestDistanceOfRightTarget && availableTargets[k] != currentLockOnTarget)
           {
             shortestDistanceOfRightTarget = distanceFromRightTarget;
             rightLockTarget = availableTargets[k];
@@ -225,5 +249,7 @@ namespace SG
         cameraPivotTransform.transform.localPosition = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
       }
     }
+
+
   }
 }

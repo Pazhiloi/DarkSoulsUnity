@@ -2508,6 +2508,112 @@ Transform:
   - {fileID: 715313139}
   m_Father: {fileID: 1650060619}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &453185186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453185187}
+  m_Layer: 11
+  m_Name: Target Transform While Aiming
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &453185187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453185186}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.882, y: 0, z: 1.087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1654675153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &457411746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457411747}
+  - component: {fileID: 457411749}
+  - component: {fileID: 457411748}
+  m_Layer: 5
+  m_Name: Crosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &457411747
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457411746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5876800281749886865}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &457411748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457411746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 90c4805fde909b141b0260cb9cda8631, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &457411749
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457411746}
+  m_CullTransparentMesh: 1
 --- !u!1 &460651173
 GameObject:
   m_ObjectHideFlags: 0
@@ -7919,6 +8025,7 @@ MonoBehaviour:
   isUsingRightHand: 0
   isUsingLeftHand: 0
   isHoldingArrow: 0
+  isAiming: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -9142,7 +9249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc5c17fe5b65af4ab22f5a39d86c536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 543450651902353127}
+  targetTransformWhileAiming: {fileID: 453185187}
   cameraTransform: {fileID: 963194228}
   cameraPivotTransform: {fileID: 1225420256}
   ignoreLayers:
@@ -10502,6 +10610,7 @@ Transform:
   m_Children:
   - {fileID: 1527132813}
   - {fileID: 2120848553}
+  - {fileID: 453185187}
   m_Father: {fileID: 543450651902353127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1655618845
@@ -13339,7 +13448,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132147630490717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.37, y: 0.087, z: -0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14485,6 +14594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInventoryManager: {fileID: 5866666020217144478}
   equipmentWindowUI: {fileID: 9146070149810509231}
+  crossHair: {fileID: 457411746}
   hudWindow: {fileID: 5153895060812893150}
   selectWindow: {fileID: 2992142037532238124}
   weaponInventoryWindow: {fileID: 4066790882635847258}
@@ -19334,7 +19444,10 @@ Animator:
     by Humanoid clips.\n\tTransform 'Thumb_02_R'\n\tTransform 'Thumb_02_L'\n\tTransform
     'IndexFinger_02_L'\n\tTransform 'Finger_03_R'\n\tTransform 'Thumb_03_L'\n\tTransform
     'Thumb_03_R'\n\tTransform 'Ball_L'\n\tTransform 'Ball_R'\n\tTransform 'Neck'\n\tTransform
-    'Head'\n\tand more ...\n\tFrom animation clip 'bow_th_aim_walk_BR_01'"
+    'Head'\n\tand more ...\n\tFrom animation clip 'bow_th_aim_walk_BR_01'\n\tFrom
+    animation clip 'bow_th_draw_01'\n\tFrom animation clip 'bow_th_fire_01'\n\tFrom
+    animation clip 'OH_Running_Attack_01'\n\tFrom animation clip 'TH_Running_Attack_01'\n\tFrom
+    animation clip 'TH_Jumping_Attack_01'\n\tFrom animation clip 'OH_Jumping_Attack_01'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -19579,6 +19692,7 @@ MonoBehaviour:
   isUsingRightHand: 0
   isUsingLeftHand: 0
   isHoldingArrow: 0
+  isAiming: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -19633,6 +19747,7 @@ MonoBehaviour:
   inventoryFlag: 0
   rollInputTimer: 0
   criticalAttackRayCastStartPoint: {fileID: 1355703664}
+  uiManager: {fileID: 0}
 --- !u!136 &5866666020217144488
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19778,6 +19893,7 @@ MonoBehaviour:
   isUsingRightHand: 0
   isUsingLeftHand: 0
   isHoldingArrow: 0
+  isAiming: 0
   isTwoHandingWeapon: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
@@ -19976,6 +20092,7 @@ RectTransform:
   - {fileID: 1264751047819820810}
   - {fileID: 6642176226279487726}
   - {fileID: 4208847704313451522}
+  - {fileID: 457411747}
   m_Father: {fileID: 3130131724031770294}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -377,7 +377,9 @@ namespace SG
 
     private void PerformLBAimingAction()
     {
-      // playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
+      if (playerManager.isAiming) return;
+      inputHandler.uiManager.crossHair.SetActive(true);
+      playerManager.isAiming = true;
     }
 
 
