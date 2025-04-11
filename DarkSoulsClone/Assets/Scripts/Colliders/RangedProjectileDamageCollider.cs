@@ -63,6 +63,19 @@ namespace SG
 
         illusionaryWall.wallHasBeenHit = true;
       }
+
+      if (!hasAlreadyPenetratedASurface && penetratedProjectile == null)
+      {
+        hasAlreadyPenetratedASurface = true;
+        Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        GameObject penetratedArrow = Instantiate(ammoItem.penetratedModel, contactPoint, Quaternion.Euler(0, 0, 0));
+        penetratedProjectile = penetratedArrow;
+        penetratedArrow.transform.parent = other.transform;
+        penetratedArrow.transform.rotation = Quaternion.LookRotation(other.gameObject.transform.forward);
+      }
+
+      Destroy(transform.root.gameObject);
+
     }
   }
 }

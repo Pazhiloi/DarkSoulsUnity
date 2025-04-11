@@ -49,7 +49,7 @@ namespace SG
     BlockingCollider blockingCollider;
     PlayerWeaponSlotManager playerWeaponSlotManager;
     CameraHandler cameraHandler;
-   public UIManager uiManager;
+    public UIManager uiManager;
 
 
     Vector2 movementInput;
@@ -129,7 +129,13 @@ namespace SG
       {
         horizontal = movementInput.x;
         vertical = movementInput.y;
-        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical) / 2);
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+
+        if (moveAmount > 0.5f)
+        {
+          moveAmount = 0.5f;
+        }
+
         mouseX = cameraInput.x;
         mouseY = cameraInput.y;
       }
@@ -216,6 +222,7 @@ namespace SG
         {
           playerManager.isAiming = false;
           uiManager.crossHair.SetActive(false);
+          cameraHandler.ResetAimCameraRotations();
         }
 
         if (blockingCollider.blockingCollider.enabled)

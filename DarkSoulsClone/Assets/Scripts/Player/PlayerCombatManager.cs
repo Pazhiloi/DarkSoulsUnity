@@ -64,19 +64,13 @@ namespace SG
 
     public void HandleRBAction()
     {
-      playerAnimatorManager.EraseHandIKForWeapon();
-      if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
-      {
-        PerformRBMelleAction();
-      }
-      else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.SpellCaster ||
-               playerInventoryManager.rightWeapon.weaponType == WeaponType.FaithCaster ||
-               playerInventoryManager.rightWeapon.weaponType == WeaponType.PyromancyCaster)
-      {
-        PerformMagicAction(playerInventoryManager.rightWeapon, false);
-      }
+      PerformRBMeleeAction();
+      PerformMagicAction(playerInventoryManager.rightWeapon, true);
     }
-    public void HandleRTAction(){
+
+
+    public void HandleRTAction()
+    {
       playerAnimatorManager.EraseHandIKForWeapon();
       if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
       {
@@ -161,21 +155,7 @@ namespace SG
       }
     }
 
-    private void HandleLightAttack(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      playerWeaponSlotManager.attackingWeapon = weapon;
-      if (inputHandler.twoHandFlag)
-      {
-        playerAnimatorManager.PlayTargetAnimation(th_light_attack_01, true);
-        lastAttack = th_light_attack_01;
-      }
-      else
-      {
-        playerAnimatorManager.PlayTargetAnimation(oh_light_attack_01, true);
-        lastAttack = oh_light_attack_01;
-      }
-    }
+
 
     private void HandleJumpingAttack(WeaponItem weapon)
     {
@@ -266,16 +246,35 @@ namespace SG
       Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
       RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
 
-      // GIVE AMMO VELOCITY
-      if (cameraHandler != null)
+      if (playerManager.isAiming)
       {
-        Quaternion arrowRotation = Quaternion.LookRotation(transform.forward);
-        liveArrow.transform.rotation = arrowRotation;
-      }
-      else{
-        liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+        Ray ray = cameraHandler.cameraObject.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hitPoint;
 
+        if (Physics.Raycast(ray, out hitPoint, 100.0f))
+        {
+          liveArrow.transform.LookAt(hitPoint.point);
+        }
+        else
+        {
+          liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+        }
       }
+      else
+      {
+        // GIVE AMMO VELOCITY
+        if (cameraHandler != null)
+        {
+          Quaternion arrowRotation = Quaternion.LookRotation(cameraHandler.currentLockOnTarget.lockOnTransform.position - liveArrow.gameObject.transform.position);
+          liveArrow.transform.rotation = arrowRotation;
+        }
+        else
+        {
+          liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
+        }
+      }
+
+
 
       rigidBody.AddForce(liveArrow.transform.forward * playerInventoryManager.currentAmmo.forwardVelocity);
       rigidBody.AddForce(liveArrow.transform.up * playerInventoryManager.currentAmmo.upwardVelocity);
@@ -291,39 +290,9 @@ namespace SG
     }
 
 
-    private void PerformRBMelleAction()
+
+    private void PerformRTMelleAction()
     {
-      playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
-
-      if (playerManager.isSprinting)
-      {
-        HandleRunningAttack(playerInventoryManager.rightWeapon);
-        return;
-      }
-      
-      if (playerManager.canDoCombo)
-      {
-        inputHandler.comboFlag = true;
-        HandleLightWeaponCombo(playerInventoryManager.rightWeapon);
-        inputHandler.comboFlag = false;
-      }
-      else
-      {
-        if (playerManager.isInteracting)
-        {
-          return;
-        }
-        if (playerManager.canDoCombo)
-        {
-          return;
-        }
-        HandleLightAttack(playerInventoryManager.rightWeapon);
-      }
-      playerEffectsManager.PlayWeaponFX(false);
-
-    }
-
-   private void PerformRTMelleAction(){
       playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
 
       if (playerManager.isSprinting)

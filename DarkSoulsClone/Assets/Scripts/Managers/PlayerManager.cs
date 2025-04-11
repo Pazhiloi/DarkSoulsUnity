@@ -6,13 +6,16 @@ namespace SG
   public class PlayerManager : CharacterManager
   {
 
-    InputHandler inputHandler;
     Animator animator;
     CameraHandler cameraHandler;
-    PlayerLocomotionManager playerLocomotionManager;
-    PlayerStatsManager playerStatsManager;
-    PlayerEffectsManager playerEffectsManager;
-    PlayerAnimatorManager playerAnimatorManager;
+    public InputHandler inputHandler;
+    public PlayerLocomotionManager playerLocomotionManager;
+    public PlayerStatsManager playerStatsManager;
+    public PlayerWeaponSlotManager playerWeaponSlotManager;
+    public PlayerCombatManager playerCombatManager;
+    public PlayerInventoryManager playerInventoryManager;
+    public PlayerEffectsManager playerEffectsManager;
+    public PlayerAnimatorManager playerAnimatorManager;
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableGameObject;
@@ -26,6 +29,7 @@ namespace SG
       inputHandler = GetComponent<InputHandler>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       animator = GetComponent<Animator>();
+      playerInventoryManager = GetComponent<PlayerInventoryManager>();
       playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
       playerStatsManager = GetComponent<PlayerStatsManager>();
       playerEffectsManager = GetComponent<PlayerEffectsManager>();
@@ -47,7 +51,7 @@ namespace SG
       animator.SetBool("isInAir", isInAir);
       animator.SetBool("isDead", playerStatsManager.isDead);
 
-      
+
       inputHandler.TickInput(delta);
       playerAnimatorManager.canRotate = animator.GetBool("canRotate");
       playerLocomotionManager.HandleRollingAndSprinting(delta);
@@ -136,15 +140,16 @@ namespace SG
       playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
     }
 
-    public void PassThroughFogWallInteraction(Transform fogWallEntrance){
+    public void PassThroughFogWallInteraction(Transform fogWallEntrance)
+    {
       playerLocomotionManager.rigidbody.velocity = Vector3.zero;
 
-      Vector3 rotationDirection  = fogWallEntrance.transform.forward;
+      Vector3 rotationDirection = fogWallEntrance.transform.forward;
       Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);
       transform.rotation = turnRotation;
 
       playerAnimatorManager.PlayTargetAnimation("Pass Through Fog", true);
-      
+
     }
     #endregion
 
