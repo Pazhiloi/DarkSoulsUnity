@@ -64,7 +64,7 @@ namespace SG
 
     public void HandleRBAction()
     {
-      PerformRBMeleeAction();
+      // PerformRBMeleeAction();
       PerformMagicAction(playerInventoryManager.rightWeapon, true);
     }
 

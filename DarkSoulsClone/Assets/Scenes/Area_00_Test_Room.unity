@@ -9252,6 +9252,7 @@ MonoBehaviour:
   targetTransform: {fileID: 543450651902353127}
   targetTransformWhileAiming: {fileID: 453185187}
   cameraTransform: {fileID: 963194228}
+  cameraObject: {fileID: 963194227}
   cameraPivotTransform: {fileID: 1225420256}
   ignoreLayers:
     serializedVersion: 2
@@ -9259,11 +9260,13 @@ MonoBehaviour:
   environmentLayer:
     serializedVersion: 2
     m_Bits: 1
-  lookSpeed: 150
-  followSpeed: 0.1
-  pivotSpeed: 150
-  minimumPivot: -35
-  maximumPivot: 35
+  leftAndRightLookSpeed: 250
+  leftAndRightAimingLookSpeed: 100
+  followSpeed: 50
+  upAndDownLookSpeed: 250
+  upAndDownAimingLookSpeed: 100
+  minimumLookUpAngle: -35
+  maximumLookUpAngle: 35
   cameraSphereRadius: 0.2
   cameraCollisionOffSet: 0.2
   minimumCollisionOffSet: 0.2
@@ -19701,6 +19704,14 @@ MonoBehaviour:
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  inputHandler: {fileID: 0}
+  playerLocomotionManager: {fileID: 0}
+  playerStatsManager: {fileID: 0}
+  playerWeaponSlotManager: {fileID: 0}
+  playerCombatManager: {fileID: 0}
+  playerInventoryManager: {fileID: 0}
+  playerEffectsManager: {fileID: 0}
+  playerAnimatorManager: {fileID: 0}
   interactableUIGameObject: {fileID: 7102340927103900870}
   itemInteractableGameObject: {fileID: 4200978215310196542}
 --- !u!114 &5866666020217144487

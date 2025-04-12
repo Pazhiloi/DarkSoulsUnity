@@ -246,7 +246,7 @@ MonoBehaviour:
   magicDamage: 0
   lightningDamage: 0
   darkDamage: 0
-  ammoItem: {fileID: 0}
+  ammoItem: {fileID: 11400000, guid: f7e8ce915d7672148a5902c26f44eb60, type: 2}
 --- !u!1 &7696471189738059371
 GameObject:
   m_ObjectHideFlags: 0
