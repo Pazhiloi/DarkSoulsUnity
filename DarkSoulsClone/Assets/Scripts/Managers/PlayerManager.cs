@@ -30,6 +30,8 @@ namespace SG
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       animator = GetComponent<Animator>();
       playerInventoryManager = GetComponent<PlayerInventoryManager>();
+      playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
+      playerCombatManager = GetComponent<PlayerCombatManager>();
       playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
       playerStatsManager = GetComponent<PlayerStatsManager>();
       playerEffectsManager = GetComponent<PlayerEffectsManager>();

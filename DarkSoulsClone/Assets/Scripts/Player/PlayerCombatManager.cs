@@ -19,21 +19,21 @@ namespace SG
     public LayerMask riposteLayer = 1 << 13;
 
     [Header("Attack Animations")]
-    string oh_light_attack_01 = "OH_Light_Attack_01";
-    string oh_light_attack_02 = "OH_Light_Attack_02";
-    string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
-    string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
-    string oh_running_attack_01 = "OH_Running_Attack_01";
-    string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
+     public string oh_light_attack_01 = "OH_Light_Attack_01";
+     public string oh_light_attack_02 = "OH_Light_Attack_02";
+     public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+     public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+     public string oh_running_attack_01 = "OH_Running_Attack_01";
+     public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
 
-    string th_light_attack_01 = "TH_Light_Attack_01";
-    string th_light_attack_02 = "TH_Light_Attack_02";
-    string th_heavy_attack_01 = "TH_Heavy_Attack_01";
-    string th_heavy_attack_02 = "TH_Heavy_Attack_02";
-    string th_running_attack_01 = "TH_Running_Attack_01";
-    string th_jumping_attack_01 = "TH_Jumping_Attack_01";
+     public string th_light_attack_01 = "TH_Light_Attack_01";
+     public string th_light_attack_02 = "TH_Light_Attack_02";
+     public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
+     public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+     public string th_running_attack_01 = "TH_Running_Attack_01";
+     public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
 
-    string weapon_art = "Weapon_Art";
+   public  string weapon_art = "Weapon_Art";
 
     private void Awake()
     {
@@ -64,7 +64,6 @@ namespace SG
 
     public void HandleRBAction()
     {
-      // PerformRBMeleeAction();
       PerformMagicAction(playerInventoryManager.rightWeapon, true);
     }
 
@@ -119,23 +118,7 @@ namespace SG
       }
     }
 
-    private void HandleLightWeaponCombo(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      if (inputHandler.comboFlag)
-      {
-        playerAnimatorManager.animator.SetBool("canDoCombo", false);
-
-        if (lastAttack == oh_light_attack_01)
-        {
-          playerAnimatorManager.PlayTargetAnimation(oh_light_attack_02, true);
-        }
-        else if (lastAttack == th_light_attack_01)
-        {
-          playerAnimatorManager.PlayTargetAnimation(th_light_attack_02, true);
-        }
-      }
-    }
+    
 
     private void HandleHeavyWeaponCombo(WeaponItem weapon)
     {
@@ -192,22 +175,7 @@ namespace SG
       }
     }
 
-    private void HandleRunningAttack(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      playerWeaponSlotManager.attackingWeapon = weapon;
-
-      if (inputHandler.twoHandFlag)
-      {
-        playerAnimatorManager.PlayTargetAnimation(th_running_attack_01, true);
-        lastAttack = th_running_attack_01;
-      }
-      else
-      {
-        playerAnimatorManager.PlayTargetAnimation(oh_running_attack_01, true);
-        lastAttack = oh_running_attack_01;
-      }
-    }
+   
 
 
 
@@ -289,7 +257,7 @@ namespace SG
       damageCollider.physicalDamage = playerInventoryManager.currentAmmo.physicalDamage;
     }
 
-
+   
 
     private void PerformRTMelleAction()
     {
