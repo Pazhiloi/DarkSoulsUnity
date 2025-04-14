@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SG
+namespace MR
 {
   [CreateAssetMenu(menuName = "Items/Consumable/Flask")]
 public class FlaskItem : ConsumableItem

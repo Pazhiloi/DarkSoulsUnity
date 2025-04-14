@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SG
+namespace MR
 {
   [CreateAssetMenu(menuName = "Items/Ammo")]
   public class RangedAmmoItem : Item

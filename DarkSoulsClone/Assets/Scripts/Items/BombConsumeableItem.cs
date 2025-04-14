@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SG
+namespace MR
 {
   [CreateAssetMenu(menuName = "Items/Consumables/Bomb Item")]
   public class BombConsumeableItem : ConsumableItem

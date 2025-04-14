@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-namespace SG
+namespace MR
 {
     public class PoisonAmountBar : MonoBehaviour
     {

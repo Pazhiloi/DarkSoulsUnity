@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SG
+namespace MR
 {
   public class InputHandler : MonoBehaviour
   {
@@ -111,19 +111,26 @@ namespace SG
     public void TickInput(float delta)
     {
       if (playerStatsManager.isDead) return;
-      HandleMoveInput(delta);
-      HandleRollInput(delta);
+      HandleMoveInput();
+      HandleRollInput();
+
+      HandleHoldRBInput();
+      HandleFireBowInput();
+
       HandleLBInput();
-      HandleCombatInput(delta);
+      HandleTapRBInput();
+      HandleTapRTInput();
+      HandleTapLTInput();
+
       HandleQuickSlotsInput();
       HandleInventoryInput();
+
       HandleLockOnInput();
       HandleTwoHandInput();
       HandleUseConsumableInput();
-      HandleHoldRBInput();
-      HandleFireBowInput();
+      
     }
-    private void HandleMoveInput(float delta)
+    private void HandleMoveInput()
     {
       if (playerManager.isHoldingArrow)
       {
@@ -150,11 +157,11 @@ namespace SG
 
     }
 
-    private void HandleRollInput(float delta)
+    private void HandleRollInput()
     {
       if (b_Input)
       {
-        rollInputTimer += delta;
+        rollInputTimer += Time.deltaTime;
         if (playerStatsManager.currentStamina <= 0)
         {
           b_Input = false;
@@ -177,29 +184,40 @@ namespace SG
       }
     }
 
-    private void HandleCombatInput(float delta)
+    private void HandleTapRBInput()
     {
       if (rb_Input)
       {
+        playerManager.UpdateWhichHandCharacterIsUsing(true);
         playerInventoryManager.rightWeapon.tap_RB_Action.PerformAction(playerManager);
       }
+      
+
+
+      
+    }
+
+    private void HandleTapRTInput()
+    {
       if (rt_Input)
       {
-        playerCombatManager.HandleRTAction();
+        playerManager.UpdateWhichHandCharacterIsUsing(true);
+        playerInventoryManager.rightWeapon.tap_RT_Action.PerformAction(playerManager);
       }
+    }
 
-
-
+    private void HandleTapLTInput()
+    {
       if (lt_Input)
       {
-        if (twoHandFlag)
-        {
-          // handle two handing weapon art
+       if (playerManager.isTwoHandingWeapon)
+       {
+          playerManager.UpdateWhichHandCharacterIsUsing(true);
+          playerInventoryManager.rightWeapon.tap_LT_Action.PerformAction(playerManager);
         }
-        else
-        {
-          // handle normal weapon art
-          playerCombatManager.HandleLTAction();
+        else{
+          playerManager.UpdateWhichHandCharacterIsUsing(false);
+          playerInventoryManager.leftWeapon.tap_LT_Action.PerformAction(playerManager);
         }
       }
     }

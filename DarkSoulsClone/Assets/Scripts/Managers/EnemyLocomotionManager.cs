@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-namespace SG
+namespace MR
 {
   public class EnemyLocomotionManager : MonoBehaviour
   {

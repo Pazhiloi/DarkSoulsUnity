@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SG{
+namespace MR{
 public class TorsoModelChanger : MonoBehaviour
 {
     public List<GameObject> tosroModels;

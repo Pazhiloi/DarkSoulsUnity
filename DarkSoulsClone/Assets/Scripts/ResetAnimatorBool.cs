@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+namespace MR
+{
 public class ResetAnimatorBool : StateMachineBehaviour
 {
 
@@ -25,8 +26,14 @@ public class ResetAnimatorBool : StateMachineBehaviour
 
   public string isMirroredBool = "isMirrored";
   public bool isMirroredStatus = false;
-  override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override  void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
   {
+
+    CharacterManager character = animator.GetComponent<CharacterManager>();
+
+    character.isUsingLeftHand = false;
+    character.isUsingRightHand = false;
+
     animator.SetBool(isInteractingBool, isInteractingStatus);
     animator.SetBool(isFiringSpellBool, isFiringSpellStatus);
     animator.SetBool(isRotationWithRootMotion, isRotationWithRootMotionStatus);
@@ -36,4 +43,5 @@ public class ResetAnimatorBool : StateMachineBehaviour
     animator.SetBool(isUsingLeftHand,isUsingLeftHandStatus);
     animator.SetBool(isMirroredBool, isMirroredStatus);
   }
+}
 }

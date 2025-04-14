@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace SG
+namespace MR
 {
   public class PlayerEquipmentManager : MonoBehaviour
   {

@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-namespace SG
+namespace MR
 {
 
   public class CharacterAnimatorManager : MonoBehaviour
