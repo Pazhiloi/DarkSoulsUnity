@@ -19,21 +19,21 @@ namespace MR
     public LayerMask riposteLayer = 1 << 13;
 
     [Header("Attack Animations")]
-     public string oh_light_attack_01 = "OH_Light_Attack_01";
-     public string oh_light_attack_02 = "OH_Light_Attack_02";
-     public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
-     public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
-     public string oh_running_attack_01 = "OH_Running_Attack_01";
-     public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
+    public string oh_light_attack_01 = "OH_Light_Attack_01";
+    public string oh_light_attack_02 = "OH_Light_Attack_02";
+    public string oh_heavy_attack_01 = "OH_Heavy_Attack_01";
+    public string oh_heavy_attack_02 = "OH_Heavy_Attack_02";
+    public string oh_running_attack_01 = "OH_Running_Attack_01";
+    public string oh_jumping_attack_01 = "OH_Jumping_Attack_01";
 
-     public string th_light_attack_01 = "TH_Light_Attack_01";
-     public string th_light_attack_02 = "TH_Light_Attack_02";
-     public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
-     public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
-     public string th_running_attack_01 = "TH_Running_Attack_01";
-     public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
+    public string th_light_attack_01 = "TH_Light_Attack_01";
+    public string th_light_attack_02 = "TH_Light_Attack_02";
+    public string th_heavy_attack_01 = "TH_Heavy_Attack_01";
+    public string th_heavy_attack_02 = "TH_Heavy_Attack_02";
+    public string th_running_attack_01 = "TH_Running_Attack_01";
+    public string th_jumping_attack_01 = "TH_Jumping_Attack_01";
 
-   public  string weapon_art = "Weapon_Art";
+    public string weapon_art = "Weapon_Art";
 
     private void Awake()
     {
@@ -68,21 +68,6 @@ namespace MR
     }
 
 
-    public void HandleRTAction()
-    {
-      playerAnimatorManager.EraseHandIKForWeapon();
-      if (playerInventoryManager.rightWeapon.weaponType == WeaponType.StraightSword || playerInventoryManager.rightWeapon.weaponType == WeaponType.Unarmed)
-      {
-        PerformRTMelleAction();
-      }
-      else if (playerInventoryManager.rightWeapon.weaponType == WeaponType.SpellCaster ||
-               playerInventoryManager.rightWeapon.weaponType == WeaponType.FaithCaster ||
-               playerInventoryManager.rightWeapon.weaponType == WeaponType.PyromancyCaster)
-      {
-        PerformMagicAction(playerInventoryManager.rightWeapon, false);
-      }
-    }
-
     public void HandleLBAction()
     {
       if (playerManager.isTwoHandingWeapon)
@@ -96,7 +81,6 @@ namespace MR
       {
         if (playerInventoryManager.leftWeapon.weaponType == WeaponType.Shield || playerInventoryManager.leftWeapon.weaponType == WeaponType.StraightSword)
         {
-          PerformLBBlockingAction();
         }
         else if (playerInventoryManager.leftWeapon.weaponType == WeaponType.FaithCaster || playerInventoryManager.leftWeapon.weaponType == WeaponType.PyromancyCaster)
         {
@@ -117,67 +101,6 @@ namespace MR
         // do a light attack
       }
     }
-
-    
-
-    private void HandleHeavyWeaponCombo(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      if (inputHandler.comboFlag)
-      {
-        playerAnimatorManager.animator.SetBool("canDoCombo", false);
-
-        if (lastAttack == oh_heavy_attack_01)
-        {
-          playerAnimatorManager.PlayTargetAnimation(oh_heavy_attack_02, true);
-        }
-        else if (lastAttack == th_heavy_attack_01)
-        {
-          playerAnimatorManager.PlayTargetAnimation(th_heavy_attack_02, true);
-        }
-      }
-    }
-
-
-
-    private void HandleJumpingAttack(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      playerWeaponSlotManager.attackingWeapon = weapon;
-
-      if (inputHandler.twoHandFlag)
-      {
-        playerAnimatorManager.PlayTargetAnimation(th_jumping_attack_01, true);
-        lastAttack = th_jumping_attack_01;
-      }
-      else
-      {
-        playerAnimatorManager.PlayTargetAnimation(oh_jumping_attack_01, true);
-        lastAttack = oh_jumping_attack_01;
-      }
-    }
-
-
-    public void HandleHeavyAttack(WeaponItem weapon)
-    {
-      if (playerStatsManager.currentStamina <= 0) return;
-      playerWeaponSlotManager.attackingWeapon = weapon;
-
-      if (inputHandler.twoHandFlag)
-      {
-        playerAnimatorManager.PlayTargetAnimation(th_light_attack_01, true);
-        lastAttack = th_heavy_attack_01;
-      }
-      else
-      {
-        playerAnimatorManager.PlayTargetAnimation(oh_heavy_attack_01, true);
-        lastAttack = oh_heavy_attack_01;
-      }
-    }
-
-   
-
-
 
     private void DrawArrowAction()
     {
@@ -257,39 +180,6 @@ namespace MR
       damageCollider.physicalDamage = playerInventoryManager.currentAmmo.physicalDamage;
     }
 
-   
-
-    private void PerformRTMelleAction()
-    {
-      playerAnimatorManager.animator.SetBool("isUsingRightHand", true);
-
-      if (playerManager.isSprinting)
-      {
-        HandleJumpingAttack(playerInventoryManager.rightWeapon);
-        return;
-      }
-
-      if (playerManager.canDoCombo)
-      {
-        inputHandler.comboFlag = true;
-        HandleHeavyWeaponCombo(playerInventoryManager.rightWeapon);
-        inputHandler.comboFlag = false;
-      }
-      else
-      {
-        if (playerManager.isInteracting)
-        {
-          return;
-        }
-        if (playerManager.canDoCombo)
-        {
-          return;
-        }
-        HandleHeavyAttack(playerInventoryManager.rightWeapon);
-      }
-      playerEffectsManager.PlayWeaponFX(false);
-    }
-
     private void PerformRBRangedAction()
     {
       if (playerStatsManager.currentStamina <= 0)
@@ -355,15 +245,7 @@ namespace MR
       }
     }
 
-    private void PerformLBBlockingAction()
-    {
-      if (playerManager.isInteracting) return;
-      if (playerManager.isBlocking) return;
-
-      playerAnimatorManager.PlayTargetAnimation("Block Start", false, true);
-      playerEquipmentManager.OpenBlockingCollider();
-      playerManager.isBlocking = true;
-    }
+    
 
     private void PerformLTWeaponArt(bool isTwoHanding)
     {

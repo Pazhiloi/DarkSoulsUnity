@@ -106,20 +106,6 @@ namespace MR
 
     }
 
-
-    #region  Handle Weapons Stamina Drainage
-    public void DrainStaminaLightAttack()
-    {
-      playerStatsManager.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.lightAttackMultiplier));
-    }
-    public void DrainStaminaHeavyAttack()
-    {
-      playerStatsManager.TakeStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStamina * attackingWeapon.heavyAttackMultiplier));
-    }
-    #endregion
-
-
-
   }
 
 }

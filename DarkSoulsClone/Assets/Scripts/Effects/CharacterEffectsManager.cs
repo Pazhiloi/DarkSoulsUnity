@@ -11,17 +11,17 @@ namespace MR
     public GameObject bloodSplatterFX;
     [Header("Weapon FX")]
     public WeaponFX rightWeaponFX;
-    public WeaponFX  leftWeaponFX;
+    public WeaponFX leftWeaponFX;
 
     [Header("Poison FX")]
     public GameObject defaultPoisonParticleFX;
     public GameObject currentPoisonParticleFX;
     public Transform buildUpTransform;
     public bool isPoisoned;
-    public float poisonBuildup = 0; 
-    public float poisonAmount = 100; 
-    public float defaultPoisonAmount = 100; 
-    public float poisonTimer =2;
+    public float poisonBuildup = 0;
+    public float poisonAmount = 100;
+    public float defaultPoisonAmount = 100;
+    public float poisonTimer = 2;
     public int poisonDamage = 1;
     float timer;
 
@@ -49,7 +49,7 @@ namespace MR
 
     public virtual void PlayBloodSplatterFX(Vector3 bloodSplatterLocation)
     {
-      GameObject blood  = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
+      GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
     public virtual void HandleAllBuildUpEffects()
     {
@@ -78,7 +78,9 @@ namespace MR
         if (buildUpTransform != null)
         {
           currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, buildUpTransform.transform);
-        }else{
+        }
+        else
+        {
           currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, characterStatsManager.transform);
         }
       }

@@ -32,7 +32,7 @@ MonoBehaviour:
   tap_RB_Action: {fileID: 11400000, guid: 7e438bb24deec0243b7f500429b73d9c, type: 2}
   tap_LB_Action: {fileID: 0}
   hold_LB_Action: {fileID: 0}
-  tap_RT_Action: {fileID: 0}
+  tap_RT_Action: {fileID: 11400000, guid: 716add36e33656d4b953071ad12d1034, type: 2}
   hold_RT_Action: {fileID: 0}
-  tap_LT_Action: {fileID: 0}
+  tap_LT_Action: {fileID: 11400000, guid: 7e438bb24deec0243b7f500429b73d9c, type: 2}
   hold_LT_Action: {fileID: 0}

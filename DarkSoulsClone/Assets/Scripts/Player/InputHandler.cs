@@ -117,7 +117,7 @@ namespace MR
       HandleHoldRBInput();
       HandleFireBowInput();
 
-      HandleLBInput();
+      HandleHoldLBInput();
       HandleTapRBInput();
       HandleTapRTInput();
       HandleTapLTInput();
@@ -128,7 +128,7 @@ namespace MR
       HandleLockOnInput();
       HandleTwoHandInput();
       HandleUseConsumableInput();
-      
+
     }
     private void HandleMoveInput()
     {
@@ -189,12 +189,13 @@ namespace MR
       if (rb_Input)
       {
         playerManager.UpdateWhichHandCharacterIsUsing(true);
+        playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
         playerInventoryManager.rightWeapon.tap_RB_Action.PerformAction(playerManager);
       }
-      
 
 
-      
+
+
     }
 
     private void HandleTapRTInput()
@@ -202,6 +203,7 @@ namespace MR
       if (rt_Input)
       {
         playerManager.UpdateWhichHandCharacterIsUsing(true);
+        playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
         playerInventoryManager.rightWeapon.tap_RT_Action.PerformAction(playerManager);
       }
     }
@@ -210,19 +212,22 @@ namespace MR
     {
       if (lt_Input)
       {
-       if (playerManager.isTwoHandingWeapon)
-       {
+        if (playerManager.isTwoHandingWeapon)
+        {
           playerManager.UpdateWhichHandCharacterIsUsing(true);
+          playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
           playerInventoryManager.rightWeapon.tap_LT_Action.PerformAction(playerManager);
         }
-        else{
+        else
+        {
           playerManager.UpdateWhichHandCharacterIsUsing(false);
+          playerInventoryManager.currentItemBeingUsed = playerInventoryManager.leftWeapon;
           playerInventoryManager.leftWeapon.tap_LT_Action.PerformAction(playerManager);
         }
       }
     }
 
-    private void HandleLBInput()
+    private void HandleHoldLBInput()
     {
       if (playerManager.isInAir || playerManager.isSprinting || playerManager.isFiringSpell)
       {
@@ -232,7 +237,18 @@ namespace MR
 
       if (lb_Input)
       {
-        playerCombatManager.HandleLBAction();
+        if (playerManager.isTwoHandingWeapon)
+        {
+          playerManager.UpdateWhichHandCharacterIsUsing(true);
+          playerInventoryManager.currentItemBeingUsed = playerInventoryManager.rightWeapon;
+          playerInventoryManager.rightWeapon.hold_LB_Action.PerformAction(playerManager);
+        }
+        else
+        {
+          playerManager.UpdateWhichHandCharacterIsUsing(false);
+          playerInventoryManager.currentItemBeingUsed = playerInventoryManager.leftWeapon;
+          playerInventoryManager.leftWeapon.hold_LB_Action.PerformAction(playerManager);
+        }
       }
       else if (lb_Input == false)
       {

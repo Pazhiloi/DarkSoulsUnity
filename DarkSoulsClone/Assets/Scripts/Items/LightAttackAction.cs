@@ -14,7 +14,7 @@ namespace MR
       {
         return;
       }
-     
+
       player.playerAnimatorManager.EraseHandIKForWeapon();
       player.playerEffectsManager.PlayWeaponFX(false);
 

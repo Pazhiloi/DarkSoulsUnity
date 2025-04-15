@@ -38,7 +38,8 @@ namespace MR
 
     public bool isDead;
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
       characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
     }
 
@@ -141,6 +142,11 @@ namespace MR
       {
         totalPoiseDefence = armorPoiseBonus;
       }
+    }
+
+    public void DrainStaminaBasedOnAttackType()
+    {
+
     }
   }
 }

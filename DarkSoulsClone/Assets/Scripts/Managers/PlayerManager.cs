@@ -12,6 +12,7 @@ namespace MR
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
+    public PlayerEquipmentManager playerEquipmentManager;
     public PlayerCombatManager playerCombatManager;
     public PlayerInventoryManager playerInventoryManager;
     public PlayerEffectsManager playerEffectsManager;
@@ -43,8 +44,6 @@ namespace MR
       float delta = Time.deltaTime;
       isInteracting = animator.GetBool("isInteracting");
       canDoCombo = animator.GetBool("canDoCombo");
-      isUsingRightHand = animator.GetBool("isUsingRightHand");
-      isUsingLeftHand = animator.GetBool("isUsingLeftHand");
       isInvulnerable = animator.GetBool("isInvulnerable");
       isFiringSpell = animator.GetBool("isFiringSpell");
       isHoldingArrow = animator.GetBool("isHoldingArrow");
