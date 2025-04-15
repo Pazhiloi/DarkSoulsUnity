@@ -393,7 +393,6 @@ namespace MR
         if (playerManager.isHoldingArrow)
         {
           fireFlag = false;
-          playerCombatManager.FireArrowAction();
         }
       }
     }

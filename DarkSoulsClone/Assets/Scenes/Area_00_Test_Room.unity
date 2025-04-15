@@ -5786,7 +5786,6 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
-  attackingWeapon: {fileID: 0}
   rightHandIKTarget: {fileID: 0}
   leftHandIKTarget: {fileID: 0}
 --- !u!1 &954407942
@@ -7889,7 +7888,6 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
-  attackingWeapon: {fileID: 0}
   rightHandIKTarget: {fileID: 0}
   leftHandIKTarget: {fileID: 0}
 --- !u!114 &1317471734
@@ -19467,6 +19465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3b22af227a78340aa1e47d0a07eb65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItemBeingUsed: {fileID: 0}
   currentSpell: {fileID: 11400000, guid: e3221913ee2ebf44bb5ff0e8873ec3a8, type: 2}
   rightWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   leftWeapon: {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
@@ -19557,6 +19556,19 @@ MonoBehaviour:
   riposteLayer:
     serializedVersion: 2
     m_Bits: 8192
+  oh_light_attack_01: OH_Light_Attack_01
+  oh_light_attack_02: OH_Light_Attack_02
+  oh_heavy_attack_01: OH_Heavy_Attack_01
+  oh_heavy_attack_02: OH_Heavy_Attack_02
+  oh_running_attack_01: OH_Running_Attack_01
+  oh_jumping_attack_01: OH_Jumping_Attack_01
+  th_light_attack_01: TH_Light_Attack_01
+  th_light_attack_02: TH_Light_Attack_02
+  th_heavy_attack_01: TH_Heavy_Attack_01
+  th_heavy_attack_02: TH_Heavy_Attack_02
+  th_running_attack_01: TH_Running_Attack_01
+  th_jumping_attack_01: TH_Jumping_Attack_01
+  weapon_art: Weapon_Art
 --- !u!114 &5866666020217144482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19575,7 +19587,6 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   leftHandDamageCollider: {fileID: 0}
   rightHandDamageCollider: {fileID: 0}
-  attackingWeapon: {fileID: 0}
   rightHandIKTarget: {fileID: 0}
   leftHandIKTarget: {fileID: 0}
 --- !u!114 &5866666020217144483
@@ -19704,10 +19715,12 @@ MonoBehaviour:
   isGrounded: 0
   isFiringSpell: 0
   pendingCriticalDamage: 0
+  cameraHandler: {fileID: 0}
   inputHandler: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerStatsManager: {fileID: 0}
   playerWeaponSlotManager: {fileID: 0}
+  playerEquipmentManager: {fileID: 0}
   playerCombatManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
@@ -20054,6 +20067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672f0713bb535044dbf871ce797c7e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentItemBeingUsed: {fileID: 0}
   currentSpell: {fileID: 0}
   rightWeapon: {fileID: 11400000, guid: 737cd8f7f078326428d9f7991718fea5, type: 2}
   leftWeapon: {fileID: 0}

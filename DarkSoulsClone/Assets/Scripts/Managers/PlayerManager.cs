@@ -7,7 +7,7 @@ namespace MR
   {
 
     Animator animator;
-    CameraHandler cameraHandler;
+   public CameraHandler cameraHandler;
     public InputHandler inputHandler;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerStatsManager playerStatsManager;

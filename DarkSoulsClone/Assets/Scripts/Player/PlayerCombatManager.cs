@@ -70,25 +70,13 @@ namespace MR
 
     public void HandleLBAction()
     {
-      if (playerManager.isTwoHandingWeapon)
-      {
-        if (playerInventoryManager.rightWeapon.weaponType == WeaponType.Bow)
-        {
-          PerformLBAimingAction();
-        }
-      }
-      else
-      {
-        if (playerInventoryManager.leftWeapon.weaponType == WeaponType.Shield || playerInventoryManager.leftWeapon.weaponType == WeaponType.StraightSword)
-        {
-        }
-        else if (playerInventoryManager.leftWeapon.weaponType == WeaponType.FaithCaster || playerInventoryManager.leftWeapon.weaponType == WeaponType.PyromancyCaster)
+        if (playerInventoryManager.leftWeapon.weaponType == WeaponType.FaithCaster || playerInventoryManager.leftWeapon.weaponType == WeaponType.PyromancyCaster)
         {
           PerformMagicAction(playerInventoryManager.leftWeapon, true);
           playerAnimatorManager.animator.SetBool("isUsingLeftHand", true);
         }
       }
-    }
+    
 
     public void HandleLTAction()
     {
@@ -102,83 +90,8 @@ namespace MR
       }
     }
 
-    private void DrawArrowAction()
-    {
-      playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
-      playerAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
-      GameObject loadedArrow = Instantiate(playerInventoryManager.currentAmmo.loadedItemModel, playerWeaponSlotManager.leftHandSlot.transform);
-      Animator bowAnimator = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
-      bowAnimator.SetBool("isDrawn", true);
-      bowAnimator.Play("Bow_TH_Draw_01");
-      playerEffectsManager.currentRangeFX = loadedArrow;
-    }
 
-    public void FireArrowAction()
-    {
-      ArrowInstantiationLocation arrowInstantiationLocation;
-      arrowInstantiationLocation = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<ArrowInstantiationLocation>();
-
-      // ANIMATE THE BOW FIRING THE ARROW
-      Animator bowAnimator = playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
-
-      bowAnimator.SetBool("isDrawn", false);
-      bowAnimator.Play("Bow_TH_Fire_01");
-
-      Destroy(playerEffectsManager.currentRangeFX); // Destroys the loaded arrow model
-
-      // RESET THE PLAYERS HOLDING ARROW FLAG
-      playerAnimatorManager.PlayTargetAnimation("Bow_TH_Fire_01", true);
-      playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
-
-
-      // CREATE AND FIRE THE LIVE ARROW
-      GameObject liveArrow = Instantiate(playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, cameraHandler.cameraPivotTransform.rotation);
-
-      Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
-      RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
-
-      if (playerManager.isAiming)
-      {
-        Ray ray = cameraHandler.cameraObject.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hitPoint;
-
-        if (Physics.Raycast(ray, out hitPoint, 100.0f))
-        {
-          liveArrow.transform.LookAt(hitPoint.point);
-        }
-        else
-        {
-          liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
-        }
-      }
-      else
-      {
-        // GIVE AMMO VELOCITY
-        if (cameraHandler != null)
-        {
-          Quaternion arrowRotation = Quaternion.LookRotation(cameraHandler.currentLockOnTarget.lockOnTransform.position - liveArrow.gameObject.transform.position);
-          liveArrow.transform.rotation = arrowRotation;
-        }
-        else
-        {
-          liveArrow.transform.rotation = Quaternion.Euler(cameraHandler.cameraPivotTransform.eulerAngles.x, playerManager.lockOnTransform.eulerAngles.y, 0);
-        }
-      }
-
-
-
-      rigidBody.AddForce(liveArrow.transform.forward * playerInventoryManager.currentAmmo.forwardVelocity);
-      rigidBody.AddForce(liveArrow.transform.up * playerInventoryManager.currentAmmo.upwardVelocity);
-
-      rigidBody.useGravity = playerInventoryManager.currentAmmo.useGravity;
-
-      rigidBody.mass = playerInventoryManager.currentAmmo.ammoMass;
-      liveArrow.transform.parent = null;
-      // SET LIVE AMMO DAMAGE
-      damageCollider.characterManager = playerManager;
-      damageCollider.ammoItem = playerInventoryManager.currentAmmo;
-      damageCollider.physicalDamage = playerInventoryManager.currentAmmo.physicalDamage;
-    }
+   
 
     private void PerformRBRangedAction()
     {
@@ -193,20 +106,12 @@ namespace MR
       {
         if (playerInventoryManager.currentAmmo != null)
         {
-          DrawArrowAction();
         }
         else
         {
           playerAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
       }
-    }
-
-    private void PerformLBAimingAction()
-    {
-      if (playerManager.isAiming) return;
-      inputHandler.uiManager.crossHair.SetActive(true);
-      playerManager.isAiming = true;
     }
 
 
