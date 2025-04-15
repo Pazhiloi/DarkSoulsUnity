@@ -11,6 +11,7 @@ namespace MR
     SpellCaster,
     Unarmed,
     StraightSword,
+    SmallShield,
     Shield,
     Bow
   }

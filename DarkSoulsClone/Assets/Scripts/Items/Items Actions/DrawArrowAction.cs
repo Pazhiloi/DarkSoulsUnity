@@ -9,6 +9,9 @@ namespace MR
   {
     public override void PerformAction(PlayerManager player)
     {
+      if (player.isInteracting) return;
+      if (player.isHoldingArrow) return;
+      
       player.playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
       player.playerAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
