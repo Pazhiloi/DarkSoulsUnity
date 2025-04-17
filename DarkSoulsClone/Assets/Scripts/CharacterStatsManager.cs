@@ -20,7 +20,10 @@ namespace MR
 
     public int soulsAwardedOnDeath = 50;
 
-    [Header("LEVELS")]
+    [Header("CHARACTER LEVEL")]
+    public int playerLevel= 1;
+
+    [Header("STAT LEVELS")]
     public int healthLevel = 10;
     public int staminaLevel = 10;
     public int focusLevel = 10;

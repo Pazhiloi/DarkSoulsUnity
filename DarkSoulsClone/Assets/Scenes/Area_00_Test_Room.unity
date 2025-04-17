@@ -360,7 +360,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 284767736}
+        m_TargetAssemblyTypeName: MR.LevelUpUI, Assembly-CSharp
+        m_MethodName: UpdateHealthLevelSlider
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &60396043
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,6 +2630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02605c4402b06543b50c226d6337364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatsManager: {fileID: 5866666020217144484}
   currentPlayerLevel: 0
   projectedPlayerLevel: 0
   currentPlayerLevelText: {fileID: 573722315}
@@ -8968,6 +8981,7 @@ GameObject:
   - component: {fileID: 909942126}
   - component: {fileID: 909942128}
   - component: {fileID: 909942127}
+  - component: {fileID: 909942129}
   m_Layer: 5
   m_Name: Health  Level
   m_TagString: Untagged
@@ -9041,6 +9055,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909942125}
   m_CullTransparentMesh: 1
+--- !u!114 &909942129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909942125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205f01203cc5b9d48bd01ccac7569601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statSlider: {fileID: 57884137}
 --- !u!1 &914333244
 GameObject:
   m_ObjectHideFlags: 0
@@ -12840,6 +12867,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLevel: 1
   healthLevel: 10
   staminaLevel: 10
   focusLevel: 10
@@ -17137,7 +17165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 207, y: -0.000015258789}
+  m_AnchoredPosition: {x: 207, y: 0}
   m_SizeDelta: {x: -239.497, y: -14.897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1740327723
@@ -26945,6 +26973,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLevel: 1
   healthLevel: 10
   staminaLevel: 10
   focusLevel: 10
@@ -27336,6 +27365,7 @@ MonoBehaviour:
   currentFocusPoints: 0
   soulCount: 0
   soulsAwardedOnDeath: 50
+  playerLevel: 1
   healthLevel: 10
   staminaLevel: 10
   focusLevel: 10
