@@ -9,6 +9,7 @@ namespace MR
     Animator animator;
     public CameraHandler cameraHandler;
     public InputHandler inputHandler;
+    public UIManager uiManager;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
@@ -27,6 +28,7 @@ namespace MR
     {
       base.Awake();
       cameraHandler = FindObjectOfType<CameraHandler>();
+      uiManager = FindObjectOfType<UIManager>();
       inputHandler = GetComponent<InputHandler>();
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       animator = GetComponent<Animator>();

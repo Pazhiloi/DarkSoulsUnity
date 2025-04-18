@@ -7,7 +7,7 @@ namespace MR
   public class PlayerStatsManager : CharacterStatsManager
   {
 
-   public HealthBar healthBar;
+    public HealthBar healthBar;
     StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
 
@@ -58,22 +58,7 @@ namespace MR
       }
     }
 
-    private int SetMaxHealthFromHealthLevel()
-    {
-      maxHealth = healthLevel * 10;
-      return maxHealth;
-    }
-    private float SetMaxStaminaFromStaminaLevel()
-    {
-      maxStamina = staminaLevel * 10;
-      return maxStamina;
-    }
 
-    private float SetMaxFocusFromFocusLevel()
-    {
-      maxFocusPoints = focusLevel * 10;
-      return maxFocusPoints;
-    }
     public override void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
       base.TakeDamageNoAnimation(physicalDamage, fireDamage);
@@ -165,7 +150,7 @@ namespace MR
 
     public void AddSouls(int souls)
     {
-      soulCount += souls;
+      currentSoulCount += souls;
     }
   }
 }

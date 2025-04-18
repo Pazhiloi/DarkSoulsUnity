@@ -27,7 +27,7 @@ namespace MR
         PlayerStatsManager.AddSouls(characterStatsManager.soulsAwardedOnDeath);
         if (soulCountBar != null)
         {
-          soulCountBar.SetSoulCountText(PlayerStatsManager.soulCount);
+          soulCountBar.SetSoulCountText(PlayerStatsManager.currentSoulCount);
         }
       }
     }

@@ -16,12 +16,12 @@ namespace MR
 
     public float maxFocusPoints;
     public float currentFocusPoints;
-    public int soulCount = 0;
+    public int currentSoulCount = 0;
 
     public int soulsAwardedOnDeath = 50;
 
     [Header("CHARACTER LEVEL")]
-    public int playerLevel= 1;
+    public int playerLevel = 1;
 
     [Header("STAT LEVELS")]
     public int healthLevel = 10;
@@ -157,6 +157,23 @@ namespace MR
     public void DrainStaminaBasedOnAttackType()
     {
 
+    }
+
+    public int SetMaxHealthFromHealthLevel()
+    {
+      maxHealth = healthLevel * 10;
+      return maxHealth;
+    }
+    public float SetMaxStaminaFromStaminaLevel()
+    {
+      maxStamina = staminaLevel * 10;
+      return maxStamina;
+    }
+
+    public float SetMaxFocusFromFocusLevel()
+    {
+      maxFocusPoints = focusLevel * 10;
+      return maxFocusPoints;
     }
   }
 }
