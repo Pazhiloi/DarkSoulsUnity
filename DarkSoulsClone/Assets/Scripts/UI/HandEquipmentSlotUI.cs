@@ -32,7 +32,6 @@ namespace MR
       weapon = null;
       icon.sprite = null;
       icon.enabled = false;
-      gameObject.SetActive(false);
     }
 
     public void SelectThisSlot()

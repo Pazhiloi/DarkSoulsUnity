@@ -8,7 +8,6 @@ namespace MR
     public Animator animator;
     protected CharacterManager characterManager;
     protected CharacterStatsManager characterStatsManager;
-    public bool canRotate;
     protected RigBuilder rigBuilder;
     public TwoBoneIKConstraint leftHandConstraint;
     public TwoBoneIKConstraint rightHandConstraint;

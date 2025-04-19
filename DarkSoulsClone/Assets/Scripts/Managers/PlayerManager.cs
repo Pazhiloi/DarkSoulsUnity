@@ -46,6 +46,7 @@ namespace MR
       float delta = Time.deltaTime;
       isInteracting = animator.GetBool("isInteracting");
       canDoCombo = animator.GetBool("canDoCombo");
+      canRotate = animator.GetBool("canRotate");
       isInvulnerable = animator.GetBool("isInvulnerable");
       isFiringSpell = animator.GetBool("isFiringSpell");
       isHoldingArrow = animator.GetBool("isHoldingArrow");
@@ -56,7 +57,6 @@ namespace MR
 
 
       inputHandler.TickInput(delta);
-      playerAnimatorManager.canRotate = animator.GetBool("canRotate");
       playerLocomotionManager.HandleRollingAndSprinting();
       playerLocomotionManager.HandleJumping();
 

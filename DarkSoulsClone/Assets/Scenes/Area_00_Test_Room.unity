@@ -27249,8 +27249,8 @@ MonoBehaviour:
   weaponsInLeftHandSlots:
   - {fileID: 11400000, guid: 4180eeba4b137c14fa2a039e2843c586, type: 2}
   - {fileID: 11400000, guid: 68a3fdf764d3dfe45b362f3707a49d90, type: 2}
-  currentRightWeaponIndex: -1
-  currentLeftWeaponIndex: -1
+  currentRightWeaponIndex: 0
+  currentLeftWeaponIndex: 0
   weaponsInventory: []
 --- !u!114 &5866666020217144479
 MonoBehaviour:
