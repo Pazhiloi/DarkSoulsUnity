@@ -6,10 +6,17 @@ namespace MR
   public class PlayerManager : CharacterManager
   {
 
-    Animator animator;
+    [Header("Camera")]
     public CameraHandler cameraHandler;
+
+    [Header("Input")]
     public InputHandler inputHandler;
+
+    [Header("UI")]
     public UIManager uiManager;
+
+    [Header("Player")]
+    public Animator animator;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
@@ -18,6 +25,11 @@ namespace MR
     public PlayerInventoryManager playerInventoryManager;
     public PlayerEffectsManager playerEffectsManager;
     public PlayerAnimatorManager playerAnimatorManager;
+
+    [Header("Colliders")]
+    public BlockingCollider blockingCollider;
+    
+    [Header("Interactables")]
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
     public GameObject itemInteractableGameObject;
@@ -53,7 +65,7 @@ namespace MR
       animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
       animator.SetBool("isBlocking", isBlocking);
       animator.SetBool("isInAir", isInAir);
-      animator.SetBool("isDead", playerStatsManager.isDead);
+      animator.SetBool("isDead", isDead);
 
 
       inputHandler.TickInput(delta);

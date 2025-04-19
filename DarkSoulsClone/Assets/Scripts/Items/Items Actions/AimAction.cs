@@ -10,7 +10,7 @@ namespace MR
     public override void PerformAction(PlayerManager player)
     {
       if (player.isAiming) return;
-      player.inputHandler.uiManager.crossHair.SetActive(true);
+      player.uiManager.crossHair.SetActive(true);
       player.isAiming = true;
     }
   }

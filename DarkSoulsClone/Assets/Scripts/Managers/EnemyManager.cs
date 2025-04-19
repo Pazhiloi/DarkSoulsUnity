@@ -5,10 +5,11 @@ namespace MR
   public class EnemyManager : CharacterManager
   {
 
-    EnemyLocomotionManager enemyLocomotionManager;
-    EnemyAnimatorManager enemyAnimatorManager;
-    EnemyStatsManager enemyStatsManager;
-    EnemyEffectsManager enemyEffectsManager;
+    public EnemyBossManager enemyBossManager;
+   public EnemyLocomotionManager enemyLocomotionManager;
+   public EnemyAnimatorManager enemyAnimatorManager;
+   public EnemyStatsManager enemyStatsManager;
+   public EnemyEffectsManager enemyEffectsManager;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -38,6 +39,7 @@ namespace MR
     {
       base.Awake();
       enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+      enemyBossManager = GetComponent<EnemyBossManager>();
       enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
       enemyStatsManager = GetComponent<EnemyStatsManager>();
       enemyEffectsManager = GetComponent<EnemyEffectsManager>();
@@ -61,7 +63,7 @@ namespace MR
       isInvulnerable = enemyAnimatorManager.animator.GetBool("isInvulnerable");
       canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
       canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
-      enemyAnimatorManager.animator.SetBool("isDead", enemyStatsManager.isDead);
+      enemyAnimatorManager.animator.SetBool("isDead", isDead);
     }
 
     protected override void FixedUpdate()

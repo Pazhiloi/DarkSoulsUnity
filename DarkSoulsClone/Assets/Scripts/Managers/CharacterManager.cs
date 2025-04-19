@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace MR
 {
   public class CharacterManager : MonoBehaviour
   {
-    CharacterAnimatorManager characterAnimatorManager;
-    CharacterWeaponSlotManager characterWeaponSlotManager;
+   public CharacterAnimatorManager characterAnimatorManager;
+   public CharacterWeaponSlotManager characterWeaponSlotManager;
+  public CharacterStatsManager characterStatsManager;
+
     [Header("Look On Transform")]
     [Header("Lock On Transform")]
     public Transform lockOnTransform;
@@ -16,6 +16,8 @@ namespace MR
     public CriticalDamageCollider riposteCollider;
     [Header("Interaction")]
     public bool isInteracting;
+    [Header("Status")]
+    public bool isDead;
 
     [Header("Combat Flags")]
     public bool canBeRiposted;
@@ -51,6 +53,7 @@ namespace MR
     {
       characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
       characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
+      characterStatsManager = GetComponent<CharacterStatsManager>();
     }
 
     protected virtual void FixedUpdate()

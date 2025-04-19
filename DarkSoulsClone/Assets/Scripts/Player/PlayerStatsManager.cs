@@ -12,7 +12,7 @@ namespace MR
     public FocusPointBar focusPointBar;
 
 
-    PlayerManager playerManager;
+    PlayerManager player;
     PlayerAnimatorManager playerAnimatorManager;
 
     public float staminaRegenerationAmount = 30f;
@@ -27,7 +27,7 @@ namespace MR
     }
     private void Start()
     {
-      playerManager = GetComponent<PlayerManager>();
+      player = GetComponent<PlayerManager>();
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;
       healthBar.SetMaxHealth(maxHealth);
@@ -52,7 +52,7 @@ namespace MR
       {
         poiseResetTimer -= Time.deltaTime;
       }
-      else if (poiseResetTimer <= 0 && !playerManager.isInteracting)
+      else if (poiseResetTimer <= 0 && !player.isInteracting)
       {
         totalPoiseDefence = armorPoiseBonus;
       }
@@ -67,21 +67,21 @@ namespace MR
 
     public override void TakePoisonDamage(int damage)
     {
-      if (isDead) return;
+      if (player.isDead) return;
 
       base.TakePoisonDamage(damage);
       healthBar.SetCurrentHealth(currentHealth);
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        isDead = true;
+        player.isDead = true;
         playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
 
     public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
     {
-      if (playerManager.isInvulnerable)
+      if (player.isInvulnerable)
         return;
 
       base.TakeDamage(physicalDamage, fireDamage, damageAnimation);
@@ -91,7 +91,7 @@ namespace MR
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        isDead = true;
+        player.isDead = true;
         playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
@@ -114,7 +114,7 @@ namespace MR
 
     public void RegenerateStamina()
     {
-      if (playerManager.isInteracting)
+      if (player.isInteracting)
       {
         staminaRegenTimer = 0f;
       }

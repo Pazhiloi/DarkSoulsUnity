@@ -6,7 +6,7 @@ namespace MR
 {
   public class CharacterStatsManager : MonoBehaviour
   {
-    CharacterAnimatorManager characterAnimatorManager;
+    CharacterManager characterManager;
     [Header("Team I.D")]
     public int teamIDNumber = 0;
     public int maxHealth;
@@ -46,11 +46,10 @@ namespace MR
     public float fireDamageAbsorptionLegs;
     public float fireDamageAbsorptionHands;
 
-    public bool isDead;
 
     protected virtual void Awake()
     {
-      characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+      characterManager = GetComponent<CharacterManager>();
     }
 
     protected virtual void Update()
@@ -66,9 +65,9 @@ namespace MR
 
     public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
     {
-      if (isDead) return;
+      if (characterManager.isDead) return;
 
-      characterAnimatorManager.EraseHandIKForWeapon();
+      characterManager.characterAnimatorManager.EraseHandIKForWeapon();
 
       float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
                                                 (1 - physicalDamageAbsorptionBody / 100) *
@@ -94,13 +93,13 @@ namespace MR
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        isDead = true;
+        characterManager.isDead = true;
       }
     }
 
     public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-      if (isDead) return;
+      if (characterManager.isDead) return;
 
       float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
                                                 (1 - physicalDamageAbsorptionBody / 100) *
@@ -126,18 +125,18 @@ namespace MR
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        isDead = true;
+        characterManager.isDead = true;
       }
     }
     public virtual void TakePoisonDamage(int damage)
     {
-      if (isDead) { return; }
+      if (characterManager.isDead) { return; }
       currentHealth -= damage;
 
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        isDead = true;
+        characterManager.isDead = true;
       }
     }
 
