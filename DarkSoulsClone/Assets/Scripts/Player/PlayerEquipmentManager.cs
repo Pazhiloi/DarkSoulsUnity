@@ -63,7 +63,7 @@ namespace MR
       leftHandModelChanger.UnequipAllModels();
       rightHandModelChanger.UnequipAllModels();
     }
-    private void EquipAllEquipmentModelsOnStart()
+    public void EquipAllEquipmentModelsOnStart()
     {
       UnequipAllEquipmentModels();
       if (player.playerInventoryManager.currentHelmetEquipment != null)

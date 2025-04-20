@@ -8,6 +8,7 @@ namespace MR
   {
 
     public List<WeaponItem> weaponsInventory;
+    public List<HelmetEquipment> headEquipmentInventory;
 
     public void ChangeRightWeapon()
     {

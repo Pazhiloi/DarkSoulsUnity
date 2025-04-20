@@ -328,6 +328,10 @@ namespace MR
 
     private void HandleInventoryInput()
     {
+      if (inventoryFlag)
+      {
+        player.uiManager.UpdateUI();
+      }
 
       if (inventory_Input)
       {
@@ -336,7 +340,6 @@ namespace MR
         if (inventoryFlag)
         {
           player.uiManager.OpenSelectWindow();
-          player.uiManager.UpdateUI();
           player.uiManager.hudWindow.SetActive(false);
         }
         else

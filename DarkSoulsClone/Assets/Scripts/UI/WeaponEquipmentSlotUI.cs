@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace MR
 {
-  public class HandEquipmentSlotUI : MonoBehaviour
+  public class WeaponEquipmentSlotUI : MonoBehaviour
   {
     UIManager uiManager;
     public Image icon;
