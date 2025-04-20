@@ -22,7 +22,7 @@ namespace MR
 
       // RESET THE PLAYERS HOLDING ARROW FLAG
       player.playerAnimatorManager.PlayTargetAnimation("Bow_TH_Fire_01", true);
-      player.playerAnimatorManager.animator.SetBool("isHoldingArrow", false);
+      player.animator.SetBool("isHoldingArrow", false);
 
 
       // CREATE AND FIRE THE LIVE ARROW

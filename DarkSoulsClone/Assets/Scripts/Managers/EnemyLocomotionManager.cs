@@ -4,8 +4,7 @@ namespace MR
 {
   public class EnemyLocomotionManager : MonoBehaviour
   {
-    EnemyManager enemyManager;
-    EnemyAnimatorManager enemyAnimatorManager;
+    EnemyManager enemy;
 
     public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
 
@@ -16,8 +15,7 @@ namespace MR
 
     private void Awake()
     {
-      enemyManager = GetComponent<EnemyManager>();
-      enemyAnimatorManager = GetComponent<EnemyAnimatorManager>();
+      enemy = GetComponent<EnemyManager>();
     }
 
     private void Start() {

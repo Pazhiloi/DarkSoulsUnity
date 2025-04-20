@@ -16,7 +16,6 @@ namespace MR
     public UIManager uiManager;
 
     [Header("Player")]
-    public Animator animator;
     public PlayerLocomotionManager playerLocomotionManager;
     public PlayerStatsManager playerStatsManager;
     public PlayerWeaponSlotManager playerWeaponSlotManager;
@@ -42,8 +41,12 @@ namespace MR
       cameraHandler = FindObjectOfType<CameraHandler>();
       uiManager = FindObjectOfType<UIManager>();
       inputHandler = GetComponent<InputHandler>();
-      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       animator = GetComponent<Animator>();
+
+      backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
+      blockingCollider = GetComponentInChildren<BlockingCollider>();
+      
+      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       playerInventoryManager = GetComponent<PlayerInventoryManager>();
       playerWeaponSlotManager = GetComponent<PlayerWeaponSlotManager>();
       playerCombatManager = GetComponent<PlayerCombatManager>();

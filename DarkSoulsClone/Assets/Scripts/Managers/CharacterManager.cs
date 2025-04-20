@@ -3,9 +3,12 @@ namespace MR
 {
   public class CharacterManager : MonoBehaviour
   {
+    public Animator animator; 
    public CharacterAnimatorManager characterAnimatorManager;
    public CharacterWeaponSlotManager characterWeaponSlotManager;
   public CharacterStatsManager characterStatsManager;
+    public CharacterInventoryManager characterInventoryManager;
+    public CharacterEffectsManager characterEffectsManager;
 
     [Header("Look On Transform")]
     [Header("Lock On Transform")]
@@ -51,9 +54,12 @@ namespace MR
 
     protected virtual void Awake()
     {
+      animator = GetComponent<Animator>();
       characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
       characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
       characterStatsManager = GetComponent<CharacterStatsManager>();
+      characterInventoryManager = GetComponent<CharacterInventoryManager>();
+      characterEffectsManager = GetComponent<CharacterEffectsManager>();
     }
 
     protected virtual void FixedUpdate()

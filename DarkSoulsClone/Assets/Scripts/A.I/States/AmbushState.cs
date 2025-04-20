@@ -14,17 +14,17 @@ namespace MR
    public LayerMask detectionLayer;
 
     public PursueTargetState pursueTargetState;
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemy)
     {
 
-      if (isSleeping && !enemyManager.isInteracting)
+      if (isSleeping && !enemy.isInteracting)
       {
-        enemyAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
+        enemy.enemyAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
       }
 
       #region Handle Target Detection
 
-      Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, detectionRadius, detectionLayer);
+      Collider[] colliders = Physics.OverlapSphere(enemy.transform.position, detectionRadius, detectionLayer);
 
       for (int i = 0; i < colliders.Length; i++)
       {
@@ -32,15 +32,15 @@ namespace MR
 
         if (CharacterStatsManager != null)
         {
-          Vector3 targetsDirection = CharacterStatsManager.transform.position - enemyManager.transform.position;
+          Vector3 targetsDirection = CharacterStatsManager.transform.position - enemy.transform.position;
 
-          float viewableAngle = Vector3.Angle(targetsDirection, enemyManager.transform.forward);
+          float viewableAngle = Vector3.Angle(targetsDirection, enemy.transform.forward);
 
-          if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
+          if (viewableAngle > enemy.minimumDetectionAngle && viewableAngle < enemy.maximumDetectionAngle)
           {
-            enemyManager.currentTarget = CharacterStatsManager;
+            enemy.currentTarget = CharacterStatsManager;
             isSleeping = false;
-            enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
+            enemy.enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
           }
         }
       }
@@ -48,7 +48,7 @@ namespace MR
       #endregion
 
       #region Handle State Change
-      if (enemyManager.currentTarget != null)
+      if (enemy.currentTarget != null)
       {
         return pursueTargetState;
       }

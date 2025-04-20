@@ -11,25 +11,25 @@ namespace MR
 
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemy)
     {
-      float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-      RotateTowardsTargetWhilstAttacking(enemyManager);
+      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+      RotateTowardsTargetWhilstAttacking(enemy);
 
-      if (distanceFromTarget > enemyManager.maximumAggroRadius)
+      if (distanceFromTarget > enemy.maximumAggroRadius)
       {
         return pursueTargetState;
       }
 
-      if (willDoComboOnNextAttack && enemyManager.canDoCombo)
+      if (willDoComboOnNextAttack && enemy.canDoCombo)
       {
-        AttackTargetWithCombo(enemyAnimatorManager, enemyManager);
-        enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+        AttackTargetWithCombo(enemy);
+        enemy.currentRecoveryTime = currentAttack.recoveryTime;
       }
       if (!hasPerformedAttack)
       {
-        AttackTarget(enemyAnimatorManager, enemyManager);
-        RollForComboChance(enemyManager);
+        AttackTarget(enemy);
+        RollForComboChance(enemy);
       }
 
       if (willDoComboOnNextAttack && hasPerformedAttack)
@@ -41,32 +41,32 @@ namespace MR
 
 
 
-    private void AttackTarget(EnemyAnimatorManager enemyAnimatorManager, EnemyManager enemyManager)
+    private void AttackTarget(EnemyManager enemy)
     {
-      enemyAnimatorManager.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
-      enemyAnimatorManager.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
-      enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-      enemyAnimatorManager.PlayWeaponTrailFX();
-      enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+      enemy.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
+      enemy.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
+      enemy.enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+      enemy.enemyAnimatorManager.PlayWeaponTrailFX();
+      enemy.currentRecoveryTime = currentAttack.recoveryTime;
       hasPerformedAttack = true;
     }
 
-    private void AttackTargetWithCombo(EnemyAnimatorManager enemyAnimatorManager, EnemyManager enemyManager)
+    private void AttackTargetWithCombo(EnemyManager enemy)
     {
-      enemyAnimatorManager.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
-      enemyAnimatorManager.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
+      enemy.animator.SetBool("isUsingRightHand", currentAttack.isRightHandedAction);
+      enemy.animator.SetBool("isUsingLeftHand", !currentAttack.isRightHandedAction);
       willDoComboOnNextAttack = false;
-      enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
-      enemyAnimatorManager.PlayWeaponTrailFX();
-      enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+      enemy.enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+      enemy.enemyAnimatorManager.PlayWeaponTrailFX();
+      enemy.currentRecoveryTime = currentAttack.recoveryTime;
       currentAttack = null;
     }
-    private void RotateTowardsTargetWhilstAttacking(EnemyManager enemyManager)
+    private void RotateTowardsTargetWhilstAttacking(EnemyManager enemy)
     {
       // Rotate Manually
-      if (enemyManager.canRotate && enemyManager.isInteracting)
+      if (enemy.canRotate && enemy.isInteracting)
       {
-        Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+        Vector3 direction = enemy.currentTarget.transform.position - enemy.transform.position;
         direction.y = 0;
         direction.Normalize();
 
@@ -76,16 +76,16 @@ namespace MR
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+        enemy.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemy.rotationSpeed / Time.deltaTime);
       }
 
     }
 
-    private void RollForComboChance(EnemyManager enemyManager)
+    private void RollForComboChance(EnemyManager enemy)
     {
       float comboChance = Random.Range(0f, 100f);
 
-      if (enemyManager.allowAIToPerformCombos && comboChance <= enemyManager.comboLikelyHood)
+      if (enemy.allowAIToPerformCombos && comboChance <= enemy.comboLikelyHood)
       {
         if (currentAttack.comboAction != null)
         {

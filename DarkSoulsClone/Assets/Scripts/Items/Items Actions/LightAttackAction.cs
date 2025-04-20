@@ -98,7 +98,7 @@ namespace MR
     {
       if (player.inputHandler.comboFlag)
       {
-        player.playerAnimatorManager.animator.SetBool("canDoCombo", false);
+        player.animator.SetBool("canDoCombo", false);
         if (player.isUsingLeftHand)
         {
           if (player.playerCombatManager.lastAttack == player.playerCombatManager.oh_light_attack_01)

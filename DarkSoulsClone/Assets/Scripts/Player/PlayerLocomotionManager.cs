@@ -3,20 +3,9 @@ namespace MR
 {
   public class PlayerLocomotionManager : MonoBehaviour
   {
-    CameraHandler cameraHandler;
-    PlayerManager playerManager;
-    PlayerStatsManager playerStatsManager;
-    Transform cameraObject;
-    InputHandler inputHandler;
+    PlayerManager player;
     public Vector3 moveDirection;
-
-    [HideInInspector]
-    public Transform myTransform;
-    [HideInInspector]
-    public PlayerAnimatorManager playerAnimatorManager;
-
     public new Rigidbody rigidbody;
-    public GameObject normalCamera;
 
     [Header("Ground & Air Detection Stats")]
     [SerializeField] private float groundDetectionRayStartPoint = 0.5f;
@@ -36,51 +25,44 @@ namespace MR
     [SerializeField] private int rollStaminaCost = 15;
     [SerializeField] private int backstepStaminaCost = 12;
     [SerializeField] private int sprintStaminaCost = 12;
+
+    Vector3 normalVector;
+    Vector3 targetPosition;
     public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
 
     private void Awake()
     {
-      cameraHandler = FindObjectOfType<CameraHandler>();
-      playerManager = GetComponent<PlayerManager>();
-      playerStatsManager = GetComponent<PlayerStatsManager>();
+      player = GetComponent<PlayerManager>();
       rigidbody = GetComponent<Rigidbody>();
-      inputHandler = GetComponent<InputHandler>();
-      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
     private void Start()
     {
-      cameraObject = Camera.main.transform;
-      myTransform = transform;
-
-      playerManager.isGrounded = true;
+      player.isGrounded = true;
       groundLayer = ~(1 << 8 | 1 << 11);
       Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
     }
 
-    #region Movement
-    Vector3 normalVector;
-    Vector3 targetPosition;
 
     public void HandleRotation()
     {
-      if (playerManager.canRotate)
+      if (player.canRotate)
       {
-        if (playerManager.isAiming)
+        if (player.isAiming)
         {
-          Quaternion targetRotation = Quaternion.Euler(0, cameraHandler.cameraTransform.eulerAngles.y, 0);
+          Quaternion targetRotation = Quaternion.Euler(0, player.cameraHandler.cameraTransform.eulerAngles.y, 0);
           Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
           transform.rotation = playerRotation;
         }
         else
         {
-          if (inputHandler.lockOnFlag)
+          if (player.inputHandler.lockOnFlag)
           {
 
-            if (inputHandler.sprintFlag || inputHandler.rollFlag)
+            if (player.inputHandler.sprintFlag || player.inputHandler.rollFlag)
             {
               Vector3 targetDirection = Vector3.zero;
-              targetDirection = cameraHandler.cameraTransform.forward * inputHandler.vertical;
-              targetDirection += cameraHandler.cameraTransform.right * inputHandler.horizontal;
+              targetDirection = player.cameraHandler.cameraTransform.forward * player.inputHandler.vertical;
+              targetDirection += player.cameraHandler.cameraTransform.right * player.inputHandler.horizontal;
               targetDirection.Normalize();
               targetDirection.y = 0;
 
@@ -96,7 +78,7 @@ namespace MR
             else
             {
               Vector3 rotationDirection = moveDirection;
-              rotationDirection = cameraHandler.currentLockOnTarget.transform.position - transform.position;
+              rotationDirection = player.cameraHandler.currentLockOnTarget.transform.position - transform.position;
 
               rotationDirection.y = 0;
               rotationDirection.Normalize();
@@ -109,24 +91,24 @@ namespace MR
           else
           {
             Vector3 targetDir = Vector3.zero;
-            float moveOverride = inputHandler.moveAmount;
+            float moveOverride = player.inputHandler.moveAmount;
 
-            targetDir = cameraObject.forward * inputHandler.vertical;
-            targetDir += cameraObject.right * inputHandler.horizontal;
+            targetDir = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+            targetDir += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
 
             targetDir.Normalize();
             targetDir.y = 0;
 
             if (targetDir == Vector3.zero)
             {
-              targetDir = myTransform.forward;
+              targetDir = player.transform.forward;
             }
             float rs = rotationSpeed;
 
             Quaternion tr = Quaternion.LookRotation(targetDir);
-            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * Time.deltaTime);
+            Quaternion targetRotation = Quaternion.Slerp(player.transform.rotation, tr, rs * Time.deltaTime);
 
-            myTransform.rotation = targetRotation;
+            player.transform.rotation = targetRotation;
           }
         }
 
@@ -136,52 +118,52 @@ namespace MR
     public void HandleMovement()
     {
 
-      if (inputHandler.rollFlag)
+      if (player.inputHandler.rollFlag)
       {
         return;
       }
-      if (playerManager.isInteracting)
+      if (player.isInteracting)
       {
         return;
       }
 
-      moveDirection = cameraObject.forward * inputHandler.vertical;
-      moveDirection += cameraObject.right * inputHandler.horizontal;
+      moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+      moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
       moveDirection.Normalize();
       moveDirection.y = 0;
 
       float speed = movementSpeed;
 
-      if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5)
+      if (player.inputHandler.sprintFlag && player.inputHandler.moveAmount > 0.5)
       {
         speed = sprintSpeed;
-        playerManager.isSprinting = true;
+        player.isSprinting = true;
         moveDirection *= speed;
-        playerStatsManager.TakeStaminaDamage(sprintStaminaCost);
+        player.playerStatsManager.TakeStaminaDamage(sprintStaminaCost);
       }
       else
       {
-        if (inputHandler.moveAmount <= 0.5)
+        if (player.inputHandler.moveAmount <= 0.5)
         {
           moveDirection *= walkingSpeed;
-          playerManager.isSprinting = false;
+          player.isSprinting = false;
         }
         else
         {
           moveDirection *= speed;
-          playerManager.isSprinting = false;
+          player.isSprinting = false;
         }
       }
 
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
       rigidbody.velocity = projectedVelocity;
-      if (inputHandler.lockOnFlag && !inputHandler.sprintFlag)
+      if (player.inputHandler.lockOnFlag && !player.inputHandler.sprintFlag)
       {
-        playerAnimatorManager.UpdateAnimatorValues(inputHandler.vertical, inputHandler.horizontal, playerManager.isSprinting);
+        player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.vertical, player.inputHandler.horizontal, player.isSprinting);
       }
       else
       {
-        playerAnimatorManager.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
+        player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.moveAmount, 0, player.isSprinting);
       }
 
 
@@ -189,46 +171,46 @@ namespace MR
 
     public void HandleRollingAndSprinting()
     {
-      if (playerAnimatorManager.animator.GetBool("isInteracting")) return;
-      if (playerStatsManager.currentStamina <= 0) return;
+      if (player.animator.GetBool("isInteracting")) return;
+      if (player.playerStatsManager.currentStamina <= 0) return;
 
-      if (inputHandler.rollFlag)
+      if (player.inputHandler.rollFlag)
       {
-        inputHandler.rollFlag = false;
-        moveDirection = cameraObject.forward * inputHandler.vertical;
-        moveDirection += cameraObject.right * inputHandler.horizontal;
+        player.inputHandler.rollFlag = false;
+        moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+        moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
 
-        if (inputHandler.moveAmount > 0)
+        if (player.inputHandler.moveAmount > 0)
         {
-          playerAnimatorManager.PlayTargetAnimation("Rolling", true);
-          playerAnimatorManager.EraseHandIKForWeapon();
+          player.playerAnimatorManager.PlayTargetAnimation("Rolling", true);
+          player.playerAnimatorManager.EraseHandIKForWeapon();
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
-          myTransform.rotation = rollRotation;
-          playerStatsManager.TakeStaminaDamage(rollStaminaCost);
+          player.transform.rotation = rollRotation;
+          player.playerStatsManager.TakeStaminaDamage(rollStaminaCost);
         }
         else
         {
-          playerAnimatorManager.PlayTargetAnimation("Backstep", true);
-          playerAnimatorManager.EraseHandIKForWeapon();
-          playerStatsManager.TakeStaminaDamage(backstepStaminaCost);
+          player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+          player.playerAnimatorManager.EraseHandIKForWeapon();
+          player.playerStatsManager.TakeStaminaDamage(backstepStaminaCost);
         }
       }
     }
 
     public void HandleFalling( Vector3 moveDirection)
     {
-      playerManager.isGrounded = false;
+      player.isGrounded = false;
       RaycastHit hit;
-      Vector3 origin = myTransform.position;
+      Vector3 origin = player.transform.position;
       origin.y += groundDetectionRayStartPoint;
 
-      if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
+      if (Physics.Raycast(origin, player.transform.forward, out hit, 0.4f))
       {
         moveDirection = Vector3.zero;
       }
 
-      if (playerManager.isInAir)
+      if (player.isInAir)
       {
         rigidbody.AddForce(-Vector3.up * fallingSpeed);
         rigidbody.AddForce(moveDirection * fallingSpeed / 5f);
@@ -238,89 +220,88 @@ namespace MR
       dir.Normalize();
       origin = origin + dir * groundDirectionRayDistance;
 
-      targetPosition = myTransform.position;
+      targetPosition = player.transform.position;
 
       Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
       if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
       {
         normalVector = hit.normal;
         Vector3 tp = hit.point;
-        playerManager.isGrounded = true;
+        player.isGrounded = true;
         targetPosition.y = tp.y;
 
-        if (playerManager.isInAir)
+        if (player.isInAir)
         {
           if (inAirTimer > 0.5f)
           {
             Debug.Log("You were in the air for " + inAirTimer);
-            playerAnimatorManager.PlayTargetAnimation("Landing", true);
+            player.playerAnimatorManager.PlayTargetAnimation("Landing", true);
             inAirTimer = 0;
           }
           else
           {
-            playerAnimatorManager.PlayTargetAnimation("Empty", false);
+            player.playerAnimatorManager.PlayTargetAnimation("Empty", false);
             inAirTimer = 0;
           }
-          playerManager.isInAir = false;
+          player.isInAir = false;
         }
       }
       else
       {
-        if (playerManager.isGrounded)
+        if (player.isGrounded)
         {
-          playerManager.isGrounded = false;
+          player.isGrounded = false;
         }
-        if (playerManager.isInAir == false)
+        if (player.isInAir == false)
         {
 
-          if (playerManager.isInteracting == false)
+          if (player.isInteracting == false)
           {
-            playerAnimatorManager.PlayTargetAnimation("Falling", true);
+            player.playerAnimatorManager.PlayTargetAnimation("Falling", true);
           }
 
           Vector3 vel = rigidbody.velocity;
           vel.Normalize();
           rigidbody.velocity = vel * (movementSpeed / 2);
-          playerManager.isInAir = true;
+          player.isInAir = true;
         }
       }
 
-      if (playerManager.isGrounded)
+      if (player.isGrounded)
       {
-        if (playerManager.isInteracting || inputHandler.moveAmount > 0)
+        if (player.isInteracting || player.inputHandler.moveAmount > 0)
         {
-          myTransform.position = Vector3.MoveTowards(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+          player.transform.position = Vector3.MoveTowards(player.transform.position, targetPosition, Time.deltaTime / 0.1f);
         }
         else
         {
-          myTransform.position = targetPosition;
+          player.transform.position = targetPosition;
         }
       }
     }
 
     public void HandleJumping()
     {
-      if (playerManager.isInteracting) return;
-      if (playerStatsManager.currentStamina <= 0) return;
+      if (player.isInteracting) return;
+      if (player.playerStatsManager.currentStamina <= 0) return;
 
-      if (inputHandler.jump_Input)
+      if (player.inputHandler.jump_Input)
       {
 
-        if (inputHandler.moveAmount > 0)
+        if (player.inputHandler.moveAmount > 0)
         {
-          moveDirection = cameraObject.forward * inputHandler.vertical;
-          moveDirection += cameraObject.right * inputHandler.horizontal;
-          playerAnimatorManager.PlayTargetAnimation("Jump", true);
-          playerAnimatorManager.EraseHandIKForWeapon();
+          moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
+          moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
+          player.playerAnimatorManager.PlayTargetAnimation("Jump", true);
+          player.playerAnimatorManager.EraseHandIKForWeapon();
           moveDirection.y = 0;
           Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
-          myTransform.rotation = jumpRotation;
+          player.transform.rotation = jumpRotation;
         }
       }
 
     }
 
-    #endregion
 
 
   }

@@ -12,7 +12,7 @@ namespace MR
       if (player.isInteracting) return;
       if (player.isHoldingArrow) return;
       
-      player.playerAnimatorManager.animator.SetBool("isHoldingArrow", true);
+      player.animator.SetBool("isHoldingArrow", true);
       player.playerAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
       GameObject loadedArrow = Instantiate(player.playerInventoryManager.currentAmmo.loadedItemModel, player.playerWeaponSlotManager.leftHandSlot.transform);

@@ -15,20 +15,20 @@ namespace MR
    protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
-    public override State Tick(EnemyManager enemyManager, EnemyStatsManager enemyStatsManager, EnemyAnimatorManager enemyAnimatorManager)
+    public override State Tick(EnemyManager enemy)
     {
-      float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-      enemyAnimatorManager.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-      enemyAnimatorManager.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+      enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+      enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
       attackState.hasPerformedAttack = false;
 
-      if (enemyManager.isInteracting) {
-        enemyAnimatorManager.animator.SetFloat("Vertical", 0);
-        enemyAnimatorManager.animator.SetFloat("Horizontal", 0);
+      if (enemy.isInteracting) {
+        enemy.animator.SetFloat("Vertical", 0);
+        enemy.animator.SetFloat("Horizontal", 0);
         return this;
       }
 
-      if (distanceFromTarget > enemyManager.maximumAggroRadius)
+      if (distanceFromTarget > enemy.maximumAggroRadius)
       {
         return pursueTargetState;
       }
@@ -36,30 +36,30 @@ namespace MR
       if (!randomDestinationSet)
       {
         randomDestinationSet = true;
-        DecideCirclingAction(enemyAnimatorManager);
+        DecideCirclingAction(enemy);
       }
 
-      HandleRotateTowardsTarget(enemyManager);
+      HandleRotateTowardsTarget(enemy);
 
-      if (enemyManager.currentRecoveryTime <= 0 && attackState.currentAttack != null)
+      if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
       {
         randomDestinationSet = false;
         return attackState;
       }
       else
       {
-        GetNewAttack(enemyManager);
+        GetNewAttack(enemy);
       }
       return this;
 
     }
 
-    protected void HandleRotateTowardsTarget(EnemyManager enemyManager)
+    protected void HandleRotateTowardsTarget(EnemyManager enemy)
     {
       // Rotate Manually
-      if (enemyManager.isPreformingAction)
+      if (enemy.isPreformingAction)
       {
-        Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+        Vector3 direction = enemy.currentTarget.transform.position - enemy.transform.position;
         direction.y = 0;
         direction.Normalize();
 
@@ -69,28 +69,28 @@ namespace MR
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+        enemy.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemy.rotationSpeed / Time.deltaTime);
       }
       // Rotate with pathfinding(navmesh)
       else
       {
-        Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-        Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+        Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navMeshAgent.desiredVelocity);
+        Vector3 targetVelocity = enemy.enemyRigidbody.velocity;
 
-        enemyManager.navMeshAgent.enabled = true;
-        enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-        enemyManager.enemyRigidbody.velocity = targetVelocity;
-        enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, enemyManager.navMeshAgent.transform.rotation, enemyManager.rotationSpeed / Time.deltaTime);
+        enemy.navMeshAgent.enabled = true;
+        enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
+        enemy.enemyRigidbody.velocity = targetVelocity;
+        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navMeshAgent.transform.rotation, enemy.rotationSpeed / Time.deltaTime);
       }
     }
 
 
-    protected void DecideCirclingAction(EnemyAnimatorManager enemyAnimatorManager)
+    protected void DecideCirclingAction(EnemyManager enemy)
     {
-      WalkAroundTarget(enemyAnimatorManager);
+      WalkAroundTarget(enemy);
     }
 
-    protected void WalkAroundTarget(EnemyAnimatorManager enemyAnimatorManager)
+    protected void WalkAroundTarget(EnemyManager enemy)
     {
       verticalMovementValue = 0.5f;
 
@@ -106,11 +106,11 @@ namespace MR
       }
     }
 
-    protected virtual void GetNewAttack(EnemyManager enemyManager)
+    protected virtual void GetNewAttack(EnemyManager enemy)
     {
-      Vector3 targetsDirection = enemyManager.currentTarget.transform.position - transform.position;
+      Vector3 targetsDirection = enemy.currentTarget.transform.position - transform.position;
       float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-      float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
 
       int maxScore = 0;
 

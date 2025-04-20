@@ -8,12 +8,11 @@ namespace MR
   {
 
     public HealthBar healthBar;
-    StaminaBar staminaBar;
+    public StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
 
 
     PlayerManager player;
-    PlayerAnimatorManager playerAnimatorManager;
 
     public float staminaRegenerationAmount = 30f;
     public float staminaRegenTimer;
@@ -23,7 +22,6 @@ namespace MR
       base.Awake();
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
-      playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
     }
     private void Start()
     {
@@ -75,7 +73,7 @@ namespace MR
       {
         currentHealth = 0;
         player.isDead = true;
-        playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
 
@@ -86,13 +84,13 @@ namespace MR
 
       base.TakeDamage(physicalDamage, fireDamage, damageAnimation);
 
-      playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+      player.playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
       if (currentHealth <= 0)
       {
         currentHealth = 0;
         player.isDead = true;
-        playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
     public void TakeStaminaDamage(int damage)

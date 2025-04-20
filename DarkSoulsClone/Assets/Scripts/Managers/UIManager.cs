@@ -8,7 +8,7 @@ namespace MR
   {
     PlayerManager playerManager;
     public EquipmentWindowUI equipmentWindowUI;
-    private QuickSlotsUI quickSlotsUI;
+    public QuickSlotsUI quickSlotsUI;
 
     [Header("HUD")]
     public GameObject crossHair;

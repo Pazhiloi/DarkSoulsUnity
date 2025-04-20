@@ -57,13 +57,13 @@ namespace MR
       HandleRecoveryTimer();
       HandleStateMachine();
 
-      isRotatingWithRootMotion = enemyAnimatorManager.animator.GetBool("isRotatingWithRootMotion");
-      isInteracting = enemyAnimatorManager.animator.GetBool("isInteracting");
-      isPhaseShifting = enemyAnimatorManager.animator.GetBool("isPhaseShifting");
-      isInvulnerable = enemyAnimatorManager.animator.GetBool("isInvulnerable");
-      canDoCombo = enemyAnimatorManager.animator.GetBool("canDoCombo");
-      canRotate = enemyAnimatorManager.animator.GetBool("canRotate");
-      enemyAnimatorManager.animator.SetBool("isDead", isDead);
+      isRotatingWithRootMotion = animator.GetBool("isRotatingWithRootMotion");
+      isInteracting = animator.GetBool("isInteracting");
+      isPhaseShifting = animator.GetBool("isPhaseShifting");
+      isInvulnerable = animator.GetBool("isInvulnerable");
+      canDoCombo = animator.GetBool("canDoCombo");
+      canRotate = animator.GetBool("canRotate");
+      animator.SetBool("isDead", isDead);
     }
 
     protected override void FixedUpdate()
@@ -83,7 +83,7 @@ namespace MR
 
       if (currentState != null)
       {
-        State nextState = currentState.Tick(this, enemyStatsManager, enemyAnimatorManager);
+        State nextState = currentState.Tick(this);
 
         if (nextState != null)
         {
