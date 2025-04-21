@@ -9,6 +9,9 @@ namespace MR
 
     public List<WeaponItem> weaponsInventory;
     public List<HelmetEquipment> headEquipmentInventory;
+    public List<BodyEquipment> bodyEquipmentInventory;
+    public List<LegEquipment> legEquipmentInventory;
+    public List<HandEquipment> handEquipmentInventory;
 
     public void ChangeRightWeapon()
     {

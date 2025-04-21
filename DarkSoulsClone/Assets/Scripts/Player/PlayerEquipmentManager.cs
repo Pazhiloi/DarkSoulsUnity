@@ -79,12 +79,12 @@ namespace MR
         player.playerStatsManager.physicalDamageAbsorptionHead = 0;
       }
 
-      if (player.playerInventoryManager.currentTorsoEquipment != null)
+      if (player.playerInventoryManager.currentBodyEquipment != null)
       {
-        torsoModelChanger.EquipTorsoModelByName(player.playerInventoryManager.currentTorsoEquipment.torsoModelName);
-        upperLeftArmModelChanger.EquipModelByName(player.playerInventoryManager.currentTorsoEquipment.upperLeftArmModelName);
-        upperRightArmModelChanger.EquipModelByName(player.playerInventoryManager.currentTorsoEquipment.upperRightArmModelName);
-        player.playerStatsManager.physicalDamageAbsorptionBody = player.playerInventoryManager.currentTorsoEquipment.physicalDefense;
+        torsoModelChanger.EquipTorsoModelByName(player.playerInventoryManager.currentBodyEquipment.torsoModelName);
+        upperLeftArmModelChanger.EquipModelByName(player.playerInventoryManager.currentBodyEquipment.upperLeftArmModelName);
+        upperRightArmModelChanger.EquipModelByName(player.playerInventoryManager.currentBodyEquipment.upperRightArmModelName);
+        player.playerStatsManager.physicalDamageAbsorptionBody = player.playerInventoryManager.currentBodyEquipment.physicalDefense;
       }
       else
       {

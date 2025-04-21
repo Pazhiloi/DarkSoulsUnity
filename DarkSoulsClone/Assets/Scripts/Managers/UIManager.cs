@@ -24,6 +24,9 @@ namespace MR
     [Header("Equipment Window Slots Selected")]
     public bool rightHandSlot01Selected, rightHandSlot02Selected, leftHandSlot01Selected, leftHandSlot02Selected;
     public bool headEquipmentSlotSelected;
+    public bool bodyEquipmentSlotSelected;
+    public bool legEquipmentSlotSelected;
+    public bool handEquipmentSlotSelected;
 
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
@@ -33,7 +36,17 @@ namespace MR
     [Header("Head Equipment Inventory")]
     public GameObject headEquipmentInventorySlotPrefab;
     public Transform headEquipmentInventorySlotParent;
+    public GameObject bodyEquipmentInventorySlotPrefab;
+    public Transform bodyEquipmentInventorySlotParent;
+    public GameObject legEquipmentInventorySlotPrefab;
+    public Transform legEquipmentInventorySlotParent;
+    public GameObject handEquipmentInventorySlotPrefab;
+    public Transform handEquipmentInventorySlotParent;
     HeadEquipmentInventorySlot[] headEquipmentInventorySlots;
+    BodyEquipmentInventorySlot[] bodyEquipmentInventorySlots;
+    LegEquipmentInventorySlot[] legEquipmentInventorySlots;
+    HandEquipmentInventorySlot[] handEquipmentInventorySlots;
+
 
     private void Awake()
     {
@@ -42,6 +55,9 @@ namespace MR
 
       weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
       headEquipmentInventorySlots = headEquipmentInventorySlotParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
+      bodyEquipmentInventorySlots = bodyEquipmentInventorySlotParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
+      legEquipmentInventorySlots = legEquipmentInventorySlotParent.GetComponentsInChildren<LegEquipmentInventorySlot>();
+      handEquipmentInventorySlots = handEquipmentInventorySlotParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
     }
 
     private void Start()
@@ -79,6 +95,7 @@ namespace MR
           weaponInventorySlots[i].ClearInventorySlot();
         }
       }
+      // HEAD EQUIPMENT INVENTORY SLOTS
 
       for (int i = 0; i < headEquipmentInventorySlots.Length; i++)
       {
@@ -94,6 +111,59 @@ namespace MR
         else
         {
           headEquipmentInventorySlots[i].ClearInventorySlot();
+        }
+      }
+
+      // BODY EQUIPMENT INVENTORY SLOTS
+      for (int i = 0; i < player.playerInventoryManager.bodyEquipmentInventory.Count; i++)
+      {
+        if (i < player.playerInventoryManager.bodyEquipmentInventory.Count)
+        {
+          if (bodyEquipmentInventorySlots.Length < player.playerInventoryManager.bodyEquipmentInventory.Count)
+          {
+            Instantiate(bodyEquipmentInventorySlotPrefab, bodyEquipmentInventorySlotParent);
+            bodyEquipmentInventorySlots = bodyEquipmentInventorySlotParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
+          }
+          bodyEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.bodyEquipmentInventory[i]);
+        }
+        else
+        {
+          bodyEquipmentInventorySlots[i].ClearInventorySlot();
+        }
+      }
+      // LEG EQUIPMENT INVENTORY SLOTS
+      for (int i = 0; i < player.playerInventoryManager.legEquipmentInventory.Count; i++)
+      {
+        if (i < player.playerInventoryManager.legEquipmentInventory.Count)
+        {
+          if (legEquipmentInventorySlots.Length < player.playerInventoryManager.legEquipmentInventory.Count)
+          {
+            Instantiate(legEquipmentInventorySlotPrefab, legEquipmentInventorySlotParent);
+            legEquipmentInventorySlots = legEquipmentInventorySlotParent.GetComponentsInChildren<LegEquipmentInventorySlot>();
+          }
+          legEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.legEquipmentInventory[i]);
+        }
+        else
+        {
+          legEquipmentInventorySlots[i].ClearInventorySlot();
+        }
+      }
+      // HAND EQUIPMENT INVENTORY SLOTS
+
+      for (int i = 0; i < player.playerInventoryManager.handEquipmentInventory.Count; i++)
+      {
+        if (i < player.playerInventoryManager.handEquipmentInventory.Count)
+        {
+          if (handEquipmentInventorySlots.Length < player.playerInventoryManager.handEquipmentInventory.Count)
+          {
+            Instantiate(handEquipmentInventorySlotPrefab, handEquipmentInventorySlotParent);
+            handEquipmentInventorySlots = handEquipmentInventorySlotParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
+          }
+          handEquipmentInventorySlots[i].AddItem(player.playerInventoryManager.handEquipmentInventory[i]);
+        }
+        else
+        {
+          handEquipmentInventorySlots[i].ClearInventorySlot();
         }
       }
 
@@ -121,7 +191,11 @@ namespace MR
       rightHandSlot02Selected = false;
       leftHandSlot01Selected = false;
       leftHandSlot02Selected = false;
+
       headEquipmentSlotSelected = false;
+      bodyEquipmentSlotSelected = false;
+      legEquipmentSlotSelected = false;
+      handEquipmentSlotSelected = false;
     }
   }
 }

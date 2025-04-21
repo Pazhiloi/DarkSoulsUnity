@@ -4,7 +4,7 @@ using UnityEngine;
 namespace  MR
 {
   [CreateAssetMenu(menuName = "Items/Equipment/Torso Equipment")]
-  public class TorsoEquipment : EquipmentItem
+  public class BodyEquipment : EquipmentItem
 {
   public string torsoModelName, upperLeftArmModelName, upperRightArmModelName;
 }

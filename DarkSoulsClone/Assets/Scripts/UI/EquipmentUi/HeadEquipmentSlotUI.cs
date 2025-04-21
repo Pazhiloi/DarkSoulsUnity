@@ -7,7 +7,7 @@ namespace MR
     {
     UIManager uiManager;
     public Image icon;
-    HelmetEquipment helmetItem;
+    HelmetEquipment item;
     private void Awake()
     {
       uiManager = FindObjectOfType<UIManager>();
@@ -15,8 +15,8 @@ namespace MR
 
     public void AddItem(HelmetEquipment helmetEquipment)
     {
-      helmetItem = helmetEquipment;
-      icon.sprite = helmetItem.itemIcon;
+      item = helmetEquipment;
+      icon.sprite = item.itemIcon;
       icon.enabled = true;
       gameObject.SetActive(true);
      
@@ -24,7 +24,7 @@ namespace MR
 
     public void ClearItem()
     {
-      helmetItem = null;
+      item = null;
       icon.sprite = null;
       icon.enabled = false;
     }
