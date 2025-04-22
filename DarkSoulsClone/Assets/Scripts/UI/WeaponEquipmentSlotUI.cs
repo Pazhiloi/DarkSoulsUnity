@@ -34,6 +34,7 @@ namespace MR
 
     public void SelectThisSlot()
     {
+      uiManager.ResetAllSelectedSlots();
       if (rightHandSlot01)
       {
         uiManager.rightHandSlot01Selected = true;
@@ -50,7 +51,9 @@ namespace MR
       {
         uiManager.leftHandSlot02Selected = true;
       }
+      uiManager.itemStatsWindowUI.UpdateWeaponItemStats(weapon);
+
     }
-    
+
   }
 }

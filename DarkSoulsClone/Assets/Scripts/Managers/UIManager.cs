@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 namespace MR
@@ -7,6 +5,7 @@ namespace MR
   public class UIManager : MonoBehaviour
   {
    public PlayerManager player;
+   public ItemStatsWindowUI itemStatsWindowUI;
     public EquipmentWindowUI equipmentWindowUI;
     public QuickSlotsUI quickSlotsUI;
 
@@ -18,6 +17,7 @@ namespace MR
     public GameObject hudWindow;
     public GameObject selectWindow;
     public GameObject weaponInventoryWindow;
+    public GameObject itemStatsWindow;
     public GameObject equipmentScreenWindow;
     public GameObject levelUpWindow;
 
@@ -50,8 +50,8 @@ namespace MR
 
     private void Awake()
     {
-      quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
       player = FindObjectOfType<PlayerManager>();
+      quickSlotsUI = GetComponentInChildren<QuickSlotsUI>();
 
       weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>();
       headEquipmentInventorySlots = headEquipmentInventorySlotParent.GetComponentsInChildren<HeadEquipmentInventorySlot>();
@@ -183,6 +183,7 @@ namespace MR
       ResetAllSelectedSlots();
       weaponInventoryWindow.SetActive(false);
       equipmentScreenWindow.SetActive(false);
+      itemStatsWindow.SetActive(false);
     }
 
     public void ResetAllSelectedSlots()
