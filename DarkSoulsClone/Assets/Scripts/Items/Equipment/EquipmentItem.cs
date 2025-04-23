@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace MR
 {
@@ -7,5 +5,9 @@ namespace MR
   {
     [Header("Defense Bonus")]
     public float physicalDefense;
+    public float magicDefense;
+
+    [Header("Resistances")]
+    public float poisonResistance;
   }
 }

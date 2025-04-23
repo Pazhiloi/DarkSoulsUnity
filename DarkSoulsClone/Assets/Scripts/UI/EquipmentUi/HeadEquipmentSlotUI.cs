@@ -32,6 +32,7 @@ namespace MR
     public void SelectThisSlot()
     {
       uiManager.headEquipmentSlotSelected = true;
+      uiManager.itemStatsWindowUI.UpdateArmorItemStats(item);
     }
   }
 }

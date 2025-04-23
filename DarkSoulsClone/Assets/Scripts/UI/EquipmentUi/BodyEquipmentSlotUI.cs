@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace MR
 {
-    public class BodyEquipmentSlotUI : MonoBehaviour
-    {
+  public class BodyEquipmentSlotUI : MonoBehaviour
+  {
     UIManager uiManager;
     public Image icon;
     BodyEquipment item;
@@ -21,7 +21,7 @@ namespace MR
       icon.sprite = item.itemIcon;
       icon.enabled = true;
       gameObject.SetActive(true);
-     
+
     }
 
     public void ClearItem()
@@ -34,6 +34,7 @@ namespace MR
     public void SelectThisSlot()
     {
       uiManager.bodyEquipmentSlotSelected = true;
+      uiManager.itemStatsWindowUI.UpdateArmorItemStats(item);
     }
-    }
+  }
 }

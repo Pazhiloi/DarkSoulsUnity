@@ -34,6 +34,7 @@ namespace MR
     public void SelectThisSlot()
     {
       uiManager.legEquipmentSlotSelected = true;
+      uiManager.itemStatsWindowUI.UpdateArmorItemStats(item);
     }
     }
 }

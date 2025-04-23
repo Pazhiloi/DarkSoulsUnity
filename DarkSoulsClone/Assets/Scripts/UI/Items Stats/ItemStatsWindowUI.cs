@@ -9,10 +9,24 @@ namespace MR
   {
     public Text itemNameText;
     public Image itemIconImage;
+    [Header("Equipment Stats Windows")]
+    public GameObject weaponStats;
+    public GameObject armorStats;
 
+    [Header("Weapon Stats")]
+    public Text physicalDamageText;
+    public Text magicDamageText;
+    public Text physicalAbsorptionText;
+    public Text magicAbsorptionText;
+
+    [Header("Armor Stats")]
+    public Text armorPhysicalAbsorptionText;
+    public Text armorMagicAbsorptionText;
+    public Text armorPoisonResistanceText;
     public void UpdateWeaponItemStats(WeaponItem weapon)
     {
-      if (weapon!=null)
+      CloseAllStatWindows();
+      if (weapon != null)
       {
         if (weapon.itemName != null)
         {
@@ -35,13 +49,64 @@ namespace MR
           itemIconImage.enabled = false;
           itemIconImage.sprite = null;
         }
-      }else{
+        physicalDamageText.text = weapon.physicalDamage.ToString();
+        physicalAbsorptionText.text = weapon.physicalDamageAbsorption.ToString();
+
+        weaponStats.SetActive(true);
+      }
+      else
+      {
         itemNameText.text = "";
         itemIconImage.gameObject.SetActive(false);
         itemIconImage.sprite = null;
+        weaponStats.SetActive(false);
       }
-      
+    }
 
+    public void UpdateArmorItemStats(EquipmentItem armor)
+    {
+      CloseAllStatWindows();
+      if (armor != null)
+      {
+        if (armor.itemName != null)
+        {
+          itemNameText.text = armor.itemName;
+        }
+        else
+        {
+          itemNameText.text = "";
+        }
+
+        if (armor.itemIcon != null)
+        {
+          itemIconImage.gameObject.SetActive(true);
+          itemIconImage.enabled = true;
+          itemIconImage.sprite = armor.itemIcon;
+        }
+        else
+        {
+          itemIconImage.gameObject.SetActive(false);
+          itemIconImage.enabled = false;
+          itemIconImage.sprite = null;
+        }
+        armorPhysicalAbsorptionText.text = armor.physicalDefense.ToString();
+        armorMagicAbsorptionText.text = armor.magicDefense.ToString();
+        armorPoisonResistanceText.text = armor.poisonResistance.ToString();
+        armorStats.SetActive(true);
+      }
+      else
+      {
+        itemNameText.text = "";
+        itemIconImage.gameObject.SetActive(false);
+        itemIconImage.sprite = null;
+        armorStats.SetActive(false);
+      }
+    }
+
+    private void CloseAllStatWindows()
+    {
+      weaponStats.SetActive(false);
+      armorStats.SetActive(false);
     }
   }
 }
