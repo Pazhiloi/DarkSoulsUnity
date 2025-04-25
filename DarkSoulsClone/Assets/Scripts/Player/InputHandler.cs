@@ -20,7 +20,7 @@ namespace MR
 
     public bool tap_rb_Input, lb_Input, tap_lb_Input;
     public bool hold_rb_Input;
-    public bool tap_rt_Input, tap_lt_Input;
+    public bool tap_rt_Input, tap_lt_Input, hold_rt_Input;
 
     public bool jump_Input;
     public bool inventory_Input;
@@ -63,8 +63,13 @@ namespace MR
         inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
         inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
         inputActions.PlayerActions.RB.performed += i => tap_rb_Input = true;
+
         inputActions.PlayerActions.HoldRB.performed += i => hold_rb_Input = true;
         inputActions.PlayerActions.HoldRB.canceled += i => hold_rb_Input = false;
+
+        inputActions.PlayerActions.HoldRT.performed += i => hold_rt_Input = true;
+        inputActions.PlayerActions.HoldRT.canceled += i => hold_rt_Input = false;
+
         inputActions.PlayerActions.RT.performed += i => tap_rt_Input = true;
         inputActions.PlayerActions.LT.performed += i => tap_lt_Input = true;
         inputActions.PlayerActions.TapLB.performed += i => tap_lb_Input = true;
@@ -92,15 +97,16 @@ namespace MR
       inputActions.Disable();
     }
 
-    public void TickInput(float delta)
+    public void TickInput()
     {
       if (player.isDead) return;
       HandleMoveInput();
       HandleRollInput();
 
       HandleHoldRBInput();
-
       HandleHoldLBInput();
+      HandleHoldRTInput();
+
       HandleTapLBInput();
       HandleTapRBInput();
       HandleTapRTInput();
@@ -173,11 +179,11 @@ namespace MR
       if (tap_rb_Input)
       {
         tap_rb_Input = false;
-        if (player.playerInventoryManager.rightWeapon.tap_RB_Action != null)
+        if (player.playerInventoryManager.rightWeapon.oh_tap_RB_Action != null)
         {
           player.UpdateWhichHandCharacterIsUsing(true);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-          player.playerInventoryManager.rightWeapon.tap_RB_Action.PerformAction(player);
+          player.playerInventoryManager.rightWeapon.oh_tap_RB_Action.PerformAction(player);
         }
         
       }
@@ -188,14 +194,36 @@ namespace MR
     {
       if (hold_rb_Input)
       {
-        if (player.playerInventoryManager.rightWeapon.hold_LB_Action != null){
+        if (player.playerInventoryManager.rightWeapon.oh_hold_LB_Action != null){
           player.UpdateWhichHandCharacterIsUsing(true);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-          player.playerInventoryManager.rightWeapon.hold_RB_Action.PerformAction(player);
+          player.playerInventoryManager.rightWeapon.oh_hold_RB_Action.PerformAction(player);
         }
          
       }
     }
+
+    private void HandleHoldRTInput()
+    {
+      player.animator.SetBool("isChargingAttack", hold_rt_Input);
+      if (hold_rt_Input)
+      {
+          player.UpdateWhichHandCharacterIsUsing(true);
+          player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
+          if (player.isTwoHandingWeapon)
+          {
+            if (player.playerInventoryManager.rightWeapon.th_hold_RT_Action != null)
+            {
+              player.playerInventoryManager.rightWeapon.th_hold_RT_Action.PerformAction(player);
+            }
+          }else{
+            if (player.playerInventoryManager.rightWeapon.oh_hold_RT_Action != null)
+            {
+              player.playerInventoryManager.rightWeapon.oh_hold_RT_Action.PerformAction(player);
+            }
+          }
+          }
+      }
 
 
     private void HandleTapRTInput()
@@ -203,11 +231,11 @@ namespace MR
       if (tap_rt_Input)
       {
         tap_rt_Input = false;
-        if (player.playerInventoryManager.rightWeapon.tap_RT_Action != null)
+        if (player.playerInventoryManager.rightWeapon.oh_tap_RT_Action != null)
         {
           player.UpdateWhichHandCharacterIsUsing(true);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-          player.playerInventoryManager.rightWeapon.tap_RT_Action.PerformAction(player);
+          player.playerInventoryManager.rightWeapon.oh_tap_RT_Action.PerformAction(player);
         }
       }
     }
@@ -219,20 +247,20 @@ namespace MR
         tap_lt_Input = false;
         if (player.isTwoHandingWeapon)
         {
-          if (player.playerInventoryManager.rightWeapon.tap_LT_Action != null){
+          if (player.playerInventoryManager.rightWeapon.oh_tap_LT_Action != null){
             player.UpdateWhichHandCharacterIsUsing(true);
             player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-            player.playerInventoryManager.rightWeapon.tap_LT_Action.PerformAction(player);
+            player.playerInventoryManager.rightWeapon.oh_tap_LT_Action.PerformAction(player);
           }
            
         }
         else
         {
-          if (player.playerInventoryManager.leftWeapon.tap_LT_Action != null)
+          if (player.playerInventoryManager.leftWeapon.oh_tap_LT_Action != null)
           {
             player.UpdateWhichHandCharacterIsUsing(false);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.leftWeapon;
-          player.playerInventoryManager.leftWeapon.tap_LT_Action.PerformAction(player);
+          player.playerInventoryManager.leftWeapon.oh_tap_LT_Action.PerformAction(player);
           }
 
         }
@@ -251,19 +279,19 @@ namespace MR
       {
         if (player.isTwoHandingWeapon)
         {
-          if (player.playerInventoryManager.rightWeapon.hold_LB_Action != null)
+          if (player.playerInventoryManager.rightWeapon.oh_hold_LB_Action != null)
           {
             player.UpdateWhichHandCharacterIsUsing(true);
             player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-            player.playerInventoryManager.rightWeapon.hold_LB_Action.PerformAction(player);
+            player.playerInventoryManager.rightWeapon.oh_hold_LB_Action.PerformAction(player);
           }
         }
         else
         {
-          if (player.playerInventoryManager.leftWeapon.hold_LB_Action != null){
+          if (player.playerInventoryManager.leftWeapon.oh_hold_LB_Action != null){
             player.UpdateWhichHandCharacterIsUsing(false);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.leftWeapon;
-          player.playerInventoryManager.leftWeapon.hold_LB_Action.PerformAction(player);
+          player.playerInventoryManager.leftWeapon.oh_hold_LB_Action.PerformAction(player);
           }
 
         }
@@ -293,20 +321,20 @@ namespace MR
         tap_lb_Input = false;
         if (player.isTwoHandingWeapon)
         {
-          if (player.playerInventoryManager.rightWeapon.tap_LB_Action != null)
+          if (player.playerInventoryManager.rightWeapon.oh_tap_LB_Action != null)
           {
             player.UpdateWhichHandCharacterIsUsing(true);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.rightWeapon;
-          player.playerInventoryManager.rightWeapon.tap_LB_Action.PerformAction(player);
+          player.playerInventoryManager.rightWeapon.oh_tap_LB_Action.PerformAction(player);
           }
         }
         else
         {
-          if (player.playerInventoryManager.leftWeapon.tap_LB_Action != null)
+          if (player.playerInventoryManager.leftWeapon.oh_tap_LB_Action != null)
           {
             player.UpdateWhichHandCharacterIsUsing(false);
           player.playerInventoryManager.currentItemBeingUsed = player.playerInventoryManager.leftWeapon;
-          player.playerInventoryManager.leftWeapon.tap_LB_Action.PerformAction(player);
+          player.playerInventoryManager.leftWeapon.oh_tap_LB_Action.PerformAction(player);
           }
         }
       }

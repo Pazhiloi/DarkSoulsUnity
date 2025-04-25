@@ -63,9 +63,10 @@ namespace MR
     }
 
 
-    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
+    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
     {
       if (characterManager.isDead) return;
+
 
       characterManager.characterAnimatorManager.EraseHandIKForWeapon();
 
@@ -86,6 +87,12 @@ namespace MR
       fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
 
       float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
+
+
+      if (enemyCharacterDamagingMe.isPerformingFullyChargedAttack)
+      {
+        finalDamage = finalDamage * 2;
+      }
 
       currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 

@@ -77,12 +77,12 @@ namespace MR
       }
     }
 
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
     {
       if (player.isInvulnerable)
         return;
 
-      base.TakeDamage(physicalDamage, fireDamage, damageAnimation);
+      base.TakeDamage(physicalDamage, fireDamage, damageAnimation, enemyCharacterDamagingMe);
 
       player.playerAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 

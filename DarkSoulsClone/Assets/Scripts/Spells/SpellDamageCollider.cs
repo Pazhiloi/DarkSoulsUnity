@@ -36,7 +36,7 @@ namespace MR
 
         if (spellTarget != null && spellTarget.teamIDNumber != teamIDNumber)
         {
-          spellTarget.TakeDamage(0, fireDamage, currentDamageAnimation);
+          spellTarget.TakeDamage(0, fireDamage, currentDamageAnimation, characterManager);
         }
         hasCollided = true;
         impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));

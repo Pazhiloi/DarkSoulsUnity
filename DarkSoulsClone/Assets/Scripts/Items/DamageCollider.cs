@@ -84,7 +84,7 @@ namespace MR
           }
           else
           {
-            enemyStats.TakeDamage(physicalDamage, 0, currentDamageAnimation);
+            enemyStats.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
           }
         }
       }
@@ -114,7 +114,7 @@ namespace MR
         float fireDamageAfterBlock = fireDamage - (fireDamage * shield.blockingFireDamageAbsorption) / 100;
 
         if (enemyStats != null)
-        { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block Guard"); }
+        { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block Guard", characterManager); }
         shieldHasBeenHit = true;
       }
     }

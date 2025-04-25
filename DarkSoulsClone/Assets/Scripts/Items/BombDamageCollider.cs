@@ -34,7 +34,7 @@ namespace MR
         {
           if (character.teamIDNumber != teamIDNumber)
           {
-            character.TakeDamage(0, explosionDamage, currentDamageAnimation);
+            character.TakeDamage(0, explosionDamage, currentDamageAnimation, characterManager);
           }
         }
 
@@ -54,7 +54,7 @@ namespace MR
         {
           if (character.teamIDNumber != teamIDNumber)
           {
-            character.TakeDamage(0, explosionSplashDamage, currentDamageAnimation);
+            character.TakeDamage(0, explosionSplashDamage, currentDamageAnimation, characterManager);
           }
         }
       }

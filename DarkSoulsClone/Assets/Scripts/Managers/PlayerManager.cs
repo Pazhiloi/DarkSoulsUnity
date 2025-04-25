@@ -65,13 +65,14 @@ namespace MR
       isInvulnerable = animator.GetBool("isInvulnerable");
       isFiringSpell = animator.GetBool("isFiringSpell");
       isHoldingArrow = animator.GetBool("isHoldingArrow");
+      isPerformingFullyChargedAttack = animator.GetBool("isPerformingFullyChargedAttack");
       animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
       animator.SetBool("isBlocking", isBlocking);
       animator.SetBool("isInAir", isInAir);
       animator.SetBool("isDead", isDead);
 
 
-      inputHandler.TickInput(delta);
+      inputHandler.TickInput();
       playerLocomotionManager.HandleRollingAndSprinting();
       playerLocomotionManager.HandleJumping();
 

@@ -73,9 +73,9 @@ namespace MR
     {
       enemy.enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation)
+    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
     {
-      base.TakeDamage(physicalDamage, fireDamage, damageAnimation);
+      base.TakeDamage(physicalDamage, fireDamage, damageAnimation, enemyCharacterDamagingMe);
 
       if (!isBoss)
       {

@@ -34,6 +34,7 @@ namespace MR
     public bool isHoldingArrow;
     public bool isAiming;
     public bool isTwoHandingWeapon;
+    public bool isPerformingFullyChargedAttack;
 
 
 

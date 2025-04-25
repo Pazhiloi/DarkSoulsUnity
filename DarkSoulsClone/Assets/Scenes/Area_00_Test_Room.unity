@@ -33606,12 +33606,16 @@ MonoBehaviour:
   oh_heavy_attack_02: OH_Heavy_Attack_02
   oh_running_attack_01: OH_Running_Attack_01
   oh_jumping_attack_01: OH_Jumping_Attack_01
+  oh_charge_attack_01: OH_Charge_Attack_01
+  oh_charge_attack_02: OH_Charge_Attack_02
   th_light_attack_01: TH_Light_Attack_01
   th_light_attack_02: TH_Light_Attack_02
   th_heavy_attack_01: TH_Heavy_Attack_01
   th_heavy_attack_02: TH_Heavy_Attack_02
   th_running_attack_01: TH_Running_Attack_01
   th_jumping_attack_01: TH_Jumping_Attack_01
+  th_charge_attack_01: TH_Charge_Attack_01
+  th_charge_attack_02: TH_Charge_Attack_02
   weapon_art: Weapon_Art
 --- !u!114 &5866666020217144482
 MonoBehaviour:
@@ -33808,6 +33812,7 @@ MonoBehaviour:
   hold_rb_Input: 0
   tap_rt_Input: 0
   tap_lt_Input: 0
+  hold_rt_Input: 0
   jump_Input: 0
   inventory_Input: 0
   lockOnInput: 0
