@@ -51,5 +51,8 @@ namespace MR
     public ItemAction th_tap_LT_Action;
     public ItemAction th_hold_LT_Action;
 
+    [Header("SOUND FX")]
+    public AudioClip[] weaponWhooshes;
+
   }
 }

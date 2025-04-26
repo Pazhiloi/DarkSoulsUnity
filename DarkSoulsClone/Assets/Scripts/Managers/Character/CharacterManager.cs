@@ -9,6 +9,7 @@ namespace MR
   public CharacterStatsManager characterStatsManager;
     public CharacterInventoryManager characterInventoryManager;
     public CharacterEffectsManager characterEffectsManager;
+    public CharacterSoundFXManager characterSoundFXManager;
 
     [Header("Look On Transform")]
     [Header("Lock On Transform")]
@@ -61,6 +62,7 @@ namespace MR
       characterStatsManager = GetComponent<CharacterStatsManager>();
       characterInventoryManager = GetComponent<CharacterInventoryManager>();
       characterEffectsManager = GetComponent<CharacterEffectsManager>();
+      characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
     }
 
     protected virtual void FixedUpdate()

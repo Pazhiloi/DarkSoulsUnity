@@ -102,6 +102,7 @@ namespace MR
         currentHealth = 0;
         characterManager.isDead = true;
       }
+      characterManager.characterSoundFXManager.PlayRandomDamageSoundFX();
     }
 
     public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
