@@ -28,6 +28,9 @@ namespace MR
     public bool legEquipmentSlotSelected;
     public bool handEquipmentSlotSelected;
 
+    [Header("Pop Ups")]
+    BonfireLitPopUpUI bonfireLitPopUpUI;
+
     [Header("Weapon Inventory")]
     public GameObject weaponInventorySlotPrefab;
     public Transform weaponInventorySlotsParent;
@@ -58,6 +61,8 @@ namespace MR
       bodyEquipmentInventorySlots = bodyEquipmentInventorySlotParent.GetComponentsInChildren<BodyEquipmentInventorySlot>();
       legEquipmentInventorySlots = legEquipmentInventorySlotParent.GetComponentsInChildren<LegEquipmentInventorySlot>();
       handEquipmentInventorySlots = handEquipmentInventorySlotParent.GetComponentsInChildren<HandEquipmentInventorySlot>();
+
+      bonfireLitPopUpUI = GetComponentInChildren<BonfireLitPopUpUI>();
     }
 
     private void Start()
@@ -198,5 +203,10 @@ namespace MR
       legEquipmentSlotSelected = false;
       handEquipmentSlotSelected = false;
     }
+    public void ActivateBonfireLitPopUp()
+    {
+      bonfireLitPopUpUI.DisplayBonfireLitPopUp();
+    }
+
   }
 }
