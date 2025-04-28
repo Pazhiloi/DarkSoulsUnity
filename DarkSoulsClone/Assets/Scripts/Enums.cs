@@ -20,6 +20,11 @@ namespace MR
     Arrow,
     Bolt
   }
+  public enum AttackType
+  {
+    light,
+    heavy
+  }
   public class Enums : MonoBehaviour
   {
 

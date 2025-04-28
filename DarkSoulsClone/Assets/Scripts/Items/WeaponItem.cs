@@ -19,6 +19,9 @@ namespace MR
     [Header("Damage")]
     public int physicalDamage;
     public int fireDamage;
+    [Header("Damage Modifiers")]
+    public float lightAttackDamageModifier;
+    public float heavyAttackDamageModifier;
     public int criticalDamageMultiplier = 4;
     [Header("Poise")]
     public int poiseBreak, offensivePoiseBonus;

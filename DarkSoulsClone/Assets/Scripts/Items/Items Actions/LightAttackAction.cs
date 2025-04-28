@@ -43,7 +43,7 @@ namespace MR
         }
         HandleLightAttack(player);
       }
-
+      player.playerCombatManager.currentAttackType = AttackType.light;
     }
 
     private void HandleLightAttack(PlayerManager player)

@@ -78,14 +78,9 @@ namespace MR
           ChooseWhichDirectionDamageCameFrom(directionHitFrom);
           enemyEffects.PlayBloodSplatterFX(contactPoint);
 
-          if (enemyStats.totalPoiseDefence > poiseBreak)
-          {
-            enemyStats.TakeDamageNoAnimation(physicalDamage, 0);
-          }
-          else
-          {
-            enemyStats.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
-          }
+
+          DealDamage(enemyStats);
+
         }
       }
 
@@ -119,6 +114,41 @@ namespace MR
       }
     }
 
+    protected virtual void DealDamage(CharacterStatsManager enemyStats)
+    {
+      float finalPhysicalDamage = physicalDamage;
+      if (characterManager.isUsingRightHand)
+      {
+        if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
+        {
+          finalPhysicalDamage = finalPhysicalDamage* characterManager.characterInventoryManager.rightWeapon.lightAttackDamageModifier;
+        }
+        else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+        {
+          finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.heavyAttackDamageModifier;
+        }
+      }
+      else if (characterManager.isUsingLeftHand)
+      {
+        if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
+        {
+          finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.lightAttackDamageModifier;
+        }
+        else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
+        {
+          finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.leftWeapon.heavyAttackDamageModifier;
+        }
+      }
+
+      if (enemyStats.totalPoiseDefence > poiseBreak)
+      {
+        enemyStats.TakeDamageNoAnimation(Mathf.RoundToInt(finalPhysicalDamage), 0);
+      }
+      else
+      {
+        enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
+      }
+    }
     protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)
     {
       if (direction >= 145 && direction <= 180)

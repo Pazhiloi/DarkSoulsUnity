@@ -10,6 +10,7 @@ namespace MR
     public CharacterInventoryManager characterInventoryManager;
     public CharacterEffectsManager characterEffectsManager;
     public CharacterSoundFXManager characterSoundFXManager;
+    public CharacterCombatManager characterCombatManager;
 
     [Header("Look On Transform")]
     [Header("Lock On Transform")]
@@ -63,6 +64,7 @@ namespace MR
       characterInventoryManager = GetComponent<CharacterInventoryManager>();
       characterEffectsManager = GetComponent<CharacterEffectsManager>();
       characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
+      characterCombatManager = GetComponent<CharacterCombatManager>();
     }
 
     protected virtual void FixedUpdate()

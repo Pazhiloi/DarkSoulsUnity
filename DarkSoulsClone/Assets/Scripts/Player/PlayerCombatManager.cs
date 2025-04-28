@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace MR
 {
-  public class PlayerCombatManager : MonoBehaviour
+  public class PlayerCombatManager : CharacterCombatManager
   {
     PlayerManager player;
+    
     public string lastAttack;
     public LayerMask backStabLayer = 1 << 12;
     public LayerMask riposteLayer = 1 << 13;
