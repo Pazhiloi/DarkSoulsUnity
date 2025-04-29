@@ -63,6 +63,12 @@ namespace MR
       healthBar.SetCurrentHealth(currentHealth);
     }
 
+    public override void DeductStamina(float staminaToDeduct)
+    {
+      base.DeductStamina(staminaToDeduct);
+      staminaBar.SetCurrentStamina(currentStamina);
+    }
+
     public override void TakePoisonDamage(int damage)
     {
       if (player.isDead) return;
@@ -93,11 +99,7 @@ namespace MR
         player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
-    public void TakeStaminaDamage(int damage)
-    {
-      currentStamina -= damage;
-      staminaBar.SetCurrentStamina(currentStamina);
-    }
+   
 
     public void DrainFocusPoints(int focusPoints)
     {

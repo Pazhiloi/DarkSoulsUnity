@@ -8,5 +8,9 @@ namespace MR
     {
     [Header("Attack Type")]
     public AttackType currentAttackType;
+
+    public virtual void DrainStaminaBasedOnAttack(){
+      
+    }
   }
 }

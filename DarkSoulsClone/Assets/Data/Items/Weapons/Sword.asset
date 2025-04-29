@@ -21,13 +21,15 @@ MonoBehaviour:
   weaponType: 4
   physicalDamage: 25
   fireDamage: 0
+  lightAttackDamageModifier: 1
+  heavyAttackDamageModifier: 2
   criticalDamageMultiplier: 4
   poiseBreak: 25
   offensivePoiseBonus: 0
   physicalDamageAbsorption: 0
-  baseStamina: 20
-  lightAttackMultiplier: 1
-  heavyAttackMultiplier: 2
+  baseStaminaCost: 25
+  lightAttackStaminaMultiplier: 1
+  heavyAttackStaminaMultiplier: 2
   oh_hold_RB_Action: {fileID: 0}
   oh_tap_RB_Action: {fileID: 0}
   oh_tap_LB_Action: {fileID: 0}

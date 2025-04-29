@@ -161,10 +161,12 @@ namespace MR
       }
     }
 
-    public void DrainStaminaBasedOnAttackType()
+    public virtual void DeductStamina(float staminaToDeduct)
     {
-
+      currentStamina = currentStamina - staminaToDeduct;
+     
     }
+    
 
     public int SetMaxHealthFromHealthLevel()
     {

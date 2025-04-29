@@ -139,7 +139,7 @@ namespace MR
         speed = sprintSpeed;
         player.isSprinting = true;
         moveDirection *= speed;
-        player.playerStatsManager.TakeStaminaDamage(sprintStaminaCost);
+        player.playerStatsManager.DeductStamina(sprintStaminaCost);
       }
       else
       {
@@ -187,13 +187,13 @@ namespace MR
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
           player.transform.rotation = rollRotation;
-          player.playerStatsManager.TakeStaminaDamage(rollStaminaCost);
+          player.playerStatsManager.DeductStamina(rollStaminaCost);
         }
         else
         {
           player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
           player.playerAnimatorManager.EraseHandIKForWeapon();
-          player.playerStatsManager.TakeStaminaDamage(backstepStaminaCost);
+          player.playerStatsManager.DeductStamina(backstepStaminaCost);
         }
       }
     }
@@ -287,7 +287,7 @@ namespace MR
 
       if (player.inputHandler.jump_Input)
       {
-
+        player.inputHandler.jump_Input = false;
         if (player.inputHandler.moveAmount > 0)
         {
           moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
