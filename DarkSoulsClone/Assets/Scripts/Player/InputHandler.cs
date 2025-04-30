@@ -305,10 +305,9 @@ namespace MR
           player.cameraHandler.ResetAimCameraRotations();
         }
 
-        if (player.blockingCollider.blockingCollider.enabled)
+        if (player.isBlocking)
         {
           player.isBlocking = false;
-          player.blockingCollider.DisableBlockingCollider();
         }
 
       }

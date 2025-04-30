@@ -12,9 +12,8 @@ namespace MR
     {
       if (player.isInteracting) return;
       if (player.isBlocking) return;
+      player.playerCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
 
-      player.playerAnimatorManager.PlayTargetAnimation("Block Start", false, true);
-      player.playerEquipmentManager.OpenBlockingCollider();
       player.isBlocking = true;
     }
 

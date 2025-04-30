@@ -32,10 +32,10 @@ namespace MR
 
     public string weapon_art = "Weapon_Art";
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       player = GetComponent<PlayerManager>();
-
     }
 
 

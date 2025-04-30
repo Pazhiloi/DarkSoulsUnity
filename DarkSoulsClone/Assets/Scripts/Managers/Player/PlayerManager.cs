@@ -25,9 +25,7 @@ namespace MR
     public PlayerEffectsManager playerEffectsManager;
     public PlayerAnimatorManager playerAnimatorManager;
 
-    [Header("Colliders")]
-    public BlockingCollider blockingCollider;
-    
+
     [Header("Interactables")]
     InteractableUI interactableUI;
     public GameObject interactableUIGameObject;
@@ -44,7 +42,6 @@ namespace MR
       animator = GetComponent<Animator>();
 
       backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
-      blockingCollider = GetComponentInChildren<BlockingCollider>();
       
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       playerInventoryManager = GetComponent<PlayerInventoryManager>();

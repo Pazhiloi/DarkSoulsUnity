@@ -23,11 +23,16 @@ namespace MR
     public float lightAttackDamageModifier;
     public float heavyAttackDamageModifier;
     public int criticalDamageMultiplier = 4;
+    public int guardBreakModifier = 1;
+    
     [Header("Poise")]
     public int poiseBreak, offensivePoiseBonus;
 
     [Header("Absorpsion")]
-    public float physicalDamageAbsorption;
+    public float physicalBlockingDamageAbsorption;
+    public float fireBlockingDamageAbsorption;
+    [Header("Stability")]
+    public int stability = 67;
 
     [Header("Stamina Costs")]
     public int baseStaminaCost;

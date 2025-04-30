@@ -25,7 +25,6 @@ namespace MR
     public string nakedUpperLeftArm, nakedUpperRightArm, nakedLowerLeftArm, nakedLowerRightArm, nakedLeftHand, nakedRightHand;
     public string nakedTorsoModel;
     public string nakedHipModel, nakedLeftLeg, nakedRightLeg;
-    public BlockingCollider blockingCollider;
 
     private void Awake()
     {
@@ -128,24 +127,6 @@ namespace MR
 
 
     }
-
-    public void OpenBlockingCollider()
-    {
-      if (player.inputHandler.twoHandFlag)
-      {
-        blockingCollider.SetColliderDamageAbsorption(player.playerInventoryManager.rightWeapon);
-      }
-      else
-      {
-        blockingCollider.SetColliderDamageAbsorption(player.playerInventoryManager.leftWeapon);
-      }
-
-      blockingCollider.EnableBlockingCollider();
-    }
-
-    public void CloseBlockingCollider()
-    {
-      blockingCollider.DisableBlockingCollider();
-    }
+    
   }
 }

@@ -9083,75 +9083,6 @@ Transform:
   - {fileID: 778040560}
   m_Father: {fileID: 1676888073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &703308378
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 703308379}
-  - component: {fileID: 703308381}
-  - component: {fileID: 703308380}
-  m_Layer: 9
-  m_Name: Blocking Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &703308379
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703308378}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 899486129}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &703308380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703308378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9981001d4d4b6654fba173671892089d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockingCollider: {fileID: 0}
-  blockingPhysicalDamageAbsorption: 0
-  blockingFireDamageAbsorption: 0
---- !u!65 &703308381
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703308378}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.98, y: 1.37, z: 0.1}
-  m_Center: {x: -0.008, y: 0.703, z: 0.362}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -11572,7 +11503,6 @@ Transform:
   - {fileID: 1627505770}
   - {fileID: 1621343585}
   - {fileID: 1554954567}
-  - {fileID: 703308379}
   m_Father: {fileID: 543450651902353127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900843296
@@ -16851,6 +16781,7 @@ GameObject:
   - component: {fileID: 1317471738}
   - component: {fileID: 1317471737}
   - component: {fileID: 1317471736}
+  - component: {fileID: 1317471742}
   m_Layer: 9
   m_Name: Boss
   m_TagString: Enemy
@@ -16993,6 +16924,9 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
+  blockingStabilityRating: 0
   enemyHealthBar: {fileID: 0}
   isBoss: 1
 --- !u!114 &1317471738
@@ -17031,6 +16965,7 @@ MonoBehaviour:
   characterInventoryManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1902572498}
   backStabCollider: {fileID: 1124211235}
   riposteCollider: {fileID: 1197691728}
@@ -17124,6 +17059,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1317471742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317471731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttackType: 0
 --- !u!1 &1324838879
 GameObject:
   m_ObjectHideFlags: 0
@@ -42156,6 +42104,7 @@ GameObject:
   - component: {fileID: 5866666021332270831}
   - component: {fileID: 5866666021332270833}
   - component: {fileID: 5866666021332270832}
+  - component: {fileID: 5866666021332270834}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Character
@@ -52794,7 +52743,6 @@ MonoBehaviour:
   nakedHipModel: Naked_Hips
   nakedLeftLeg: Naked_Leg
   nakedRightLeg: Naked_Leg
-  blockingCollider: {fileID: 0}
 --- !u!114 &5866666020217144481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52807,6 +52755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515bf4801dfd31e42810e7f64c0b66d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 0
   lastAttack: 
   backStabLayer:
     serializedVersion: 2
@@ -52908,6 +52857,9 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
+  blockingStabilityRating: 0
   healthBar: {fileID: 2464153670485678061}
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
@@ -52963,6 +52915,7 @@ MonoBehaviour:
   characterInventoryManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 2083012898}
   backStabCollider: {fileID: 1621343587}
   riposteCollider: {fileID: 1554954568}
@@ -52998,7 +52951,6 @@ MonoBehaviour:
   playerInventoryManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
   playerAnimatorManager: {fileID: 0}
-  blockingCollider: {fileID: 0}
   interactableUIGameObject: {fileID: 7102340927103900870}
   itemInteractableGameObject: {fileID: 4200978215310196542}
 --- !u!114 &5866666020217144487
@@ -53296,6 +53248,7 @@ MonoBehaviour:
   characterInventoryManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1841210898}
   backStabCollider: {fileID: 2070478348}
   riposteCollider: {fileID: 303706882}
@@ -53432,6 +53385,9 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  blockingPhysicalDamageAbsorption: 0
+  blockingFireDamageAbsorption: 0
+  blockingStabilityRating: 0
   enemyHealthBar: {fileID: 259633376}
   isBoss: 0
 --- !u!114 &5866666021332270829
@@ -53617,6 +53573,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5866666021332270834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148660747813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttackType: 0
 --- !u!224 &5876800281749886865
 RectTransform:
   m_ObjectHideFlags: 0

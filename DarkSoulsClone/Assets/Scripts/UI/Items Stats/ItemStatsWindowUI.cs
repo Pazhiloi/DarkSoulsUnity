@@ -50,7 +50,7 @@ namespace MR
           itemIconImage.sprite = null;
         }
         physicalDamageText.text = weapon.physicalDamage.ToString();
-        physicalAbsorptionText.text = weapon.physicalDamageAbsorption.ToString();
+        physicalAbsorptionText.text = weapon.physicalBlockingDamageAbsorption.ToString();
 
         weaponStats.SetActive(true);
       }

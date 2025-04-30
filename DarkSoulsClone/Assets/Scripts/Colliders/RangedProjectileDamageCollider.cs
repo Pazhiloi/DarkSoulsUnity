@@ -20,16 +20,13 @@ namespace MR
         CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
         CharacterManager enemyManager = other.GetComponent<CharacterManager>();
         CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
-        BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
 
         if (enemyManager != null)
         {
           if (enemyStats.teamIDNumber == teamIDNumber) return;
 
           CheckForParry(enemyManager);
-          CheckForBlock(enemyManager, enemyStats, shield);
-
-
+          CheckForBlock(enemyManager);
         }
 
         if (enemyStats != null)

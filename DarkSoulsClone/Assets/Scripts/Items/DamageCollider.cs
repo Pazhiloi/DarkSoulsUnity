@@ -22,6 +22,9 @@ namespace MR
     public int lightningDamage;
     public int darkDamage;
 
+    [Header("Guard Break Modifier")]
+    public float guardBreakModifier = 1;
+
     protected bool shieldHasBeenHit;
     protected bool hasBeenParried;
     protected string currentDamageAnimation;
@@ -52,16 +55,13 @@ namespace MR
         CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
         CharacterManager enemyManager = other.GetComponent<CharacterManager>();
         CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
-        BlockingCollider shield = other.transform.GetComponentInChildren<BlockingCollider>();
 
         if (enemyManager != null)
         {
           if (enemyStats.teamIDNumber == teamIDNumber) return;
 
           CheckForParry(enemyManager);
-          CheckForBlock(enemyManager, enemyStats, shield);
-
-
+          CheckForBlock(enemyManager);
         }
 
         if (enemyStats != null)
@@ -101,16 +101,19 @@ namespace MR
       }
     }
 
-    protected virtual void CheckForBlock(CharacterManager enemyManager, CharacterStatsManager enemyStats, BlockingCollider shield)
+    protected virtual void CheckForBlock(CharacterManager enemyManager)
     {
-      if (shield != null && enemyManager.isBlocking)
-      {
-        float physicalDamageAfterBlock = physicalDamage - (physicalDamage * shield.blockingPhysicalDamageAbsorption) / 100;
-        float fireDamageAfterBlock = fireDamage - (fireDamage * shield.blockingFireDamageAbsorption) / 100;
+      CharacterStatsManager enemyShield = enemyManager.characterStatsManager;
+      Vector3 directionFromPlayerToEnemy = (characterManager.transform.position - enemyManager.transform.position);
+      float dotValueFromPlayerToEnemy = Vector3.Dot(directionFromPlayerToEnemy, enemyManager.transform.forward);
 
-        if (enemyStats != null)
-        { enemyStats.TakeDamage(Mathf.RoundToInt(physicalDamageAfterBlock), 0, "Block Guard", characterManager); }
+      if (enemyManager.isBlocking && dotValueFromPlayerToEnemy > 0.3f)
+      {
         shieldHasBeenHit = true;
+        float physicalDamageAfterBlock = physicalDamage - (physicalDamage * enemyShield.blockingPhysicalDamageAbsorption) / 100;
+        float fireDamageAfterBlock = fireDamage - (fireDamage * enemyShield.blockingFireDamageAbsorption) / 100;
+        enemyManager.characterCombatManager.AttemptBlock(this, physicalDamageAfterBlock, fireDamageAfterBlock, "Block_01");
+        enemyShield.TakeDamageAfterBlock(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock),  characterManager);
       }
     }
 
@@ -121,7 +124,7 @@ namespace MR
       {
         if (characterManager.characterCombatManager.currentAttackType == AttackType.light)
         {
-          finalPhysicalDamage = finalPhysicalDamage* characterManager.characterInventoryManager.rightWeapon.lightAttackDamageModifier;
+          finalPhysicalDamage = finalPhysicalDamage * characterManager.characterInventoryManager.rightWeapon.lightAttackDamageModifier;
         }
         else if (characterManager.characterCombatManager.currentAttackType == AttackType.heavy)
         {
