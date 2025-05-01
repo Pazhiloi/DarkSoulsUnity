@@ -23,7 +23,7 @@ namespace MR
           leftHandSlot.LoadWeaponModel(weaponItem);
           LoadLeftWeaponDamageCollider();
           player.uiManager.quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
-          player.playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+          // player.playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
         }
         else
         {
@@ -54,7 +54,7 @@ namespace MR
           leftHandSlot.LoadWeaponModel(weaponItem);
           LoadLeftWeaponDamageCollider();
           player.uiManager.quickSlotsUI.UpdateWeaponQuickSlotsUI(true, weaponItem);
-          player.playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+          // player.playerAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
         }
         else
         {

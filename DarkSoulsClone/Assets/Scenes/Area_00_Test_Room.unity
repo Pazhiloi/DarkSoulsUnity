@@ -6238,7 +6238,7 @@ MonoBehaviour:
   pursueTargetState: {fileID: 902587512}
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 2560
 --- !u!1 &487239835
 GameObject:
   m_ObjectHideFlags: 0
@@ -17009,6 +17009,9 @@ MonoBehaviour:
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100
+  distanceFromTarget: 0
+  targetsDirection: {x: 0, y: 0, z: 0}
+  viewableAngle: 0
 --- !u!54 &1317471740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52864,6 +52867,7 @@ MonoBehaviour:
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
   staminaRegenerationAmount: 30
+  staminaRegenerationAmountWhilstBlocking: 3
   staminaRegenTimer: 0
 --- !u!114 &5866666020217144485
 MonoBehaviour:
@@ -53292,6 +53296,9 @@ MonoBehaviour:
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100
+  distanceFromTarget: 0
+  targetsDirection: {x: 0, y: 0, z: 0}
+  viewableAngle: 0
 --- !u!54 &5866666021332270826
 Rigidbody:
   m_ObjectHideFlags: 0

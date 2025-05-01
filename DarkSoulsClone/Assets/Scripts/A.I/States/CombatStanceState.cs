@@ -17,7 +17,6 @@ namespace MR
     protected float horizontalMovementValue = 0;
     public override State Tick(EnemyManager enemy)
     {
-      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
       enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
       enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
       attackState.hasPerformedAttack = false;
@@ -28,7 +27,7 @@ namespace MR
         return this;
       }
 
-      if (distanceFromTarget > enemy.maximumAggroRadius)
+      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
       {
         return pursueTargetState;
       }
@@ -108,20 +107,16 @@ namespace MR
 
     protected virtual void GetNewAttack(EnemyManager enemy)
     {
-      Vector3 targetsDirection = enemy.currentTarget.transform.position - transform.position;
-      float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
-
       int maxScore = 0;
 
       for (int i = 0; i < enemyAttacks.Length; i++)
       {
         EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-        if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-        distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+        if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+        enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
         {
-          if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+          if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle && enemy.viewableAngle >= enemyAttackAction.minimumAttackAngle)
           {
             maxScore += enemyAttackAction.attackScore;
           }
@@ -135,10 +130,10 @@ namespace MR
       {
         EnemyAttackAction enemyAttackAction = enemyAttacks[i];
 
-        if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-        distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+        if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+        enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
         {
-          if (viewableAngle <= enemyAttackAction.maximumAttackAngle && viewableAngle >= enemyAttackAction.minimumAttackAngle)
+          if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle && enemy.viewableAngle >= enemyAttackAction.minimumAttackAngle)
           {
             if (attackState.currentAttack != null)
             {

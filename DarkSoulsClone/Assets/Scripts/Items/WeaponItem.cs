@@ -11,7 +11,7 @@ namespace MR
 
     [Header("Animator Replacer")]
     public AnimatorOverrideController weaponController;
-    public string offHandIdleAnimation = "Left_Arm_Idle_01";
+    // public string offHandIdleAnimation = "Left_Arm_Idle_01";
 
     [Header("Weapon Type")]
     public WeaponType weaponType;
@@ -20,8 +20,8 @@ namespace MR
     public int physicalDamage;
     public int fireDamage;
     [Header("Damage Modifiers")]
-    public float lightAttackDamageModifier;
-    public float heavyAttackDamageModifier;
+    public float lightAttackDamageModifier = 1;
+    public float heavyAttackDamageModifier = 1;
     public int criticalDamageMultiplier = 4;
     public int guardBreakModifier = 1;
     

@@ -9,13 +9,6 @@ namespace MR
    public RotateTowardsTargetState rotateTowardsTargetState;
     public override State Tick(EnemyManager enemy)
     {
-
-      Vector3 targetDirection = enemy.currentTarget.transform.position - enemy.transform.position;
-      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
-      float viewableAngle = Vector3.SignedAngle(targetDirection, enemy.transform.forward, Vector3.up);
-      HandleRotateTowardsTarget(enemy);
-
-
       if (enemy.isInteracting) return this;
 
       if (enemy.isPreformingAction){
@@ -24,13 +17,13 @@ namespace MR
       }
       
 
-      if (distanceFromTarget > enemy.maximumAggroRadius)
+      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
       {
         enemy.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
       }
       
 
-      if (distanceFromTarget <= enemy.maximumAggroRadius)
+      if (enemy.distanceFromTarget <= enemy.maximumAggroRadius)
       {
         return combatStanceState;
       }

@@ -65,7 +65,7 @@ namespace MR
         {
           leftHandSlot.currentWeapon = weaponItem;
           leftHandSlot.LoadWeaponModel(weaponItem);
-          character.characterAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+          // character.characterAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
         }
         else
         {
@@ -95,7 +95,7 @@ namespace MR
           leftHandSlot.currentWeapon = unarmedWeapon;
           leftHandSlot.LoadWeaponModel(weaponItem);
           LoadLeftWeaponDamageCollider();
-          character.characterAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
+          // character.characterAnimatorManager.PlayTargetAnimation(weaponItem.offHandIdleAnimation, false, true);
         }
         else
         {

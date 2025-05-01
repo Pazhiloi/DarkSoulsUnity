@@ -136,5 +136,11 @@ namespace MR
     }
 
 
+    public override void AttemptBlock(DamageCollider attackingWeapon, float physicalDamage, float fireDamage, string blockAnimation)
+    {
+      base.AttemptBlock(attackingWeapon, physicalDamage, fireDamage, blockAnimation);
+      player.playerStatsManager.staminaBar.SetCurrentStamina(player.playerStatsManager.currentStamina);
+    }
+
   }
 }

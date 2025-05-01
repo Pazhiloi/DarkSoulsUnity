@@ -15,6 +15,7 @@ namespace MR
     PlayerManager player;
 
     public float staminaRegenerationAmount = 30f;
+    public float staminaRegenerationAmountWhilstBlocking = 3f;
     public float staminaRegenTimer;
 
     protected override void Awake()
@@ -99,7 +100,7 @@ namespace MR
         player.playerAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
-   
+
 
     public void DrainFocusPoints(int focusPoints)
     {
@@ -120,16 +121,23 @@ namespace MR
       }
       else
       {
-        if (staminaRegenTimer <= 1f)
-        {
-          staminaRegenTimer += Time.deltaTime;
-        }
+        staminaRegenTimer += Time.deltaTime;
 
         if (currentStamina < maxStamina && staminaRegenTimer > 1f)
         {
-          currentStamina += staminaRegenerationAmount * Time.deltaTime;
-          staminaBar.SetCurrentStamina(currentStamina);
+          if (player.isBlocking)
+          {
+            currentStamina += staminaRegenerationAmountWhilstBlocking * Time.deltaTime;
+            staminaBar.SetCurrentStamina(currentStamina);
+          }
+          else
+          {
+            currentStamina += staminaRegenerationAmount * Time.deltaTime;
+            staminaBar.SetCurrentStamina(currentStamina);
+          }
+
         }
+
       }
 
     }

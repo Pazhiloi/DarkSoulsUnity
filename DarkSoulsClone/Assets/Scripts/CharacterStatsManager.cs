@@ -48,7 +48,7 @@ namespace MR
     [Header("Blocking Absorptions")]
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
-    public int blockingStabilityRating;
+    public float blockingStabilityRating;
     protected virtual void Awake()
     {
       characterManager = GetComponent<CharacterManager>();
