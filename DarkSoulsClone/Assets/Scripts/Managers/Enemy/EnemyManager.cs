@@ -15,7 +15,7 @@ namespace MR
 
 
     public State currentState;
-    public CharacterStatsManager currentTarget;
+    public CharacterManager currentTarget;
 
     public bool isPreformingAction;
 
@@ -34,6 +34,8 @@ namespace MR
     public bool allowAIToPerformCombos;
     public bool isPhaseShifting;
     public float comboLikelyHood;
+    public AICombatStyle combatStyle;
+
     [Header("A.I Target Information")]
     public float distanceFromTarget;
     public Vector3 targetsDirection;

@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace MR
 {
   public class PursueTargetState : State
   {
    public CombatStanceState combatStanceState;
-   public RotateTowardsTargetState rotateTowardsTargetState;
     public override State Tick(EnemyManager enemy)
     {
       if (enemy.isInteracting) return this;

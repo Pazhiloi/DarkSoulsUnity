@@ -28,17 +28,17 @@ namespace MR
 
       for (int i = 0; i < colliders.Length; i++)
       {
-        CharacterStatsManager CharacterStatsManager = colliders[i].transform.GetComponent<CharacterStatsManager>();
+        CharacterManager potentialTarget = colliders[i].transform.GetComponent<CharacterManager>();
 
-        if (CharacterStatsManager != null)
+        if (potentialTarget != null)
         {
-          Vector3 targetsDirection = CharacterStatsManager.transform.position - enemy.transform.position;
+          Vector3 targetsDirection = potentialTarget.transform.position - enemy.transform.position;
 
           float viewableAngle = Vector3.Angle(targetsDirection, enemy.transform.forward);
 
           if (viewableAngle > enemy.minimumDetectionAngle && viewableAngle < enemy.maximumDetectionAngle)
           {
-            enemy.currentTarget = CharacterStatsManager;
+            enemy.currentTarget = potentialTarget;
             isSleeping = false;
             enemy.enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
           }

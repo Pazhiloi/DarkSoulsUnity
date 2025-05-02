@@ -25,6 +25,12 @@ namespace MR
     light,
     heavy
   }
+
+  public enum AICombatStyle
+  {
+    swordAndShield,
+    archer
+  }
   public class Enums : MonoBehaviour
   {
 
