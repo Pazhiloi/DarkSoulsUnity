@@ -5,13 +5,16 @@ namespace MR
     public class CombatStanceStateHumanoid : State
     {
     public AttackState attackState;
-    public EnemyAttackAction[] enemyAttacks;
+    public ItemBasedAttackAction[] enemyAttacks;
     public PursueTargetStateHumanoid pursueTargetState;
-
-
     protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
+
+    [Header("State Flags")]
+    bool willPerformBlock = false;
+    bool willPerformDodge = false;
+    bool willPerformParry = false;
     public override State Tick(EnemyManager enemy)
     {
       if (enemy.combatStyle == AICombatStyle.swordAndShield)
@@ -32,9 +35,8 @@ namespace MR
     {
       enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
       enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
-      attackState.hasPerformedAttack = false;
 
-      if (enemy.isInteracting)
+      if (!enemy.isGrounded || enemy.isInteracting)
       {
         enemy.animator.SetFloat("Vertical", 0);
         enemy.animator.SetFloat("Horizontal", 0);
@@ -50,6 +52,33 @@ namespace MR
       {
         randomDestinationSet = true;
         DecideCirclingAction(enemy);
+      }
+
+      if (enemy.allowAIToPerformBlock){
+        RollForBlockChance(enemy);
+      }
+      if (enemy.allowAIToPerformDodge)
+      {
+        RollForDodgeChance(enemy);
+      }
+
+      if (enemy.allowAIToPerformParry)
+      {
+        RollForParryChance(enemy);
+      }
+
+
+      if (willPerformBlock)
+      {
+        
+      }
+      if (willPerformDodge)
+      {
+        
+      }
+      if (willPerformParry)
+      {
+        
       }
 
       HandleRotateTowardsTarget(enemy);
@@ -170,5 +199,41 @@ namespace MR
 
     }
 
+    private void RollForBlockChance(EnemyManager enemy){
+      int blockChance = Random.Range(0,100);
+      if (blockChance <= enemy.blockLikelyHood)
+      {
+        willPerformBlock = true;
+      }else{
+        willPerformBlock = false;
+      }
+    }
+
+    private void RollForDodgeChance(EnemyManager enemy){
+      int dodgeChance = Random.Range(0,100);
+      if (dodgeChance <= enemy.dodgeLikelyHood)
+      {
+        willPerformDodge = true;
+      }else{
+        willPerformDodge = false;
+      }
+    }
+
+    private void RollForParryChance(EnemyManager enemy){
+      int parryChance = Random.Range(0,100);
+      if (parryChance <= enemy.parryLikelyHood)
+      {
+        willPerformParry = true;
+      }else{
+        willPerformParry = false;
+      }
+    }
+
+    private void ResetStateFlags()
+    {
+      willPerformBlock = false;
+      willPerformDodge = false;
+      willPerformParry = false;
+    }
   }
 }

@@ -11632,7 +11632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 1337768098}
-  rotateTowardsTargetState: {fileID: 1512057410}
 --- !u!1 &903557017
 GameObject:
   m_ObjectHideFlags: 0
@@ -17009,9 +17008,16 @@ MonoBehaviour:
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
+  allowAIToPerformBlock: 0
+  blockLikelyHood: 50
+  allowAIToPerformDodge: 0
+  dodgeLikelyHood: 50
+  allowAIToPerformParry: 0
+  parryLikelyHood: 50
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100
+  combatStyle: 0
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -22894,7 +22900,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatStanceState: {fileID: 74641538}
-  rotateTowardsTargetState: {fileID: 2137034043}
 --- !u!4 &1776800404
 Transform:
   m_ObjectHideFlags: 0
@@ -53307,9 +53312,16 @@ MonoBehaviour:
   maximumDetectionAngle: 50
   minimumDetectionAngle: -50
   currentRecoveryTime: 0
+  allowAIToPerformBlock: 0
+  blockLikelyHood: 50
+  allowAIToPerformDodge: 0
+  dodgeLikelyHood: 50
+  allowAIToPerformParry: 0
+  parryLikelyHood: 50
   allowAIToPerformCombos: 1
   isPhaseShifting: 0
   comboLikelyHood: 100
+  combatStyle: 0
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0

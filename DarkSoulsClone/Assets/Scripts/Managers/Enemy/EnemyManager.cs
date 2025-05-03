@@ -30,6 +30,16 @@ namespace MR
 
     public float currentRecoveryTime = 0;
 
+    [Header("Advanced A.I Settings")]
+    public bool allowAIToPerformBlock;
+    public int blockLikelyHood = 50;
+    public bool allowAIToPerformDodge;
+    public int dodgeLikelyHood = 50;
+
+    public bool allowAIToPerformParry;
+    public int parryLikelyHood = 50;
+
+
     [Header("A.I Combat Settings")]
     public bool allowAIToPerformCombos;
     public bool isPhaseShifting;

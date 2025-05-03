@@ -7,11 +7,16 @@ namespace MR
   [CreateAssetMenu(menuName = "Items Actions/Aim Action")]
   public class AimAction : ItemAction
   {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-      if (player.isAiming) return;
-      player.uiManager.crossHair.SetActive(true);
-      player.isAiming = true;
+      PlayerManager player = character as PlayerManager;
+      if (character.isAiming) return;
+
+      if (player != null)
+      {
+        player.uiManager.crossHair.SetActive(true);
+      }
+      character.isAiming = true;
     }
   }
 }

@@ -31,6 +31,13 @@ namespace MR
     swordAndShield,
     archer
   }
+
+  public enum AIAttackActionType
+  {
+    meleeAttackAction,
+    magicAttackAction,
+    rangedAttackAction
+  }
   public class Enums : MonoBehaviour
   {
 
