@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace MR
 {
-public class SpellItem : Item
-{
+  public class SpellItem : Item
+  {
     public GameObject spellWarmUpFX, spellCastFX;
     public string spellAnimation;
     [Header("Spell Cast")]
@@ -18,14 +18,18 @@ public class SpellItem : Item
     [TextArea]
     public string spellDescription;
 
-    public virtual void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager,bool isLeftHanded)
+    public virtual void AttemptToCastSpell(CharacterManager character)
     {
       Debug.Log("You attempted to cast the spell!");
     }
-    public virtual void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager, bool isLeftHanded)
+    public virtual void SuccessfullyCastSpell(CharacterManager character)
     {
       Debug.Log("You Successfully cast a spell!");
-      PlayerStatsManager.DrainFocusPoints(focusPointCost);
+      PlayerManager player = character as PlayerManager;
+      if (player != null)
+      {
+        player.playerStatsManager.DrainFocusPoints(focusPointCost);
+      }
     }
   }
 }

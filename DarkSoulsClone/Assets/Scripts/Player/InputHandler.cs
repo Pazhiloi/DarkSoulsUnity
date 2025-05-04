@@ -39,10 +39,6 @@ namespace MR
     public bool inventoryFlag;
     public float rollInputTimer;
 
-    public Transform criticalAttackRayCastStartPoint;
-
-
-   
 
 
     Vector2 movementInput;

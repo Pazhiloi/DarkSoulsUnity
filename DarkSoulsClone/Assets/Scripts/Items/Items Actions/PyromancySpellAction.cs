@@ -7,24 +7,21 @@ namespace MR
   [CreateAssetMenu(menuName = "Items Actions/Pyromancy Spell Action")]
   public class PyromancySpellAction : ItemAction
   {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-      if (player.isInteracting)
+      if (character.isInteracting)
         return;
 
-      if (player.playerInventoryManager.currentSpell != null && player.playerInventoryManager.currentSpell.isPyroSpell)
+      if (character.characterInventoryManager.currentSpell != null && character.characterInventoryManager.currentSpell.isPyroSpell)
       {
-        if (player.playerStatsManager.currentFocusPoints >= player.playerInventoryManager.currentSpell.focusPointCost)
+        if (character.characterStatsManager.currentFocusPoints >= character.characterInventoryManager.currentSpell.focusPointCost)
         {
-          player.playerInventoryManager.currentSpell.AttemptToCastSpell(
-              player.playerAnimatorManager,
-              player.playerStatsManager,
-              player.playerWeaponSlotManager,
-              player.isUsingLeftHand);
+          character.characterInventoryManager.currentSpell.AttemptToCastSpell(
+              character);
         }
         else
         {
-          player.playerAnimatorManager.PlayTargetAnimation("Shrug", true);
+          character.characterAnimatorManager.PlayTargetAnimation("Shrug", true);
         }
       }
     }

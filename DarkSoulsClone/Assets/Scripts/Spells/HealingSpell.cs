@@ -7,18 +7,18 @@ public class HealingSpell : SpellItem
 {
     public int healAmount;
 
-    public override void AttemptToCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, PlayerWeaponSlotManager playerWeaponSlotManager, bool isLeftHanded)
+    public override void AttemptToCastSpell(CharacterManager character)
     {
-      base.AttemptToCastSpell(playerAnimatorManager, PlayerStatsManager, playerWeaponSlotManager, isLeftHanded);
-      GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, playerAnimatorManager.transform);
-      playerAnimatorManager.PlayTargetAnimation(spellAnimation, true, false, isLeftHanded);
+      base.AttemptToCastSpell(character);
+      GameObject instantiatedWarmUpSpellFX = Instantiate(spellWarmUpFX, character.transform);
+      character.characterAnimatorManager.PlayTargetAnimation(spellAnimation, true, false, character.isUsingLeftHand);
       // Debug.Log("Attempting to cast spell");
     }
-    public override void SuccessfullyCastSpell(PlayerAnimatorManager playerAnimatorManager, PlayerStatsManager PlayerStatsManager, CameraHandler cameraHandler, PlayerWeaponSlotManager playerWeaponSlotManager, bool isLeftHanded)
+    public override void SuccessfullyCastSpell(CharacterManager character)
     {
-      base.SuccessfullyCastSpell(playerAnimatorManager, PlayerStatsManager, cameraHandler, playerWeaponSlotManager, isLeftHanded);
-      GameObject instantiatedSpellFX = Instantiate(spellCastFX, playerAnimatorManager.transform);
-      PlayerStatsManager.HealPlayer(healAmount);
+      base.SuccessfullyCastSpell(character);
+      GameObject instantiatedSpellFX = Instantiate(spellCastFX, character.transform);
+      character.characterStatsManager.HealCharacter(healAmount);
       // Debug.Log("SpellCast successful");
     }
 

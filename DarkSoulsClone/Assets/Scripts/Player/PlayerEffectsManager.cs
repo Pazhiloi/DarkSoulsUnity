@@ -20,7 +20,7 @@ namespace MR
 
     public void HealPlayerFromEffect()
     {
-      player.playerStatsManager.HealPlayer(amountToBeHealed);
+      player.playerStatsManager.HealCharacter(amountToBeHealed);
       GameObject healParticles = Instantiate(currentParticleFX, player.playerStatsManager.transform);
       Destroy(instantiatedFXModel.gameObject);
       player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();

@@ -8,13 +8,13 @@ namespace MR
   public class BlockingAction : ItemAction
   {
 
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-      if (player.isInteracting) return;
-      if (player.isBlocking) return;
-      player.playerCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
+      if (character.isInteracting) return;
+      if (character.isBlocking) return;
+      character.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
 
-      player.isBlocking = true;
+      character.isBlocking = true;
     }
 
   

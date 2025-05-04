@@ -13,8 +13,11 @@ namespace MR
     public CharacterCombatManager characterCombatManager;
 
     [Header("Look On Transform")]
-    [Header("Lock On Transform")]
+    
     public Transform lockOnTransform;
+    [Header("Ray Casts")]
+    public Transform criticalAttackRayCastStartPoint;
+
 
     [Header("Combat Colliders")]
     public CriticalDamageCollider backStabCollider;

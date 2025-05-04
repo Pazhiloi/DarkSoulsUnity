@@ -143,14 +143,9 @@ namespace MR
     }
 
 
-    public void HealPlayer(int amount)
+    public override void HealCharacter(int amount)
     {
-      currentHealth += amount;
-
-      if (currentHealth > maxHealth)
-      {
-        currentHealth = maxHealth;
-      }
+      base.HealCharacter(amount);
 
       healthBar.SetCurrentHealth(currentHealth);
     }

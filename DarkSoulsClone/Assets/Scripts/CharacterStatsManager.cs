@@ -227,5 +227,15 @@ namespace MR
       maxFocusPoints = focusLevel * 10;
       return maxFocusPoints;
     }
+
+    public virtual void HealCharacter(int amount)
+    {
+      currentHealth += amount;
+
+      if (currentHealth > maxHealth)
+      {
+        currentHealth = maxHealth;
+      }
+    }
   }
 }

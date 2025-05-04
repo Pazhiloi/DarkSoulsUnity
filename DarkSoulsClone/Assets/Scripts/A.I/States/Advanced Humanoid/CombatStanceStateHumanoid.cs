@@ -4,7 +4,7 @@ namespace MR
 {
     public class CombatStanceStateHumanoid : State
     {
-    public AttackState attackState;
+    public AttackStateHumanoid attackState;
     public ItemBasedAttackAction[] enemyAttacks;
     public PursueTargetStateHumanoid pursueTargetState;
     protected bool randomDestinationSet = false;
@@ -158,7 +158,7 @@ namespace MR
 
       for (int i = 0; i < enemyAttacks.Length; i++)
       {
-        EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+        ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
         if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
         enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
@@ -175,7 +175,7 @@ namespace MR
       int temporaryScore = 0;
       for (int i = 0; i < enemyAttacks.Length; i++)
       {
-        EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+        ItemBasedAttackAction enemyAttackAction = enemyAttacks[i];
 
         if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
         enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)

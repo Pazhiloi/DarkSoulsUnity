@@ -7,19 +7,19 @@ namespace MR
   [CreateAssetMenu(menuName = "Items Actions/Draw Arrow Action")]
   public class DrawArrowAction : ItemAction
   {
-    public override void PerformAction(PlayerManager player)
+    public override void PerformAction(CharacterManager character)
     {
-      if (player.isInteracting) return;
-      if (player.isHoldingArrow) return;
+      if (character.isInteracting) return;
+      if (character.isHoldingArrow) return;
       
-      player.animator.SetBool("isHoldingArrow", true);
-      player.playerAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
+      character.animator.SetBool("isHoldingArrow", true);
+      character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
-      GameObject loadedArrow = Instantiate(player.playerInventoryManager.currentAmmo.loadedItemModel, player.playerWeaponSlotManager.leftHandSlot.transform);
-      player.playerEffectsManager.currentRangeFX = loadedArrow;
+      GameObject loadedArrow = Instantiate(character.characterInventoryManager.currentAmmo.loadedItemModel, character.characterWeaponSlotManager.leftHandSlot.transform);
+      character.characterEffectsManager.currentRangeFX = loadedArrow;
       
 
-      Animator bowAnimator = player.playerWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
+      Animator bowAnimator = character.characterWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();
       bowAnimator.SetBool("isDrawn", true);
       bowAnimator.Play("Bow_TH_Draw_01");
     }
