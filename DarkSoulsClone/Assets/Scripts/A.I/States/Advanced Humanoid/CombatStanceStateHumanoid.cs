@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace MR
 {
-    public class CombatStanceStateHumanoid : State
-    {
+  public class CombatStanceStateHumanoid : State
+  {
     public AttackStateHumanoid attackState;
     public ItemBasedAttackAction[] enemyAttacks;
     public PursueTargetStateHumanoid pursueTargetState;
@@ -15,6 +15,10 @@ namespace MR
     bool willPerformBlock = false;
     bool willPerformDodge = false;
     bool willPerformParry = false;
+    bool hasPerformedDodge = false;
+    bool hasRandomDodgeDirection = false;
+
+    Quaternion targetDodgeDirection;
     public override State Tick(EnemyManager enemy)
     {
       if (enemy.combatStyle == AICombatStyle.swordAndShield)
@@ -54,7 +58,8 @@ namespace MR
         DecideCirclingAction(enemy);
       }
 
-      if (enemy.allowAIToPerformBlock){
+      if (enemy.allowAIToPerformBlock)
+      {
         RollForBlockChance(enemy);
       }
       if (enemy.allowAIToPerformDodge)
@@ -70,22 +75,22 @@ namespace MR
 
       if (willPerformBlock)
       {
-        
+        BlockUsingOffHand(enemy);
       }
-      if (willPerformDodge)
+      if (willPerformDodge && enemy.currentTarget.isAttacking)
       {
-        
+        Dodge(enemy);
       }
       if (willPerformParry)
       {
-        
+
       }
 
       HandleRotateTowardsTarget(enemy);
 
       if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
       {
-        randomDestinationSet = false;
+        ResetStateFlags();
         return attackState;
       }
       else
@@ -199,41 +204,98 @@ namespace MR
 
     }
 
-    private void RollForBlockChance(EnemyManager enemy){
-      int blockChance = Random.Range(0,100);
+    private void RollForBlockChance(EnemyManager enemy)
+    {
+      int blockChance = Random.Range(0, 100);
       if (blockChance <= enemy.blockLikelyHood)
       {
         willPerformBlock = true;
-      }else{
+      }
+      else
+      {
         willPerformBlock = false;
       }
     }
 
-    private void RollForDodgeChance(EnemyManager enemy){
-      int dodgeChance = Random.Range(0,100);
+    private void RollForDodgeChance(EnemyManager enemy)
+    {
+      int dodgeChance = Random.Range(0, 100);
       if (dodgeChance <= enemy.dodgeLikelyHood)
       {
         willPerformDodge = true;
-      }else{
+      }
+      else
+      {
         willPerformDodge = false;
       }
     }
 
-    private void RollForParryChance(EnemyManager enemy){
-      int parryChance = Random.Range(0,100);
+    private void RollForParryChance(EnemyManager enemy)
+    {
+      int parryChance = Random.Range(0, 100);
       if (parryChance <= enemy.parryLikelyHood)
       {
         willPerformParry = true;
-      }else{
+      }
+      else
+      {
         willPerformParry = false;
       }
     }
 
     private void ResetStateFlags()
     {
+      hasRandomDodgeDirection = false;
+      hasPerformedDodge = false;
+      randomDestinationSet = false;
       willPerformBlock = false;
       willPerformDodge = false;
       willPerformParry = false;
     }
+    private void BlockUsingOffHand(EnemyManager enemy)
+    {
+      if (enemy.isBlocking == false)
+      {
+        if (enemy.allowAIToPerformBlock)
+        {
+          enemy.isBlocking = true;
+          enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.leftWeapon;
+          enemy.characterCombatManager.SetBlockingAbsorptionsFromBlockingWeapon();
+        }
+      }
+    }
+
+    private void Dodge(EnemyManager enemy)
+    {
+      if (!hasPerformedDodge)
+      {
+        if (!hasRandomDodgeDirection)
+        {
+          float randomDodgeDirection;
+          hasRandomDodgeDirection = true;
+          randomDodgeDirection = Random.Range(0, 360);
+          targetDodgeDirection = Quaternion.Euler(enemy.transform.eulerAngles.x, randomDodgeDirection, enemy.transform.eulerAngles.z);
+        }
+
+        if (enemy.transform.rotation != targetDodgeDirection)
+        {
+          Quaternion targetRotation = Quaternion.Slerp(enemy.transform.rotation, targetDodgeDirection, 1f);
+          enemy.transform.rotation = targetRotation;
+
+          float targetYRotation = targetDodgeDirection.eulerAngles.y;
+          float currentYRotation = enemy.transform.eulerAngles.y;
+          float rotationDifference = Mathf.Abs(targetYRotation - currentYRotation);
+
+          if (rotationDifference <= 5)
+          {
+            hasPerformedDodge = true;
+            enemy.transform.rotation = targetDodgeDirection;
+            enemy.enemyAnimatorManager.PlayTargetAnimation("Roll_01", true);
+          }
+        }
+      }
+    }
+
+
   }
 }

@@ -6,9 +6,9 @@ namespace MR
 {
     public class AttackStateHumanoid : State
     {
-    public RotateTowardsTargetState rotateTowardsTargetState;
-    public CombatStanceState combatStanceState;
-    public PursueTargetState pursueTargetState;
+    public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
+    public CombatStanceStateHumanoid combatStanceState;
+    public PursueTargetStateHumanoid pursueTargetState;
     public ItemBasedAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
@@ -38,6 +38,8 @@ namespace MR
       {
         return this;
       }
+
+      ResetStateFlags();
       return rotateTowardsTargetState;
     }
 
@@ -94,5 +96,13 @@ namespace MR
         }
       }
     }
+
+    private void ResetStateFlags()
+    {
+      willDoComboOnNextAttack = false;
+      hasPerformedAttack = false;
+    }
+
+
   }
 }

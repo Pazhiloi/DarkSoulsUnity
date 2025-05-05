@@ -40,6 +40,7 @@ namespace MR
     public bool isAiming;
     public bool isTwoHandingWeapon;
     public bool isPerformingFullyChargedAttack;
+    public bool isAttacking;
 
 
 

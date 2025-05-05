@@ -14,7 +14,8 @@ namespace MR
       {
         return;
       }
-
+      
+      character.isAttacking = true;
       character.characterAnimatorManager.EraseHandIKForWeapon();
       character.characterEffectsManager.PlayWeaponFX(false);
 

@@ -26,6 +26,7 @@ namespace MR
 
       character.isUsingLeftHand = false;
       character.isUsingRightHand = false;
+      character.isAttacking = false;
 
       animator.SetBool(isInteractingBool, isInteractingStatus);
       animator.SetBool(isFiringSpellBool, isFiringSpellStatus);

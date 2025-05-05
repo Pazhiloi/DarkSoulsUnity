@@ -8,7 +8,7 @@ namespace MR
   {
     public PursueTargetStateHumanoid pursueTargetState;
     public LayerMask detectionLayer;
-    public LayerMask layersToIgnoreForLineOfSight;
+    public LayerMask layersThatBlockLineOfSight;
     public override State Tick(EnemyManager aiCharacter)
     {
 
@@ -26,7 +26,7 @@ namespace MR
 
             if (viewableAngle > aiCharacter.minimumDetectionAngle && viewableAngle < aiCharacter.maximumDetectionAngle)
             {
-              if (Physics.Linecast(aiCharacter.lockOnTransform.position, targetCharacter.lockOnTransform.position, layersToIgnoreForLineOfSight))
+              if (Physics.Linecast(aiCharacter.lockOnTransform.position, targetCharacter.lockOnTransform.position, layersThatBlockLineOfSight))
               {
                 return this;
               }
