@@ -8,6 +8,10 @@ namespace MR
     {
     public CombatStanceStateHumanoid combatStanceState;
 
+    private void Awake() {
+      combatStanceState = GetComponent<CombatStanceStateHumanoid>();
+    }
+
     public override State Tick(EnemyManager enemy)
     {
       enemy.animator.SetFloat("Vertical", 0);

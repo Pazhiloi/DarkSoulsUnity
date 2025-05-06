@@ -80,6 +80,34 @@ namespace MR
       }
       else{
 
+        EnemyManager enemy = character as EnemyManager;
+        // CREATE AND FIRE THE LIVE ARROW
+        GameObject liveArrow = Instantiate(player.playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, Quaternion.identity);
+
+        Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
+        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+
+
+        //GIVE AMMO VELOCITY
+        if (enemy.currentTarget != null)
+        {
+          //Since while locked we are ALWAYS facing our target we can copy our facing direction to our arrows facing direction when fired
+          Quaternion arrowRotation = Quaternion.LookRotation(enemy.currentTarget.lockOnTransform.position - liveArrow.transform.position);
+          liveArrow.transform.rotation = arrowRotation;
+        }
+
+        rigidBody.AddForce(liveArrow.transform.forward * enemy.characterInventoryManager.currentAmmo.forwardVelocity);
+        rigidBody.AddForce(liveArrow.transform.up * enemy.characterInventoryManager.currentAmmo.upwardVelocity);
+
+        rigidBody.useGravity = enemy.characterInventoryManager.currentAmmo.useGravity;
+
+        rigidBody.mass = enemy.characterInventoryManager.currentAmmo.ammoMass;
+        liveArrow.transform.parent = null;
+        // SET LIVE AMMO DAMAGE
+        damageCollider.characterManager = character;
+        damageCollider.ammoItem = enemy.characterInventoryManager.currentAmmo;
+        damageCollider.physicalDamage = enemy.characterInventoryManager.currentAmmo.physicalDamage;
+        damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
       }
       
     }

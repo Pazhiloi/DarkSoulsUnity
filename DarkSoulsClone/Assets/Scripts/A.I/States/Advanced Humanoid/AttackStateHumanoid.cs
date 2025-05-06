@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace MR
 {
-    public class AttackStateHumanoid : State
-    {
+  public class AttackStateHumanoid : State
+  {
     public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
     public CombatStanceStateHumanoid combatStanceState;
     public PursueTargetStateHumanoid pursueTargetState;
@@ -13,12 +13,34 @@ namespace MR
 
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
+
+    private void Awake() {
+      rotateTowardsTargetState = GetComponent<RotateTowardsTargetStateHumanoid>();
+      combatStanceState = GetComponent<CombatStanceStateHumanoid>();
+      pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    }
+
     public override State Tick(EnemyManager enemy)
     {
-      float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+      if (enemy.combatStyle == AICombatStyle.swordAndShield)
+      {
+       return ProcessSwordAndShieldCombatStyle(enemy);
+      }
+      else if (enemy.combatStyle == AICombatStyle.archer)
+      {
+       return ProcessArcherCombatStyle(enemy);
+      }
+      else
+      {
+        return this;
+      }
+    }
+
+    private State ProcessSwordAndShieldCombatStyle(EnemyManager enemy)
+    {
       RotateTowardsTargetWhilstAttacking(enemy);
 
-      if (distanceFromTarget > enemy.maximumAggroRadius)
+      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
       {
         return pursueTargetState;
       }
@@ -43,6 +65,34 @@ namespace MR
       return rotateTowardsTargetState;
     }
 
+    private State ProcessArcherCombatStyle(EnemyManager enemy)
+    {
+      RotateTowardsTargetWhilstAttacking(enemy);
+
+      if (enemy.isInteracting)
+        return this;
+
+      if (enemy.currentTarget.isDead)
+      {
+        ResetStateFlags();
+        enemy.currentTarget = null;
+        return this;
+      }
+
+      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
+      {
+        ResetStateFlags();
+        return pursueTargetState;
+      }
+
+      if (!hasPerformedAttack && enemy.isHoldingArrow)
+      {
+        FireAmmo(enemy);
+      }
+      ResetStateFlags();
+
+      return rotateTowardsTargetState;
+    }
 
 
     private void AttackTarget(EnemyManager enemy)
@@ -103,6 +153,16 @@ namespace MR
       hasPerformedAttack = false;
     }
 
+
+    private void FireAmmo(EnemyManager enemy)
+    {
+      if (enemy.isHoldingArrow)
+      {
+        hasPerformedAttack = true;
+        enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
+        enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+      }
+    }
 
   }
 }

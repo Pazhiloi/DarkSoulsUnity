@@ -46,6 +46,10 @@ namespace MR
     public float comboLikelyHood;
     public AICombatStyle combatStyle;
 
+    [Header("A.I Archery Settings")]
+    public float minimumTimeToAimAtTarget = 3;
+    public float maximumTimeToAimAtTarget = 6;
+
     [Header("A.I Target Information")]
     public float distanceFromTarget;
     public Vector3 targetsDirection;
@@ -77,9 +81,11 @@ namespace MR
       isInteracting = animator.GetBool("isInteracting");
       isPhaseShifting = animator.GetBool("isPhaseShifting");
       isInvulnerable = animator.GetBool("isInvulnerable");
+      isHoldingArrow = animator.GetBool("isHoldingArrow");
       canDoCombo = animator.GetBool("canDoCombo");
       canRotate = animator.GetBool("canRotate");
       animator.SetBool("isDead", isDead);
+      animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
       animator.SetBool("isBlocking", isBlocking);
 
       if (currentTarget != null)

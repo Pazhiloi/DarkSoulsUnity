@@ -9,6 +9,10 @@ namespace MR
     public PursueTargetStateHumanoid pursueTargetState;
     public LayerMask detectionLayer;
     public LayerMask layersThatBlockLineOfSight;
+
+    private void Awake() {
+      pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    }
     public override State Tick(EnemyManager aiCharacter)
     {
 

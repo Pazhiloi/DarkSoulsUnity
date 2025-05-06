@@ -17,8 +17,14 @@ namespace MR
     bool willPerformParry = false;
     bool hasPerformedDodge = false;
     bool hasRandomDodgeDirection = false;
+    bool hasAmmoLoaded = false;
 
     Quaternion targetDodgeDirection;
+
+    private void Awake() {
+      attackState = GetComponent<AttackStateHumanoid>();
+      pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    }
     public override State Tick(EnemyManager enemy)
     {
       if (enemy.combatStyle == AICombatStyle.swordAndShield)
@@ -102,6 +108,54 @@ namespace MR
 
     private State ProcessArcherCombatStyle(EnemyManager enemy)
     {
+      enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+      enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+
+      if (!enemy.isGrounded || enemy.isInteracting)
+      {
+        enemy.animator.SetFloat("Vertical", 0);
+        enemy.animator.SetFloat("Horizontal", 0);
+        return this;
+      }
+
+      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
+      {
+        ResetStateFlags();
+        return pursueTargetState;
+      }
+
+      if (!randomDestinationSet)
+      {
+        randomDestinationSet = true;
+        DecideCirclingAction(enemy);
+      }
+
+      if (enemy.allowAIToPerformDodge)
+      {
+        RollForDodgeChance(enemy);
+      }
+
+
+
+      if (willPerformDodge && enemy.currentTarget.isAttacking)
+      {
+        Dodge(enemy);
+      }
+     
+
+      HandleRotateTowardsTarget(enemy);
+
+      if (!hasAmmoLoaded)
+      {
+        DrawArrow(enemy);
+        AimAtTargetBeforeFiring(enemy);
+      }
+
+      if (enemy.currentRecoveryTime <= 0 && hasAmmoLoaded)
+      {
+        ResetStateFlags();
+        return attackState;
+      }
       return this;
     }
 
@@ -247,6 +301,7 @@ namespace MR
     {
       hasRandomDodgeDirection = false;
       hasPerformedDodge = false;
+      hasAmmoLoaded = false;
       randomDestinationSet = false;
       willPerformBlock = false;
       willPerformDodge = false;
@@ -294,6 +349,28 @@ namespace MR
           }
         }
       }
+    }
+
+    private void DrawArrow(EnemyManager enemy)
+    {
+      //We must two hand the bow to fire and load it
+      if (enemy.isTwoHandingWeapon)
+      {
+        enemy.isTwoHandingWeapon = true;
+        enemy.characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+      }
+      else
+      {
+        hasAmmoLoaded = true;
+        enemy.characterInventoryManager.currentItemBeingUsed = enemy.characterInventoryManager.rightWeapon;
+        enemy.characterInventoryManager.rightWeapon.th_hold_RB_Action.PerformAction(enemy);
+      }
+    }
+
+    private void AimAtTargetBeforeFiring(EnemyManager enemy)
+    {
+      float timeUntilAmmoIsShotAtTarget = Random.Range(enemy.minimumTimeToAimAtTarget, enemy.maximumTimeToAimAtTarget);
+      enemy.currentRecoveryTime = timeUntilAmmoIsShotAtTarget;
     }
 
 
