@@ -5109,12 +5109,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabLayer:
+  backStabReceiverTransform: {fileID: 0}
+  characterLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  riposteLayer:
-    serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 512
+  criticalAttackRange: 0.7
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -5133,6 +5132,7 @@ MonoBehaviour:
   th_charge_attack_01: TH_Ch_At_charge_01
   th_charge_attack_02: TH_Ch_At_charge_02
   weapon_art: Weapon_Art
+  pendingCriticalDamage: 0
   lastAttack: 
 --- !u!114 &325664393
 MonoBehaviour:
@@ -5304,7 +5304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRangeFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -5404,8 +5404,6 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1799550819}
   criticalAttackRayCastStartPoint: {fileID: 0}
-  backStabCollider: {fileID: 1359174470}
-  riposteCollider: {fileID: 1081115785}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 1
@@ -5421,6 +5419,10 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isPerformingFullyChargedAttack: 0
   isAttacking: 0
+  isBeingBackstabbed: 0
+  isBeingRiposted: 0
+  isPerformingBackstab: 0
+  isPerformingRiposte: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -10941,8 +10943,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1933984076}
-  - {fileID: 1359174469}
-  - {fileID: 1081115784}
   m_Father: {fileID: 325664406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &655366389
@@ -14787,8 +14787,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1627505770}
-  - {fileID: 1621343585}
-  - {fileID: 1554954567}
   m_Father: {fileID: 543450651902353127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900843296
@@ -17900,73 +17898,6 @@ Transform:
   - {fileID: 1355703664}
   m_Father: {fileID: 543450651902353127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1081115783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1081115784}
-  - component: {fileID: 1081115786}
-  - component: {fileID: 1081115785}
-  m_Layer: 13
-  m_Name: 'Riposte Collider '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1081115784
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081115783}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 650367946}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081115785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081115783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 353612254}
---- !u!65 &1081115786
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081115783}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.623, y: 1, z: 0.0301}
-  m_Center: {x: 0.02457, y: 0, z: 0.03141}
 --- !u!1 &1084316972
 GameObject:
   m_ObjectHideFlags: 0
@@ -18203,12 +18134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabLayer:
+  backStabReceiverTransform: {fileID: 0}
+  characterLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  riposteLayer:
-    serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
+  criticalAttackRange: 0.7
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -18227,6 +18157,7 @@ MonoBehaviour:
   th_charge_attack_01: TH_Ch_At_charge_01
   th_charge_attack_02: TH_Ch_At_charge_02
   weapon_art: Weapon_Art
+  pendingCriticalDamage: 0
   lastAttack: 
 --- !u!114 &1097270703
 MonoBehaviour:
@@ -18398,7 +18329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRangeFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -18498,8 +18429,6 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1482507742}
   criticalAttackRayCastStartPoint: {fileID: 0}
-  backStabCollider: {fileID: 55215807}
-  riposteCollider: {fileID: 1520330130}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 1
@@ -18515,6 +18444,10 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isPerformingFullyChargedAttack: 0
   isAttacking: 0
+  isBeingBackstabbed: 0
+  isBeingRiposted: 0
+  isPerformingBackstab: 0
+  isPerformingRiposte: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -22042,8 +21975,6 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1902572498}
   criticalAttackRayCastStartPoint: {fileID: 0}
-  backStabCollider: {fileID: 1124211235}
-  riposteCollider: {fileID: 1197691728}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 1
@@ -22059,6 +21990,10 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isPerformingFullyChargedAttack: 0
   isAttacking: 0
+  isBeingBackstabbed: 0
+  isBeingRiposted: 0
+  isPerformingBackstab: 0
+  isPerformingRiposte: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -22159,12 +22094,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabLayer:
+  backStabReceiverTransform: {fileID: 0}
+  characterLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  riposteLayer:
-    serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
+  criticalAttackRange: 0.7
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -22183,6 +22117,7 @@ MonoBehaviour:
   th_charge_attack_01: TH_Ch_At_charge_01
   th_charge_attack_02: TH_Ch_At_charge_02
   weapon_art: Weapon_Art
+  pendingCriticalDamage: 0
   lastAttack: 
 --- !u!1 &1324838879
 GameObject:
@@ -23109,73 +23044,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1080928834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1359174468
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1359174469}
-  - component: {fileID: 1359174471}
-  - component: {fileID: 1359174470}
-  m_Layer: 12
-  m_Name: Back Stab Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1359174469
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359174468}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: -0.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 650367946}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1359174470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359174468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 672920985}
---- !u!65 &1359174471
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359174468}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.623, y: 1, z: 0.0301}
-  m_Center: {x: 0.02457, y: 0, z: 0.03141}
 --- !u!1 &1367413906
 GameObject:
   m_ObjectHideFlags: 0
@@ -25989,7 +25857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527132813}
   m_Layer: 11
-  m_Name: Back Stabber Standing Point
+  m_Name: Backstab Receiver Transform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26004,7 +25872,7 @@ Transform:
   m_GameObject: {fileID: 1527132812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.75}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26189,73 +26057,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 768183531493597285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1554954566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1554954567}
-  - component: {fileID: 1554954569}
-  - component: {fileID: 1554954568}
-  m_Layer: 13
-  m_Name: Riposte Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1554954567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554954566}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 899486129}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554954568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554954566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 2120848553}
---- !u!65 &1554954569
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554954566}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.623, y: 1, z: 0.0301}
-  m_Center: {x: 0.02457, y: 0, z: 0.03141}
 --- !u!1 &1560752755
 GameObject:
   m_ObjectHideFlags: 0
@@ -27224,73 +27025,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621248869}
   m_CullTransparentMesh: 1
---- !u!1 &1621343584
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1621343585}
-  - component: {fileID: 1621343586}
-  - component: {fileID: 1621343587}
-  m_Layer: 12
-  m_Name: Back Stab Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1621343585
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621343584}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.25, z: -0.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 899486129}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1621343586
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621343584}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.623, y: 1, z: 0.0301}
-  m_Center: {x: 0.02457, y: 0, z: 0.03141}
---- !u!114 &1621343587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621343584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 1527132813}
 --- !u!1 &1621599834
 GameObject:
   m_ObjectHideFlags: 0
@@ -60431,7 +60165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36561cd1d9633ea40b4ec83c38337950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRangeFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -60483,12 +60217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515bf4801dfd31e42810e7f64c0b66d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabLayer:
+  backStabReceiverTransform: {fileID: 1527132813}
+  characterLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  riposteLayer:
-    serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 512
+  criticalAttackRange: 0.7
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -60507,6 +60240,7 @@ MonoBehaviour:
   th_charge_attack_01: TH_Charge_Attack_01
   th_charge_attack_02: TH_Charge_Attack_02
   weapon_art: Weapon_Art
+  pendingCriticalDamage: 0
   lastAttack: 
 --- !u!114 &5866666020217144482
 MonoBehaviour:
@@ -60646,9 +60380,7 @@ MonoBehaviour:
   characterSoundFXManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 2083012898}
-  criticalAttackRayCastStartPoint: {fileID: 0}
-  backStabCollider: {fileID: 1621343587}
-  riposteCollider: {fileID: 1554954568}
+  criticalAttackRayCastStartPoint: {fileID: 1355703664}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 0
@@ -60664,6 +60396,10 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isPerformingFullyChargedAttack: 0
   isAttacking: 0
+  isBeingBackstabbed: 0
+  isBeingRiposted: 0
+  isPerformingBackstab: 0
+  isPerformingRiposte: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -60989,8 +60725,6 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   lockOnTransform: {fileID: 1841210898}
   criticalAttackRayCastStartPoint: {fileID: 0}
-  backStabCollider: {fileID: 2070478348}
-  riposteCollider: {fileID: 303706882}
   isInteracting: 0
   isDead: 0
   canBeRiposted: 1
@@ -61006,6 +60740,10 @@ MonoBehaviour:
   isTwoHandingWeapon: 0
   isPerformingFullyChargedAttack: 0
   isAttacking: 0
+  isBeingBackstabbed: 0
+  isBeingRiposted: 0
+  isPerformingBackstab: 0
+  isPerformingRiposte: 0
   isRotatingWithRootMotion: 0
   canRotate: 0
   isSprinting: 0
@@ -61154,7 +60892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRangeFX: {fileID: 0}
+  instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
   leftWeaponFX: {fileID: 0}
@@ -61337,12 +61075,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c33fd94a847be4b832d460a64c9e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backStabLayer:
+  backStabReceiverTransform: {fileID: 0}
+  characterLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  riposteLayer:
-    serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 0
+  criticalAttackRange: 0.7
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -61361,6 +61098,7 @@ MonoBehaviour:
   th_charge_attack_01: TH_Ch_At_charge_01
   th_charge_attack_02: TH_Ch_At_charge_02
   weapon_art: Weapon_Art
+  pendingCriticalDamage: 0
   lastAttack: 
 --- !u!224 &5876800281749886865
 RectTransform:

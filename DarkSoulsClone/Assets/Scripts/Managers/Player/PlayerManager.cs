@@ -41,7 +41,6 @@ namespace MR
       inputHandler = GetComponent<InputHandler>();
       animator = GetComponent<Animator>();
 
-      backStabCollider = GetComponentInChildren<CriticalDamageCollider>();
       
       playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
       playerInventoryManager = GetComponent<PlayerInventoryManager>();

@@ -72,6 +72,11 @@ namespace MR
       if (enemy.isInteracting)
         return this;
 
+      if (!enemy.isHoldingArrow)
+      {
+        ResetStateFlags();
+        return combatStanceState;
+      }
       if (enemy.currentTarget.isDead)
       {
         ResetStateFlags();

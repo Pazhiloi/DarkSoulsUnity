@@ -77,7 +77,7 @@ namespace MR
           float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
           ChooseWhichDirectionDamageCameFrom(directionHitFrom);
           enemyEffects.PlayBloodSplatterFX(contactPoint);
-
+          enemyEffects.InterruptEffect();
 
           DealDamage(enemyStats);
 

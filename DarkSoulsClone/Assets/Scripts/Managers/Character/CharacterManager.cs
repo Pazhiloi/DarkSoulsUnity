@@ -3,25 +3,23 @@ namespace MR
 {
   public class CharacterManager : MonoBehaviour
   {
-    public Animator animator; 
-   public CharacterAnimatorManager characterAnimatorManager;
-   public CharacterWeaponSlotManager characterWeaponSlotManager;
-  public CharacterStatsManager characterStatsManager;
+    public Animator animator;
+    public CharacterAnimatorManager characterAnimatorManager;
+    public CharacterWeaponSlotManager characterWeaponSlotManager;
+    public CharacterStatsManager characterStatsManager;
     public CharacterInventoryManager characterInventoryManager;
     public CharacterEffectsManager characterEffectsManager;
     public CharacterSoundFXManager characterSoundFXManager;
     public CharacterCombatManager characterCombatManager;
 
     [Header("Look On Transform")]
-    
+
     public Transform lockOnTransform;
     [Header("Ray Casts")]
     public Transform criticalAttackRayCastStartPoint;
 
 
     [Header("Combat Colliders")]
-    public CriticalDamageCollider backStabCollider;
-    public CriticalDamageCollider riposteCollider;
     [Header("Interaction")]
     public bool isInteracting;
     [Header("Status")]
@@ -41,7 +39,10 @@ namespace MR
     public bool isTwoHandingWeapon;
     public bool isPerformingFullyChargedAttack;
     public bool isAttacking;
-
+    public bool isBeingBackstabbed;
+    public bool isBeingRiposted;
+    public bool isPerformingBackstab;
+    public bool isPerformingRiposte;
 
 
     [Header("Movement Flags")]

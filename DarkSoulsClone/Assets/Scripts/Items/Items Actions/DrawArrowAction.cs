@@ -16,7 +16,7 @@ namespace MR
       character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Draw_01", true);
 
       GameObject loadedArrow = Instantiate(character.characterInventoryManager.currentAmmo.loadedItemModel, character.characterWeaponSlotManager.leftHandSlot.transform);
-      character.characterEffectsManager.currentRangeFX = loadedArrow;
+      character.characterEffectsManager.instantiatedFXModel = loadedArrow;
       
 
       Animator bowAnimator = character.characterWeaponSlotManager.rightHandSlot.GetComponentInChildren<Animator>();

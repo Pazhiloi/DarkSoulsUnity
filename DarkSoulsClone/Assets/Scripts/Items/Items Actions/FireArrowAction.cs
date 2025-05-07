@@ -21,7 +21,7 @@ namespace MR
       bowAnimator.SetBool("isDrawn", false);
       bowAnimator.Play("Bow_TH_Fire_01");
 
-      Destroy(character.characterEffectsManager.currentRangeFX); // Destroys the loaded arrow model
+      Destroy(character.characterEffectsManager.instantiatedFXModel); // Destroys the loaded arrow model
 
       // RESET THE PLAYERS HOLDING ARROW FLAG
       character.characterAnimatorManager.PlayTargetAnimation("Bow_TH_Fire_01", true);
