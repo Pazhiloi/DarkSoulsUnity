@@ -5110,6 +5110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backStabReceiverTransform: {fileID: 0}
+  riposteReceiverTransform: {fileID: 0}
   characterLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -18135,6 +18136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backStabReceiverTransform: {fileID: 0}
+  riposteReceiverTransform: {fileID: 0}
   characterLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -22095,6 +22097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backStabReceiverTransform: {fileID: 0}
+  riposteReceiverTransform: {fileID: 0}
   characterLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -23709,6 +23712,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402457720}
   m_CullTransparentMesh: 1
+--- !u!1 &1406171109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1406171110}
+  m_Layer: 11
+  m_Name: Riposte Receiver Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1406171110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406171109}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1654675153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1407484232
 GameObject:
   m_ObjectHideFlags: 0
@@ -27902,7 +27936,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1527132813}
-  - {fileID: 2120848553}
+  - {fileID: 1406171110}
   - {fileID: 453185187}
   m_Father: {fileID: 543450651902353127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33871,37 +33905,6 @@ Transform:
   - {fileID: 2070478346}
   - {fileID: 303706881}
   m_Father: {fileID: 543450653119276191}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2120848552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2120848553}
-  m_Layer: 11
-  m_Name: 'Riposter Standing Point '
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2120848553
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120848552}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.75}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1654675153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2121043499
 GameObject:
@@ -60218,6 +60221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backStabReceiverTransform: {fileID: 1527132813}
+  riposteReceiverTransform: {fileID: 1406171110}
   characterLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -61076,6 +61080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backStabReceiverTransform: {fileID: 0}
+  riposteReceiverTransform: {fileID: 0}
   characterLayer:
     serializedVersion: 2
     m_Bits: 0

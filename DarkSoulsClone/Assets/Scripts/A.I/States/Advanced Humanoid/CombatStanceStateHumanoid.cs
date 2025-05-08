@@ -16,6 +16,7 @@ namespace MR
     bool willPerformDodge = false;
     bool willPerformParry = false;
     bool hasPerformedDodge = false;
+    bool hasPerformedParry = false;
     bool hasRandomDodgeDirection = false;
     bool hasAmmoLoaded = false;
 
@@ -64,6 +65,15 @@ namespace MR
         DecideCirclingAction(enemy);
       }
 
+      if (enemy.allowAIToPerformParry)
+      {
+        if (enemy.currentTarget.canBeRiposted)
+        {
+          CheckForRiposte(enemy);
+          return this;
+        }
+      }
+
       if (enemy.allowAIToPerformBlock)
       {
         RollForBlockChance(enemy);
@@ -78,6 +88,15 @@ namespace MR
         RollForParryChance(enemy);
       }
 
+      if (enemy.currentTarget.isAttacking)
+      {
+        if (willPerformParry && !hasPerformedParry)
+        {
+          ParryCurrentTarget(enemy);
+          return this;
+        }
+      }
+
 
       if (willPerformBlock)
       {
@@ -86,10 +105,6 @@ namespace MR
       if (willPerformDodge && enemy.currentTarget.isAttacking)
       {
         Dodge(enemy);
-      }
-      if (willPerformParry)
-      {
-
       }
 
       HandleRotateTowardsTarget(enemy);
@@ -302,6 +317,7 @@ namespace MR
       hasRandomDodgeDirection = false;
       hasPerformedDodge = false;
       hasAmmoLoaded = false;
+      hasPerformedParry = false;
       randomDestinationSet = false;
       willPerformBlock = false;
       willPerformDodge = false;
@@ -373,6 +389,45 @@ namespace MR
       enemy.currentRecoveryTime = timeUntilAmmoIsShotAtTarget;
     }
 
+    private void ParryCurrentTarget(EnemyManager enemy)
+    {
+      if (enemy.currentTarget.canBeParried)
+      {
+        if (enemy.distanceFromTarget <= 2)
+        {
+          hasPerformedParry = true;
+          enemy.isParrying = true;
+          enemy.enemyAnimatorManager.PlayTargetAnimation("Parry_01", true);
+        }
+      }
+    }
 
+    private void CheckForRiposte(EnemyManager enemy)
+    {
+      if (enemy.isInteracting)
+      {
+        enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+        enemy.animator.SetFloat("Vertical", 0, 0.2f, Time.deltaTime);
+        return;
+      }
+
+      if (enemy.distanceFromTarget >= 1.0f)
+      {
+        HandleRotateTowardsTarget(enemy);
+        enemy.animator.SetFloat("Horizontal", 0, 0.2f, Time.deltaTime);
+        enemy.animator.SetFloat("Vertical", 1, 0.2f, Time.deltaTime);
+      }
+      else
+      {
+        enemy.isBlocking = false;
+
+        if (!enemy.isInteracting && enemy.currentTarget.isBeingRiposted && !enemy.currentTarget.isBeingBackstabbed)
+        {
+          enemy.enemyRigidbody.velocity = Vector3.zero;
+          enemy.animator.SetFloat("Vertical", 0);
+          enemy.characterCombatManager.AttemptBackStabOrRiposte();
+        }
+      }
+    }
   }
 }

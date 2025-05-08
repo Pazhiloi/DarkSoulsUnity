@@ -9,6 +9,7 @@ namespace MR
     CharacterManager character;
     [Header("Combat Transform")]
     public Transform backStabReceiverTransform;
+    public Transform riposteReceiverTransform;
     public LayerMask characterLayer;
     public float criticalAttackRange = 0.7f;
     [Header("Attack Type")]
@@ -86,14 +87,10 @@ namespace MR
     }
 
 
-
-
     private void SuccessfullyCastSpell()
     {
       character.characterInventoryManager.currentSpell.SuccessfullyCastSpell(character);
     }
-
-
 
     public void AttemptBackStabOrRiposte()
     {
@@ -116,7 +113,8 @@ namespace MR
         {
           if (dotValue <= 1.2f && dotValue >= 0.6f)
           {
-            //ATTEMPT RIPOSTE
+           AttemptRiposte(hit);
+           return;
           }
         }
 
@@ -139,14 +137,32 @@ namespace MR
         yield return new WaitForSeconds(0.05f);
       }
     }
-
+    IEnumerator ForceMoveCharacterToEnemyRipostePosition(CharacterManager characterPerformingRiposte)
+    {
+      for (float timer = 0.05f; timer < 0.5f; timer += 0.05f)
+      {
+        Quaternion backstabRotation = Quaternion.LookRotation(-characterPerformingRiposte.transform.forward);
+        transform.rotation = Quaternion.Slerp(transform.rotation, backstabRotation, 1);
+        transform.parent = characterPerformingRiposte.characterCombatManager.riposteReceiverTransform;
+        transform.localPosition = characterPerformingRiposte.characterCombatManager.riposteReceiverTransform.localPosition;
+        transform.parent = null;
+        yield return new WaitForSeconds(0.05f);
+      }
+    }
 
     public void GetBackStabbed(CharacterManager characterPerformingBackStab)
     {
       character.isBeingBackstabbed = true;
       StartCoroutine(ForceMoveCharacterToEnemyBackStabPosition(characterPerformingBackStab));
       character.characterAnimatorManager.PlayTargetAnimation("Back_Stabbed_01", true);
+    }
 
+
+    public void GetRiposted(CharacterManager characterPerformingRiposte)
+    {
+      character.isBeingRiposted = true;
+      StartCoroutine(ForceMoveCharacterToEnemyRipostePosition(characterPerformingRiposte));
+      character.characterAnimatorManager.PlayTargetAnimation("Riposted_01", true);
     }
 
     private void AttemptBackStab(RaycastHit hit)
@@ -173,6 +189,29 @@ namespace MR
       }
     }
 
+    private void AttemptRiposte (RaycastHit hit){
+      CharacterManager enemyCharacter = hit.transform.GetComponent<CharacterManager>();
+      if (enemyCharacter != null)
+      {
+        if (!enemyCharacter.isBeingBackstabbed && !enemyCharacter.isBeingRiposted)
+        {
+          //We make it so the enemy cannot be damaged whilst being critically damaged
+          EnableIsInvulnerable();
+          character.isPerformingRiposte = true;
+          character.characterAnimatorManager.EraseHandIKForWeapon();
+
+          character.characterAnimatorManager.PlayTargetAnimation("Riposte_01", true);
+
+          float criticalDamage = (character.characterInventoryManager.rightWeapon.criticalDamageMultiplier * (character.characterInventoryManager.rightWeapon.physicalDamage + character.characterInventoryManager.rightWeapon.fireDamage));
+
+          int roundedCriticalDamage = Mathf.RoundToInt(criticalDamage);
+          enemyCharacter.characterCombatManager.pendingCriticalDamage = roundedCriticalDamage;
+          enemyCharacter.characterCombatManager.GetRiposted(character);
+        }
+      }
+    }
+
+
     private void EnableIsInvulnerable()
     {
       character.animator.SetBool("isInvulnerable", true);
@@ -181,7 +220,12 @@ namespace MR
     public void ApplyPendingDamage(){
       character.characterStatsManager.TakeDamageNoAnimation(pendingCriticalDamage, 0);
     }
-
+    public void EnableCanBeParried(){
+      character.canBeParried = true;
+    }
+    public void DisableCanBeParried(){
+      character.canBeParried = false;
+    }
 
   }
 }
