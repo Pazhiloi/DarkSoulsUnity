@@ -28,6 +28,8 @@ namespace MR
     protected bool shieldHasBeenHit;
     protected bool hasBeenParried;
     protected string currentDamageAnimation;
+
+    private List<CharacterManager> charactersDamagedDuringThisCalculation = new List<CharacterManager>();
     protected virtual void Awake()
     {
       damageCollider = GetComponent<Collider>();
@@ -42,44 +44,48 @@ namespace MR
     }
     public void DisableDamageCollider()
     {
+      if (charactersDamagedDuringThisCalculation.Count > 0)
+      {
+        charactersDamagedDuringThisCalculation.Clear();
+      }
       damageCollider.enabled = false;
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-      if (other.tag == "Character")
+      if (other.gameObject.layer == LayerMask.NameToLayer("Damageable Character"))
       {
         shieldHasBeenHit = false;
         hasBeenParried = false;
 
-        CharacterStatsManager enemyStats = other.GetComponent<CharacterStatsManager>();
-        CharacterManager enemyManager = other.GetComponent<CharacterManager>();
-        CharacterEffectsManager enemyEffects = other.GetComponent<CharacterEffectsManager>();
+        CharacterManager enemyManager = other.GetComponentInParent<CharacterManager>();
+
 
         if (enemyManager != null)
         {
-          if (enemyStats.teamIDNumber == teamIDNumber) return;
-
+          if (charactersDamagedDuringThisCalculation.Contains(enemyManager)) return;
+          if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber) return;
+          charactersDamagedDuringThisCalculation.Add(enemyManager);
           CheckForParry(enemyManager);
           CheckForBlock(enemyManager);
         }
 
-        if (enemyStats != null)
+        if (enemyManager.characterStatsManager != null)
         {
-          if (enemyStats.teamIDNumber == teamIDNumber) return;
+          if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber) return;
           if (hasBeenParried) return;
           if (shieldHasBeenHit) return;
 
-          enemyStats.poiseResetTimer = enemyStats.totalPoiseResetTime;
-          enemyStats.totalPoiseDefence = enemyStats.totalPoiseResetTime - poiseBreak;
+          enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
+          enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseResetTime - poiseBreak;
 
           Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
           float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
           ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-          enemyEffects.PlayBloodSplatterFX(contactPoint);
-          enemyEffects.InterruptEffect();
+          enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+          enemyManager.characterEffectsManager.InterruptEffect();
 
-          DealDamage(enemyStats);
+          DealDamage(enemyManager.characterStatsManager);
 
         }
       }
@@ -113,7 +119,7 @@ namespace MR
         float physicalDamageAfterBlock = physicalDamage - (physicalDamage * enemyShield.blockingPhysicalDamageAbsorption) / 100;
         float fireDamageAfterBlock = fireDamage - (fireDamage * enemyShield.blockingFireDamageAbsorption) / 100;
         enemyManager.characterCombatManager.AttemptBlock(this, physicalDamage, fireDamage, "Block_01");
-        enemyShield.TakeDamageAfterBlock(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock),  characterManager);
+        enemyShield.TakeDamageAfterBlock(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock), characterManager);
       }
     }
 

@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4659468454774755843}
   - component: {fileID: 1749396991081967019}
   - component: {fileID: 1581338005332174060}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,6 +161,7 @@ MonoBehaviour:
   magicDamage: 0
   lightningDamage: 0
   darkDamage: 0
+  guardBreakModifier: 1
 --- !u!1 &5315358620256627297
 GameObject:
   m_ObjectHideFlags: 0
