@@ -23,24 +23,24 @@ namespace MR
     public float minimumDistanceNeededToAttack = 0;
     public float maximumDistanceNeededToAttack = 3;
 
-    public void PerformAttackAction(EnemyManager enemy)
+    public void PerformAttackAction(AICharacterManager aiCharacter)
     {
       if (isRightHandedAction)
       {
-        enemy.UpdateWhichHandCharacterIsUsing(true);
-        PerformRightHandItemActionBasedOnAttackType(enemy);
+        aiCharacter.UpdateWhichHandCharacterIsUsing(true);
+        PerformRightHandItemActionBasedOnAttackType(aiCharacter);
       }
       else
       {
-        enemy.UpdateWhichHandCharacterIsUsing(false);
-        PerformLeftHandItemActionBasedOnAttackType(enemy);
+        aiCharacter.UpdateWhichHandCharacterIsUsing(false);
+        PerformLeftHandItemActionBasedOnAttackType(aiCharacter);
       }
     }
-    private void PerformRightHandItemActionBasedOnAttackType(EnemyManager enemy)
+    private void PerformRightHandItemActionBasedOnAttackType(AICharacterManager aiCharacter)
     {
       if (actionAttackType == AIAttackActionType.meleeAttackAction)
       {
-       PerformRightHandMeleeAction(enemy);
+       PerformRightHandMeleeAction(aiCharacter);
       }
       else if (actionAttackType == AIAttackActionType.rangedAttackAction)
       {
@@ -48,7 +48,7 @@ namespace MR
       }
     }
 
-    private void PerformLeftHandItemActionBasedOnAttackType(EnemyManager enemy)
+    private void PerformLeftHandItemActionBasedOnAttackType(AICharacterManager aiCharacter)
     {
       if (actionAttackType == AIAttackActionType.meleeAttackAction)
       {
@@ -60,28 +60,28 @@ namespace MR
       }
     }
 
-    private void PerformRightHandMeleeAction(EnemyManager enemy)
+    private void PerformRightHandMeleeAction(AICharacterManager aiCharacter)
     {
-      if (enemy.isTwoHandingWeapon)
+      if (aiCharacter.isTwoHandingWeapon)
       {
         if (attackType == AttackType.light)
         {
-          enemy.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(enemy);
+          aiCharacter.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(aiCharacter);
         }
         else if (attackType == AttackType.heavy)
         {
-          enemy.characterInventoryManager.rightWeapon.th_tap_RT_Action.PerformAction(enemy);
+          aiCharacter.characterInventoryManager.rightWeapon.th_tap_RT_Action.PerformAction(aiCharacter);
         }
       }
       else
       {
         if (attackType == AttackType.light)
         {
-          enemy.characterInventoryManager.rightWeapon.oh_tap_RB_Action.PerformAction(enemy);
+          aiCharacter.characterInventoryManager.rightWeapon.oh_tap_RB_Action.PerformAction(aiCharacter);
         }
         else if (attackType == AttackType.heavy)
         {
-          enemy.characterInventoryManager.rightWeapon.oh_tap_RT_Action.PerformAction(enemy);
+          aiCharacter.characterInventoryManager.rightWeapon.oh_tap_RT_Action.PerformAction(aiCharacter);
         }
       }
     }

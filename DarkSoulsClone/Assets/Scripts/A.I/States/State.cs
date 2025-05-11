@@ -5,6 +5,6 @@ namespace MR
 {
   public abstract class State : MonoBehaviour
   {
-    public abstract  State Tick(EnemyManager enemy);
+    public abstract  State Tick(AICharacterManager aiCharacter);
   }
 }

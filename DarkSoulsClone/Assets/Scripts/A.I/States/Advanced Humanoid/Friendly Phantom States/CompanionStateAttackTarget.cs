@@ -1,34 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace MR
 {
-  public class AttackStateHumanoid : State
+    public class CompanionStateAttackTarget : State
   {
-    public RotateTowardsTargetStateHumanoid rotateTowardsTargetState;
-    public CombatStanceStateHumanoid combatStanceState;
-    public PursueTargetStateHumanoid pursueTargetState;
+     CompanionStateRotateTowardsTarget rotateTowardsTargetState;
+     CompanionStateCombatStance combatStanceState;
+     CompanionStatePursueTarget pursueTargetState;
     public ItemBasedAttackAction currentAttack;
 
     bool willDoComboOnNextAttack = false;
     public bool hasPerformedAttack = false;
 
-    private void Awake() {
-      rotateTowardsTargetState = GetComponent<RotateTowardsTargetStateHumanoid>();
-      combatStanceState = GetComponent<CombatStanceStateHumanoid>();
-      pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+    private void Awake()
+    {
+      rotateTowardsTargetState = GetComponent<CompanionStateRotateTowardsTarget>();
+      combatStanceState = GetComponent<CompanionStateCombatStance>();
+      pursueTargetState = GetComponent<CompanionStatePursueTarget>();
     }
 
     public override State Tick(AICharacterManager aiCharacter)
     {
       if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
       {
-       return ProcessSwordAndShieldCombatStyle(aiCharacter);
+        return ProcessSwordAndShieldCombatStyle(aiCharacter);
       }
       else if (aiCharacter.combatStyle == AICombatStyle.archer)
       {
-       return ProcessArcherCombatStyle(aiCharacter);
+        return ProcessArcherCombatStyle(aiCharacter);
       }
       else
       {
@@ -168,6 +167,5 @@ namespace MR
         aiCharacter.characterInventoryManager.rightWeapon.th_tap_RB_Action.PerformAction(aiCharacter);
       }
     }
-
   }
 }

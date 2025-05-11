@@ -2,31 +2,52 @@ using UnityEngine;
 
 namespace MR
 {
-    public class PursueTargetStateHumanoid : State
-    {
+  public class PursueTargetStateHumanoid : State
+  {
     public CombatStanceStateHumanoid combatStanceState;
 
-    private void Awake() {
+    private void Awake()
+    {
       combatStanceState = GetComponent<CombatStanceStateHumanoid>();
     }
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
-      if (enemy.isInteracting) return this;
-
-      if (enemy.isPreformingAction)
+      if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
       {
-        enemy.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        return ProcessSwordAndShieldCombatStyle(aiCharacter);
+      }
+      else if (aiCharacter.combatStyle == AICombatStyle.archer)
+      {
+        return ProcessArcherCombatStyle(aiCharacter);
+      }
+      else
+      {
+        return this;
+      }
+    }
+
+    private State ProcessArcherCombatStyle(AICharacterManager aiCharacter)
+    {
+      HandleRotateTowardsTarget(aiCharacter);
+      if (aiCharacter.isInteracting) return this;
+
+      if (aiCharacter.isPreformingAction)
+      {
+        aiCharacter.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         return this;
       }
 
 
-      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
+      if (aiCharacter.distanceFromTarget > aiCharacter.maximumAggroRadius)
       {
-        enemy.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        if (!aiCharacter.isStationaryArcher)
+        {
+          aiCharacter.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        }
       }
 
 
-      if (enemy.distanceFromTarget <= enemy.maximumAggroRadius)
+      if (aiCharacter.distanceFromTarget <= aiCharacter.maximumAggroRadius)
       {
         return combatStanceState;
       }
@@ -36,13 +57,40 @@ namespace MR
       }
     }
 
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager aiCharacter)
+    {
+      HandleRotateTowardsTarget(aiCharacter);
+      if (aiCharacter.isInteracting) return this;
 
-    private void HandleRotateTowardsTarget(EnemyManager enemy)
+      if (aiCharacter.isPreformingAction)
+      {
+        aiCharacter.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        return this;
+      }
+
+
+      if (aiCharacter.distanceFromTarget > aiCharacter.maximumAggroRadius)
+      {
+        aiCharacter.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+      }
+
+
+      if (aiCharacter.distanceFromTarget <= aiCharacter.maximumAggroRadius)
+      {
+        return combatStanceState;
+      }
+      else
+      {
+        return this;
+      }
+    }
+
+    private void HandleRotateTowardsTarget(AICharacterManager aiCharacter)
     {
       // Rotate Manually
-      if (enemy.isPreformingAction)
+      if (aiCharacter.isPreformingAction)
       {
-        Vector3 direction = enemy.currentTarget.transform.position - enemy.transform.position;
+        Vector3 direction = aiCharacter.currentTarget.transform.position - aiCharacter.transform.position;
         direction.y = 0;
         direction.Normalize();
 
@@ -52,19 +100,21 @@ namespace MR
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        enemy.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemy.rotationSpeed / Time.deltaTime);
+        aiCharacter.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, aiCharacter.rotationSpeed / Time.deltaTime);
       }
       // Rotate with pathfinding(navmesh)
       else
       {
-        Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navMeshAgent.desiredVelocity);
-        Vector3 targetVelocity = enemy.enemyRigidbody.velocity;
+        Vector3 relativeDirection = transform.InverseTransformDirection(aiCharacter.navMeshAgent.desiredVelocity);
+        Vector3 targetVelocity = aiCharacter.enemyRigidbody.velocity;
 
-        enemy.navMeshAgent.enabled = true;
-        enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
-        enemy.enemyRigidbody.velocity = targetVelocity;
-        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navMeshAgent.transform.rotation, enemy.rotationSpeed / Time.deltaTime);
+        aiCharacter.navMeshAgent.enabled = true;
+        aiCharacter.navMeshAgent.SetDestination(aiCharacter.currentTarget.transform.position);
+        aiCharacter.enemyRigidbody.velocity = targetVelocity;
+        aiCharacter.transform.rotation = Quaternion.Slerp(aiCharacter.transform.rotation, aiCharacter.navMeshAgent.transform.rotation, aiCharacter.rotationSpeed / Time.deltaTime);
       }
     }
+
+    
   }
 }

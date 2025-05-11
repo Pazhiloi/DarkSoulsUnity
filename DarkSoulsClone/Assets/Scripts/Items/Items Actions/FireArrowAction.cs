@@ -33,8 +33,8 @@ namespace MR
         // CREATE AND FIRE THE LIVE ARROW
         GameObject liveArrow = Instantiate(player.playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, player.cameraHandler.cameraPivotTransform.rotation);
 
-        Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
-        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+        Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
+        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
         if (player.isAiming)
         {
@@ -80,34 +80,34 @@ namespace MR
       }
       else{
 
-        EnemyManager enemy = character as EnemyManager;
+        AICharacterManager aiCharacter = character as AICharacterManager;
         // CREATE AND FIRE THE LIVE ARROW
         GameObject liveArrow = Instantiate(player.playerInventoryManager.currentAmmo.liveAmmoModel, arrowInstantiationLocation.transform.position, Quaternion.identity);
 
-        Rigidbody rigidBody = liveArrow.GetComponentInChildren<Rigidbody>();
-        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponentInChildren<RangedProjectileDamageCollider>();
+        Rigidbody rigidBody = liveArrow.GetComponent<Rigidbody>();
+        RangedProjectileDamageCollider damageCollider = liveArrow.GetComponent<RangedProjectileDamageCollider>();
 
 
         //GIVE AMMO VELOCITY
-        if (enemy.currentTarget != null)
+        if (aiCharacter.currentTarget != null)
         {
           //Since while locked we are ALWAYS facing our target we can copy our facing direction to our arrows facing direction when fired
-          Quaternion arrowRotation = Quaternion.LookRotation(enemy.currentTarget.lockOnTransform.position - liveArrow.transform.position);
+          Quaternion arrowRotation = Quaternion.LookRotation(aiCharacter.currentTarget.lockOnTransform.position - liveArrow.transform.position);
           liveArrow.transform.rotation = arrowRotation;
         }
 
-        rigidBody.AddForce(liveArrow.transform.forward * enemy.characterInventoryManager.currentAmmo.forwardVelocity);
-        rigidBody.AddForce(liveArrow.transform.up * enemy.characterInventoryManager.currentAmmo.upwardVelocity);
+        rigidBody.AddForce(liveArrow.transform.forward * aiCharacter.characterInventoryManager.currentAmmo.forwardVelocity);
+        rigidBody.AddForce(liveArrow.transform.up * aiCharacter.characterInventoryManager.currentAmmo.upwardVelocity);
 
-        rigidBody.useGravity = enemy.characterInventoryManager.currentAmmo.useGravity;
+        rigidBody.useGravity = aiCharacter.characterInventoryManager.currentAmmo.useGravity;
 
-        rigidBody.mass = enemy.characterInventoryManager.currentAmmo.ammoMass;
+        rigidBody.mass = aiCharacter.characterInventoryManager.currentAmmo.ammoMass;
         liveArrow.transform.parent = null;
         // SET LIVE AMMO DAMAGE
         damageCollider.characterManager = character;
-        damageCollider.ammoItem = enemy.characterInventoryManager.currentAmmo;
-        damageCollider.physicalDamage = enemy.characterInventoryManager.currentAmmo.physicalDamage;
-        damageCollider.teamIDNumber = enemy.characterStatsManager.teamIDNumber;
+        damageCollider.ammoItem = aiCharacter.characterInventoryManager.currentAmmo;
+        damageCollider.physicalDamage = aiCharacter.characterInventoryManager.currentAmmo.physicalDamage;
+        damageCollider.teamIDNumber = aiCharacter.characterStatsManager.teamIDNumber;
       }
       
     }

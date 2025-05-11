@@ -63,15 +63,14 @@ namespace MR
 
         if (enemyManager != null)
         {
+
+          AICharacterManager aICharacter = enemyManager as AICharacterManager;
           if (charactersDamagedDuringThisCalculation.Contains(enemyManager)) return;
           if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber) return;
           charactersDamagedDuringThisCalculation.Add(enemyManager);
           CheckForParry(enemyManager);
           CheckForBlock(enemyManager);
-        }
 
-        if (enemyManager.characterStatsManager != null)
-        {
           if (enemyManager.characterStatsManager.teamIDNumber == teamIDNumber) return;
           if (hasBeenParried) return;
           if (shieldHasBeenHit) return;
@@ -84,9 +83,12 @@ namespace MR
           ChooseWhichDirectionDamageCameFrom(directionHitFrom);
           enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
           enemyManager.characterEffectsManager.InterruptEffect();
-
           DealDamage(enemyManager.characterStatsManager);
 
+          if (aICharacter != null)
+          {
+            aICharacter.currentTarget = characterManager;
+          }
         }
       }
 

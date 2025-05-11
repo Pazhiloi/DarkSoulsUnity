@@ -1,13 +1,28 @@
 using UnityEngine;
+
 namespace MR
 {
-  public class IdleState : State
+  public class CompanionStateIdle : State
   {
-    public PursueTargetState pursueTargetState;
+
+    CompanionStatePursueTarget pursueTargetState;
+    CompanionStateFollowHost followHostState;
     public LayerMask detectionLayer;
     public LayerMask layersThatBlockLineOfSight;
+
+
+    private void Awake() {
+      pursueTargetState = GetComponent<CompanionStatePursueTarget>();
+      followHostState = GetComponent<CompanionStateFollowHost>();
+    }
     public override State Tick(AICharacterManager aiCharacter)
     {
+      aiCharacter.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+
+      if (aiCharacter.distanceFromCompanion > aiCharacter.maxDistanceFromCompanion)
+      {
+        return followHostState;
+      }
 
       Collider[] colliders = Physics.OverlapSphere(transform.position, aiCharacter.detectionRadius, detectionLayer);
       for (int i = 0; i < colliders.Length; i++)
@@ -44,7 +59,6 @@ namespace MR
       {
         return this;
       }
-
     }
   }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace MR
 {
-    public class RotateTowardsTargetStateHumanoid : State
+    public class CompanionStateRotateTowardsTarget : State
     {
-    public CombatStanceStateHumanoid combatStanceState;
+     CompanionStateCombatStance combatStanceState;
 
-    private void Awake() {
-      combatStanceState = GetComponent<CombatStanceStateHumanoid>();
-    }
+     private void Awake() {
+      combatStanceState = GetComponent<CompanionStateCombatStance>();
+     }
 
     public override State Tick(AICharacterManager aiCharacter)
     {

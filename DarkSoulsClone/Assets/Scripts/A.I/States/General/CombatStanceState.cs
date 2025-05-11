@@ -5,7 +5,7 @@ namespace MR
   {
 
     public AttackState attackState;
-    public EnemyAttackAction[] enemyAttacks;
+    public AICharacterAttackAction[] enemyAttacks;
 
     public PursueTargetState pursueTargetState;
 
@@ -13,19 +13,19 @@ namespace MR
    protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
-      enemy.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
-      enemy.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
+      aiCharacter.animator.SetFloat("Vertical", verticalMovementValue, 0.2f, Time.deltaTime);
+      aiCharacter.animator.SetFloat("Horizontal", horizontalMovementValue, 0.2f, Time.deltaTime);
       attackState.hasPerformedAttack = false;
 
-      if (enemy.isInteracting) {
-        enemy.animator.SetFloat("Vertical", 0);
-        enemy.animator.SetFloat("Horizontal", 0);
+      if (aiCharacter.isInteracting) {
+        aiCharacter.animator.SetFloat("Vertical", 0);
+        aiCharacter.animator.SetFloat("Horizontal", 0);
         return this;
       }
 
-      if (enemy.distanceFromTarget > enemy.maximumAggroRadius)
+      if (aiCharacter.distanceFromTarget > aiCharacter.maximumAggroRadius)
       {
         return pursueTargetState;
       }
@@ -33,30 +33,30 @@ namespace MR
       if (!randomDestinationSet)
       {
         randomDestinationSet = true;
-        DecideCirclingAction(enemy);
+        DecideCirclingAction(aiCharacter);
       }
 
-      HandleRotateTowardsTarget(enemy);
+      HandleRotateTowardsTarget(aiCharacter);
 
-      if (enemy.currentRecoveryTime <= 0 && attackState.currentAttack != null)
+      if (aiCharacter.currentRecoveryTime <= 0 && attackState.currentAttack != null)
       {
         randomDestinationSet = false;
         return attackState;
       }
       else
       {
-        GetNewAttack(enemy);
+        GetNewAttack(aiCharacter);
       }
       return this;
 
     }
 
-    protected void HandleRotateTowardsTarget(EnemyManager enemy)
+    protected void HandleRotateTowardsTarget(AICharacterManager aiCharacter)
     {
       // Rotate Manually
-      if (enemy.isPreformingAction)
+      if (aiCharacter.isPreformingAction)
       {
-        Vector3 direction = enemy.currentTarget.transform.position - enemy.transform.position;
+        Vector3 direction = aiCharacter.currentTarget.transform.position - aiCharacter.transform.position;
         direction.y = 0;
         direction.Normalize();
 
@@ -66,28 +66,28 @@ namespace MR
         }
 
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-        enemy.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemy.rotationSpeed / Time.deltaTime);
+        aiCharacter.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, aiCharacter.rotationSpeed / Time.deltaTime);
       }
       // Rotate with pathfinding(navmesh)
       else
       {
-        Vector3 relativeDirection = transform.InverseTransformDirection(enemy.navMeshAgent.desiredVelocity);
-        Vector3 targetVelocity = enemy.enemyRigidbody.velocity;
+        Vector3 relativeDirection = transform.InverseTransformDirection(aiCharacter.navMeshAgent.desiredVelocity);
+        Vector3 targetVelocity = aiCharacter.enemyRigidbody.velocity;
 
-        enemy.navMeshAgent.enabled = true;
-        enemy.navMeshAgent.SetDestination(enemy.currentTarget.transform.position);
-        enemy.enemyRigidbody.velocity = targetVelocity;
-        enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, enemy.navMeshAgent.transform.rotation, enemy.rotationSpeed / Time.deltaTime);
+        aiCharacter.navMeshAgent.enabled = true;
+        aiCharacter.navMeshAgent.SetDestination(aiCharacter.currentTarget.transform.position);
+        aiCharacter.enemyRigidbody.velocity = targetVelocity;
+        aiCharacter.transform.rotation = Quaternion.Slerp(aiCharacter.transform.rotation, aiCharacter.navMeshAgent.transform.rotation, aiCharacter.rotationSpeed / Time.deltaTime);
       }
     }
 
 
-    protected void DecideCirclingAction(EnemyManager enemy)
+    protected void DecideCirclingAction(AICharacterManager aiCharacter)
     {
-      WalkAroundTarget(enemy);
+      WalkAroundTarget(aiCharacter);
     }
 
-    protected void WalkAroundTarget(EnemyManager enemy)
+    protected void WalkAroundTarget(AICharacterManager aiCharacter)
     {
       verticalMovementValue = 0.5f;
 
@@ -103,18 +103,18 @@ namespace MR
       }
     }
 
-    protected virtual void GetNewAttack(EnemyManager enemy)
+    protected virtual void GetNewAttack(AICharacterManager aiCharacter)
     {
       int maxScore = 0;
 
       for (int i = 0; i < enemyAttacks.Length; i++)
       {
-        EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+        AICharacterAttackAction enemyAttackAction = enemyAttacks[i];
 
-        if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-        enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+        if (aiCharacter.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+        aiCharacter.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
         {
-          if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle && enemy.viewableAngle >= enemyAttackAction.minimumAttackAngle)
+          if (aiCharacter.viewableAngle <= enemyAttackAction.maximumAttackAngle && aiCharacter.viewableAngle >= enemyAttackAction.minimumAttackAngle)
           {
             maxScore += enemyAttackAction.attackScore;
           }
@@ -126,12 +126,12 @@ namespace MR
       int temporaryScore = 0;
       for (int i = 0; i < enemyAttacks.Length; i++)
       {
-        EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+        AICharacterAttackAction enemyAttackAction = enemyAttacks[i];
 
-        if (enemy.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
-        enemy.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+        if (aiCharacter.distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+        aiCharacter.distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
         {
-          if (enemy.viewableAngle <= enemyAttackAction.maximumAttackAngle && enemy.viewableAngle >= enemyAttackAction.minimumAttackAngle)
+          if (aiCharacter.viewableAngle <= enemyAttackAction.maximumAttackAngle && aiCharacter.viewableAngle >= enemyAttackAction.minimumAttackAngle)
           {
             if (attackState.currentAttack != null)
             {

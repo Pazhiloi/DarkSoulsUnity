@@ -13,9 +13,8 @@ namespace MR
     private void Awake() {
       pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
     }
-    public override State Tick(EnemyManager aiCharacter)
+    public override State Tick(AICharacterManager aiCharacter)
     {
-
       Collider[] colliders = Physics.OverlapSphere(transform.position, aiCharacter.detectionRadius, detectionLayer);
       for (int i = 0; i < colliders.Length; i++)
       {
@@ -42,7 +41,6 @@ namespace MR
           }
         }
       }
-
 
       if (aiCharacter.currentTarget != null)
       {

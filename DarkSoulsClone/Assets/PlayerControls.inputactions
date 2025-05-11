@@ -216,6 +216,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Qued RB",
+                    "type": "Button",
+                    "id": "c8e54bf9-835e-4277-85d7-50464c9e4f59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Hold RB",
                     "type": "PassThrough",
                     "id": "74c34e15-3b46-4182-aa01-839e7f521695",
@@ -570,6 +579,28 @@
                     "processors": "",
                     "groups": "Mouse & KeyBoard",
                     "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5c5573a-cc09-4827-9670-50c9cf580c7c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Mouse & KeyBoard",
+                    "action": "Qued RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd8c95f4-e7e5-44ac-8bab-6a8205128951",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Qued RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

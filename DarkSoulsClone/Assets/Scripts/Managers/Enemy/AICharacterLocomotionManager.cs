@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.AI;
 namespace MR
 {
-  public class EnemyLocomotionManager : MonoBehaviour
+  public class AICharacterLocomotionManager : MonoBehaviour
   {
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
 
     public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
 
@@ -15,7 +15,7 @@ namespace MR
 
     private void Awake()
     {
-      enemy = GetComponent<EnemyManager>();
+      aiCharacter = GetComponent<AICharacterManager>();
     }
 
     private void Start() {

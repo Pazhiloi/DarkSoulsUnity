@@ -7,7 +7,7 @@ namespace MR
     public string bossName;
 
     UIBossHealthBar bossHealthBar;
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
     BossCombatStanceState bossCombatStanceState;
     [Header("Second Phase FX")]
     public GameObject particleFX;
@@ -15,14 +15,14 @@ namespace MR
     private void Awake()
     {
       bossHealthBar = FindObjectOfType<UIBossHealthBar>();
-      enemy = GetComponent<EnemyManager>();
+      aiCharacter = GetComponent<AICharacterManager>();
       bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
     }
 
     private void Start()
     {
       bossHealthBar.SetBossName(bossName);
-      bossHealthBar.SetBossMaxHealth(enemy.enemyStatsManager.maxHealth);
+      bossHealthBar.SetBossMaxHealth(aiCharacter.enemyStatsManager.maxHealth);
     }
 
     public void UpdateBossHealthBar(int currentHealth, int maxHealth)
@@ -37,9 +37,9 @@ namespace MR
 
     public void ShiftToSecondPhase()
     {
-      enemy.animator.SetBool("isInvulnerable", true);
-      enemy.animator.SetBool("isPhaseShifting", true);
-      enemy.enemyAnimatorManager.PlayTargetAnimation("Phase Shift", true);
+      aiCharacter.animator.SetBool("isInvulnerable", true);
+      aiCharacter.animator.SetBool("isPhaseShifting", true);
+      aiCharacter.enemyAnimatorManager.PlayTargetAnimation("Phase Shift", true);
       bossCombatStanceState.hasPhaseShifted = true;
     }
   }

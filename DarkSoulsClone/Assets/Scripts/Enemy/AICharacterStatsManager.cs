@@ -4,9 +4,9 @@ using UnityEngine;
 namespace MR
 {
 
-  public class EnemyStatsManager : CharacterStatsManager
+  public class AICharacterStatsManager : CharacterStatsManager
   {
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
     public UIEnemyHealthBar enemyHealthBar;
 
 
@@ -15,7 +15,7 @@ namespace MR
     protected override void Awake()
     {
       base.Awake();
-      enemy = GetComponent<EnemyManager>();
+      aiCharacter = GetComponent<AICharacterManager>();
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;
     }
@@ -43,35 +43,35 @@ namespace MR
       {
         enemyHealthBar.SetHealth(currentHealth);
       }
-      else if (isBoss && enemy.enemyBossManager != null)
+      else if (isBoss && aiCharacter.enemyBossManager != null)
       {
-        enemy.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+        aiCharacter.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
       }
     }
     public override void TakePoisonDamage(int damage)
     {
-      if (enemy.isDead) return;
+      if (aiCharacter.isDead) return;
 
       base.TakePoisonDamage(damage);
       if (!isBoss)
       {
         enemyHealthBar.SetHealth(currentHealth);
       }
-      else if (isBoss && enemy.enemyBossManager != null)
+      else if (isBoss && aiCharacter.enemyBossManager != null)
       {
-        enemy.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+        aiCharacter.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
       }
       if (currentHealth <= 0)
       {
         currentHealth = 0;
-        enemy.isDead = true;
-        enemy.enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        aiCharacter.isDead = true;
+        aiCharacter.enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
       }
     }
 
     public void BreakGuard()
     {
-      enemy.enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
+      aiCharacter.enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
     public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
     {
@@ -81,12 +81,12 @@ namespace MR
       {
         enemyHealthBar.SetHealth(currentHealth);
       }
-      else if (isBoss && enemy.enemyBossManager != null)
+      else if (isBoss && aiCharacter.enemyBossManager != null)
       {
-        enemy.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+        aiCharacter.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
       }
 
-      enemy.enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+      aiCharacter.enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
 
       if (currentHealth <= 0)
       {
@@ -97,8 +97,8 @@ namespace MR
     private void HandleDeath()
     {
       currentHealth = 0;
-      enemy.enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
-      enemy.isDead = true;
+      aiCharacter.enemyAnimatorManager.PlayTargetAnimation("Dead_01", true);
+      aiCharacter.isDead = true;
     }
 
   }

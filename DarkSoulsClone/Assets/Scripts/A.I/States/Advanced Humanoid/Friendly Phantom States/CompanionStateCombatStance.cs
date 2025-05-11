@@ -2,11 +2,12 @@ using UnityEngine;
 
 namespace MR
 {
-  public class CombatStanceStateHumanoid : State
+  public class CompanionStateCombatStance : State
   {
-    public AttackStateHumanoid attackState;
     public ItemBasedAttackAction[] enemyAttacks;
-    public PursueTargetStateHumanoid pursueTargetState;
+    CompanionStateAttackTarget attackState;
+    CompanionStatePursueTarget pursueTargetState;
+    CompanionStateFollowHost followHostState;
     protected bool randomDestinationSet = false;
     protected float verticalMovementValue = 0;
     protected float horizontalMovementValue = 0;
@@ -24,12 +25,18 @@ namespace MR
 
     private void Awake()
     {
-      attackState = GetComponent<AttackStateHumanoid>();
-      pursueTargetState = GetComponent<PursueTargetStateHumanoid>();
+      attackState = GetComponent<CompanionStateAttackTarget>();
+      pursueTargetState = GetComponent<CompanionStatePursueTarget>();
+      followHostState = GetComponent<CompanionStateFollowHost>();
     }
-    
     public override State Tick(AICharacterManager aiCharacter)
     {
+
+      if (aiCharacter.distanceFromCompanion > aiCharacter.maxDistanceFromCompanion)
+      {
+        return followHostState;
+      }
+
       if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
       {
         return ProcessSwordAndShieldCombatStyle(aiCharacter);
@@ -202,6 +209,7 @@ namespace MR
       Quaternion targetRotation = Quaternion.LookRotation(direction);
       aiCharacter.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, aiCharacter.rotationSpeed / Time.deltaTime);
     }
+
 
     protected void DecideCirclingAction(AICharacterManager aiCharacter)
     {

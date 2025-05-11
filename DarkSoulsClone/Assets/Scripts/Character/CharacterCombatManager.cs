@@ -172,7 +172,7 @@ namespace MR
       {
         if (!enemyCharacter.isBeingBackstabbed && !enemyCharacter.isBeingRiposted)
         {
-          //We make it so the enemy cannot be damaged whilst being critically damaged
+          //We make it so the aiCharacter cannot be damaged whilst being critically damaged
           EnableIsInvulnerable();
           character.isPerformingBackstab = true;
           character.characterAnimatorManager.EraseHandIKForWeapon();
@@ -195,7 +195,7 @@ namespace MR
       {
         if (!enemyCharacter.isBeingBackstabbed && !enemyCharacter.isBeingRiposted)
         {
-          //We make it so the enemy cannot be damaged whilst being critically damaged
+          //We make it so the aiCharacter cannot be damaged whilst being critically damaged
           EnableIsInvulnerable();
           character.isPerformingRiposte = true;
           character.characterAnimatorManager.EraseHandIKForWeapon();

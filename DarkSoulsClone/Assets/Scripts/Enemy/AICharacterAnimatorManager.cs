@@ -2,13 +2,13 @@ using UnityEngine;
 namespace MR
 {
 
-  public class EnemyAnimatorManager : CharacterAnimatorManager
+  public class AICharacterAnimatorManager : CharacterAnimatorManager
   {
-    EnemyManager enemy;
+    AICharacterManager aiCharacter;
     protected override void Awake()
     {
       base.Awake();
-      enemy = GetComponent<EnemyManager>();
+      aiCharacter = GetComponent<AICharacterManager>();
     }
   
 
@@ -19,7 +19,7 @@ namespace MR
       
       if (PlayerStatsManager != null)
       {
-        PlayerStatsManager.AddSouls(enemy.enemyStatsManager.soulsAwardedOnDeath);
+        PlayerStatsManager.AddSouls(aiCharacter.enemyStatsManager.soulsAwardedOnDeath);
         if (soulCountBar != null)
         {
           soulCountBar.SetSoulCountText(PlayerStatsManager.currentSoulCount);
@@ -30,12 +30,12 @@ namespace MR
     public void InstantiateBossParticeFX()
     {
       BossFXTransform bossFXTransform = GetComponentInChildren<BossFXTransform>();
-      GameObject phaseFX = Instantiate(enemy.enemyBossManager.particleFX, bossFXTransform.transform);
+      GameObject phaseFX = Instantiate(aiCharacter.enemyBossManager.particleFX, bossFXTransform.transform);
     }
 
     public void PlayWeaponTrailFX()
     {
-        enemy.enemyEffectsManager.PlayWeaponFX(false);
+        aiCharacter.enemyEffectsManager.PlayWeaponFX(false);
     }
 
    
@@ -43,15 +43,15 @@ namespace MR
     private void OnAnimatorMove()
     {
       float delta = Time.deltaTime;
-      enemy.enemyRigidbody.drag = 0;
-      Vector3 deltaPosition = enemy.animator.deltaPosition;
+      aiCharacter.enemyRigidbody.drag = 0;
+      Vector3 deltaPosition = aiCharacter.animator.deltaPosition;
       deltaPosition.y = 0;
       Vector3 velocity = deltaPosition / delta;
-      enemy.enemyRigidbody.velocity = velocity;
+      aiCharacter.enemyRigidbody.velocity = velocity;
 
-      if (enemy.isRotatingWithRootMotion)
+      if (aiCharacter.isRotatingWithRootMotion)
       {
-        enemy.transform.rotation *= enemy.animator.deltaRotation;
+        aiCharacter.transform.rotation *= aiCharacter.animator.deltaRotation;
       }
     }
 

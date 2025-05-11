@@ -14,17 +14,17 @@ namespace MR
    public LayerMask detectionLayer;
 
     public PursueTargetState pursueTargetState;
-    public override State Tick(EnemyManager enemy)
+    public override State Tick(AICharacterManager aiCharacter)
     {
 
-      if (isSleeping && !enemy.isInteracting)
+      if (isSleeping && !aiCharacter.isInteracting)
       {
-        enemy.enemyAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
+        aiCharacter.enemyAnimatorManager.PlayTargetAnimation(sleepAnimation, true);
       }
 
       #region Handle Target Detection
 
-      Collider[] colliders = Physics.OverlapSphere(enemy.transform.position, detectionRadius, detectionLayer);
+      Collider[] colliders = Physics.OverlapSphere(aiCharacter.transform.position, detectionRadius, detectionLayer);
 
       for (int i = 0; i < colliders.Length; i++)
       {
@@ -32,15 +32,15 @@ namespace MR
 
         if (potentialTarget != null)
         {
-          Vector3 targetsDirection = potentialTarget.transform.position - enemy.transform.position;
+          Vector3 targetsDirection = potentialTarget.transform.position - aiCharacter.transform.position;
 
-          float viewableAngle = Vector3.Angle(targetsDirection, enemy.transform.forward);
+          float viewableAngle = Vector3.Angle(targetsDirection, aiCharacter.transform.forward);
 
-          if (viewableAngle > enemy.minimumDetectionAngle && viewableAngle < enemy.maximumDetectionAngle)
+          if (viewableAngle > aiCharacter.minimumDetectionAngle && viewableAngle < aiCharacter.maximumDetectionAngle)
           {
-            enemy.currentTarget = potentialTarget;
+            aiCharacter.currentTarget = potentialTarget;
             isSleeping = false;
-            enemy.enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
+            aiCharacter.enemyAnimatorManager.PlayTargetAnimation(wakeAnimation, true);
           }
         }
       }
@@ -48,7 +48,7 @@ namespace MR
       #endregion
 
       #region Handle State Change
-      if (enemy.currentTarget != null)
+      if (aiCharacter.currentTarget != null)
       {
         return pursueTargetState;
       }

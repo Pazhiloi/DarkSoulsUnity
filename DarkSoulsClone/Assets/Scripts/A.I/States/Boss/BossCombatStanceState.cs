@@ -6,22 +6,22 @@ namespace MR
     {
       [Header("Second Phase Attacks")]
       public bool hasPhaseShifted;
-      public EnemyAttackAction[] secondPhaseAttacks;
+      public AICharacterAttackAction[] secondPhaseAttacks;
 
-    protected override void GetNewAttack(EnemyManager enemy)
+    protected override void GetNewAttack(AICharacterManager aiCharacter)
     {
 
       if (hasPhaseShifted)
       {
-        Vector3 targetsDirection = enemy.currentTarget.transform.position - transform.position;
+        Vector3 targetsDirection = aiCharacter.currentTarget.transform.position - transform.position;
         float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
-        float distanceFromTarget = Vector3.Distance(enemy.currentTarget.transform.position, enemy.transform.position);
+        float distanceFromTarget = Vector3.Distance(aiCharacter.currentTarget.transform.position, aiCharacter.transform.position);
 
         int maxScore = 0;
 
         for (int i = 0; i < secondPhaseAttacks.Length; i++)
         {
-          EnemyAttackAction enemyAttackAction = secondPhaseAttacks[i];
+          AICharacterAttackAction enemyAttackAction = secondPhaseAttacks[i];
 
           if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
           distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
@@ -38,7 +38,7 @@ namespace MR
         int temporaryScore = 0;
         for (int i = 0; i < secondPhaseAttacks.Length; i++)
         {
-          EnemyAttackAction enemyAttackAction = secondPhaseAttacks[i];
+          AICharacterAttackAction enemyAttackAction = secondPhaseAttacks[i];
 
           if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
           distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
@@ -61,7 +61,7 @@ namespace MR
         }
       }
       else{
-      base.GetNewAttack(enemy);
+      base.GetNewAttack(aiCharacter);
       }
     }
   }

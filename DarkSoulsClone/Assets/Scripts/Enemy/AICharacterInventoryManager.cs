@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace MR
 {
-    public class EnemyCombatManager : CharacterCombatManager
+    public class AICharacterInventoryManager : CharacterInventoryManager
     {
-       
+
     }
 }

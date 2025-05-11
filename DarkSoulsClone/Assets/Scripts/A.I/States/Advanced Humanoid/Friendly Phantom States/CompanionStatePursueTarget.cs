@@ -1,24 +1,59 @@
 using UnityEngine;
+
 namespace MR
 {
-  public class PursueTargetState : State
+    public class CompanionStatePursueTarget : State
   {
-   public CombatStanceState combatStanceState;
+    CompanionStateCombatStance combatStanceState;
+    CompanionStateFollowHost followHostState;
+
+    private void Awake()
+    {
+      combatStanceState = GetComponent<CompanionStateCombatStance>();
+      followHostState = GetComponent<CompanionStateFollowHost>();
+    }
+
     public override State Tick(AICharacterManager aiCharacter)
     {
+      if (aiCharacter.distanceFromCompanion > aiCharacter.maxDistanceFromCompanion)
+      {
+        return followHostState;
+      }
+      
+      if (aiCharacter.combatStyle == AICombatStyle.swordAndShield)
+      {
+        return ProcessSwordAndShieldCombatStyle(aiCharacter);
+      }
+      else if (aiCharacter.combatStyle == AICombatStyle.archer)
+      {
+        return ProcessArcherCombatStyle(aiCharacter);
+      }
+      else
+      {
+        return this;
+      }
+    }
+
+    private State ProcessArcherCombatStyle(AICharacterManager aiCharacter)
+    {
+      HandleRotateTowardsTarget(aiCharacter);
       if (aiCharacter.isInteracting) return this;
 
-      if (aiCharacter.isPreformingAction){
+      if (aiCharacter.isPreformingAction)
+      {
         aiCharacter.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
         return this;
       }
-      
+
 
       if (aiCharacter.distanceFromTarget > aiCharacter.maximumAggroRadius)
       {
-        aiCharacter.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        if (!aiCharacter.isStationaryArcher)
+        {
+          aiCharacter.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        }
       }
-      
+
 
       if (aiCharacter.distanceFromTarget <= aiCharacter.maximumAggroRadius)
       {
@@ -30,6 +65,33 @@ namespace MR
       }
     }
 
+    private State ProcessSwordAndShieldCombatStyle(AICharacterManager aiCharacter)
+    {
+      HandleRotateTowardsTarget(aiCharacter);
+      if (aiCharacter.isInteracting) return this;
+
+      if (aiCharacter.isPreformingAction)
+      {
+        aiCharacter.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        return this;
+      }
+
+
+      if (aiCharacter.distanceFromTarget > aiCharacter.maximumAggroRadius)
+      {
+        aiCharacter.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+      }
+
+
+      if (aiCharacter.distanceFromTarget <= aiCharacter.maximumAggroRadius)
+      {
+        return combatStanceState;
+      }
+      else
+      {
+        return this;
+      }
+    }
 
     private void HandleRotateTowardsTarget(AICharacterManager aiCharacter)
     {
@@ -60,5 +122,6 @@ namespace MR
         aiCharacter.transform.rotation = Quaternion.Slerp(aiCharacter.transform.rotation, aiCharacter.navMeshAgent.transform.rotation, aiCharacter.rotationSpeed / Time.deltaTime);
       }
     }
+
   }
 }
