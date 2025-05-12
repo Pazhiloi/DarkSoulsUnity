@@ -6267,6 +6267,11 @@ MonoBehaviour:
   isStationaryArcher: 0
   minimumTimeToAimAtTarget: 3
   maximumTimeToAimAtTarget: 6
+  maxDistanceFromCompanion: 0
+  minimumDistanceFromCompanion: 0
+  returnDistanceFromCompanion: 0
+  distanceFromCompanion: 0
+  companion: {fileID: 0}
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -9604,6 +9609,37 @@ MonoBehaviour:
   isRightHandSlot: 0
   isBackSlot: 1
   currentWeaponModel: {fileID: 0}
+--- !u!1 &504158175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504158176}
+  m_Layer: 0
+  m_Name: Patrol Check Point (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504158176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504158175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587672381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &504319420
 GameObject:
   m_ObjectHideFlags: 0
@@ -13688,6 +13724,11 @@ MonoBehaviour:
   isStationaryArcher: 0
   minimumTimeToAimAtTarget: 3
   maximumTimeToAimAtTarget: 6
+  maxDistanceFromCompanion: 0
+  minimumDistanceFromCompanion: 0
+  returnDistanceFromCompanion: 0
+  distanceFromCompanion: 0
+  companion: {fileID: 0}
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -19273,6 +19314,38 @@ Transform:
   - {fileID: 2062885050}
   m_Father: {fileID: 325664406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1003447270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003447271}
+  m_Layer: 0
+  m_Name: _PATROL PATHS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1003447271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003447270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1587672381}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1007440023
 GameObject:
   m_ObjectHideFlags: 0
@@ -20992,6 +21065,11 @@ MonoBehaviour:
   isStationaryArcher: 0
   minimumTimeToAimAtTarget: 3
   maximumTimeToAimAtTarget: 6
+  maxDistanceFromCompanion: 0
+  minimumDistanceFromCompanion: 0
+  returnDistanceFromCompanion: 0
+  distanceFromCompanion: 0
+  companion: {fileID: 0}
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -24668,6 +24746,11 @@ MonoBehaviour:
   isStationaryArcher: 0
   minimumTimeToAimAtTarget: 3
   maximumTimeToAimAtTarget: 6
+  maxDistanceFromCompanion: 0
+  minimumDistanceFromCompanion: 0
+  returnDistanceFromCompanion: 0
+  distanceFromCompanion: 0
+  companion: {fileID: 0}
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -29624,6 +29707,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
+--- !u!1 &1587672380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1587672381}
+  m_Layer: 0
+  m_Name: Patrol_Path_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1587672381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587672380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1750561229}
+  - {fileID: 504158176}
+  m_Father: {fileID: 1003447271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589103297
 GameObject:
   m_ObjectHideFlags: 0
@@ -32212,6 +32328,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740327721}
   m_CullTransparentMesh: 1
+--- !u!1 &1750561228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1750561229}
+  m_Layer: 0
+  m_Name: Patrol Check Point (0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1750561229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750561228}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.98, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1587672381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1760570784
 GameObject:
   m_ObjectHideFlags: 0
@@ -64229,6 +64376,10 @@ MonoBehaviour:
   fireFlag: 0
   inventoryFlag: 0
   rollInputTimer: 0
+  input_Has_Been_Qued: 0
+  current_Qued_Input_Timer: 0
+  default_Qued_Input_Time: 0
+  qued_RB_Input: 0
 --- !u!136 &5866666020217144488
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -64545,6 +64696,11 @@ MonoBehaviour:
   isStationaryArcher: 0
   minimumTimeToAimAtTarget: 3
   maximumTimeToAimAtTarget: 6
+  maxDistanceFromCompanion: 0
+  minimumDistanceFromCompanion: 0
+  returnDistanceFromCompanion: 0
+  distanceFromCompanion: 0
+  companion: {fileID: 0}
   distanceFromTarget: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   viewableAngle: 0
@@ -68961,3 +69117,4 @@ SceneRoots:
   - {fileID: 6617786446002073877}
   - {fileID: 1293666348}
   - {fileID: 768183531493597285}
+  - {fileID: 1003447271}
