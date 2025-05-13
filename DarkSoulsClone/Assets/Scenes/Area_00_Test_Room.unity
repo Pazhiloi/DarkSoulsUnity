@@ -644,7 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 340937581}
 --- !u!65 &55215808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5486,7 +5485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 2019293802}
 --- !u!65 &303706883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6153,6 +6151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: 
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -13610,6 +13610,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: 
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -20951,6 +20953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: 
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -21286,7 +21290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 998654417}
 --- !u!65 &1124211236
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22058,7 +22061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 514245529}
 --- !u!65 &1197691729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24615,6 +24617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: 
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -28733,7 +28737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 710005891}
 --- !u!65 &1520330131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36358,7 +36361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95754f8df398f2540bc2bb2024b87821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
 --- !u!1 &2013611746
 GameObject:
   m_ObjectHideFlags: 0
@@ -36975,7 +36977,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa4a9aa6be963f488f7469a234a1549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  criticalDamageStandPosition: {fileID: 1581693663}
 --- !u!1 &2072753953
 GameObject:
   m_ObjectHideFlags: 0
@@ -53362,6 +53363,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1001 &926221547675940025
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1747332897939959326, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 5866666020217144486}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.4473183
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6988506
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.1765695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4947035016532917938, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438116444823441928, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
+      propertyPath: m_Name
+      value: World Save Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e8a84df6985d21448bd9f440f99f741, type: 3}
 --- !u!114 &949790103862849990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64199,6 +64261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb336978c0cda1408e8e6c4a1dea633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: Aboba
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -64766,6 +64830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5f1275adddedc44bfce18b4696893c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAvatar: {fileID: 0}
+  characterName: 
   teamIDNumber: 0
   maxHealth: 0
   currentHealth: 0
@@ -69096,6 +69162,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
+  - {fileID: 926221547675940025}
   - {fileID: 2013524733}
   - {fileID: 26271232}
   - {fileID: 543450651902353127}

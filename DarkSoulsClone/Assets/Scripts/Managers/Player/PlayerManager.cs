@@ -162,5 +162,15 @@ namespace MR
     #endregion
 
 
+    public void SaveCharacterDataToCurrentSaveData(ref CharacterSaveData currentCharacterSaveData)
+    {
+      currentCharacterSaveData.characterName = playerStatsManager.characterName;
+      currentCharacterSaveData.characterLevel = playerStatsManager.playerLevel;
+      currentCharacterSaveData.xPosition = transform.position.x;
+      currentCharacterSaveData.yPosition = transform.position.y;
+      currentCharacterSaveData.zPosition = transform.position.z;
+    }
+
+
   }
 }

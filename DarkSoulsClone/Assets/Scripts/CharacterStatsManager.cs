@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MR
 {
   public class CharacterStatsManager : MonoBehaviour
   {
     CharacterManager characterManager;
+    [Header("CHARACTER NAME")]
+    public Image _characterAvatar;
+    public string characterName;
     [Header("Team I.D")]
     public int teamIDNumber = 0;
     public int maxHealth;
