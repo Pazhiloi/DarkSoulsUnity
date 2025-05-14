@@ -50,7 +50,12 @@ namespace MR
       playerStatsManager = GetComponent<PlayerStatsManager>();
       playerEffectsManager = GetComponent<PlayerEffectsManager>();
       interactableUI = FindObjectOfType<InteractableUI>();
+      
+      WorldSaveGameManager.instance.player = this;
     }
+
+
+
 
     void Update()
     {
@@ -169,6 +174,13 @@ namespace MR
       currentCharacterSaveData.xPosition = transform.position.x;
       currentCharacterSaveData.yPosition = transform.position.y;
       currentCharacterSaveData.zPosition = transform.position.z;
+    }
+
+    public void LoadCharacterDataFromCurrentCharacterSaveData(ref CharacterSaveData currentCharacterSaveData)
+    {
+      playerStatsManager.characterName = currentCharacterSaveData.characterName;
+      playerStatsManager.playerLevel = currentCharacterSaveData.characterLevel;
+      transform.position = new Vector3(currentCharacterSaveData.xPosition, currentCharacterSaveData.yPosition, currentCharacterSaveData.zPosition);
     }
 
 

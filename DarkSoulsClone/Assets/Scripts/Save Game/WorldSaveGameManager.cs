@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MR
 {
   public class WorldSaveGameManager : MonoBehaviour
   {
     public static WorldSaveGameManager instance;
-    [SerializeField] private PlayerManager player;
+    public PlayerManager player;
     [Header("Save Data Writer")]
     SaveGameDataWriter saveGameDataWriter;
 
@@ -40,6 +41,7 @@ namespace MR
       else if (loadGame)
       {
         loadGame = false;
+        LoadGame();
       }
     }
 
@@ -59,6 +61,39 @@ namespace MR
       Debug.Log("SAVING GAME...");
       Debug.Log("FILE SAVED AS: " + fileName);
     }
+
+    public void  LoadGame(){
+      saveGameDataWriter = new SaveGameDataWriter();
+      saveGameDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+      saveGameDataWriter.dataSaveFileName = fileName;
+      currentCharacterSaveData = saveGameDataWriter.LoadCharacterDataFromJson();
+
+      StartCoroutine(LoadWorldSceneAsynchronously());
+    }
+
+    private IEnumerator LoadWorldSceneAsynchronously()
+    {
+      if (player == null)
+      {
+        player = FindObjectOfType<PlayerManager>();
+      }
+
+
+      AsyncOperation loadOperation = SceneManager.LoadSceneAsync(0); // Assuming index 0 is your world scene
+
+      while (!loadOperation.isDone)
+      {
+        // You can update a loading bar here if you have one
+        float loadingProgress = Mathf.Clamp01(loadOperation.progress / 0.9f);
+        yield return null;
+      }
+
+      player.LoadCharacterDataFromCurrentCharacterSaveData(ref currentCharacterSaveData);
+
+    }
+
+
+
 
 
 

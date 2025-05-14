@@ -27,6 +27,8 @@ namespace MR
             }
           }
 
+          loadedSaveData = JsonUtility.FromJson<CharacterSaveData>(saveDataToLoad);
+
         }
         catch (Exception ex)
         {
@@ -84,6 +86,8 @@ namespace MR
       }
     }
 
+
+  
 
   }
 }
