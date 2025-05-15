@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace MR
 {
-public class Item : ScriptableObject
-{
+  public class Item : ScriptableObject
+  {
     [Header("Item Information")]
     public Sprite itemIcon;
     public string itemName;
-}
+    public int itemID;
+  }
 
 }
