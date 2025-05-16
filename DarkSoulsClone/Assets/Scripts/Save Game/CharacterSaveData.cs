@@ -23,5 +23,16 @@ namespace MR
     public float xPosition;
     public float yPosition;
     public float zPosition;
+
+
+    [Header("Items Loodted From World")]
+    public SerializableDictionary<int, bool> itemsInWorld;
+
+    public CharacterSaveData()
+    {
+      itemsInWorld = new SerializableDictionary<int, bool>(); 
+    }
+
+
   }
 }
