@@ -53,6 +53,13 @@ namespace MR
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
     public float blockingStabilityRating;
+
+    [Header("Damage Type Modifiers")]
+    public float physicalDamagePercentageModifier = 100;
+    public float fireDamagePercentageModifier = 100;
+    [Header("Damage Absorption Modifiers")]
+    public float physicalAbsorptionPercentageModifier = 0;
+    public float fireAbsorptionPercentageModifier = 0;
     protected virtual void Awake()
     {
       characterManager = GetComponent<CharacterManager>();
@@ -74,6 +81,10 @@ namespace MR
       if (characterManager.isDead) return;
 
 
+      physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamagingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
+      fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamagingMe.characterStatsManager.fireDamagePercentageModifier / 100));
+
+
       characterManager.characterAnimatorManager.EraseHandIKForWeapon();
 
       float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
@@ -91,6 +102,8 @@ namespace MR
           (1 - fireDamageAbsorptionHands / 100);
 
       fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
+      physicalDamage -= Mathf.RoundToInt(physicalDamage - (physicalAbsorptionPercentageModifier / 100));
+      fireDamage -= Mathf.RoundToInt(fireDamage - (fireAbsorptionPercentageModifier / 100));
 
       float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
 
@@ -115,6 +128,9 @@ namespace MR
     {
       if (characterManager.isDead) return;
 
+      physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamagingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
+      fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamagingMe.characterStatsManager.fireDamagePercentageModifier / 100));
+
 
       characterManager.characterAnimatorManager.EraseHandIKForWeapon();
 
@@ -133,6 +149,8 @@ namespace MR
           (1 - fireDamageAbsorptionHands / 100);
 
       fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
+      physicalDamage -= Mathf.RoundToInt(physicalDamage - (physicalAbsorptionPercentageModifier / 100));
+      fireDamage -= Mathf.RoundToInt(fireDamage - (fireAbsorptionPercentageModifier / 100));
 
       float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
 
@@ -141,6 +159,7 @@ namespace MR
       {
         finalDamage = finalDamage * 2;
       }
+
 
       currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
 
