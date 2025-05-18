@@ -3715,6 +3715,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.6
   interactableText: Pick Up Item
+  itemPickUpID: 0
+  hasBeenLooted: 0
   weapon: {fileID: 11400000, guid: e961d5710cdf17f44a42f9c252455831, type: 2}
 --- !u!135 &198269588
 SphereCollider:
@@ -6109,6 +6111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -6187,6 +6190,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   enemyHealthBar: {fileID: 93206274}
   isBoss: 0
 --- !u!114 &325664400
@@ -13568,6 +13575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -13646,6 +13654,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   enemyHealthBar: {fileID: 1479768910}
   isBoss: 0
 --- !u!114 &703550922
@@ -20911,6 +20923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -20989,6 +21002,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   enemyHealthBar: {fileID: 1062223003}
   isBoss: 0
 --- !u!114 &1097270710
@@ -24699,6 +24716,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   enemyHealthBar: {fileID: 0}
   isBoss: 1
 --- !u!114 &1317471738
@@ -64183,6 +64204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36561cd1d9633ea40b4ec83c38337950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects:
+  - {fileID: 11400000, guid: 9f7cdd3709f46be4dabb47b7e6b9b312, type: 2}
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}
@@ -64343,6 +64366,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   healthBar: {fileID: 2464153670485678061}
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
@@ -64912,6 +64939,10 @@ MonoBehaviour:
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
+  physicalDamagePercentageModifier: 100
+  fireDamagePercentageModifier: 100
+  physicalAbsorptionPercentageModifier: 0
+  fireAbsorptionPercentageModifier: 0
   enemyHealthBar: {fileID: 259633376}
   isBoss: 0
 --- !u!114 &5866666021332270829
@@ -64926,6 +64957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada425ef61e4a904bb990c622855c391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  staticCharacterEffects: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponFX: {fileID: 0}

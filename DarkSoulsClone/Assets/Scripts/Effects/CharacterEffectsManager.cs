@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MR
@@ -5,6 +6,11 @@ namespace MR
   public class CharacterEffectsManager : MonoBehaviour
   {
     CharacterManager character;
+
+    [Header("Static Effects")]
+    [SerializeField] List<StaticCharacterEffect> staticCharacterEffects;
+
+
     [Header("Current  FX")]
     public GameObject instantiatedFXModel;
     [Header("Damage FX")]
@@ -29,6 +35,74 @@ namespace MR
     {
       character = GetComponent<CharacterManager>();
     }
+    protected virtual void Start(){
+      foreach (var effect in staticCharacterEffects)
+      {
+        effect.AddStaticEffect(character);
+      }
+    }
+
+    public void AddStaticEffect(StaticCharacterEffect effect)
+    {
+      // CHECK THE LIST TO MAKE SURE WE DON'T ADD A DUPLICATE EFFECT
+      StaticCharacterEffect staticEffect;
+
+      for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+      {
+        if (staticCharacterEffects[i] != null)
+        {
+          if (staticCharacterEffects[i].effectID == effect.effectID)
+          {
+            staticEffect = staticCharacterEffects[i];
+            staticEffect.RemoveStaticEffect(character);
+            staticCharacterEffects.Remove(staticEffect);
+          }
+        }
+      }
+
+      staticCharacterEffects.Add(effect);
+      effect.AddStaticEffect(character);
+
+      // CHECK THE LIST FOR NULL ITEMS AND REMOVE THEM
+      for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+      {
+        if (staticCharacterEffects[i] == null)
+        {
+          staticCharacterEffects.RemoveAt(i);
+        }
+      }
+    }
+
+    public void RemoveStaticEffect(int effectID)
+    {
+      StaticCharacterEffect staticEffect;
+
+      for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+      {
+        if (staticCharacterEffects[i] != null)
+        {
+          if (staticCharacterEffects[i].effectID == effectID)
+          {
+            staticEffect = staticCharacterEffects[i];
+            staticEffect.RemoveStaticEffect(character); // Assuming 'this' refers to the CharacterManager
+            staticCharacterEffects.Remove(staticEffect);
+            return; // Exit the loop after removing the effect
+          }
+        }
+      }
+
+      // CHECK THE LIST FOR NULL ITEMS AND REMOVE THEM
+      for (int i = staticCharacterEffects.Count - 1; i > -1; i--)
+      {
+        if (staticCharacterEffects[i] == null)
+        {
+          staticCharacterEffects.RemoveAt(i);
+        }
+      }
+    }
+
+
+
     public virtual void PlayWeaponFX(bool isLeft)
     {
       if (!isLeft)
@@ -118,7 +192,7 @@ namespace MR
 
       //Fires the characters bow and removes the arrow if they are currently holding an arrow
       if (character.isHoldingArrow)
-      {
+      { 
         character.animator.SetBool("isHoldingArrow", false);
         Animator rangedWeaponAnimator = character.characterWeaponSlotManager.rightHandSlot.currentWeaponModel.GetComponentInChildren<Animator>();
 
