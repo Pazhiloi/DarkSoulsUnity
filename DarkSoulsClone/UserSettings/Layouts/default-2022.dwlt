@@ -215,8 +215,8 @@ MonoBehaviour:
     y: 0
     width: 868
     height: 559
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -366,7 +366,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -2280
+  m_LastSelectedObjectID: 33428
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -663,7 +663,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: eefaffff
+      m_ExpandedIDs: fafaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1306,9 +1306,9 @@ MonoBehaviour:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: ae9e0000
-    m_LastClickedID: 40622
-    m_ExpandedIDs: 000000009a8b0000
+    m_SelectedIDs: 14a20000
+    m_LastClickedID: 41492
+    m_ExpandedIDs: 00000000988b0000548d000016a2000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1336,7 +1336,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009a8b0000
+    m_ExpandedIDs: 00000000988b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1361,9 +1361,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 988b0000
-    m_LastClickedInstanceID: 35736
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000f6790000765601000c800100047a0000dc7e0000f87e00008a780000a8780000a6a10000702101000000000030800000dac000002a8a0000cafa0100de610200c89b0000e4b600000c8300008e7d0000fa7d000088ea020080940000728e0000828e0000e4b80000a68b010030e900002ce9000050bb0000fed00000f4d00000fad00000dca00000d6a00000d0a00000caa00000665c000046b30000427c0000bc92000046bf000062c000003e6e0000e0940000009500000895000010950000f4940000e0a50000d4a50000f4a50000eca50000e4a50000dca50000d8a50000e8a500001ab2000016b20000eeb1000026b2000022b200001eb20000feb100000ab20000eab1000006b20000e6b1000012b20000f6b100000eb2000002b20000e2b10000f2b10000fab1000042c90000f0a50000b6a5000058a70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1653,7 +1653,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Save Game
+    - Assets/Data
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1661,16 +1661,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Scripts/Save Game
+  - Assets/Data
   m_LastFoldersGridSize: 46
   m_LastProjectPath: D:\unity\courseProjects\DarkSoulsUnity\DarkSoulsClone
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 968d0000
-    m_LastClickedID: 36246
-    m_ExpandedIDs: 000000009a8b0000608d000000ca9a3bffffff7f
+    m_SelectedIDs: 588d0000
+    m_LastClickedID: 36184
+    m_ExpandedIDs: 00000000988b0000588d00005e8d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1698,7 +1698,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009a8b0000
+    m_ExpandedIDs: 00000000988b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

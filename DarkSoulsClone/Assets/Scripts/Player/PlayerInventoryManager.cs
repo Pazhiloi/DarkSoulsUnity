@@ -20,7 +20,7 @@ namespace MR
       if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] != null)
       {
         rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-        characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
       }
       else if (currentRightWeaponIndex == 0 && weaponsInRightHandSlots[0] == null)
       {
@@ -29,7 +29,7 @@ namespace MR
       else if (currentRightWeaponIndex == 1 && weaponsInRightHandSlots[1] != null)
       {
         rightWeapon = weaponsInRightHandSlots[currentRightWeaponIndex];
-        characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInRightHandSlots[currentRightWeaponIndex], false);
       }
       else
       {
@@ -39,8 +39,8 @@ namespace MR
       if (currentRightWeaponIndex > weaponsInRightHandSlots.Length - 1)
       {
         currentRightWeaponIndex = -1;
-        rightWeapon = characterWeaponSlotManager.unarmedWeapon;
-        characterWeaponSlotManager.LoadWeaponOnSlot(characterWeaponSlotManager.unarmedWeapon, false);
+        rightWeapon = character.characterWeaponSlotManager.unarmedWeapon;
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmedWeapon, false);
       }
     }
 
@@ -52,7 +52,7 @@ namespace MR
       if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] != null)
       {
         leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-        characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(weaponsInLeftHandSlots[currentLeftWeaponIndex], true);
       }
       else if (currentLeftWeaponIndex == 0 && weaponsInLeftHandSlots[0] == null)
       {
@@ -62,7 +62,7 @@ namespace MR
       else if (currentLeftWeaponIndex == 1 && weaponsInLeftHandSlots[1] != null)
       {
         leftWeapon = weaponsInLeftHandSlots[currentLeftWeaponIndex];
-        characterWeaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
       }
       else
       {
@@ -72,8 +72,8 @@ namespace MR
       if (currentLeftWeaponIndex > weaponsInLeftHandSlots.Length - 1)
       {
         currentLeftWeaponIndex = -1;
-        leftWeapon = characterWeaponSlotManager.unarmedWeapon;
-        characterWeaponSlotManager.LoadWeaponOnSlot(characterWeaponSlotManager.unarmedWeapon, true);
+        leftWeapon = character.characterWeaponSlotManager.unarmedWeapon;
+        character.characterWeaponSlotManager.LoadWeaponOnSlot(character.characterWeaponSlotManager.unarmedWeapon, true);
       }
       #endregion
     }

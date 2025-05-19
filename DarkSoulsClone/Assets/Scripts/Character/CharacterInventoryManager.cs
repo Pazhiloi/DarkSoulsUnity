@@ -6,8 +6,7 @@ namespace MR
 {
   public class CharacterInventoryManager : MonoBehaviour
   {
-
-    protected CharacterWeaponSlotManager characterWeaponSlotManager;
+   protected CharacterManager character;
 
     [Header("Current Item Being Used")]
     public Item currentItemBeingUsed;
@@ -25,7 +24,7 @@ namespace MR
     public BodyEquipment currentBodyEquipment;
     public LegEquipment currentLegEquipment;
     public HandEquipment currentHandEquipment;
-
+    public RingItem ringSlot01, ringSlot02, ringSlot03, ringSlot04;
     public WeaponItem[] weaponsInRightHandSlots = new WeaponItem[2];
     public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[2];
 
@@ -36,12 +35,35 @@ namespace MR
 
     private void Awake()
     {
-      characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();
+      character = GetComponent<CharacterManager>();
     }
 
     private void Start()
     {
-      characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+      character.characterWeaponSlotManager.LoadBothWeaponsOnSlots();
+    }
+
+    public virtual void LoadRingEffects()
+    {
+      if (ringSlot01 != null)
+      {
+        ringSlot01.EquipRing(character);
+      }
+
+      if (ringSlot02 != null)
+      {
+        ringSlot02.EquipRing(character);
+      }
+
+      if (ringSlot03 != null)
+      {
+        ringSlot03.EquipRing(character);
+      }
+
+      if (ringSlot04 != null)
+      {
+        ringSlot04.EquipRing(character);
+      }
     }
   }
 }
