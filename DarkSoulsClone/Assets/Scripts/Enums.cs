@@ -44,6 +44,11 @@ namespace MR
     Physical,
     Fire
   }
+  public enum BuffClass
+  {
+    Physical,
+    Fire
+  }
   public class Enums : MonoBehaviour
   {
 
