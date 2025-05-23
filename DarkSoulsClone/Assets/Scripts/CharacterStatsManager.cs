@@ -42,6 +42,8 @@ namespace MR
     public float totalPoiseResetTime = 15;
     public float poiseResetTimer = 0;
 
+
+
     [Header("Armor Absorptions")]
     public float physicalDamageAbsorptionHead;
     public float physicalDamageAbsorptionBody, physicalDamageAbsorptionLegs, physicalDamageAbsorptionHands;
@@ -49,6 +51,11 @@ namespace MR
     public float fireDamageAbsorptionBody;
     public float fireDamageAbsorptionLegs;
     public float fireDamageAbsorptionHands;
+
+    [Header("Resistances")]
+    public float poisonResistance;
+
+
     [Header("Blocking Absorptions")]
     public float blockingPhysicalDamageAbsorption;
     public float blockingFireDamageAbsorption;
@@ -60,6 +67,13 @@ namespace MR
     [Header("Damage Absorption Modifiers")]
     public float physicalAbsorptionPercentageModifier = 0;
     public float fireAbsorptionPercentageModifier = 0;
+
+    [Header("Poison")]
+    public bool isPoisoned;
+    public float poisonBuildUp = 0; //The build up over time that poisons the player after reaching 100
+    public float poisonAmount = 100; //The amount of poison the player has to process before becoming unpoisoned
+
+
     protected virtual void Awake()
     {
       characterManager = GetComponent<CharacterManager>();

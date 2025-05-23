@@ -72,9 +72,19 @@ namespace MR
       characterCombatManager = GetComponent<CharacterCombatManager>();
     }
 
+    protected virtual void Start()
+    {
+
+    }
+
     protected virtual void FixedUpdate()
     {
       characterAnimatorManager.CheckHandIKWeight(characterWeaponSlotManager.rightHandIKTarget, characterWeaponSlotManager.leftHandIKTarget, isTwoHandingWeapon);
+    }
+
+    protected virtual void Update()
+    {
+      characterEffectsManager.ProcessAllTimedEffects();
     }
 
     public virtual void UpdateWhichHandCharacterIsUsing(bool usingRightHand)

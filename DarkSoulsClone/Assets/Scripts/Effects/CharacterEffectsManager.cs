@@ -10,6 +10,10 @@ namespace MR
     [Header("Static Effects")]
     [SerializeField] List<StaticCharacterEffect> staticCharacterEffects;
 
+    [Header("Timed Effects")]
+    public List<CharacterEffect> timedEffects;
+    [SerializeField] float effectTickTimer = 0;
+
 
     [Header("Current  FX")]
     public GameObject instantiatedFXModel;
@@ -26,22 +30,33 @@ namespace MR
     public GameObject defaultPoisonParticleFX;
     public GameObject currentPoisonParticleFX;
     public Transform buildUpTransform;
-    public bool isPoisoned;
-    public float poisonBuildup = 0;
-    public float poisonAmount = 100;
-    public float defaultPoisonAmount = 100;
-    public float poisonTimer = 2;
-    public int poisonDamage = 1;
-    float timer;
 
     protected virtual void Awake()
     {
       character = GetComponent<CharacterManager>();
     }
-    protected virtual void Start(){
+    protected virtual void Start()
+    {
       foreach (var effect in staticCharacterEffects)
       {
         effect.AddStaticEffect(character);
+      }
+    }
+
+    public virtual void ProcessAllTimedEffects()
+    {
+      effectTickTimer = effectTickTimer + Time.deltaTime;
+
+      if (effectTickTimer >= 1)
+      {
+        effectTickTimer = 0;
+
+        ProcessWeaponBuffs();
+
+        for (int i = timedEffects.Count - 1; i >= 0; i--)
+        {
+          timedEffects[i].ProcessEffect(character);
+        }
       }
     }
 
@@ -136,63 +151,8 @@ namespace MR
     {
       GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
-    public virtual void HandleAllBuildUpEffects()
-    {
-      if (character.isDead)
-      {
-        return;
-      }
+    
 
-      HandlePoisonBuildUp();
-      HandleIsPoisonedEffect();
-    }
-
-    protected virtual void HandlePoisonBuildUp()
-    {
-      if (isPoisoned) return;
-
-      if (poisonBuildup > 0 && poisonBuildup < 100)
-      {
-        poisonBuildup -= 1 * Time.deltaTime;
-      }
-      else if (poisonBuildup >= 100)
-      {
-        isPoisoned = true;
-        poisonBuildup = 0;
-
-        if (buildUpTransform != null)
-        {
-          currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, buildUpTransform.transform);
-        }
-        else
-        {
-          currentPoisonParticleFX = Instantiate(defaultPoisonParticleFX, character.transform);
-        }
-      }
-    }
-
-    protected virtual void HandleIsPoisonedEffect()
-    {
-      if (isPoisoned)
-      {
-        if (poisonAmount > 0)
-        {
-          timer += Time.deltaTime;
-          if (timer >= poisonTimer)
-          {
-            character.characterStatsManager.TakePoisonDamage(poisonDamage);
-            timer = 0;
-          }
-          poisonAmount -= 1 * Time.deltaTime;
-        }
-        else
-        {
-          isPoisoned = false;
-          poisonAmount = defaultPoisonAmount;
-          Destroy(currentPoisonParticleFX);
-        }
-      }
-    }
     public virtual void InterruptEffect()
     {
       //Can be used to destroy effects models (Drinking Estus, Having Arrow Drawn Ect)
@@ -203,7 +163,7 @@ namespace MR
 
       //Fires the characters bow and removes the arrow if they are currently holding an arrow
       if (character.isHoldingArrow)
-      { 
+      {
         character.animator.SetBool("isHoldingArrow", false);
         Animator rangedWeaponAnimator = character.characterWeaponSlotManager.rightHandSlot.currentWeaponModel.GetComponentInChildren<Animator>();
 

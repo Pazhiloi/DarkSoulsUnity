@@ -5983,19 +5983,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staticCharacterEffects: []
+  timedEffects: []
+  effectTickTimer: 0
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1799550819}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 0
-  poisonTimer: 2
-  poisonDamage: 1
 --- !u!114 &325664398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6058,6 +6055,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -6065,6 +6063,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   enemyHealthBar: {fileID: 0}
   isBoss: 0
 --- !u!114 &325664400
@@ -13451,19 +13452,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staticCharacterEffects: []
+  timedEffects: []
+  effectTickTimer: 0
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1778724336}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 0
-  poisonTimer: 2
-  poisonDamage: 1
 --- !u!114 &703550920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13526,6 +13524,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -13533,6 +13532,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   enemyHealthBar: {fileID: 1479768910}
   isBoss: 0
 --- !u!114 &703550922
@@ -20803,19 +20805,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staticCharacterEffects: []
+  timedEffects: []
+  effectTickTimer: 0
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1482507742}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 0
-  poisonTimer: 2
-  poisonDamage: 1
 --- !u!114 &1097270708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20878,6 +20877,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -20885,6 +20885,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   enemyHealthBar: {fileID: 1062223003}
   isBoss: 0
 --- !u!114 &1097270710
@@ -24517,6 +24520,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -24524,6 +24528,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   enemyHealthBar: {fileID: 0}
   isBoss: 1
 --- !u!114 &1317471738
@@ -54560,6 +54567,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4631378160984683432}
   m_CullTransparentMesh: 1
+--- !u!1001 &1879454843491327961
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3553247980364819012, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_Name
+      value: World Effect Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.4473183
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6988506
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.1765695
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490416393105497078, guid: db917532cdd478742b02638469b652e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db917532cdd478742b02638469b652e1, type: 3}
 --- !u!224 &1912260490909602357
 RectTransform:
   m_ObjectHideFlags: 0
@@ -64052,19 +64116,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staticCharacterEffects:
   - {fileID: 11400000, guid: 9f7cdd3709f46be4dabb47b7e6b9b312, type: 2}
+  timedEffects: []
+  effectTickTimer: 0
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 5925646746447725527, guid: 8f252e994c38ecf429e36ef9c58e2c66, type: 3}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 2083012898}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 100
-  poisonTimer: 2
-  poisonDamage: 1
   currentParticleFX: {fileID: 0}
   instantiatedFXModel: {fileID: 0}
   amountToBeHealed: 0
@@ -64209,6 +64270,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -64216,6 +64278,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   healthBar: {fileID: 2464153670485678061}
   staminaBar: {fileID: 0}
   focusPointBar: {fileID: 0}
@@ -64782,6 +64847,7 @@ MonoBehaviour:
   fireDamageAbsorptionBody: 0
   fireDamageAbsorptionLegs: 0
   fireDamageAbsorptionHands: 0
+  poisonResistance: 0
   blockingPhysicalDamageAbsorption: 0
   blockingFireDamageAbsorption: 0
   blockingStabilityRating: 0
@@ -64789,6 +64855,9 @@ MonoBehaviour:
   fireDamagePercentageModifier: 100
   physicalAbsorptionPercentageModifier: 0
   fireAbsorptionPercentageModifier: 0
+  isPoisoned: 0
+  poisonBuildUp: 0
+  poisonAmount: 100
   enemyHealthBar: {fileID: 259633376}
   isBoss: 0
 --- !u!114 &5866666021332270829
@@ -64804,19 +64873,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staticCharacterEffects: []
+  timedEffects: []
+  effectTickTimer: 0
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
-  rightWeaponFX: {fileID: 0}
-  leftWeaponFX: {fileID: 0}
+  rightWeaponManager: {fileID: 0}
+  leftWeaponManager: {fileID: 0}
+  rightWeaponBuffEffect: {fileID: 0}
   defaultPoisonParticleFX: {fileID: 0}
   currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1841210898}
-  isPoisoned: 0
-  poisonBuildup: 0
-  poisonAmount: 100
-  defaultPoisonAmount: 0
-  poisonTimer: 2
-  poisonDamage: 1
 --- !u!114 &5866666021332270830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69114,3 +69180,4 @@ SceneRoots:
   - {fileID: 768183531493597285}
   - {fileID: 1003447271}
   - {fileID: 1142805516}
+  - {fileID: 1879454843491327961}

@@ -6,10 +6,10 @@ namespace MR
   {
 
     public EnemyBossManager enemyBossManager;
-   public AICharacterLocomotionManager enemyLocomotionManager;
-   public AICharacterAnimatorManager enemyAnimatorManager;
-   public AICharacterStatsManager enemyStatsManager;
-   public AICharacterEffectsManager enemyEffectsManager;
+    public AICharacterLocomotionManager enemyLocomotionManager;
+    public AICharacterAnimatorManager enemyAnimatorManager;
+    public AICharacterStatsManager enemyStatsManager;
+    public AICharacterEffectsManager enemyEffectsManager;
     public NavMeshAgent navMeshAgent;
     public Rigidbody enemyRigidbody;
 
@@ -56,7 +56,7 @@ namespace MR
     public float minimumDistanceFromCompanion;
     public float returnDistanceFromCompanion;
     public float distanceFromCompanion;
-    public CharacterManager companion; 
+    public CharacterManager companion;
 
     [Header("A.I Target Information")]
     public float distanceFromTarget;
@@ -74,14 +74,16 @@ namespace MR
       navMeshAgent = GetComponentInChildren<NavMeshAgent>();
       enemyRigidbody = GetComponent<Rigidbody>();
     }
-    private void Start()
+    protected override void Start()
     {
-      navMeshAgent.enabled = false;
+      base.Start();
+      // navMeshAgent.enabled = false;
       enemyRigidbody.isKinematic = false;
     }
 
-    private void Update()
+    protected override void Update()
     {
+      base.Update();
       HandleRecoveryTimer();
       HandleStateMachine();
 
@@ -98,8 +100,8 @@ namespace MR
 
       if (currentTarget != null)
       {
-         distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
-          targetsDirection = currentTarget.transform.position - transform.position;
+        distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
+        targetsDirection = currentTarget.transform.position - transform.position;
         viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
       }
 
@@ -107,13 +109,12 @@ namespace MR
       {
         distanceFromCompanion = Vector3.Distance(companion.transform.position, transform.position);
       }
-      
+
     }
 
     protected override void FixedUpdate()
     {
       base.FixedUpdate();
-      enemyEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

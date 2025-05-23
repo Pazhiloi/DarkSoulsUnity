@@ -54,11 +54,17 @@ namespace MR
       WorldSaveGameManager.instance.player = this;
     }
 
-
-
-
-    void Update()
+    protected override void Start()
     {
+      base.Start();
+    }
+
+
+
+
+    protected override void Update()
+    {
+      base.Update();
       float delta = Time.deltaTime;
       isInteracting = animator.GetBool("isInteracting");
       canDoCombo = animator.GetBool("canDoCombo");
@@ -87,7 +93,6 @@ namespace MR
       playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
       playerLocomotionManager.HandleMovement();
       playerLocomotionManager.HandleRotation();
-      playerEffectsManager.HandleAllBuildUpEffects();
     }
 
     private void LateUpdate()

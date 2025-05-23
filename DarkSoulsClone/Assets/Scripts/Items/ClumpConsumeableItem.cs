@@ -22,9 +22,8 @@ namespace MR
 
       if (curePoison)
       {
-        player.playerEffectsManager.poisonBuildup = 0;
-        player.playerEffectsManager.poisonAmount = player.playerEffectsManager.defaultPoisonAmount;
-        player.playerEffectsManager.isPoisoned = false;
+        player.playerStatsManager.poisonBuildUp = 0;
+        player.playerStatsManager.isPoisoned = false;
         if (player.playerEffectsManager.currentPoisonParticleFX != null)
         {
           Destroy(player.playerEffectsManager.currentPoisonParticleFX);
