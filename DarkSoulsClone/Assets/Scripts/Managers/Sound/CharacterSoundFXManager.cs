@@ -85,5 +85,10 @@ namespace MR
     }
 
 
+    public virtual void PlayerSoundFX(AudioClip soundFX)
+    {
+      audioSource.PlayOneShot(soundFX);
+    }
+
   }
 }

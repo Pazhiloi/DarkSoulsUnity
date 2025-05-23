@@ -92,10 +92,15 @@ namespace MR
       player.playerLocomotionManager.characterCollider.enabled = true;
       player.playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
     }
-    public void AwardSoulsOnDeath()
-    {
 
+    public virtual void SuccessfullyUseCurrentConsumable()
+    {
+      if (character.characterInventoryManager.currentConsumable != null)
+      {
+        character.characterInventoryManager.currentConsumable.SuccessfullyConsumeItem(player);
+      }
     }
+  
 
     private void OnAnimatorMove()
     {

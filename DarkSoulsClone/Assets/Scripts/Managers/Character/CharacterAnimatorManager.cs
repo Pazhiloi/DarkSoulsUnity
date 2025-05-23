@@ -24,9 +24,10 @@ namespace MR
       character.animator.applyRootMotion = isInteracting;
       character.animator.SetBool("canRotate", canRotate);
       character.animator.SetBool("isInteracting", isInteracting);
-      character.animator.SetBool("isMirrored",mirrorAnim);
+      character.animator.SetBool("isMirrored", mirrorAnim);
       character.animator.CrossFade(targetAnim, 0.2f);
     }
+
     public void PlayTargetAnimationWithRootRotation(string targetAnim, bool isInteracting)
     {
       character.animator.applyRootMotion = isInteracting;
@@ -83,6 +84,7 @@ namespace MR
     {
       character.canBeRiposted = false;
     }
+
 
     public virtual void TakeCriticalDamageAnimationEvent()
     {
@@ -162,5 +164,7 @@ namespace MR
         leftHandConstraint.data.targetRotationWeight = 0;
       }
     }
+    
+
   }
 }

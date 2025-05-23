@@ -122,7 +122,7 @@ namespace MR
 
 
       leftHandDamageCollider.poiseBreak = character.characterInventoryManager.leftWeapon.poiseBreak;
-      character.characterEffectsManager.leftWeaponFX = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+      character.characterEffectsManager.leftWeaponManager = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
     }
 
     protected virtual void LoadRightWeaponDamageCollider()
@@ -136,7 +136,7 @@ namespace MR
       rightHandDamageCollider.teamIDNumber = character.characterStatsManager.teamIDNumber;
 
       rightHandDamageCollider.poiseBreak = character.characterInventoryManager.rightWeapon.poiseBreak;
-      character.characterEffectsManager.rightWeaponFX = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponFX>();
+      character.characterEffectsManager.rightWeaponManager = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
     }
 
     public virtual void LoadTwoHandIKTargets(bool isTwoHandingWeapon)
