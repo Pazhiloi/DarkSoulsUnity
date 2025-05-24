@@ -24,10 +24,7 @@ namespace MR
       {
         player.playerStatsManager.poisonBuildUp = 0;
         player.playerStatsManager.isPoisoned = false;
-        if (player.playerEffectsManager.currentPoisonParticleFX != null)
-        {
-          Destroy(player.playerEffectsManager.currentPoisonParticleFX);
-        }
+       
       }
 
       player.playerWeaponSlotManager.rightHandSlot.UnloadWeapon();

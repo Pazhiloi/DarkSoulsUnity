@@ -18,6 +18,8 @@ namespace MR
 
     public override void ProcessEffect(CharacterManager character)
     {
+
+      PlayerManager player = character as PlayerManager;
       // POISON BUILD UP AFTER WE FACTOR IN OUR PLAYERS RESISTANCES
       float finalPoisonBuildUp = 0;
 
@@ -44,11 +46,7 @@ namespace MR
         character.characterEffectsManager.timedEffects.Remove(this);
       }
 
-      // EACH TICK, IF THE CHARACTER IS NOT POISONED, A BIT OF BUILD UP IS REMOVED
-      if (character.characterStatsManager.poisonBuildUp > 0 && character.characterStatsManager.poisonBuildUp < 100)
-      {
-        character.characterStatsManager.poisonBuildUp -= 1;
-      }
+
 
       // IF OUR BUILD UP IS 100 OR MORE, POISON THE CHARACTER
       if (character.characterStatsManager.poisonBuildUp >= 100)
@@ -56,12 +54,23 @@ namespace MR
         character.characterStatsManager.isPoisoned = true;
         character.characterStatsManager.poisonAmount = poisonAmount;
         character.characterStatsManager.poisonBuildUp = 0;
-      }
 
-      PoisonedEffect poisonedEffect = Instantiate(WorldCharacterEffectsManager.instance.poisonedEffect);
-      poisonedEffect.poisonDamage = poisonDamagePerTick;
-      character.characterEffectsManager.timedEffects.Add(poisonedEffect);
+        if (player != null)
+        {
+          player.playerEffectsManager.poisonAmountBar.SetPoisonAmount(Mathf.RoundToInt(poisonAmount));
+        }
+
+        PoisonedEffect poisonedEffect = Instantiate(WorldCharacterEffectsManager.instance.poisonedEffect);
+        poisonedEffect.poisonDamage = poisonDamagePerTick;
+        character.characterEffectsManager.timedEffects.Add(poisonedEffect);
+        character.characterEffectsManager.timedEffects.Remove(this);
+        character.characterSoundFXManager.PlayerSoundFX(WorldCharacterEffectsManager.instance.poisonSFX);
+
+        character.characterEffectsManager.AddTimedEffectParticle(WorldCharacterEffectsManager.instance.poisonFX);
+      }
       character.characterEffectsManager.timedEffects.Remove(this);
+
     }
+    
   }
 }

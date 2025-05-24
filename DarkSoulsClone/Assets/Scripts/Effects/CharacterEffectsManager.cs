@@ -14,6 +14,8 @@ namespace MR
     public List<CharacterEffect> timedEffects;
     [SerializeField] float effectTickTimer = 0;
 
+    [Header("Timed Effect Visual FX")]
+    public List<GameObject> timedEffectParticles;
 
     [Header("Current  FX")]
     public GameObject instantiatedFXModel;
@@ -27,8 +29,6 @@ namespace MR
     public WeaponBuffEffect rightWeaponBuffEffect;
 
     [Header("Poison FX")]
-    public GameObject defaultPoisonParticleFX;
-    public GameObject currentPoisonParticleFX;
     public Transform buildUpTransform;
 
     protected virtual void Awake()
@@ -57,6 +57,7 @@ namespace MR
         {
           timedEffects[i].ProcessEffect(character);
         }
+        ProcessBuildUpDecay();
       }
     }
 
@@ -151,7 +152,7 @@ namespace MR
     {
       GameObject blood = Instantiate(bloodSplatterFX, bloodSplatterLocation, Quaternion.identity);
     }
-    
+
 
     public virtual void InterruptEffect()
     {
@@ -180,6 +181,36 @@ namespace MR
         character.animator.SetBool("isAiming", false);
       }
     }
+
+
+
+    protected virtual void ProcessBuildUpDecay()
+    {
+      if (character.characterStatsManager.poisonBuildUp > 0)
+      {
+        character.characterStatsManager.poisonBuildUp -= 1;
+      }
+    }
+    public virtual void AddTimedEffectParticle(GameObject effect)
+    {
+      GameObject effectGameObject = Instantiate(effect, buildUpTransform);
+      timedEffectParticles.Add(effectGameObject);
+    }
+
+    public virtual void RemoveTimedEffectParticle(EffectParticleType effectType)
+    {
+      for (int i = timedEffectParticles.Count - 1; i > -1; i--)
+      {
+        if (timedEffectParticles[i].GetComponent<EffectParticle>().effectType == effectType)
+        {
+          Destroy(timedEffectParticles[i]);
+          timedEffectParticles.RemoveAt(i);
+        }
+      }
+    }
+
+
+
 
 
   }

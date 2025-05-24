@@ -6,8 +6,8 @@ namespace MR
     PlayerManager player;
 
     PoisonBuildUpBar poisonBuildUpBar;
-    PoisonAmountBar poisonAmountBar;
-    public GameObject currentParticleFX, instantiatedFXModel;
+    public PoisonAmountBar poisonAmountBar;
+    public GameObject currentParticleFX;
     public int amountToBeHealed;
 
     protected override void Awake()
@@ -24,6 +24,17 @@ namespace MR
       GameObject healParticles = Instantiate(currentParticleFX, player.playerStatsManager.transform);
       Destroy(instantiatedFXModel.gameObject);
       player.playerWeaponSlotManager.LoadBothWeaponsOnSlots();
+    }
+
+    protected override void ProcessBuildUpDecay()
+    {
+      if (player.characterStatsManager.poisonBuildUp >= 0)
+      {
+        player.characterStatsManager.poisonBuildUp -= 1;
+
+        poisonBuildUpBar.gameObject.SetActive(true);
+        poisonBuildUpBar.SetPoisonBuildUpAmount(Mathf.RoundToInt(player.characterStatsManager.poisonBuildUp));
+      }
     }
   }
 }

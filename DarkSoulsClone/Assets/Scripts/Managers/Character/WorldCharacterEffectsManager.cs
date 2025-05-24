@@ -8,13 +8,27 @@ namespace MR
   {
     public static WorldCharacterEffectsManager instance;
 
+    [Header("POISON")]
     public PoisonBuildUpEffect poisonBuildUpEffect;
     public PoisonedEffect poisonedEffect;
+    public GameObject poisonFX;
+    public AudioClip poisonSFX;
 
     private void Awake()
     {
       HandleInstance();
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void HandleInstance()

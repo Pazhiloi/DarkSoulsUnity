@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 70
+  controlID: 132
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1306,9 +1306,9 @@ MonoBehaviour:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 271}
-    m_SelectedIDs: d48d0000
-    m_LastClickedID: 36308
-    m_ExpandedIDs: 00000000d88b0000988d0000d68d000000ca9a3bffffff7f
+    m_SelectedIDs: d68d0000
+    m_LastClickedID: 36310
+    m_ExpandedIDs: 00000000da8b00009a8d0000d88d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1336,7 +1336,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d88b0000
+    m_ExpandedIDs: 00000000da8b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1653,7 +1653,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Items
+    - Assets/Scripts/Effects
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1661,16 +1661,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Scripts/Items
+  - Assets/Scripts/Effects
   m_LastFoldersGridSize: 46
   m_LastProjectPath: D:\unity\courseProjects\DarkSoulsUnity\DarkSoulsClone
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 191}
-    m_SelectedIDs: fe8d0000
-    m_LastClickedID: 36350
-    m_ExpandedIDs: 00000000d88b00009e8d000000ca9a3bffffff7f
+    m_SelectedIDs: fa8d0000
+    m_LastClickedID: 36346
+    m_ExpandedIDs: 00000000da8b0000a08d0000028e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1698,7 +1698,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d88b0000
+    m_ExpandedIDs: 00000000da8b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
