@@ -160,29 +160,7 @@ namespace MR
         enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
       }
     }
-    protected virtual void ChooseWhichDirectionDamageCameFrom(float direction)
-    {
-      if (direction >= 145 && direction <= 180)
-      {
-        currentDamageAnimation = "Damage_Forward_01";
-      }
-      else if (direction <= -145 && direction >= -180)
-      {
-        currentDamageAnimation = "Damage_Forward_01";
-      }
-      else if (direction >= -45 && direction <= 45)
-      {
-        currentDamageAnimation = "Damage_Back_01";
-      }
-      else if (direction >= -144 && direction <= -45)
-      {
-        currentDamageAnimation = "Damage_Left_01";
-      }
-      else if (direction >= 45 && direction <= 144)
-      {
-        currentDamageAnimation = "Damage_Right_01";
-      }
-    }
+    
 
   }
 }

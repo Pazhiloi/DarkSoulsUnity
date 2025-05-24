@@ -90,53 +90,6 @@ namespace MR
     }
 
 
-    public virtual void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
-    {
-      if (characterManager.isDead) return;
-
-
-      physicalDamage = Mathf.RoundToInt(physicalDamage * (enemyCharacterDamagingMe.characterStatsManager.physicalDamagePercentageModifier / 100));
-      fireDamage = Mathf.RoundToInt(fireDamage * (enemyCharacterDamagingMe.characterStatsManager.fireDamagePercentageModifier / 100));
-
-
-      characterManager.characterAnimatorManager.EraseHandIKForWeapon();
-
-      float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
-                                                (1 - physicalDamageAbsorptionBody / 100) *
-                                                (1 - physicalDamageAbsorptionLegs / 100) *
-                                                (1 - physicalDamageAbsorptionHands / 100);
-
-      physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
-
-
-      float totalFireDamageAbsorption = 1 -
-          (1 - fireDamageAbsorptionHead / 100) *
-          (1 - fireDamageAbsorptionBody / 100) *
-          (1 - fireDamageAbsorptionLegs / 100) *
-          (1 - fireDamageAbsorptionHands / 100);
-
-      fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
-      physicalDamage -= Mathf.RoundToInt(physicalDamage - (physicalAbsorptionPercentageModifier / 100));
-      fireDamage -= Mathf.RoundToInt(fireDamage - (fireAbsorptionPercentageModifier / 100));
-
-      float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
-
-
-      if (enemyCharacterDamagingMe.isPerformingFullyChargedAttack)
-      {
-        finalDamage = finalDamage * 2;
-      }
-
-      currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
-
-
-      if (currentHealth <= 0)
-      {
-        currentHealth = 0;
-        characterManager.isDead = true;
-      }
-      characterManager.characterSoundFXManager.PlayRandomDamageSoundFX();
-    }
 
     public virtual void TakeDamageAfterBlock(int physicalDamage, int fireDamage, CharacterManager enemyCharacterDamagingMe)
     {
