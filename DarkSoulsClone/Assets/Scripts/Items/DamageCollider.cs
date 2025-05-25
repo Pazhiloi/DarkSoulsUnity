@@ -80,7 +80,7 @@ namespace MR
 
           Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
           float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
-          ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+          // ChooseWhichDirectionDamageCameFrom(directionHitFrom);
           enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
           enemyManager.characterEffectsManager.InterruptEffect();
           DealDamage(enemyManager.characterStatsManager);
@@ -157,7 +157,7 @@ namespace MR
       }
       else
       {
-        enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
+        // enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
       }
     }
     

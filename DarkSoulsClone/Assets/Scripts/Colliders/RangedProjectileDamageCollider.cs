@@ -46,7 +46,7 @@ namespace MR
         //DETECTS WHERE ON THE COLLIDER OUR WEAPON FIRST MAKES CONTACT
         Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
         float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
-        ChooseWhichDirectionDamageCameFrom(directionHitFrom);
+       // ChooseWhichDirectionDamageCameFrom(directionHitFrom);
         enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
 
         if (enemyManager.characterStatsManager.totalPoiseDefence > poiseBreak)
@@ -55,7 +55,7 @@ namespace MR
         }
         else
         {
-          enemyManager.characterStatsManager.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
+        //  enemyManager.characterStatsManager.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
         }
       }
       if (other.gameObject.tag == "Illusionary Wall")

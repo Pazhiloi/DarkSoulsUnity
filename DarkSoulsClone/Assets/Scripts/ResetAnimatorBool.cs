@@ -34,6 +34,8 @@ namespace MR
       character.canBeParried = false;
       character.canBeRiposted = false;
 
+      character.characterCombatManager.previousPoiseDamageTaken = 0;
+
       animator.SetBool(isInteractingBool, isInteractingStatus);
       animator.SetBool(isFiringSpellBool, isFiringSpellStatus);
       animator.SetBool(isRotationWithRootMotion, isRotationWithRootMotionStatus);

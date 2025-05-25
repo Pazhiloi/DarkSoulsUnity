@@ -43,11 +43,11 @@ namespace MR
         return;
 
       CalculateDamage(character);
-      // CHECK WHICH DIRECTION THE DAMAGE CAME FROM SO WE CAN PLAY THE RIGHT ANIMATION
-      // PLAY A DAMAGE ANIMATION
+      CheckWhichDirectionDamageCameFrom(character);
+      PlayDamageAnimation(character);
       PlayDamageSoundFX(character);
-      // PLAY BLOOD SPLATTER FX
-      // IF THE CHARACTER IS A.I, ASSIGN THEM THE DAMAGING CHARACTER AS A TARGET
+      PlayBloodSplatter(character);
+      AssignNewAITarget(character);
     }
 
     private void CalculateDamage(CharacterManager character)
@@ -91,30 +91,140 @@ namespace MR
       }
     }
 
+
     private void CheckWhichDirectionDamageCameFrom(CharacterManager character)
     {
-      if (direction >= 145 && direction <= 180)
+      if (manuallySelectDamageAnimation) return;
+
+      if (angleHitFrom >= 145 && angleHitFrom <= 180)
       {
-        currentDamageAnimation = "Damage_Forward_01";
+        ChooseDamageAnimationForward(character);
       }
-      else if (direction <= -145 && direction >= -180)
+      else if (angleHitFrom <= -145 && angleHitFrom >= -180)
       {
-        currentDamageAnimation = "Damage_Forward_01";
+        ChooseDamageAnimationForward(character);
       }
-      else if (direction >= -45 && direction <= 45)
+      else if (angleHitFrom >= -45 && angleHitFrom <= 45)
       {
-        currentDamageAnimation = "Damage_Back_01";
+        ChooseDamageAnimationBackward(character);
       }
-      else if (direction >= -144 && direction <= -45)
+      else if (angleHitFrom >= -144 && angleHitFrom <= -45)
       {
-        currentDamageAnimation = "Damage_Left_01";
+        ChooseDamageAnimationLeft(character);
       }
-      else if (direction >= 45 && direction <= 144)
+      else if (angleHitFrom >= 45 && angleHitFrom <= 144)
       {
-        currentDamageAnimation = "Damage_Right_01";
+        ChooseDamageAnimationRight(character);
       }
     }
-   
+
+    private void ChooseDamageAnimationForward(CharacterManager character)
+    {
+      // POISE BRACKET < 25         SMALL
+      // POISE BRACKET > 25 & 50    MEDIUM
+      // POISE BRACKET > 50 & 75    LARGE
+      // POISE BRACKET > 75         COLOSAAL
+
+      if (poiseDamage <= 24 && poiseDamage >= 0)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Forward);
+        return;
+
+      }
+      else if (poiseDamage <= 49 && poiseDamage >= 25)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Forward);
+        return;
+      }
+      else if (poiseDamage <= 74 && poiseDamage >= 50)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Heavy_Forward);
+        return;
+      }
+      else if (poiseDamage >= 75)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Colossal_Forward);
+        return;
+      }
+    }
+
+    private void ChooseDamageAnimationBackward(CharacterManager character)
+    {
+      if (poiseDamage <= 24 && poiseDamage >= 0)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Backward);
+        return;
+
+      }
+      else if (poiseDamage <= 49 && poiseDamage >= 25)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Backward);
+        return;
+      }
+      else if (poiseDamage <= 74 && poiseDamage >= 50)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Heavy_Backward);
+        return;
+      }
+      else if (poiseDamage >= 75)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Colossal_Backward);
+        return;
+      }
+    }
+
+    private void ChooseDamageAnimationLeft(CharacterManager character)
+    {
+
+      if (poiseDamage <= 24 && poiseDamage >= 0)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Left);
+        return;
+
+      }
+      else if (poiseDamage <= 49 && poiseDamage >= 25)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Left);
+        return;
+      }
+      else if (poiseDamage <= 74 && poiseDamage >= 50)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Heavy_Left);
+        return;
+      }
+      else if (poiseDamage >= 75)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Colossal_Left);
+        return;
+      }
+    }
+
+    private void ChooseDamageAnimationRight(CharacterManager character)
+    {
+
+      if (poiseDamage <= 24 && poiseDamage >= 0)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Right);
+        return;
+
+      }
+      else if (poiseDamage <= 49 && poiseDamage >= 25)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Medium_Right);
+        return;
+      }
+      else if (poiseDamage <= 74 && poiseDamage >= 50)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Heavy_Right);
+        return;
+      }
+      else if (poiseDamage >= 75)
+      {
+        damageAnimation = character.characterAnimatorManager.GetRandomDamageAnimationFromList(character.characterAnimatorManager.Damage_Animations_Colossal_Right);
+        return;
+      }
+    }
+
     private void PlayDamageSoundFX(CharacterManager character)
     {
       character.characterSoundFXManager.PlayRandomDamageSoundFX();
@@ -126,6 +236,54 @@ namespace MR
 
     }
 
+
+    private void PlayDamageAnimation(CharacterManager character)
+    {
+      // IF WE ARE CURRENTLY PLAYING A DAMAGE ANIMATION THAT IS HEAVY AND A LIGHT ATTACK HITS US
+      // WE DO NOT WANT TO PLAY THE LIGHT DAMAGE ANIMATION, WE WANT TO FINISH THE HEAVY ANIMATION
+      if (character.isInteracting && character.characterCombatManager.previousPoiseDamageTaken > poiseDamage)
+      {
+        // IF THE CHARACTER IS INTERACTING && THE PREVIOUS POISE DAMAGE IS ABOVE 0, THEY MUST BE IN A DAMAGE ANIMATION
+        // IF THE PREVIOUS POISE IS ABOVE THE CURRENT POISE, RETURN, SO WE DONT CHANGE THE DAMAGE ANIMATION TO A LIGHTER ANIMATION
+        return;
+      }
+
+      if (character.isDead)
+      {
+        character.characterWeaponSlotManager.CloseDamageCollider();
+        character.characterAnimatorManager.PlayTargetAnimation("Dead_01", true);
+        return;
+      }
+
+      // IF THE CHARACTERS POISE IS NOT BROKEN, NO DAMAGE ANIMATION IS PLAYED
+      if (!poiseIsBroken)
+      {
+        return;
+      }
+      else
+      {
+        // ENABLE/DISABLE STUN LOCK
+        if (playDamageAnimation)
+        {
+          character.characterAnimatorManager.PlayTargetAnimation(damageAnimation, true);
+        }
+      }
+    }
+
+    private void PlayBloodSplatter(CharacterManager character)
+    {
+      character.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+    }
+
+    private void AssignNewAITarget(CharacterManager character)
+    {
+      AICharacterManager aiCharacter = character as AICharacterManager;
+
+      if (aiCharacter != null && characterCausingDamage != null)
+      {
+        aiCharacter.currentTarget = characterCausingDamage;
+      }
+    }
 
   }
 }

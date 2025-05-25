@@ -128,6 +128,13 @@ namespace MR
       character.animator.CrossFade(targetAnim, 0.2f);
     }
 
+    public string GetRandomDamageAnimationFromList(List<string> animationList)
+    {
+      int randomValue = Random.Range(0, animationList.Count);
+
+      return animationList[randomValue];
+    }
+
     public virtual void CanRotate()
     {
       character.animator.SetBool("canRotate", true);
