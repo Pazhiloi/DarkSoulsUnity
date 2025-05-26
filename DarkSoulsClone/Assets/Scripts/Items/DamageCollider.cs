@@ -29,6 +29,9 @@ namespace MR
     protected bool hasBeenParried;
     protected string currentDamageAnimation;
 
+    protected Vector3 contactPoint;
+    protected float angleHitFrom;
+
     private List<CharacterManager> charactersDamagedDuringThisCalculation = new List<CharacterManager>();
     protected virtual void Awake()
     {
@@ -78,12 +81,10 @@ namespace MR
           enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
           enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseResetTime - poiseDamage;
 
-          Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-          float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
-          // ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-          enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
-          enemyManager.characterEffectsManager.InterruptEffect();
-          DealDamage(enemyManager.characterStatsManager);
+          contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+          angleHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
+          // ChooseWhichDirectionDamageCameFrom(angleHitFrom);
+          DealDamage(enemyManager);
 
           if (aICharacter != null)
           {
@@ -98,13 +99,9 @@ namespace MR
 
         illusionaryWall.wallHasBeenHit = true;
 
-        TakeBlockedDamageEffect takeBlockedDamage = Instantiate(WorldCharacterEffectsManager.instance.takeBlockedDamageEffect);
-        takeBlockedDamage.physicalDamage = physicalDamage;
-        takeBlockedDamage.fireDamage = fireDamage;
-        takeBlockedDamage.poiseDamage = poiseDamage;
-        takeBlockedDamage.staminaDamage = poiseDamage;
 
-        
+
+
       }
     }
 
@@ -125,10 +122,17 @@ namespace MR
       if (enemyManager.isBlocking && dotValueFromPlayerToEnemy > 0.3f)
       {
         shieldHasBeenHit = true;
+
+        TakeBlockedDamageEffect takeBlockedDamage = Instantiate(WorldCharacterEffectsManager.instance.takeBlockedDamageEffect);
+        takeBlockedDamage.physicalDamage = physicalDamage;
+        takeBlockedDamage.fireDamage = fireDamage;
+        takeBlockedDamage.poiseDamage = poiseDamage;
+        takeBlockedDamage.staminaDamage = poiseDamage;
+        enemyManager.characterEffectsManager.ProcessEffectInstantly(takeBlockedDamage);
       }
     }
 
-    protected virtual void DealDamage(CharacterStatsManager enemyStats)
+    protected virtual void DealDamage(CharacterManager enemyManager)
     {
       float finalPhysicalDamage = physicalDamage;
       if (characterManager.isUsingRightHand)
@@ -154,16 +158,15 @@ namespace MR
         }
       }
 
-      if (enemyStats.totalPoiseDefence > poiseDamage)
-      {
-        enemyStats.TakeDamageNoAnimation(Mathf.RoundToInt(finalPhysicalDamage), 0);
-      }
-      else
-      {
-        // enemyStats.TakeDamage(Mathf.RoundToInt(finalPhysicalDamage), 0, currentDamageAnimation, characterManager);
-      }
+      TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+      takeDamageEffect.physicalDamage = finalPhysicalDamage;
+      takeDamageEffect.fireDamage = fireDamage;
+      takeDamageEffect.poiseDamage = poiseDamage;
+      takeDamageEffect.contactPoint = contactPoint;
+      takeDamageEffect.angleHitFrom = angleHitFrom;
+      enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
     }
-    
+
 
   }
 }

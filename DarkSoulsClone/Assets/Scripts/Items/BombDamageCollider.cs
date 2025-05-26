@@ -49,12 +49,18 @@ namespace MR
 
       foreach (Collider objectsInExplosion in characters)
       {
-        CharacterStatsManager character = objectsInExplosion.GetComponent<CharacterStatsManager>();
+        CharacterManager character = objectsInExplosion.GetComponent<CharacterManager>();
         if (character != null)
         {
-          if (character.teamIDNumber != teamIDNumber)
+          if (character.characterStatsManager.teamIDNumber != teamIDNumber)
           {
-            // character.TakeDamage(0, explosionSplashDamage, currentDamageAnimation, characterManager);
+            TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+            takeDamageEffect.physicalDamage = physicalDamage;
+            takeDamageEffect.fireDamage = fireDamage;
+            takeDamageEffect.poiseDamage = poiseDamage;
+            takeDamageEffect.contactPoint = contactPoint;
+            takeDamageEffect.angleHitFrom = angleHitFrom;
+            character.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
           }
         }
       }

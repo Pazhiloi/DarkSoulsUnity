@@ -43,6 +43,11 @@ namespace MR
       }
     }
 
+    public virtual void ProcessEffectInstantly(CharacterEffect effect)
+    {
+      effect.ProcessEffect(character);
+    }
+
     public virtual void ProcessAllTimedEffects()
     {
       effectTickTimer = effectTickTimer + Time.deltaTime;
@@ -60,6 +65,8 @@ namespace MR
         ProcessBuildUpDecay();
       }
     }
+
+
 
     public void ProcessWeaponBuffs()
     {

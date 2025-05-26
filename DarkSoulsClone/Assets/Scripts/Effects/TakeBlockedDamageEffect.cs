@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MR
 {
+  [CreateAssetMenu(menuName = "Character Effects/Take Blocked Damage")]
   public class TakeBlockedDamageEffect : CharacterEffect
   {
     [Header("Character Causing Damage")]

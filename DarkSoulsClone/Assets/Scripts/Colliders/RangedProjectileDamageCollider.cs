@@ -19,7 +19,7 @@ namespace MR
       arrowCapsuleCollider = GetComponent<CapsuleCollider>();
       arrowRigidbody = GetComponent<Rigidbody>();
     }
-   private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision other)
     {
       shieldHasBeenHit = false;
       hasBeenParried = false;
@@ -44,19 +44,17 @@ namespace MR
         enemyManager.characterStatsManager.totalPoiseDefence -= enemyManager.characterStatsManager.totalPoiseDefence - poiseDamage;
 
         //DETECTS WHERE ON THE COLLIDER OUR WEAPON FIRST MAKES CONTACT
-        Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-        float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
-       // ChooseWhichDirectionDamageCameFrom(directionHitFrom);
-        enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
+        contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+        angleHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
 
-        if (enemyManager.characterStatsManager.totalPoiseDefence > poiseDamage)
-        {
-          enemyManager.characterStatsManager.TakeDamageNoAnimation(physicalDamage, 0);
-        }
-        else
-        {
-        //  enemyManager.characterStatsManager.TakeDamage(physicalDamage, 0, currentDamageAnimation, characterManager);
-        }
+        TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+        takeDamageEffect.physicalDamage = physicalDamage;
+        takeDamageEffect.fireDamage = fireDamage;
+        takeDamageEffect.poiseDamage = poiseDamage;
+        takeDamageEffect.contactPoint = contactPoint;
+        takeDamageEffect.angleHitFrom = angleHitFrom;
+        enemyManager.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
+
       }
       if (other.gameObject.tag == "Illusionary Wall")
       {
@@ -73,13 +71,14 @@ namespace MR
 
         gameObject.transform.position = other.GetContact(0).point;
         gameObject.transform.rotation = Quaternion.LookRotation(transform.forward);
-        gameObject.transform.parent = other.collider.transform; 
+        gameObject.transform.parent = other.collider.transform;
 
       }
     }
 
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
       if (arrowRigidbody.velocity != Vector3.zero)
       {
         arrowRigidbody.rotation = Quaternion.LookRotation(arrowRigidbody.velocity);

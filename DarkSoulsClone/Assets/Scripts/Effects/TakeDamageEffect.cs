@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace MR
 {
+  [CreateAssetMenu(menuName = "Character Effects/Take Damage")]
   public class TakeDamageEffect : CharacterEffect
   {
 
@@ -52,9 +53,11 @@ namespace MR
 
     private void CalculateDamage(CharacterManager character)
     {
-
-      physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
-      fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+      if (characterCausingDamage != null)
+      {
+        physicalDamage = Mathf.RoundToInt(physicalDamage * (characterCausingDamage.characterStatsManager.physicalDamagePercentageModifier / 100));
+        fireDamage = Mathf.RoundToInt(fireDamage * (characterCausingDamage.characterStatsManager.fireDamagePercentageModifier / 100));
+      }
 
 
       character.characterAnimatorManager.EraseHandIKForWeapon();
@@ -83,6 +86,10 @@ namespace MR
 
       character.characterStatsManager.currentHealth = Mathf.RoundToInt(character.characterStatsManager.currentHealth - finalDamage);
 
+      if (character.characterStatsManager.totalPoiseDefence < poiseDamage)
+      {
+        poiseIsBroken = true;
+      }
 
       if (character.characterStatsManager.currentHealth <= 0)
       {

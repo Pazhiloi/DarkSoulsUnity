@@ -7,18 +7,14 @@ namespace MR
 
 
 
-    
+
 
     protected override void Awake()
     {
       base.Awake();
       player = GetComponent<PlayerManager>();
     }
-    public override void AttemptBlock(DamageCollider attackingWeapon, float physicalDamage, float fireDamage, string blockAnimation)
-    {
-      base.AttemptBlock(attackingWeapon, physicalDamage, fireDamage, blockAnimation);
-      player.playerStatsManager.staminaBar.SetCurrentStamina(player.playerStatsManager.currentStamina);
-    }
+
 
     public override void DrainStaminaBasedOnAttack()
     {
@@ -47,6 +43,7 @@ namespace MR
           player.playerStatsManager.DeductStamina(player.playerInventoryManager.leftWeapon.baseStaminaCost * player.playerInventoryManager.leftWeapon.heavyAttackStaminaMultiplier);
 
         }
+
       }
     }
 

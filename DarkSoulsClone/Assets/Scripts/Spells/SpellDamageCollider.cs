@@ -7,12 +7,13 @@ namespace MR
   {
     public GameObject impactParticles, projectileParticles, muzzleParticles;
     bool hasCollided = false;
-    CharacterStatsManager spellTarget;
+    CharacterManager spellTarget;
     Rigidbody rb;
     Vector3 impactNormal;
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       rb = GetComponent<Rigidbody>();
     }
 
@@ -32,11 +33,17 @@ namespace MR
       if (!hasCollided)
       {
 
-        spellTarget = collision.transform.GetComponent<CharacterStatsManager>();
+        spellTarget = collision.transform.GetComponent<CharacterManager>();
 
-        if (spellTarget != null && spellTarget.teamIDNumber != teamIDNumber)
+        if (spellTarget != null && spellTarget.characterStatsManager.teamIDNumber != teamIDNumber)
         {
-          // spellTarget.TakeDamage(0, fireDamage, currentDamageAnimation, characterManager);
+          TakeDamageEffect takeDamageEffect = Instantiate(WorldCharacterEffectsManager.instance.takeDamageEffect);
+          takeDamageEffect.physicalDamage = physicalDamage;
+          takeDamageEffect.fireDamage = fireDamage;
+          takeDamageEffect.poiseDamage = poiseDamage;
+          takeDamageEffect.contactPoint = contactPoint;
+          takeDamageEffect.angleHitFrom = angleHitFrom;
+          spellTarget.characterEffectsManager.ProcessEffectInstantly(takeDamageEffect);
         }
         hasCollided = true;
         impactParticles = Instantiate(impactParticles, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));

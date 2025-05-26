@@ -73,26 +73,7 @@ namespace MR
     {
       aiCharacter.enemyAnimatorManager.PlayTargetAnimation("Break Guard", true);
     }
-    public override void TakeDamage(int physicalDamage, int fireDamage, string damageAnimation, CharacterManager enemyCharacterDamagingMe)
-    {
-      base.TakeDamage(physicalDamage, fireDamage, damageAnimation, enemyCharacterDamagingMe);
-
-      if (!isBoss)
-      {
-        enemyHealthBar.SetHealth(currentHealth);
-      }
-      else if (isBoss && aiCharacter.enemyBossManager != null)
-      {
-        aiCharacter.enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
-      }
-
-      aiCharacter.enemyAnimatorManager.PlayTargetAnimation(damageAnimation, true);
-
-      if (currentHealth <= 0)
-      {
-        HandleDeath();
-      }
-    }
+   
 
     private void HandleDeath()
     {
