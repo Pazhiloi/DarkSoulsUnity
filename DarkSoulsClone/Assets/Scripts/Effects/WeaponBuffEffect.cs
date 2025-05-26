@@ -52,7 +52,7 @@ namespace MR
 
         if (buffPoiseDamage)
         {
-          poiseBuffDamage = weaponManager.damageCollider.poiseBreak * (buffBasePoiseDamagePercentageMultiplier / 100);
+          poiseBuffDamage = weaponManager.damageCollider.poiseDamage * (buffBasePoiseDamagePercentageMultiplier / 100);
         }
 
         switch (buffClass)

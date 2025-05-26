@@ -121,7 +121,7 @@ namespace MR
       leftHandDamageCollider.teamIDNumber = character.characterStatsManager.teamIDNumber;
 
 
-      leftHandDamageCollider.poiseBreak = character.characterInventoryManager.leftWeapon.poiseBreak;
+      leftHandDamageCollider.poiseDamage = character.characterInventoryManager.leftWeapon.poiseDamage;
       character.characterEffectsManager.leftWeaponManager = leftHandSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
     }
 
@@ -135,7 +135,7 @@ namespace MR
 
       rightHandDamageCollider.teamIDNumber = character.characterStatsManager.teamIDNumber;
 
-      rightHandDamageCollider.poiseBreak = character.characterInventoryManager.rightWeapon.poiseBreak;
+      rightHandDamageCollider.poiseDamage = character.characterInventoryManager.rightWeapon.poiseDamage;
       character.characterEffectsManager.rightWeaponManager = rightHandSlot.currentWeaponModel.GetComponentInChildren<WeaponManager>();
     }
 

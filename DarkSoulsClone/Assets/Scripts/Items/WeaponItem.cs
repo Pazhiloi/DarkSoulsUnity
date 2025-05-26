@@ -23,9 +23,9 @@ namespace MR
     public float heavyAttackDamageModifier = 1;
     public int criticalDamageMultiplier = 4;
     public int guardBreakModifier = 1;
-    
+
     [Header("Poise")]
-    public int poiseBreak, offensivePoiseBonus;
+    public int poiseDamage, offensivePoiseBonus;
 
     [Header("Absorpsion")]
     public float physicalBlockingDamageAbsorption;
@@ -60,6 +60,7 @@ namespace MR
 
     [Header("SOUND FX")]
     public AudioClip[] weaponWhooshes;
+    public AudioClip[] blockingNoises;
 
   }
 }

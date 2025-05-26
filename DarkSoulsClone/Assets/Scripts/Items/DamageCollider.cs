@@ -14,7 +14,7 @@ namespace MR
     public int teamIDNumber = 0;
 
     [Header("Poise")]
-    public float poiseBreak, offensivePoiseBonus;
+    public float poiseDamage, offensivePoiseBonus;
     [Header("Damage")]
     public int physicalDamage;
     public int fireDamage;
@@ -76,7 +76,7 @@ namespace MR
           if (shieldHasBeenHit) return;
 
           enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
-          enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseResetTime - poiseBreak;
+          enemyManager.characterStatsManager.totalPoiseDefence = enemyManager.characterStatsManager.totalPoiseResetTime - poiseDamage;
 
           Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
           float directionHitFrom = (Vector3.SignedAngle(characterManager.transform.forward, enemyManager.transform.forward, Vector3.up));
@@ -97,6 +97,14 @@ namespace MR
         IllusionaryWall illusionaryWall = other.GetComponent<IllusionaryWall>();
 
         illusionaryWall.wallHasBeenHit = true;
+
+        TakeBlockedDamageEffect takeBlockedDamage = Instantiate(WorldCharacterEffectsManager.instance.takeBlockedDamageEffect);
+        takeBlockedDamage.physicalDamage = physicalDamage;
+        takeBlockedDamage.fireDamage = fireDamage;
+        takeBlockedDamage.poiseDamage = poiseDamage;
+        takeBlockedDamage.staminaDamage = poiseDamage;
+
+        
       }
     }
 
@@ -111,17 +119,12 @@ namespace MR
 
     protected virtual void CheckForBlock(CharacterManager enemyManager)
     {
-      CharacterStatsManager enemyShield = enemyManager.characterStatsManager;
       Vector3 directionFromPlayerToEnemy = (characterManager.transform.position - enemyManager.transform.position);
       float dotValueFromPlayerToEnemy = Vector3.Dot(directionFromPlayerToEnemy, enemyManager.transform.forward);
 
       if (enemyManager.isBlocking && dotValueFromPlayerToEnemy > 0.3f)
       {
         shieldHasBeenHit = true;
-        float physicalDamageAfterBlock = physicalDamage - (physicalDamage * enemyShield.blockingPhysicalDamageAbsorption) / 100;
-        float fireDamageAfterBlock = fireDamage - (fireDamage * enemyShield.blockingFireDamageAbsorption) / 100;
-        enemyManager.characterCombatManager.AttemptBlock(this, physicalDamage, fireDamage, "Block_01");
-        enemyShield.TakeDamageAfterBlock(Mathf.RoundToInt(physicalDamageAfterBlock), Mathf.RoundToInt(fireDamageAfterBlock), characterManager);
       }
     }
 
@@ -151,7 +154,7 @@ namespace MR
         }
       }
 
-      if (enemyStats.totalPoiseDefence > poiseBreak)
+      if (enemyStats.totalPoiseDefence > poiseDamage)
       {
         enemyStats.TakeDamageNoAnimation(Mathf.RoundToInt(finalPhysicalDamage), 0);
       }

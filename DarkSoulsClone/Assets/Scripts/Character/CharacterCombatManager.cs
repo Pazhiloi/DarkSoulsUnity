@@ -69,24 +69,7 @@ namespace MR
     }
 
 
-    public virtual void AttemptBlock(DamageCollider attackingWeapon, float physicalDamage, float fireDamage, string blockAnimation)
-    {
-
-      float staminaDamageAbsorption = ((physicalDamage + fireDamage) * attackingWeapon.guardBreakModifier) * (character.characterStatsManager.blockingStabilityRating / 100);
-
-      float staminaDamage = ((physicalDamage + fireDamage) * attackingWeapon.guardBreakModifier) - staminaDamageAbsorption;
-      character.characterStatsManager.currentStamina -= staminaDamage;
-      if (character.characterStatsManager.currentStamina <= 0)
-      {
-        character.isBlocking = false;
-        character.characterAnimatorManager.PlayTargetAnimation("Guard_Break_01", true);
-      }
-      else
-      {
-        character.characterAnimatorManager.PlayTargetAnimation(blockAnimation, true);
-
-      }
-    }
+   
 
 
     private void SuccessfullyCastSpell()

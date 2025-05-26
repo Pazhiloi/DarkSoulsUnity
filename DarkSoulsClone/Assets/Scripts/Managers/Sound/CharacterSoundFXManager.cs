@@ -90,5 +90,12 @@ namespace MR
       audioSource.PlayOneShot(soundFX);
     }
 
+    public virtual void PlayRandomSoundFXFromArray(AudioClip[] soundArray)
+    {
+      int index = Random.Range(0, soundArray.Length);
+      PlayerSoundFX(soundArray[index]);
+    }
+
+
   }
 }

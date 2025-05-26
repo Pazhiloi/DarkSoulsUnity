@@ -43,7 +43,7 @@ namespace MR
         }
       }
 
-      if (enemyStats.totalPoiseDefence > poiseBreak)
+      if (enemyStats.totalPoiseDefence > poiseDamage)
       {
         enemyStats.TakeDamageNoAnimation(Mathf.RoundToInt(finalDamage), Mathf.RoundToInt(finalFireDamage));
       }

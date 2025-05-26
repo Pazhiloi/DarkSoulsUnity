@@ -7,6 +7,9 @@ namespace MR
   public class WorldCharacterEffectsManager : MonoBehaviour
   {
     public static WorldCharacterEffectsManager instance;
+    [Header("DAMAGE")]
+    public TakeDamageEffect takeDamageEffect;
+    public TakeBlockedDamageEffect takeBlockedDamageEffect;
 
     [Header("POISON")]
     public PoisonBuildUpEffect poisonBuildUpEffect;

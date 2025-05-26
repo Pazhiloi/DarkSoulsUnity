@@ -41,7 +41,7 @@ namespace MR
           return;
 
         enemyManager.characterStatsManager.poiseResetTimer = enemyManager.characterStatsManager.totalPoiseResetTime;
-        enemyManager.characterStatsManager.totalPoiseDefence -= enemyManager.characterStatsManager.totalPoiseDefence - poiseBreak;
+        enemyManager.characterStatsManager.totalPoiseDefence -= enemyManager.characterStatsManager.totalPoiseDefence - poiseDamage;
 
         //DETECTS WHERE ON THE COLLIDER OUR WEAPON FIRST MAKES CONTACT
         Vector3 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
@@ -49,7 +49,7 @@ namespace MR
        // ChooseWhichDirectionDamageCameFrom(directionHitFrom);
         enemyManager.characterEffectsManager.PlayBloodSplatterFX(contactPoint);
 
-        if (enemyManager.characterStatsManager.totalPoiseDefence > poiseBreak)
+        if (enemyManager.characterStatsManager.totalPoiseDefence > poiseDamage)
         {
           enemyManager.characterStatsManager.TakeDamageNoAnimation(physicalDamage, 0);
         }

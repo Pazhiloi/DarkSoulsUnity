@@ -140,34 +140,7 @@ namespace MR
 
     public virtual void TakeDamageNoAnimation(int physicalDamage, int fireDamage)
     {
-      if (characterManager.isDead) return;
-
-      float totalPhysicalDamageAbsorption = 1 - (1 - physicalDamageAbsorptionHead / 100) *
-                                                (1 - physicalDamageAbsorptionBody / 100) *
-                                                (1 - physicalDamageAbsorptionLegs / 100) *
-                                                (1 - physicalDamageAbsorptionHands / 100);
-
-      physicalDamage = Mathf.RoundToInt(physicalDamage - (physicalDamage * totalPhysicalDamageAbsorption));
-
-
-      float totalFireDamageAbsorption = 1 -
-          (1 - fireDamageAbsorptionHead / 100) *
-          (1 - fireDamageAbsorptionBody / 100) *
-          (1 - fireDamageAbsorptionLegs / 100) *
-          (1 - fireDamageAbsorptionHands / 100);
-
-      fireDamage = Mathf.RoundToInt(fireDamage - (fireDamage * totalFireDamageAbsorption));
-
-      float finalDamage = physicalDamage + fireDamage; // + magicDamage + lightningDamage + darkDamage
-
-      currentHealth = Mathf.RoundToInt(currentHealth - finalDamage);
-
-
-      if (currentHealth <= 0)
-      {
-        currentHealth = 0;
-        characterManager.isDead = true;
-      }
+      
     }
     public virtual void TakePoisonDamage(int damage)
     {
