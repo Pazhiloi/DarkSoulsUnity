@@ -1,45 +1,33 @@
 using UnityEngine;
 namespace MR
 {
-  public class PlayerLocomotionManager : MonoBehaviour
+  public class PlayerLocomotionManager : CharacterLocomotionManager
   {
     PlayerManager player;
-    public Vector3 moveDirection;
-    public new Rigidbody rigidbody;
-
-    [Header("Ground & Air Detection Stats")]
-    [SerializeField] private float groundDetectionRayStartPoint = 0.5f;
-    [SerializeField] private float minimumDistanceNeededToBeginFall = 1f;
-    [SerializeField] private float groundDirectionRayDistance = -0.2f;
-    public LayerMask groundLayer;
-    public float inAirTimer;
+   
 
     [Header("Movement Stats")]
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float walkingSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 7;
     [SerializeField] private float rotationSpeed = 10;
-    [SerializeField] private float fallingSpeed = 45;
 
     [Header("Stamina Costs")]
     [SerializeField] private int rollStaminaCost = 15;
     [SerializeField] private int backstepStaminaCost = 12;
     [SerializeField] private int sprintStaminaCost = 12;
 
-    Vector3 normalVector;
-    Vector3 targetPosition;
-    public CapsuleCollider characterCollider, characterCollisionBlockerCollider;
+ 
 
-    private void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       player = GetComponent<PlayerManager>();
-      rigidbody = GetComponent<Rigidbody>();
     }
-    private void Start()
+    protected override void Start()
     {
-      player.isGrounded = true;
-      groundLayer = ~(1 << 8 | 1 << 11);
-      Physics.IgnoreCollision(characterCollider, characterCollisionBlockerCollider, true);
+      base.Start();
+      
     }
 
 
@@ -115,7 +103,7 @@ namespace MR
       }
     }
 
-    public void HandleMovement()
+    public void HandleGroundedMovement()
     {
 
       if (player.inputHandler.rollFlag)
@@ -126,37 +114,31 @@ namespace MR
       {
         return;
       }
+      if (!player.isGrounded)
+      {
+        return;
+      }
 
-      moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
-      moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
+      moveDirection = player.cameraHandler.transform.forward * player.inputHandler.vertical;
+      moveDirection +=  player.cameraHandler.transform.right * player.inputHandler.horizontal;
       moveDirection.Normalize();
       moveDirection.y = 0;
 
-      float speed = movementSpeed;
-
-      if (player.inputHandler.sprintFlag && player.inputHandler.moveAmount > 0.5)
+      if (player.isSprinting)
       {
-        speed = sprintSpeed;
-        player.isSprinting = true;
-        moveDirection *= speed;
-        player.playerStatsManager.DeductStamina(sprintStaminaCost);
-      }
-      else
+        player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
+      }else
       {
-        if (player.inputHandler.moveAmount <= 0.5)
+        if (player.inputHandler.moveAmount > 0.5f)
         {
-          moveDirection *= walkingSpeed;
-          player.isSprinting = false;
+          player.characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
         }
-        else
+        else if (player.inputHandler.moveAmount <= 0.5f)
         {
-          moveDirection *= speed;
-          player.isSprinting = false;
+          player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
         }
       }
 
-      Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-      rigidbody.velocity = projectedVelocity;
       if (player.inputHandler.lockOnFlag && !player.inputHandler.sprintFlag)
       {
         player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.vertical, player.inputHandler.horizontal, player.isSprinting);
@@ -198,88 +180,7 @@ namespace MR
       }
     }
 
-    public void HandleFalling( Vector3 moveDirection)
-    {
-      player.isGrounded = false;
-      RaycastHit hit;
-      Vector3 origin = player.transform.position;
-      origin.y += groundDetectionRayStartPoint;
-
-      if (Physics.Raycast(origin, player.transform.forward, out hit, 0.4f))
-      {
-        moveDirection = Vector3.zero;
-      }
-
-      if (player.isInAir)
-      {
-        rigidbody.AddForce(-Vector3.up * fallingSpeed);
-        rigidbody.AddForce(moveDirection * fallingSpeed / 5f);
-      }
-
-      Vector3 dir = moveDirection;
-      dir.Normalize();
-      origin = origin + dir * groundDirectionRayDistance;
-
-      targetPosition = player.transform.position;
-
-      Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-      if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, groundLayer))
-      {
-        normalVector = hit.normal;
-        Vector3 tp = hit.point;
-        player.isGrounded = true;
-        targetPosition.y = tp.y;
-
-        if (player.isInAir)
-        {
-          if (inAirTimer > 0.5f)
-          {
-            Debug.Log("You were in the air for " + inAirTimer);
-            player.playerAnimatorManager.PlayTargetAnimation("Landing", true);
-            inAirTimer = 0;
-          }
-          else
-          {
-            player.playerAnimatorManager.PlayTargetAnimation("Empty", false);
-            inAirTimer = 0;
-          }
-          player.isInAir = false;
-        }
-      }
-      else
-      {
-        if (player.isGrounded)
-        {
-          player.isGrounded = false;
-        }
-        if (player.isInAir == false)
-        {
-
-          if (player.isInteracting == false)
-          {
-            player.playerAnimatorManager.PlayTargetAnimation("Falling", true);
-          }
-
-          Vector3 vel = rigidbody.velocity;
-          vel.Normalize();
-          rigidbody.velocity = vel * (movementSpeed / 2);
-          player.isInAir = true;
-        }
-      }
-
-      if (player.isGrounded)
-      {
-        if (player.isInteracting || player.inputHandler.moveAmount > 0)
-        {
-          player.transform.position = Vector3.MoveTowards(player.transform.position, targetPosition, Time.deltaTime / 0.1f);
-        }
-        else
-        {
-          player.transform.position = targetPosition;
-        }
-      }
-    }
-
+   
     public void HandleJumping()
     {
       if (player.isInteracting) return;

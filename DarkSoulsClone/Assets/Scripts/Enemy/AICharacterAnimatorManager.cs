@@ -38,20 +38,19 @@ namespace MR
         aiCharacter.enemyEffectsManager.PlayWeaponFX(false);
     }
 
-   
 
-    private void OnAnimatorMove()
+
+    public override void OnAnimatorMove()
     {
-      float delta = Time.deltaTime;
-      aiCharacter.enemyRigidbody.drag = 0;
-      Vector3 deltaPosition = aiCharacter.animator.deltaPosition;
-      deltaPosition.y = 0;
-      Vector3 velocity = deltaPosition / delta;
-      aiCharacter.enemyRigidbody.velocity = velocity;
+      if (character.isInteracting == false)
+        return;
+
+      Vector3 velocity = character.animator.deltaPosition;
+      character.characterController.Move(velocity);
 
       if (aiCharacter.isRotatingWithRootMotion)
       {
-        aiCharacter.transform.rotation *= aiCharacter.animator.deltaRotation;
+        character.transform.rotation *= character.animator.deltaRotation;
       }
     }
 

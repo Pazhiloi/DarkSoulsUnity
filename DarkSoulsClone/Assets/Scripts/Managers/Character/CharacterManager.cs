@@ -3,6 +3,7 @@ namespace MR
 {
   public class CharacterManager : MonoBehaviour
   {
+    public CharacterController characterController;
     public Animator animator;
     public CharacterAnimatorManager characterAnimatorManager;
     public CharacterWeaponSlotManager characterWeaponSlotManager;
@@ -62,6 +63,7 @@ namespace MR
 
     protected virtual void Awake()
     {
+      characterController = GetComponent<CharacterController>();
       animator = GetComponent<Animator>();
       characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
       characterWeaponSlotManager = GetComponent<CharacterWeaponSlotManager>();

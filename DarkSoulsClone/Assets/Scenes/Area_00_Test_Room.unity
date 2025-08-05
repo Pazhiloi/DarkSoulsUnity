@@ -5749,8 +5749,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 325664406}
-  - component: {fileID: 325664405}
-  - component: {fileID: 325664404}
   - component: {fileID: 325664403}
   - component: {fileID: 325664402}
   - component: {fileID: 325664401}
@@ -5763,6 +5761,8 @@ GameObject:
   - component: {fileID: 325664394}
   - component: {fileID: 325664393}
   - component: {fileID: 325664392}
+  - component: {fileID: 325664407}
+  - component: {fileID: 325664404}
   m_Layer: 9
   m_Name: Enemy [Advanced A. I  - Archer]
   m_TagString: Character
@@ -5788,6 +5788,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -5985,13 +5986,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1799550819}
 --- !u!114 &325664398
 MonoBehaviour:
@@ -6005,11 +6005,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 325664405}
-  characterCollisionBlockerCollider: {fileID: 1933984074}
-  detectionLayer:
+  moveDirection: {x: 0, y: 0, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 1
+  inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 0.25
 --- !u!114 &325664399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6080,6 +6085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510443fd08acec4bb0a63492b6fe379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -6188,6 +6194,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 2062885051}
   rightHandConstraint: {fileID: 1838199421}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!95 &325664403
 Animator:
   serializedVersion: 5
@@ -6240,33 +6282,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &325664405
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325664391}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &325664406
 Transform:
   m_ObjectHideFlags: 0
@@ -6285,12 +6304,37 @@ Transform:
   - {fileID: 1799550819}
   - {fileID: 1045748089}
   - {fileID: 1425989598}
-  - {fileID: 650367946}
   - {fileID: 1411317279}
   - {fileID: 228320053}
   - {fileID: 1000421133}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &325664407
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325664391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &326030148
 GameObject:
   m_ObjectHideFlags: 0
@@ -12122,38 +12166,6 @@ Transform:
   - {fileID: 710005891}
   m_Father: {fileID: 1097270716}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &650367945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 650367946}
-  m_Layer: 9
-  m_Name: Combat Colliders
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &650367946
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650367945}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1933984076}
-  m_Father: {fileID: 325664406}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &653483701
 GameObject:
   m_ObjectHideFlags: 0
@@ -13257,6 +13269,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -13454,13 +13467,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1778724336}
 --- !u!114 &703550920
 MonoBehaviour:
@@ -13474,11 +13486,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 703550927}
-  characterCollisionBlockerCollider: {fileID: 1601048345}
-  detectionLayer:
+  moveDirection: {x: 0, y: 0, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
+  inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 1
 --- !u!114 &703550921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13549,6 +13566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510443fd08acec4bb0a63492b6fe379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -13657,6 +13675,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 920751205}
   rightHandConstraint: {fileID: 796036319}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!95 &703550925
 Animator:
   serializedVersion: 5
@@ -16953,38 +17007,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889441314}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &899486128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 899486129}
-  m_Layer: 9
-  m_Name: Combat Colliders
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &899486129
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899486128}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1627505770}
-  m_Father: {fileID: 543450651902353127}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900843296
 GameObject:
   m_ObjectHideFlags: 0
@@ -20610,6 +20632,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -20807,13 +20830,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1482507742}
 --- !u!114 &1097270708
 MonoBehaviour:
@@ -20827,11 +20849,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 1097270715}
-  characterCollisionBlockerCollider: {fileID: 801399136}
-  detectionLayer:
+  moveDirection: {x: 0, y: 0, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
+  inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 1
 --- !u!114 &1097270709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20902,6 +20929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510443fd08acec4bb0a63492b6fe379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -21010,6 +21038,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 579158584}
   rightHandConstraint: {fileID: 1027499914}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!95 &1097270713
 Animator:
   serializedVersion: 5
@@ -24440,6 +24504,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 0}
   rightHandConstraint: {fileID: 0}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!95 &1317471735
 Animator:
   serializedVersion: 5
@@ -24545,11 +24645,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 1317471741}
-  characterCollisionBlockerCollider: {fileID: 1497484790}
-  detectionLayer:
+  moveDirection: {x: 0, y: 0, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
+  inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 1
 --- !u!114 &1317471739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24562,6 +24667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510443fd08acec4bb0a63492b6fe379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -24704,6 +24810,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -30529,89 +30636,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1627505769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1627505770}
-  - component: {fileID: 1627505772}
-  - component: {fileID: 1627505771}
-  m_Layer: 10
-  m_Name: Character Collider Blocker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1627505770
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627505769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 899486129}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1627505771
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627505769}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1627505772
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627505769}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1628906162
 GameObject:
   m_ObjectHideFlags: 0
@@ -34611,89 +34635,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 860475477}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1933984073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1933984076}
-  - component: {fileID: 1933984075}
-  - component: {fileID: 1933984074}
-  m_Layer: 10
-  m_Name: Character Collider Blocker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!136 &1933984074
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933984073}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!54 &1933984075
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933984073}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!4 &1933984076
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933984073}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 650367946}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1938154921
 GameObject:
@@ -52644,7 +52585,6 @@ Transform:
   - {fileID: 458017092966452426}
   - {fileID: 7024483453915426781}
   - {fileID: 2083012898}
-  - {fileID: 899486129}
   - {fileID: 1080928834}
   - {fileID: 1654675153}
   - {fileID: 1258267736}
@@ -53114,8 +53054,6 @@ GameObject:
   m_Component:
   - component: {fileID: 543450651902353127}
   - component: {fileID: 5866666020217144477}
-  - component: {fileID: 5866666020217144489}
-  - component: {fileID: 5866666020217144488}
   - component: {fileID: 5866666020217144487}
   - component: {fileID: 5866666020217144478}
   - component: {fileID: 5866666020217144486}
@@ -53129,6 +53067,8 @@ GameObject:
   - component: {fileID: 5866666020217144490}
   - component: {fileID: 5866666020217144492}
   - component: {fileID: 5866666020217144491}
+  - component: {fileID: 5866666020217144493}
+  - component: {fileID: 5866666020217144494}
   m_Layer: 11
   m_Name: Player
   m_TagString: Character
@@ -64118,16 +64058,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9f7cdd3709f46be4dabb47b7e6b9b312, type: 2}
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 5925646746447725527, guid: 8f252e994c38ecf429e36ef9c58e2c66, type: 3}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 2083012898}
+  poisonAmountBar: {fileID: 0}
   currentParticleFX: {fileID: 0}
-  instantiatedFXModel: {fileID: 0}
   amountToBeHealed: 0
 --- !u!114 &5866666020217144480
 MonoBehaviour:
@@ -64171,6 +64110,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02
@@ -64225,6 +64165,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 1353004657}
   rightHandConstraint: {fileID: 460651175}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!114 &5866666020217144484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64300,24 +64276,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
-  rigidbody: {fileID: 5866666020217144489}
-  groundDetectionRayStartPoint: 0.5
-  minimumDistanceNeededToBeginFall: 1
-  groundDirectionRayDistance: -0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 0.221
   movementSpeed: 5
   walkingSpeed: 3
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 45
   rollStaminaCost: 15
   backstepStaminaCost: 12
   sprintStaminaCost: 12
-  characterCollider: {fileID: 5866666020217144488}
-  characterCollisionBlockerCollider: {fileID: 1627505771}
 --- !u!114 &5866666020217144486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64330,6 +64304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ffcbc5d54edc74480d0f5749c69675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -64428,56 +64403,6 @@ MonoBehaviour:
   current_Qued_Input_Timer: 0
   default_Qued_Input_Time: 0
   qued_RB_Input: 0
---- !u!136 &5866666020217144488
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147630490717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!54 &5866666020217144489
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147630490717}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!114 &5866666020217144490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64606,6 +64531,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &5866666020217144493
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147630490717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.7
+  m_Radius: 0.3
+  m_SlopeLimit: 20
+  m_StepOffset: 0.42
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.91, z: 0}
+--- !u!54 &5866666020217144494
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147630490717}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!95 &5866666021332270821
 Animator:
   serializedVersion: 5
@@ -64649,6 +64627,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandConstraint: {fileID: 1566598242}
   rightHandConstraint: {fileID: 1584949307}
+  Damage_Forward_Medium_01: Damage_Forward_Medium_01
+  Damage_Forward_Medium_02: Damage_Forward_Medium_02
+  Damage_Back_Medium_01: Damage_Back_Medium_01
+  Damage_Back_Medium_02: Damage_Back_Medium_02
+  Damage_Left_Medium_01: Damage_Left_Medium_01
+  Damage_Left_Medium_02: Damage_Left_Medium_02
+  Damage_Right_Medium_01: Damage_Right_Medium_01
+  Damage_Right_Medium_02: Damage_Right_Medium_02
+  Damage_Forward_Heavy_01: Damage_Forward_Heavy_01
+  Damage_Forward_Heavy_02: Damage_Forward_Heavy_02
+  Damage_Back_Heavy_01: Damage_Back_Heavy_01
+  Damage_Back_Heavy_02: Damage_Back_Heavy_02
+  Damage_Left_Heavy_01: Damage_Left_Heavy_01
+  Damage_Left_Heavy_02: Damage_Left_Heavy_02
+  Damage_Right_Heavy_01: Damage_Right_Heavy_01
+  Damage_Right_Heavy_02: Damage_Right_Heavy_02
+  Damage_Colossal_Forward_01: Damage_Colossal_Forward_01
+  Damage_Colossal_Forward_02: Damage_Colossal_Forward_02
+  Damage_Colossal_Back_01: Damage_Colossal_Back_01
+  Damage_Colossal_Back_02: Damage_Colossal_Back_02
+  Damage_Colossal_Left_01: Damage_Colossal_Left_01
+  Damage_Colossal_Left_02: Damage_Colossal_Left_02
+  Damage_Colossal_Right_01: Damage_Colossal_Right_01
+  Damage_Colossal_Right_02: Damage_Colossal_Right_02
+  Damage_Animations_Medium_Forward: []
+  Damage_Animations_Medium_Backward: []
+  Damage_Animations_Medium_Left: []
+  Damage_Animations_Medium_Right: []
+  Damage_Animations_Heavy_Forward: []
+  Damage_Animations_Heavy_Backward: []
+  Damage_Animations_Heavy_Left: []
+  Damage_Animations_Heavy_Right: []
+  Damage_Animations_Colossal_Forward: []
+  Damage_Animations_Colossal_Backward: []
+  Damage_Animations_Colossal_Left: []
+  Damage_Animations_Colossal_Right: []
 --- !u!114 &5866666021332270823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64661,11 +64675,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116fa8b3abdd94148876d2b2e46d9d74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCollider: {fileID: 5866666021332270827}
-  characterCollisionBlockerCollider: {fileID: 931702176}
-  detectionLayer:
+  moveDirection: {x: 0, y: 0, z: 0}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
+  inAirTimer: 0
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -7
+  gravityForce: -25
+  groundCheckSphereRadius: 1
 --- !u!114 &5866666021332270824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64678,6 +64697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510443fd08acec4bb0a63492b6fe379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
   animator: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   characterWeaponSlotManager: {fileID: 0}
@@ -64875,13 +64895,12 @@ MonoBehaviour:
   staticCharacterEffects: []
   timedEffects: []
   effectTickTimer: 0
+  timedEffectParticles: []
   instantiatedFXModel: {fileID: 0}
   bloodSplatterFX: {fileID: 30176234441786604, guid: 5b5fbc8ae6097d74081356571166e92b, type: 3}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
   rightWeaponBuffEffect: {fileID: 0}
-  defaultPoisonParticleFX: {fileID: 0}
-  currentPoisonParticleFX: {fileID: 0}
   buildUpTransform: {fileID: 1841210898}
 --- !u!114 &5866666021332270830
 MonoBehaviour:
@@ -65063,6 +65082,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   criticalAttackRange: 0.7
+  previousPoiseDamageTaken: 0
   currentAttackType: 0
   oh_light_attack_01: OH_Light_Attack_01
   oh_light_attack_02: OH_Light_Attack_02

@@ -83,14 +83,12 @@ namespace MR
 
     public void DisableCollision()
     {
-      player.playerLocomotionManager.characterCollider.enabled = false;
-      player.playerLocomotionManager.characterCollisionBlockerCollider.enabled = false;
+      player.characterController.enabled = false;
     }
 
     public void EnableCollision()
     {
-      player.playerLocomotionManager.characterCollider.enabled = true;
-      player.playerLocomotionManager.characterCollisionBlockerCollider.enabled = true;
+      player.characterController.enabled = true;
     }
 
     public virtual void SuccessfullyUseCurrentConsumable()
@@ -101,24 +99,6 @@ namespace MR
       }
     }
   
-
-    private void OnAnimatorMove()
-    {
-      if (player.isInteracting == false)
-      {
-        return;
-      }
-
-      float delta = Time.deltaTime;
-      player.playerLocomotionManager.rigidbody.drag = 0;
-      Vector3 deltaPosition = player.animator.deltaPosition;
-      deltaPosition.y = 0;
-      Vector3 velocity = deltaPosition / delta;
-      player.playerLocomotionManager.rigidbody.velocity = velocity;
-    }
-
-
-
 
   }
 

@@ -84,15 +84,14 @@ namespace MR
       playerLocomotionManager.HandleJumping();
 
       playerStatsManager.RegenerateStamina();
+      playerLocomotionManager.HandleGroundedMovement();
+      playerLocomotionManager.HandleRotation();
 
       CheckForInteractableObject();
     }
     protected override void FixedUpdate()
     {
       base.FixedUpdate();
-      playerLocomotionManager.HandleFalling(playerLocomotionManager.moveDirection);
-      playerLocomotionManager.HandleMovement();
-      playerLocomotionManager.HandleRotation();
     }
 
     private void LateUpdate()
@@ -153,14 +152,14 @@ namespace MR
 
     public void OpenChestInteraction(Transform playerStandsHereWhenOpeningChest)
     {
-      playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+      playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
       transform.position = playerStandsHereWhenOpeningChest.position;
       playerAnimatorManager.PlayTargetAnimation("Open Chest", true);
     }
 
     public void PassThroughFogWallInteraction(Transform fogWallEntrance)
     {
-      playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+      playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
       Vector3 rotationDirection = fogWallEntrance.transform.forward;
       Quaternion turnRotation = Quaternion.LookRotation(rotationDirection);

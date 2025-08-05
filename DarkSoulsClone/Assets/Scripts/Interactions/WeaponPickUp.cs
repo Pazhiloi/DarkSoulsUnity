@@ -65,7 +65,7 @@ namespace MR
       playerLocomotionManager = playerManager.GetComponent<PlayerLocomotionManager>();
       playerAnimatorManager = playerManager.GetComponentInChildren<PlayerAnimatorManager>();
 
-      playerLocomotionManager.rigidbody.velocity = Vector3.zero;
+      playerLocomotionManager.GetComponent<Rigidbody>().velocity = Vector3.zero;
       playerAnimatorManager.PlayTargetAnimation("Pick Up Item", true);
       playerInventoryManager.weaponsInventory.Add(weapon);
       playerManager.itemInteractableGameObject.GetComponentInChildren<Text>().text = weapon.itemName;
