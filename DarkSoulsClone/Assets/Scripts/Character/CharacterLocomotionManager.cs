@@ -31,6 +31,7 @@ namespace MR
     protected virtual void Update()
     {
       character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+      character.animator.SetBool("isGrounded",character.isGrounded);
       HandleGroundCheck();
     }
 
@@ -56,7 +57,7 @@ namespace MR
         inAirTimer = inAirTimer + Time.deltaTime;
         yVelocity.y += gravityForce * Time.deltaTime;
       }
-
+      character.animator.SetFloat("inAirTimer", inAirTimer);
       character.characterController.Move(yVelocity * Time.deltaTime);
     }
 

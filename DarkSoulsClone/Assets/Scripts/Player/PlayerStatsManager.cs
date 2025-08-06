@@ -6,17 +6,19 @@ namespace MR
 {
   public class PlayerStatsManager : CharacterStatsManager
   {
-
+    PlayerManager player;
     public HealthBar healthBar;
     public StaminaBar staminaBar;
     public FocusPointBar focusPointBar;
 
 
-    PlayerManager player;
+
 
     public float staminaRegenerationAmount = 30f;
     public float staminaRegenerationAmountWhilstBlocking = 3f;
     public float staminaRegenTimer;
+
+    private float sprintingTimer = 0;
 
     protected override void Awake()
     {
@@ -69,6 +71,24 @@ namespace MR
       base.DeductStamina(staminaToDeduct);
       staminaBar.SetCurrentStamina(currentStamina);
     }
+    public void DeductSprintingStamina(float staminaToDeduct)
+    {
+      if (player.isSprinting)
+      {
+        sprintingTimer += Time.deltaTime;
+
+        if (sprintingTimer > 0.1f)
+        {
+          sprintingTimer = 0;
+          currentStamina = currentStamina - staminaToDeduct;
+          staminaBar.SetCurrentStamina(Mathf.RoundToInt(currentStamina));
+        }
+      }
+      else
+      {
+        sprintingTimer = 0;
+      }
+    }
 
     public override void TakePoisonDamage(int damage)
     {
@@ -99,7 +119,7 @@ namespace MR
 
     public void RegenerateStamina()
     {
-      if (player.isInteracting)
+      if (player.isInteracting || player.isSprinting)
       {
         staminaRegenTimer = 0f;
       }

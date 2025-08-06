@@ -75,7 +75,6 @@ namespace MR
       isPerformingFullyChargedAttack = animator.GetBool("isPerformingFullyChargedAttack");
       animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon);
       animator.SetBool("isBlocking", isBlocking);
-      animator.SetBool("isInAir", isInAir);
       animator.SetBool("isDead", isDead);
 
 
@@ -108,7 +107,7 @@ namespace MR
         cameraHandler.FollowTarget();
         cameraHandler.HandleCameraRotation();
       }
-      if (isInAir)
+      if (!isGrounded)
       {
         playerLocomotionManager.inAirTimer = playerLocomotionManager.inAirTimer + Time.deltaTime;
       }

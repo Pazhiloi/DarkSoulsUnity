@@ -20,7 +20,8 @@ namespace MR
 
     public float leftAndRightLookSpeed = 250f;
     public float leftAndRightAimingLookSpeed = 25f;
-    public float followSpeed = 1f;
+    public float groundedFollowSpeed = 30f;
+    public float aerialFollowSpeed = 10f;
     public float upAndDownLookSpeed = 250f;
     public float upAndDownAimingLookSpeed = 25f;
 
@@ -68,13 +69,22 @@ namespace MR
 
       if (playerManager.isAiming)
       {
-        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollowVelocity, Time.deltaTime * followSpeed);
+        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransformWhileAiming.position, ref cameraFollowVelocity,   groundedFollowSpeed * Time.deltaTime);
         transform.position = targetPosition;
       }
       else
       {
-        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, Time.deltaTime * followSpeed);
-        transform.position = targetPosition;
+        if (playerManager.isGrounded)
+        {
+          Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, groundedFollowSpeed * Time.deltaTime);
+          transform.position = targetPosition;
+        }
+        else
+        {
+          Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, aerialFollowSpeed * Time.deltaTime);
+          transform.position = targetPosition;
+        }
+       
       }
       HandleCameraCollisions();
 

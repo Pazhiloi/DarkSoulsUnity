@@ -46,7 +46,7 @@ namespace MR
           if (player.inputHandler.lockOnFlag)
           {
 
-            if (player.inputHandler.sprintFlag || player.inputHandler.rollFlag)
+            if (player.isSprinting || player.inputHandler.rollFlag)
             {
               Vector3 targetDirection = Vector3.zero;
               targetDirection = player.cameraHandler.cameraTransform.forward * player.inputHandler.vertical;
@@ -124,10 +124,12 @@ namespace MR
       moveDirection.Normalize();
       moveDirection.y = 0;
 
-      if (player.isSprinting)
+      if (player.isSprinting && player.inputHandler.moveAmount > 0.5f)
       {
         player.characterController.Move(moveDirection * sprintSpeed * Time.deltaTime);
-      }else
+        player.playerStatsManager.DeductSprintingStamina(sprintStaminaCost);
+      }
+      else
       {
         if (player.inputHandler.moveAmount > 0.5f)
         {
@@ -139,7 +141,7 @@ namespace MR
         }
       }
 
-      if (player.inputHandler.lockOnFlag && !player.inputHandler.sprintFlag)
+      if (player.inputHandler.lockOnFlag && !player.isSprinting)
       {
         player.playerAnimatorManager.UpdateAnimatorValues(player.inputHandler.vertical, player.inputHandler.horizontal, player.isSprinting);
       }

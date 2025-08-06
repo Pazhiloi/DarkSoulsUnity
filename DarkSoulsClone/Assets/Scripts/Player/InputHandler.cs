@@ -32,7 +32,6 @@ namespace MR
 
     public bool rollFlag;
     public bool twoHandFlag;
-    public bool sprintFlag;
     public bool comboFlag;
     public bool lockOnFlag;
     public bool fireFlag;
@@ -164,16 +163,16 @@ namespace MR
         if (player.playerStatsManager.currentStamina <= 0)
         {
           b_Input = false;
-          sprintFlag = false;
+          player.isSprinting = false;
         }
         if (moveAmount > 0.5f && player.playerStatsManager.currentStamina > 0)
         {
-          sprintFlag = true;
+          player.isSprinting  = true;
         }
       }
       else
       {
-        sprintFlag = false;
+        player.isSprinting = false;
 
         if (rollInputTimer > 0 && rollInputTimer < 0.5f)
         {
@@ -282,7 +281,7 @@ namespace MR
 
     private void HandleHoldLBInput()
     {
-      if (player.isInAir || player.isSprinting || player.isFiringSpell)
+      if (!player.isGrounded || player.isSprinting || player.isFiringSpell)
       {
         lb_Input = false;
         return;

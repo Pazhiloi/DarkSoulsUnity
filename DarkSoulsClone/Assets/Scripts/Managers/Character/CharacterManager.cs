@@ -51,7 +51,6 @@ namespace MR
     public bool canRotate;
     // public bool isInteracting;
     public bool isSprinting;
-    public bool isInAir;
     public bool isGrounded;
 
 
