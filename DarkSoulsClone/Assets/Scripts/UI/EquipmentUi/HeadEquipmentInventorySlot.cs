@@ -42,7 +42,7 @@ namespace MR
 
         uiManager.player.playerInventoryManager.currentHelmetEquipment = item;
         uiManager.player.playerInventoryManager.headEquipmentInventory.Remove(item);
-        uiManager.player.playerEquipmentManager.EquipAllEquipmentModelsOnStart();
+        uiManager.player.playerEquipmentManager.EquipAllArmor();
 
       }
       else

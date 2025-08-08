@@ -45,7 +45,7 @@ namespace MR
 
     private void Start()
     {
-      EquipAllEquipmentModelsOnStart();
+      EquipAllArmor();
     }
 
     private void UnequipAllEquipmentModels()
@@ -62,9 +62,10 @@ namespace MR
       leftHandModelChanger.UnequipAllModels();
       rightHandModelChanger.UnequipAllModels();
     }
-    public void EquipAllEquipmentModelsOnStart()
+    public void EquipAllArmor()
     {
       float poisonResistance = 0;
+      float totalEquipmentLoad = 0;
       UnequipAllEquipmentModels();
 
       if (player.playerInventoryManager.currentHelmetEquipment != null)
@@ -73,6 +74,7 @@ namespace MR
         helmetModelChanger.EquipHelmetModelByName(player.playerInventoryManager.currentHelmetEquipment.helmetModelName);
         player.playerStatsManager.physicalDamageAbsorptionHead = player.playerInventoryManager.currentHelmetEquipment.physicalDefense;
         poisonResistance += player.playerInventoryManager.currentHelmetEquipment.poisonResistance;
+        totalEquipmentLoad += player.playerInventoryManager.currentHelmetEquipment.weight;
       }
       else
       {
@@ -88,6 +90,7 @@ namespace MR
         upperRightArmModelChanger.EquipModelByName(player.playerInventoryManager.currentBodyEquipment.upperRightArmModelName);
         player.playerStatsManager.physicalDamageAbsorptionBody = player.playerInventoryManager.currentBodyEquipment.physicalDefense;
         poisonResistance += player.playerInventoryManager.currentBodyEquipment.poisonResistance;
+        totalEquipmentLoad += player.playerInventoryManager.currentBodyEquipment.weight;
       }
       else
       {
@@ -104,6 +107,7 @@ namespace MR
         rightLegModelChanger.EquipLegModelByName(player.playerInventoryManager.currentLegEquipment.rightLegName);
         player.playerStatsManager.physicalDamageAbsorptionLegs = player.playerInventoryManager.currentLegEquipment.physicalDefense;
         poisonResistance += player.playerInventoryManager.currentLegEquipment.poisonResistance;
+        totalEquipmentLoad += player.playerInventoryManager.currentLegEquipment.weight;
       }
       else
       {
@@ -121,6 +125,7 @@ namespace MR
         rightHandModelChanger.EquipModelByName(player.playerInventoryManager.currentHandEquipment.rightHandModelName);
         player.playerStatsManager.physicalDamageAbsorptionHands = player.playerInventoryManager.currentHandEquipment.physicalDefense;
         poisonResistance += player.playerInventoryManager.currentHandEquipment.poisonResistance;
+        totalEquipmentLoad += player.playerInventoryManager.currentHandEquipment.weight;
       }
       else
       {
@@ -132,7 +137,7 @@ namespace MR
       }
 
       player.playerStatsManager.poisonResistance = poisonResistance;
-
+      player.playerStatsManager.CalculateAndSetCurrentEquipLoad(totalEquipmentLoad);
 
     }
 

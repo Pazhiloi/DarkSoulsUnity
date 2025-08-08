@@ -26,8 +26,10 @@ namespace MR
       staminaBar = FindObjectOfType<StaminaBar>();
       focusPointBar = FindObjectOfType<FocusPointBar>();
     }
-    private void Start()
+    protected override void Start()
     {
+      base.Start();
+      
       player = GetComponent<PlayerManager>();
       maxHealth = SetMaxHealthFromHealthLevel();
       currentHealth = maxHealth;

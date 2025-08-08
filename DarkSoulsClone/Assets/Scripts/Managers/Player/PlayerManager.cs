@@ -258,7 +258,7 @@ namespace MR
         playerInventoryManager.currentHandEquipment = handEquipment as HandEquipment;
       }
 
-      playerEquipmentManager.EquipAllEquipmentModelsOnStart();
+      playerEquipmentManager.EquipAllArmor();
     }
 
 

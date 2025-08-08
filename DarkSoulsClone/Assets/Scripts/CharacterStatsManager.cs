@@ -37,6 +37,11 @@ namespace MR
     public int intelligenceLevel = 10;
     public int faithLevel = 10;
 
+    [Header("Equip Load")]
+    public float currentEquipLoad = 0;
+    public float maxEquipLoad = 0;
+    public EncumbranceLevel encumbranceLevel;
+
     [Header("Poise")]
     public float totalPoiseDefence, offensivePoiseBonus, armorPoiseBonus;
     public float totalPoiseResetTime = 15;
@@ -84,9 +89,10 @@ namespace MR
       HandlePoiseResetTimer();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
       totalPoiseDefence = armorPoiseBonus;
+      CalculateAndSetMaxEquipLoad();
     }
 
 
@@ -189,6 +195,53 @@ namespace MR
     {
       maxFocusPoints = focusLevel * 10;
       return maxFocusPoints;
+    }
+
+
+    public void CalculateAndSetMaxEquipLoad()
+    {
+      float totalEquipLoad = 40;
+
+      for (int i = 0; i < staminaLevel; i++)
+      {
+        // CHANGE RETURNS BASED ON STAMINA LEVEL
+        if (i < 25)
+        {
+          totalEquipLoad = totalEquipLoad + 1.2f;
+        }
+        if (i >= 25 && i <= 50)
+        {
+          totalEquipLoad = totalEquipLoad + 1.4f;
+        }
+        if (i > 50)
+        {
+          totalEquipLoad = totalEquipLoad + 1;
+        }
+      }
+
+      maxEquipLoad = totalEquipLoad;
+    }
+
+    public void CalculateAndSetCurrentEquipLoad(float equipLoad)
+    {
+      currentEquipLoad = equipLoad;
+
+      encumbranceLevel = EncumbranceLevel.Light;
+
+      if (currentEquipLoad > (maxEquipLoad * 0.3f))
+      {
+        encumbranceLevel = EncumbranceLevel.Medium;
+      }
+
+      if (currentEquipLoad > (maxEquipLoad * 0.7f))
+      {
+        encumbranceLevel = EncumbranceLevel.Heavy;
+      }
+
+      if (currentEquipLoad > maxEquipLoad)
+      {
+        encumbranceLevel = EncumbranceLevel.Overloaded;
+      }
     }
 
     public virtual void HealCharacter(int amount)

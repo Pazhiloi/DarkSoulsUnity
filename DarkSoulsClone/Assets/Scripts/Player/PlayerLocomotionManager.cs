@@ -166,7 +166,25 @@ namespace MR
 
         if (player.inputHandler.moveAmount > 0)
         {
-          player.playerAnimatorManager.PlayTargetAnimation("Rolling", true);
+          switch (player.playerStatsManager.encumbranceLevel)
+          {
+            case EncumbranceLevel.Light:
+              player.playerAnimatorManager.PlayTargetAnimation("Rolling", true);
+              break;
+            case EncumbranceLevel.Medium:
+              player.playerAnimatorManager.PlayTargetAnimation("Rolling", true);
+              break;
+            case EncumbranceLevel.Heavy:
+              player.playerAnimatorManager.PlayTargetAnimation("Heavy_Roll_01", true);
+              break;
+            case EncumbranceLevel.Overloaded:
+              player.playerAnimatorManager.PlayTargetAnimation("Heavy_Roll_01", true);
+              break;
+            default:
+              break;
+          }
+
+
           player.playerAnimatorManager.EraseHandIKForWeapon();
           moveDirection.y = 0;
           Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
@@ -175,7 +193,25 @@ namespace MR
         }
         else
         {
-          player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+
+          switch (player.playerStatsManager.encumbranceLevel)
+          {
+            case EncumbranceLevel.Light:
+              player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+              break;
+            case EncumbranceLevel.Medium:
+              player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+              break;
+            case EncumbranceLevel.Heavy:
+              player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+              break;
+            case EncumbranceLevel.Overloaded:
+              player.playerAnimatorManager.PlayTargetAnimation("Backstep", true);
+              break;
+            default:
+              break;
+          }
+
           player.playerAnimatorManager.EraseHandIKForWeapon();
           player.playerStatsManager.DeductStamina(backstepStaminaCost);
         }

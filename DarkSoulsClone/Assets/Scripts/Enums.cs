@@ -53,6 +53,15 @@ namespace MR
   {
     poison
   }
+
+  public enum EncumbranceLevel
+  {
+    Light, // LIGHT ROLL
+    Medium, // MED ROLL
+    Heavy, // HEAVY ROLL
+    Overloaded // WALK SPEED ONLY
+  }
+  
   public class Enums : MonoBehaviour
   {
 

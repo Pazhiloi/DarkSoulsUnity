@@ -43,7 +43,7 @@ namespace MR
 
         uiManager.player.playerInventoryManager.currentBodyEquipment = item;
         uiManager.player.playerInventoryManager.bodyEquipmentInventory.Remove(item);
-        uiManager.player.playerEquipmentManager.EquipAllEquipmentModelsOnStart();
+        uiManager.player.playerEquipmentManager.EquipAllArmor();
 
       }
       else

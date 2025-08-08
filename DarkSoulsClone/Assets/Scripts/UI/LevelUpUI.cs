@@ -140,6 +140,8 @@ namespace MR
       playerManager.playerStatsManager.currentSoulCount = playerManager.playerStatsManager.currentSoulCount - soulsRequiredToLevelUp;
       playerManager.uiManager.soulCountText.text = playerManager.playerStatsManager.currentSoulCount.ToString();
 
+      playerManager.playerStatsManager.CalculateAndSetMaxEquipLoad();
+
       gameObject.SetActive(false);
     }
 
