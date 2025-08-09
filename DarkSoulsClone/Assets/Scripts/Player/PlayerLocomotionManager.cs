@@ -155,12 +155,18 @@ namespace MR
 
     public void HandleRollingAndSprinting()
     {
-      if (player.animator.GetBool("isInteracting")) return;
       if (player.playerStatsManager.currentStamina <= 0) return;
 
       if (player.inputHandler.rollFlag)
       {
         player.inputHandler.rollFlag = false;
+
+        if (!player.canRoll)
+        {
+          return;
+        }
+
+
         moveDirection = player.cameraHandler.cameraObject.transform.forward * player.inputHandler.vertical;
         moveDirection += player.cameraHandler.cameraObject.transform.right * player.inputHandler.horizontal;
 

@@ -111,13 +111,14 @@ namespace MR
       Damage_Animations_Colossal_Right.Add(Damage_Colossal_Right_02);
     }
 
-    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false, bool mirrorAnim = false)
+    public void PlayTargetAnimation(string targetAnim, bool isInteracting, bool canRotate = false, bool mirrorAnim = false, bool canRoll = false)
     {
       character.animator.applyRootMotion = isInteracting;
       character.animator.SetBool("canRotate", canRotate);
       character.animator.SetBool("isInteracting", isInteracting);
       character.animator.SetBool("isMirrored", mirrorAnim);
       character.animator.CrossFade(targetAnim, 0.2f);
+      character.canRoll = canRoll;
     }
 
     public void PlayTargetAnimationWithRootRotation(string targetAnim, bool isInteracting)
@@ -152,6 +153,11 @@ namespace MR
     public virtual void DisableCombo()
     {
       character.animator.SetBool("canDoCombo", false);
+    }
+
+    public virtual void EnableCanRoll()
+    {
+      character.canRoll = true;
     }
 
     public virtual void EnableIsInvulnerable()

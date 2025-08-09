@@ -33,6 +33,7 @@ namespace MR
       character.isPerformingRiposte = false;
       character.canBeParried = false;
       character.canBeRiposted = false;
+      character.canRoll = true;
 
       character.characterCombatManager.previousPoiseDamageTaken = 0;
 
